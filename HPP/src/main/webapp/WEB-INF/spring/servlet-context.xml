@@ -9,11 +9,37 @@
 	<context:component-scan base-package="com.ksm.hpp"></context:component-scan>
 	
 	<mvc:annotation-driven />
+	
+	<!-- resources/**로 요청이 들어오면 controller를 타지 않고 /WEB-INF/resources/ 경로 하위의 파일로 response를 반환 -->
+	<mvc:resources location="/WEB-INF/resources/" mapping="/resources/**/"></mvc:resources>	
 
 	<!-- viewResolver로 jsp 페이지 호출할 때 앞, 뒤에 자동으로 경로 입력 --> 	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
-		<property name="prefix" value="/WEB-INF/views/"></property>
-		<property name="suffix" value=".jsp"></property>
+	    <property name="prefix" value="/WEB-INF/views/" />
+	    <property name="suffix" value=".jsp" />
+	    <property name="order" value="2" />
+	</bean>	
+	
+	<!-- tiles 설정 -->
+	<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+	    <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+	    <property name="order" value="1" />
 	</bean>
+	 
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+	    <property name="definitions">
+	        <list>
+	            <value>/WEB-INF/spring/tiles-define.xml</value>
+	        </list>
+	    </property>
+	</bean>
+
+	<!-- 파일업로드 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	    <property name="maxUploadSize" value="104857600"></property><!-- 10MB -->
+	    <property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+
+
 
 </beans>
