@@ -40,6 +40,29 @@
 	    <property name="defaultEncoding" value="UTF-8"></property>
 	</bean>
 
+	<!-- DB연결 설정 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+	    <property name="driverClass" value="${db.driverClass}"></property>
+	    <property name="url" value="${db.url}"></property>
+	    <property name="username" value="${db.username}"></property>
+	    <property name="password" value="${db.password}"></property>		
+	</bean>
 
+	<!-- property 설정파일 경로-->
+	<context:property-placeholder location="classpath:config/database.properties"/>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property> <!-- dataSource 아이디 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property> <!-- config 파일 경로 -->
+		<property name="mapperLocations"> <!-- mapper 파일 경로 -->
+			<list>
+				<value>classpath:mappers/article-mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+	</bean>
 
 </beans>

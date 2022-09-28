@@ -15,6 +15,12 @@ public class CommonController {
 	@Resource(name = "CommonService")
 	protected CommonService commonService;
 	
+	/**
+	 * @메소드명: home
+	 * @작성자: DGB데이터시스템 - 김상민
+	 * @생성일: 2022. 9. 23. 오전 8:20:41
+	 * @설명:
+	 */
 	@RequestMapping("/")
 	public String home(HttpServletRequest request, HttpServletResponse response) {
 		
