@@ -6,9 +6,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
 	<context:component-scan base-package="com.ksm.hpp"></context:component-scan>
 	
-	<mvc:annotation-driven />
+	<mvc:annotation-driven/>
 	
 	<!-- resources/**로 요청이 들어오면 controller를 타지 않고 /WEB-INF/resources/ 경로 하위의 파일로 response를 반환 -->
 	<mvc:resources location="/WEB-INF/resources/" mapping="/resources/**/"></mvc:resources>	
@@ -52,9 +53,9 @@
 	<context:property-placeholder location="classpath:config/database.properties"/>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property> <!-- dataSource 아이디 -->
-		<property name="configLocation" value="classpath:mybatis-config.xml"></property> <!-- config 파일 경로 -->
-		<property name="mapperLocations"> <!-- mapper 파일 경로 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<property name="mapperLocations">
 			<list>
 				<value>classpath:mappers/article-mapper.xml</value>
 			</list>
