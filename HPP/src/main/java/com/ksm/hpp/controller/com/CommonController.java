@@ -1,5 +1,8 @@
 package com.ksm.hpp.controller.com;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,8 +31,9 @@ public class CommonController {
 	}
 	
 	@RequestMapping("/test")
-	public void test() {
-		System.out.println("Test Start");
-		commonService.test("test service do");
+	public void test() throws Exception {
+		Map<String, Object> inData = new HashMap<String, Object>();
+		System.out.println("Controller Start");
+		commonService.test(inData);
 	}
 }
