@@ -11,9 +11,15 @@
 				title, 
 				content
 		from 	article		
-		
+		where	article_id = #{articleId}		
 	</select>
-
-
-
+	
+	<select id="selectArticleById" resultType="com.ksm.hpp.vo.Article" parameterType="string">
+		select  article_id as articleId, 
+				author, 
+				title, 
+				content
+		from 	article
+		where	article_id = #{articleId}
+	</select>	
 </mapper>

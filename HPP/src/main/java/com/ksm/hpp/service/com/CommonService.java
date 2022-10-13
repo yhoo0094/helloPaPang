@@ -8,13 +8,18 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ksm.hpp.dao.ArticleDAO;
 import com.ksm.hpp.framework.util.Constant;
+import com.ksm.hpp.vo.Article;
 
 @Service("CommonService")
 public class CommonService extends BaseService {
 	
 	@Autowired
 	SqlSession sqlSession; //SqlSession 빈 DI	
+	
+	@Autowired
+	private ArticleDAO articleDAO;	
 	
 	/*
 	 * public String test(String test) { List<Object> list =
@@ -38,5 +43,9 @@ public class CommonService extends BaseService {
 		System.out.println(result);
 		
 		return result;
+	}	
+	
+	public Article viewArticleDetail(String articleId) {
+		return this.articleDAO.selectArticleById(articleId);
 	}	
 }
