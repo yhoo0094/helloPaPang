@@ -1,6 +1,6 @@
 package com.ksm.hpp.service.com;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ksm.hpp.dao.ArticleDAO;
-import com.ksm.hpp.framework.util.Constant;
-import com.ksm.hpp.vo.Article;
 
 @Service("CommonService")
 public class CommonService extends BaseService {
@@ -32,20 +30,24 @@ public class CommonService extends BaseService {
 	 * return test; }
 	 */
 	
-	public Map<String, Object> test(Map<String, Object> inData) throws Exception
+	public List<Map<String, Object>> test() throws Exception
 	{
 		System.out.println("Service Start");
 		
-		Map<String, Object> result = new HashMap<String, Object>();
-
-		result.put(Constant.OUT_DATA, this.mtDao.queryForList("mappers.article-mapper.selectList", inData));
+		//Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+		
+		result = sqlSession.selectList("mappers.article-mapper.selectList");
+		
+		//result.put(Constant.OUT_DATA, this.mtDao.queryForList("mappers.article-mapper.selectList"));
 
 		System.out.println(result);
 		
 		return result;
 	}	
 	
-	public Article viewArticleDetail(String articleId) {
+	public Map<String, Object> viewArticleDetail(String articleId) {
 		return this.articleDAO.selectArticleById(articleId);
 	}	
 }

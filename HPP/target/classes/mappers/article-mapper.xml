@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappers.article-mapper">
-	<select id="selectList" parameterType="map" resultType="map">
-		<!-- 
+	<select id="selectList" resultType="map">
 		SELECT *
 		FROM MEMBER
-		 -->
-		select  article_id as articleId, 
-				author, 
-				title, 
-				content
-		from 	article		
-		where	article_id = #{articleId}		
 	</select>
 	
-	<select id="selectArticleById" resultType="com.ksm.hpp.vo.Article" parameterType="string">
+	<select id="selectArticleById" resultType="map" parameterType="string">
 		select  article_id as articleId, 
 				author, 
 				title, 

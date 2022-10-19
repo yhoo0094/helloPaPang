@@ -12,8 +12,16 @@
 		<put-attribute name="foot" value="/WEB-INF/views/tiles/footerTemplate.jsp" />
 	</definition>
 	
+	<!-- 기본 페이지 이동 -->
 	<definition name="*/*" extends="layout-tiles">
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 		<put-attribute name="title" value="HelloPaPang!" />
 	</definition>
+	
+	<!-- 홈페이지 -->
+	<definition name="/" extends="layout-tiles">
+		<put-attribute name="body" value="/home.jsp" />
+		<put-attribute name="title" value="HelloPaPang!" />
+	</definition>	
+	
 </tiles-definitions>
