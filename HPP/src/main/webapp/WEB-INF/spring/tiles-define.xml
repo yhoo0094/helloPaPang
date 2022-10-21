@@ -8,6 +8,7 @@
 	<definition name="layout-tiles" template="/WEB-INF/views/tiles/tiles-layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/tiles/headerTemplate.jsp" />
 		<put-attribute name="left" value="/WEB-INF/views/tiles/sidebarTemplate.jsp" />
+		<put-attribute name="right" value="/WEB-INF/views/tiles/bannerTemplate.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="foot" value="/WEB-INF/views/tiles/footerTemplate.jsp" />
 	</definition>

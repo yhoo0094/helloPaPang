@@ -5,8 +5,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/style.css">
-	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/template.css">
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/font.css"> <!-- 폰트적용 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- 아이콘 -->
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/template.css"> <!-- 전체 공통 css -->
     <title><tiles:insertAttribute name="title" /></title>
     
     <!-- title 아이콘 변경 -->
@@ -17,14 +18,15 @@
   
   <body>
   	<div class='wrap'>
-  		<tiles:insertAttribute name="header" />
+  		<tiles:insertAttribute name="header"/>
 		  <div class='content'>  	
   			<tiles:insertAttribute name="left"/>
 	  		<div class="page_content">
 	  			<tiles:insertAttribute name="body"/>
 	  		</div>
+	  		<tiles:insertAttribute name="right"/>
   		</div>
-  		<tiles:insertAttribute name="foot" />
+  		<tiles:insertAttribute name="foot"/>
   	</div>
   </body>
   
