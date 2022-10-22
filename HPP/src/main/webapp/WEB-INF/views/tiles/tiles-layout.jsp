@@ -6,7 +6,7 @@
 <html>
   <head>
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/font.css"> <!-- 폰트적용 -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- 아이콘 -->
+	<script src="https://kit.fontawesome.com/e2689e2fa2.js"></script> <!-- 아이콘 -->
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/template.css"> <!-- 전체 공통 css -->
     <title><tiles:insertAttribute name="title" /></title>
     

@@ -1,21 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- Navbar (sit on top) -->
-<div class="w3-top">
-  <div class="w3-bar w3-white w3-card" id="myNavbar">
-    <a href="#home" class="logo-pont w3-button w3-wide">Hello Papang</a>
-    <!-- Right-sided navbar links -->
-    <div class="w3-right w3-hide-small">
-      <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
-      <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> TEAM</a>
-      <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> WORK</a>
-      <a href="#pricing" class="w3-bar-item w3-button"><i class="fa fa-usd"></i> PRICING</a>
-      <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
-    </div>
-    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
-
-    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
-      <i class="fa fa-bars"></i>
-    </a>
-  </div>
+<div class="top">
+	<div id="myNavbar">
+		<div class="logoDiv">  
+	    	<a href="#home" class="logo-font">Hello Papang</a>
+	 	</div>
+ 	
+	 	<div class="navDiv">
+		 	<div class="loginMnuDiv">
+		 		<span style="width: 15px; float: right;">&nbsp;</span>
+				<a href="#about" class="loginMnu"><i class="fa-solid fa-door-open"></i>로그인</a>
+				<a href="#about" class="loginMnu"><i class="fa-solid fa-door-open"></i>로그아웃</a>
+				<a href="#about" class="loginMnu"><i class="fa-solid fa-user"></i>마이페이지</a>
+			</div>	
+			<div class="navMnuDiv">
+				<table>
+					<colgroup>
+						<col style="widows: 100px">
+						<col style="widows: 100px">
+						<col style="widows: 100px">
+						<col style="widows: 100px">
+						<col style="widows: 100px">
+					</colgroup>
+					<tbody>
+						<tr>
+							<td><a href="#about" class="navMnu"><i class="fa fa-comment"></i> 게시판</a></td>
+							<td><a href="#team" class="navMnu"><i class="fa-sharp fa-solid fa-store"></i> 장터</a></td>
+							<td><a href="#work" class="navMnu"><i class="fa-solid fa-baby-carriage"></i> 베이비시터</a></td>
+							<td><a href="#pricing" class="navMnu"><i class="fa-solid fa-ice-cream"></i> 활동</a></td>
+							<td><a href="#contact" class="navMnu"><i class="fa-sharp fa-solid fa-circle-info"></i> 정보</a></td>
+						</tr>	
+					</tbody>
+				</table>
+			</div>
+			<div class="dropdown-content">
+				<table style="width: 100%; text-align: center;">
+					<colgroup>
+						<col style="widows: 100px">
+						<col style="widows: 100px">
+						<col style="widows: 100px">
+						<col style="widows: 100px">
+						<col style="widows: 100px">
+					</colgroup>
+					<tbody>
+						<tr>
+							<td><a href="#about" class="navMnu"><i class="fa fa-comment"></i> 게시판</a></td>
+							<td><a href="#team" class="navMnu"><i class="fa-sharp fa-solid fa-store"></i> 장터</a></td>
+							<td><a href="#work" class="navMnu"><i class="fa-solid fa-baby-carriage"></i> 베이비시터</a></td>
+							<td><a href="#pricing" class="navMnu"><i class="fa-solid fa-ice-cream"></i> 활동</a></td>
+							<td><a href="#contact" class="navMnu"><i class="fa-sharp fa-solid fa-circle-info"></i> 정보</a></td>
+						</tr>	
+					</tbody>
+				</table>			
+			</div>		
+			
+		</div>
+	</div>
 </div>
+
