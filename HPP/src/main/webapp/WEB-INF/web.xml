@@ -16,7 +16,7 @@
 
   <servlet-mapping>
   	<servlet-name>dispatcherServlet</servlet-name>
-  	<url-pattern>/</url-pattern><!-- 모든 요청이 dispatcherServlet을 통과하도록 한다 -->
+  	<url-pattern>/</url-pattern><!-- 모든 패턴의 요청이 dispatcherServlet을 통과하도록 한다 -->
   </servlet-mapping>
   
     

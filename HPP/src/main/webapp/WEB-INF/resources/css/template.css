@@ -11,6 +11,7 @@ a {
 
 :root {
   --header-heigth: 70px;
+  --navMnu-color: rgb(255 210 88);
 }
 
 .wrap{
@@ -33,7 +34,7 @@ a {
 .SideBar{
 	width: 10%;
 	height: 600px;
-	background-color: #FFBB00;
+	background-color: #EAEAEA;
 	float: left;
 }
 
@@ -47,7 +48,7 @@ a {
 .page_content{
 	width: 80%;
 	height: 600px;
-	background-color: #EAEAEA;
+	background-color: rgb(254 224 143 / 77%);
 	float: left;
 }
 
@@ -63,7 +64,7 @@ a {
 .logo-font{
 	font-family: 나눔손글씨 가람연꽃; 
 	font-size: 26px; 
-	font-weight: bold;
+	font-weight: 900;
     padding: 8px 16px;
     float: left;
     width: auto;
@@ -90,11 +91,15 @@ a {
     display: inline-grid;
 }
 
-.navMnuDiv{
+.navMnuThDiv{
 	font-size: 18px;
-    display: block;
-    float: right;	
+    display: block;	
  	margin: 8px 0px;   
+  	font-weight: 900;
+}
+
+.navMnuTh{
+ 	text-align: center;	
 }
 
 .loginMnuDiv{
@@ -114,19 +119,49 @@ a {
     display: inline-block;	
 }
 
-.dropdown-content {
-  display: none;
-  position: relative;
-  background-color: #f9f9f9;
-  width: 100%;
-  left: 0;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  top: 0;
-  height: 300px;
+.dropdownDiv {
+    display: none;
+    position: relative;
+    background-color: #000000cc;
+    width: 100%;
+    min-height: 100px;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    color: var(--navMnu-color);
+    font-weight: 900;
+    float: right;
 }
 
-.navMnuDiv:hover ~ .dropdown-content{
+.navMnuDiv{
+	display: inline-block;	
+}
+
+.navMnuDiv:hover .dropdownDiv{
   	display: inline-block;
 }
+
+.navMnuCol{
+	width: 160px;
+}
+
+.navIcon{
+	color: var(--navMnu-color);
+}
+
+.loginMnuIcon{
+	color: #6f6f6f;	
+}
 /* 네비게이터 css 끝 */
+
+.menuNmDiv{
+	font-size: 20px;
+    padding: 5px;
+    font-weight: 900;	
+}
+
+.menuPathDiv{
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 900;
+}

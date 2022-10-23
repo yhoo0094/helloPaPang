@@ -23,21 +23,6 @@ public class CommonController {
 	@Resource(name = "CommonService")
 	protected CommonService commonService;
 	
-	/**
-	 * @메소드명: home
-	 * @작성자: DGB데이터시스템 - 김상민
-	 * @생성일: 2022. 9. 23. 오전 8:20:41
-	 * @설명:
-	 */
-	
-	/*
-	@RequestMapping("/")
-	public String home(HttpServletRequest request, HttpServletResponse response) {
-		
-		return "com/homepage";
-	}
-	*/
-	
 	@RequestMapping("/test")
 	public List<Map<String, Object>> test() throws Exception {
 		//Map<String, Object> inData = new HashMap<String, Object>();
@@ -47,6 +32,7 @@ public class CommonController {
 	}
 	
 	//글 조회
+	/*
 	@GetMapping("/{articleId}")
 	@ResponseBody
 	public Map<String, Object> viewDetail(@PathVariable String articleId) {
@@ -56,4 +42,5 @@ public class CommonController {
 		//System.out.println(map);
 		return map;
 	}	
+	*/
 }

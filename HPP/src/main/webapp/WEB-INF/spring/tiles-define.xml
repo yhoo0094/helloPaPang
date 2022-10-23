@@ -13,16 +13,17 @@
 		<put-attribute name="foot" value="/WEB-INF/views/tiles/footerTemplate.jsp" />
 	</definition>
 	
-	<!-- 기본 페이지 이동 -->
-	<definition name="*/*" extends="layout-tiles">
-		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
-		<put-attribute name="title" value="HelloPaPang!" />
-	</definition>
-	
 	<!-- 홈페이지 -->
 	<definition name="/" extends="layout-tiles">
 		<put-attribute name="body" value="/home.jsp" />
 		<put-attribute name="title" value="HelloPaPang!" />
-	</definition>	
+	</definition>		
 	
+	<!-- 기본 페이지 이동 -->
+	<definition name="*/*" extends="layout-tiles">
+		<put-attribute name="js" value="/resources/js/{1}/{2}.js" />
+		<put-attribute name="css" value="/resources/css/{1}/{2}.css" />
+		<put-attribute name="title" value="HelloPaPang!" />
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
 </tiles-definitions>
