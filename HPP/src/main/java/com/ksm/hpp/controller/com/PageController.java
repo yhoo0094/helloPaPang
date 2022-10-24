@@ -40,14 +40,6 @@ public class PageController {
 		return "com/home";
 	}
 	
-	/*
-	 * @RequestMapping("/signUp") public ModelAndView signUp(HttpServletRequest
-	 * request, HttpServletResponse response) { ModelAndView result = new
-	 * ModelAndView();
-	 * 
-	 * result.setViewName("member/signUp"); return result; }
-	 */	
-	
 	/**
 	 * @메소드명: pageController
 	 * @작성자: 김상민
