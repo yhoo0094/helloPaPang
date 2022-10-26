@@ -52,6 +52,8 @@ public class PageController {
 		ModelAndView result = new ModelAndView();
 		
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		
+		
 		System.out.println(inData);
 		
 		result.setViewName(url1 + "/" + url2);

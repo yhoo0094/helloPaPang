@@ -13,7 +13,7 @@
 				<a href="#about" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그인</a>
 				<a href="#about" class="loginMnu"><i class="fa-solid fa-user loginMnuIcon"></i>마이페이지</a>
 				<a href="#about" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그아웃</a>
-				<a href="/member/signUp" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>회원가입</a>				
+				<a href="/user/signUp" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>회원가입</a>				
 			</div>	
 			<div class="navMnuDiv">
 				<div class="navMnuThDiv">
