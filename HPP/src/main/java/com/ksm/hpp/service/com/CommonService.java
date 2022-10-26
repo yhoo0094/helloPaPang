@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ksm.hpp.dao.ArticleDAO;
+import com.ksm.hpp.framework.dao.ArticleDAO;
 
 @Service("CommonService")
 public class CommonService extends BaseService {
@@ -18,17 +18,6 @@ public class CommonService extends BaseService {
 	
 	@Autowired
 	private ArticleDAO articleDAO;	
-	
-	/*
-	 * public String test(String test) { List<Object> list =
-	 * sqlSession.queryForList("mappers.article-mapper.selectArticleById");
-	 * 
-	 * System.out.println(test);
-	 * 
-	 * System.out.println(list);
-	 * 
-	 * return test; }
-	 */
 	
 	public List<Map<String, Object>> test() throws Exception
 	{

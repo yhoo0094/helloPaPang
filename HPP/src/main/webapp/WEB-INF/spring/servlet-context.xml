@@ -58,6 +58,7 @@
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:mappers/article-mapper.xml</value>
+				<value>classpath*:com/ksm/hpp/mapper/**/*.xml</value>
 			</list>
 		</property>
 	</bean>
