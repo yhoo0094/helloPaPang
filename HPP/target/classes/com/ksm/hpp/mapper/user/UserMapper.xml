@@ -10,8 +10,8 @@
 		     )
 		VALUES
 			 (
-			   'testID2'
-			 , 'testPW2'
+			   #{userId}
+			 , #{userPw}
 			 )    
 	</insert>
 </mapper>
