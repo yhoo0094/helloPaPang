@@ -31,7 +31,7 @@
 			</tbody>
 		</table>
 		
-		<button type="button" onclick="saveUserInfo()">가입</button>
+		<button type="button" onclick="insertUserInfo()">가입</button>
 	</form>
 </div>	
 
