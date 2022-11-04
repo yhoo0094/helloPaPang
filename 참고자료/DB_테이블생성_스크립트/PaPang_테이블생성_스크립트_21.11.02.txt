@@ -1,0 +1,403 @@
+DROP TABLE IF EXISTS `ACT_COM`;
+
+CREATE TABLE `ACT_COM` (
+	`ac_no`	int	NOT NULL	COMMENT '후기번호',
+	`mbr_id`	varchar(50)	NULL	COMMENT '아이디',
+	`ac_content`	text	NULL	COMMENT '내용',
+	`ac_rate`	int	NULL	COMMENT '평점',
+	`ac_category`	char	NULL	COMMENT '카테고리(1:요리, 2:놀이)',
+	`PC_NO`	int	NULL	COMMENT '글번호'
+);
+
+DROP TABLE IF EXISTS `admin`;
+
+CREATE TABLE `admin` (
+	`ad_id`	varchar(50)	NOT NULL	COMMENT '관리자ID',
+	`ad_pw`	varchar(50)	NULL	COMMENT '관리자PW'
+);
+
+DROP TABLE IF EXISTS `ALARM`;
+
+CREATE TABLE `ALARM` (
+	`arm_no`	int	NOT NULL	COMMENT '쪽지번호',
+	`mbr_id`	varchar(50)	NULL	COMMENT '아이디',
+	`arm_content`	text	NULL	COMMENT '내용',
+	`arm_date`	datetime	NULL	COMMENT '날짜',
+	`arm_status`	char	NULL	DEFAULT '2'	COMMENT '상태(1:열람, 2:미열람)'
+);
+
+DROP TABLE IF EXISTS `BAG`;
+
+CREATE TABLE `BAG` (
+	`bag_no`	int	NOT NULL	COMMENT '장바구니번호',
+	`mbr_id`	varchar(50)	NULL	COMMENT '아이디',
+	`pro_no`	int	NULL	COMMENT '상품번호',
+	`bag_cnt`	int	NULL	COMMENT '수량'
+);
+
+DROP TABLE IF EXISTS `BANNER`;
+
+CREATE TABLE `BANNER` (
+	`ban_no`	int	NOT NULL	COMMENT '게시글번호',
+	`ad_id`	varchar(50)	NOT NULL	COMMENT '관리자 아이디',
+	`ban_category`	varchar(50)	NULL	COMMENT '분류(1:사이드배너, 2:슬라이드배너)',
+	`ban_pic_name`	varchar(100)	NULL	COMMENT '이미지명',
+	`ban_pic_status`	char	NULL	DEFAULT '1'	COMMENT '이미지 공개여부(1: 표시, 2: 숨김)',
+	`ban_pic`	varchar(200)	NULL	COMMENT '이미지 경로',
+	`ban_link`	varchar(200)	NULL	COMMENT '링크'
+);
+
+DROP TABLE IF EXISTS `CHILD`;
+
+CREATE TABLE `CHILD` (
+	`chi_no`	int	NOT NULL	COMMENT '아이번호',
+	`mbr_id`	varchar(50)	NOT NULL	COMMENT '아이디',
+	`chi_birth`	date	NULL	COMMENT '출생일',
+	`chi_name`	varchar(50)	NULL	COMMENT '아이이름',
+	`chi_gender`	char	NULL	COMMENT '아이성별(1:남자, 2:여자)',
+	`chi_sns`	char	NULL	COMMENT '수신여부(1:수신, 2:거부)',
+	`chi_pic`	varchar(200)	NULL	COMMENT '사진 경로'
+);
+
+DROP TABLE IF EXISTS `COMMUNITY`;
+
+CREATE TABLE `COMMUNITY` (
+	`com_no`	int	NOT NULL	COMMENT '게시글 번호',
+	`mbr_id`	varchar(50)	NOT NULL	COMMENT '아이디',
+	`com_category`	char	NULL	COMMENT '분류(1:정보,2:일상,3:질문)',
+	`com_title`	varchar(300)	NULL	COMMENT '제목',
+	`com_content`	text	NULL	COMMENT '내용',
+	`com_date`	datetime	NULL	COMMENT '작성일',
+	`com_hit`	int	NULL	DEFAULT '0'	COMMENT '조회수'
+);
+
+DROP TABLE IF EXISTS `COMMUNITY_COM`;
+
+CREATE TABLE `COMMUNITY_COM` (
+	`cc_no`	int	NOT NULL	COMMENT '댓글번호',
+	`mbr_id`	varchar(50)	NOT NULL	COMMENT '아이디',
+	`cc_content`	text	NULL	COMMENT '내용',
+	`com_no`	int	NOT NULL	COMMENT '게시글번호',
+	`cc_date`	datetime	NULL	COMMENT '작성일',
+	`cc_category`	varchar(50)	NULL	COMMENT '카테고리(1:자장가,2:커뮤니티))'
+);
+
+DROP TABLE IF EXISTS `COOK`;
+
+CREATE TABLE `COOK` (
+	`cook_no`	int	NOT NULL	COMMENT '글번호',
+	`cook_title`	varchar(300)	NULL	COMMENT '제목',
+	`cook_content`	text	NULL	COMMENT '내용',
+	`mbr_id`	varchar(50)	NOT NULL	COMMENT '아이디',
+	`cook_hit`	int	NULL	DEFAULT '0'	COMMENT '조회수',
+	`cook_category`	char	NULL	COMMENT '카테고리(1:이유식, 2:함께하는 요리)'
+);
+
+DROP TABLE IF EXISTS `MEMBER`;
+
+CREATE TABLE `MEMBER` (
+	`mbr_id`	varchar(50)	NOT NULL	COMMENT '아이디',
+	`mbr_pw`	varchar(100)	NULL	COMMENT '비밀번호',
+	`mbr_name`	varchar(50)	NULL	COMMENT '이름',
+	`mbr_birth`	date	NULL	COMMENT '생년월일',
+	`mbr_phone`	varchar(11)	NULL	COMMENT '연락처',
+	`mbr_post`	varchar(20)	NULL	COMMENT '우편번호',
+	`mbr_addr1`	varchar(300)	NULL	COMMENT '상세주소1',
+	`mbr_addr2`	varchar(300)	NULL	COMMENT '상세주소2',
+	`mbr_bank`	varchar(50)	NULL	COMMENT '계좌은행',
+	`mbr_account`	varchar(50)	NULL	COMMENT '계좌번호',
+	`mbr_author`	char	NULL	DEFAULT '1'	COMMENT '권한(1:일반회원,2:시터)',
+	`mbr_date`	datetime	NULL	COMMENT '가입일',
+	`mbr_status`	char	NULL	DEFAULT '1'	COMMENT '상태(1:활동중,2:정지,3:탈퇴)',
+	`mbr_gender`	char	NULL	COMMENT '성별(1:남,2:여)',
+	`mbr_email`	varchar(50)	NULL	COMMENT '이메일',
+	`mbr_pic`	varchar(200)	NULL	COMMENT '사진'
+);
+
+DROP TABLE IF EXISTS `NQ`;
+
+CREATE TABLE `NQ` (
+	`nq_no`	int	NOT NULL	COMMENT '글번호',
+	`ad_id`	varchar(50)	NOT NULL	COMMENT '관리자 아이디',
+	`nq_title`	varchar(300)	NULL	COMMENT '제목',
+	`nq_content`	text	NULL	COMMENT '내용',
+	`nq_category`	char	NULL	COMMENT '분류(1:공지사항, 2:자주묻는질문)',
+	`nq_file_no`	int	NULL	COMMENT '첨부파일 번호',
+	`nq_date`	datetime	NULL	COMMENT '등록일',
+	`nq_hit`	int	NULL	COMMENT '조회수'
+);
+
+DROP TABLE IF EXISTS `ORDER_DETAIL`;
+
+CREATE TABLE `ORDER_DETAIL` (
+	`od_detail_no`	int	NOT NULL	COMMENT '주문상세번호',
+	`order_no`	int	NULL	COMMENT '주문번호',
+	`pro_no`	int	NULL	COMMENT '상품번호',
+	`bag_cnt`	int	NULL	COMMENT '수량'
+);
+
+DROP TABLE IF EXISTS `ORDER_INFO`;
+
+CREATE TABLE `ORDER_INFO` (
+	`order_no`	int	NOT NULL	COMMENT '주문번호',
+	`waybill`	int	NULL	COMMENT '운송장번호',
+	`order_date`	datetime	NULL	COMMENT '거래일',
+	`order_status`	char	NULL	DEFAULT '1'	COMMENT '상태(1:주문완료, 2:주문취소)',
+	`mbr_id`	varchar(50)	NULL	COMMENT '아이디',
+	`addressee`	varchar(50)	NULL	COMMENT '수령인',
+	`post`	varchar(50)	NULL	COMMENT '우편번호',
+	`addr1`	varchar(300)	NULL	COMMENT '상세주소1',
+	`addr2`	varchar(300)	NULL	COMMENT '상세주소2',
+	`addr3`	varchar(300)	NULL	COMMENT '상세주소3'
+);
+
+DROP TABLE IF EXISTS `PLAY`;
+
+CREATE TABLE `PLAY` (
+	`play_no`	int	NOT NULL	COMMENT '글번호',
+	`play_title`	varchar(300)	NULL	COMMENT '제목',
+	`play_content`	text	NULL	COMMENT '내용',
+	`mbr_id`	varchar(50)	NOT NULL	COMMENT '아이디',
+	`play_hit`	int	NULL	DEFAULT '0'	COMMENT '조회수',
+	`play_category`	char	NULL	COMMENT '카테고리(1:예비아빠, 만0~1세, 만2세, 만3~6세)'
+);
+
+DROP TABLE IF EXISTS `PREVENTION`;
+
+CREATE TABLE `PREVENTION` (
+	`chi_no`	int	NOT NULL	COMMENT '아이번호',
+	`prv_name`	varchar(200)	NULL	COMMENT '접종명',
+	`prv_date`	date	NULL	COMMENT '접종일',
+	`prv_memo`	text	NULL	COMMENT '메모'
+);
+
+DROP TABLE IF EXISTS `PRODUCT`;
+
+CREATE TABLE `PRODUCT` (
+	`pro_no`	int	NOT NULL	COMMENT '상품번호',
+	`pro_name`	varchar(300)	NULL	COMMENT '상품명',
+	`pro_price`	int	NULL	COMMENT '가격',
+	`pro_pic`	varchar(200)	NULL	COMMENT '사진',
+	`pro_detail`	text	NULL	COMMENT '상세정보',
+	`pro_cnt`	int	NULL	COMMENT '수량',
+	`pro_cc`	int	NULL	COMMENT '기업코드',
+	`pro_cn`	varchar(50)	NULL	COMMENT '기업명'
+);
+
+DROP TABLE IF EXISTS `REPORT`;
+
+CREATE TABLE `REPORT` (
+	`repo_no`	int	NOT NULL	COMMENT '글번호',
+	`mbr_id`	varchar(50)	NULL	COMMENT '아이디',
+	`repo_category`	char	NULL	COMMENT '카테고리(1:시터, 2:장터, 3:커뮤니티, 4:활동))',
+	`repo_category_no`	int	NULL	COMMENT '글번호',
+	`repo_title`	varchar(300)	NULL	COMMENT '제목',
+	`repo_content`	text	NULL	COMMENT '내용',
+	`repo_status`	char	NULL	DEFAULT '1'	COMMENT '상태(1:처리, 2:미처리))',
+	`repo_ans`	text	NULL	COMMENT '답변',
+	`RE_MBR_ID`	varchar(50)	NULL	COMMENT '신고대상 아이디'
+);
+
+DROP TABLE IF EXISTS `REPORT_INFO`;
+
+CREATE TABLE `REPORT_INFO` (
+	`repo_no`	int	NOT NULL	COMMENT '글번호',
+	`mbr_id`	varchar(50)	NULL	COMMENT '아이디',
+	`rinfo_reason`	varchar(4000)	NULL	COMMENT '제재사유',
+	`rinfo_cnt`	int	NULL	COMMENT '정지 일 수',
+	`rinfo_start`	date	NULL	COMMENT '정지 시작일'
+);
+
+DROP TABLE IF EXISTS `SITTER`;
+
+CREATE TABLE `SITTER` (
+	`sit_mbr_id`	varchar(50)	NOT NULL	COMMENT '아이디',
+	`sit_payday`	varchar(50)	NULL	COMMENT '급여 지급일',
+	`sit_off`	varchar(50)	NULL	COMMENT '휴무요일(1:월, 2:화, 3:수, 4:목, 5:금, 6:토, 7:일)',
+	`sit_loc`	varchar(50)	NULL	COMMENT '활동 지역',
+	`sit_pay`	int	NULL	COMMENT '희망급여',
+	`sit_age`	char	NULL	COMMENT '희망연령대(1:신생아, 2:영아, 3:유아)',
+	`sit_note`	text	NULL	COMMENT '특이사항',
+	`sit_pic`	varchar(200)	NULL	COMMENT '사진'
+);
+
+DROP TABLE IF EXISTS `SITTER_COM`;
+
+CREATE TABLE `SITTER_COM` (
+	`sc_no`	int	NOT NULL	COMMENT '후기 번호',
+	`sc_content`	text	NULL	COMMENT '내용',
+	`sc_rate`	int	NULL	COMMENT '평점'
+);
+
+DROP TABLE IF EXISTS `SITTER_MONTH`;
+
+CREATE TABLE `SITTER_MONTH` (
+	`sit_mbr_id`	varchar(50)	NOT NULL	COMMENT '시터아이디',
+	`SRV_DATE`	varchar(50)	NOT NULL	COMMENT '월급달',
+	`MONTH_DATE`	int	NULL	COMMENT '월급',
+	`SRV_PAY`	date	NULL	COMMENT '월급 지급일'
+);
+
+DROP TABLE IF EXISTS `SITTER_REV`;
+
+CREATE TABLE `SITTER_REV` (
+	`srv_no`	int	NOT NULL	COMMENT '거래번호',
+	`srv_date`	date	NOT NULL	COMMENT '예약일',
+	`mbr_id`	varchar(50)	NOT NULL	COMMENT '아이디',
+	`sit_mbr_id`	varchar(50)	NOT NULL	COMMENT '시터아이디',
+	`chi_no`	int	NOT NULL	COMMENT '아이번호',
+	`srv_pay`	int	NULL	COMMENT '금액',
+	`srv_status`	char	NULL	DEFAULT '1'	COMMENT '상태(1:신청, 2:미결재, 3:결재완료)'
+);
+
+DROP TABLE IF EXISTS `USED`;
+
+CREATE TABLE `USED` (
+	`used_no`	int	NOT NULL	COMMENT '글번호',
+	`mbr_id`	varchar(50)	NOT NULL	COMMENT '아이디',
+	`used_title`	varchar(50)	NULL	COMMENT '제목',
+	`used_date`	date	NULL	COMMENT '등록일',
+	`used_category`	char	NULL	DEFAULT '1'	COMMENT '분류(1:판매중, 2:판매완료)',
+	`used_loc`	varchar(50)	NULL	COMMENT '지역',
+	`used_pic`	varchar(200)	NULL	COMMENT '사진',
+	`used_hit`	int	NULL	DEFAULT '0'	COMMENT '조회수',
+	`used_price`	int	NULL	COMMENT '가격',
+	`used_content`	text	NULL	COMMENT '내용'
+);
+
+DROP TABLE IF EXISTS `USED_COM`;
+
+CREATE TABLE `USED_COM` (
+	`uc_no`	int	NOT NULL	COMMENT '댓글 번호',
+	`used_no`	int	NOT NULL	COMMENT '글번호',
+	`uc_date`	datetime	NULL	COMMENT '등록일',
+	`uc_content`	text	NULL	COMMENT '내용',
+	`mbr_id`	varchar(50)	NULL	COMMENT '아이디'
+);
+
+DROP TABLE IF EXISTS `WAREHOUSING`;
+
+CREATE TABLE `WAREHOUSING` (
+	`ware_no`	int	NOT NULL	COMMENT '입출고번호',
+	`pro_no`	int	NOT NULL	COMMENT '상품번호',
+	`ware_cnt`	int	NULL	COMMENT '상품수량',
+	`ware_date`	datetime	NULL	COMMENT '입출고일',
+	`ware_note`	text	NULL	COMMENT '특이사항'
+);
+
+DROP TABLE IF EXISTS `ATTACHED_FILE`;
+
+CREATE TABLE `ATTACHED_FILE` (
+	`content_no`	VARCHAR(255)	NOT NULL	COMMENT '글번호',
+	`category`	VARCHAR(255)	NOT NULL	COMMENT '카테고리(1:',
+	`file_no`	VARCHAR(255)	NOT NULL	COMMENT '파일번호',
+	`file_name`	VARCHAR(255)	NULL	COMMENT '파일명'
+);
+
+ALTER TABLE `ACT_COM` ADD CONSTRAINT `PK_ACT_COM` PRIMARY KEY (
+	`ac_no`
+);
+
+ALTER TABLE `admin` ADD CONSTRAINT `PK_ADMIN` PRIMARY KEY (
+	`ad_id`
+);
+
+ALTER TABLE `ALARM` ADD CONSTRAINT `PK_ALARM` PRIMARY KEY (
+	`arm_no`
+);
+
+ALTER TABLE `BAG` ADD CONSTRAINT `PK_BAG` PRIMARY KEY (
+	`bag_no`
+);
+
+ALTER TABLE `BANNER` ADD CONSTRAINT `PK_BANNER` PRIMARY KEY (
+	`ban_no`
+);
+
+ALTER TABLE `CHILD` ADD CONSTRAINT `PK_CHILD` PRIMARY KEY (
+	`chi_no`
+);
+
+ALTER TABLE `COMMUNITY` ADD CONSTRAINT `PK_COMMUNITY` PRIMARY KEY (
+	`com_no`
+);
+
+ALTER TABLE `COMMUNITY_COM` ADD CONSTRAINT `PK_COMMUNITY_COM` PRIMARY KEY (
+	`cc_no`
+);
+
+ALTER TABLE `COOK` ADD CONSTRAINT `PK_COOK` PRIMARY KEY (
+	`cook_no`
+);
+
+ALTER TABLE `MEMBER` ADD CONSTRAINT `PK_MEMBER` PRIMARY KEY (
+	`mbr_id`
+);
+
+ALTER TABLE `NQ` ADD CONSTRAINT `PK_NQ` PRIMARY KEY (
+	`nq_no`
+);
+
+ALTER TABLE `ORDER_DETAIL` ADD CONSTRAINT `PK_ORDER_DETAIL` PRIMARY KEY (
+	`od_detail_no`
+);
+
+ALTER TABLE `ORDER_INFO` ADD CONSTRAINT `PK_ORDER_INFO` PRIMARY KEY (
+	`order_no`
+);
+
+ALTER TABLE `PLAY` ADD CONSTRAINT `PK_PLAY` PRIMARY KEY (
+	`play_no`
+);
+
+ALTER TABLE `PREVENTION` ADD CONSTRAINT `PK_PREVENTION` PRIMARY KEY (
+	`chi_no`
+);
+
+ALTER TABLE `PRODUCT` ADD CONSTRAINT `PK_PRODUCT` PRIMARY KEY (
+	`pro_no`
+);
+
+ALTER TABLE `REPORT` ADD CONSTRAINT `PK_REPORT` PRIMARY KEY (
+	`repo_no`
+);
+
+ALTER TABLE `REPORT_INFO` ADD CONSTRAINT `PK_REPORT_INFO` PRIMARY KEY (
+	`repo_no`
+);
+
+ALTER TABLE `SITTER` ADD CONSTRAINT `PK_SITTER` PRIMARY KEY (
+	`sit_mbr_id`
+);
+
+ALTER TABLE `SITTER_COM` ADD CONSTRAINT `PK_SITTER_COM` PRIMARY KEY (
+	`sc_no`
+);
+
+ALTER TABLE `SITTER_MONTH` ADD CONSTRAINT `PK_SITTER_MONTH` PRIMARY KEY (
+	`sit_mbr_id`,
+	`SRV_DATE`
+);
+
+ALTER TABLE `SITTER_REV` ADD CONSTRAINT `PK_SITTER_REV` PRIMARY KEY (
+	`srv_no`,
+	`srv_date`
+);
+
+ALTER TABLE `USED` ADD CONSTRAINT `PK_USED` PRIMARY KEY (
+	`used_no`
+);
+
+ALTER TABLE `USED_COM` ADD CONSTRAINT `PK_USED_COM` PRIMARY KEY (
+	`uc_no`
+);
+
+ALTER TABLE `WAREHOUSING` ADD CONSTRAINT `PK_WAREHOUSING` PRIMARY KEY (
+	`ware_no`
+);
+
+ALTER TABLE `ATTACHED_FILE` ADD CONSTRAINT `PK_ATTACHED_FILE` PRIMARY KEY (
+	`content_no`,
+	`category`,
+	`file_no`
+);
