@@ -46,4 +46,20 @@ public class UserService {
 		
 		return result;
 	}	
+	
+	/**
+	 * @메소드명: login
+	 * @작성자: 김상민
+	 * @생성일: 2022. 11. 8. 오전 8:59:13
+	 * @설명: 로그인
+	 */
+	public Map<String, Object> login(StringBuilder logStr, Map<String, Object> inData) throws Exception
+	{
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<Object> list = sqlSession.selectList("mapper.user.UserMapper.selectUser", inData);
+		result.put("list", list);
+		
+		return result;
+	}	
 }

@@ -2,5 +2,5 @@
 
 //로그인 팝업 열기
 function loginPopup(){
-	$('#ex1').modal('open')	
+	$('#loginModal').modal('open')	
 }	
