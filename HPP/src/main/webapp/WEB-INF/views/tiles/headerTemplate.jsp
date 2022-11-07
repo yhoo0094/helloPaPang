@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!-- Navbar (sit on top) -->
 <div class="top">
 	<div id="myNavbar">
@@ -10,7 +11,7 @@
 	 	<div class="navDiv">
 		 	<div class="loginMnuDiv">
 		 		<span style="width: 15px; float: right;">&nbsp;</span>
-				<a href="#about" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그인</a>
+				<a href="javascript:loginPopup()" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그인</a>
 				<a href="#about" class="loginMnu"><i class="fa-solid fa-user loginMnuIcon"></i>마이페이지</a>
 				<a href="#about" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그아웃</a>
 				<a href="/user/signUp" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>회원가입</a>				
@@ -68,3 +69,4 @@
 	</div>
 </div>
 
+<%@ include file="/WEB-INF/views/user/loginModal.jsp" %>

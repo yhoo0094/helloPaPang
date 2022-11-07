@@ -58,5 +58,18 @@ public class PageController {
 		
 		result.setViewName(url1 + "/" + url2);
 		return result;
-	}		
+	}	
+	
+	@RequestMapping("/popup.do")
+	public ModelAndView popupController(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView result = new ModelAndView();
+		
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		System.out.println(inData);
+		
+		result.setViewName((String) inData.get("view_nm"));
+		result.addObject("param", inData);
+		
+		return result;
+	}			
 }
