@@ -57,8 +57,8 @@ public class UserService {
 	{
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		List<Object> list = sqlSession.selectList("mapper.user.UserMapper.selectUser", inData);
-		result.put("list", list);
+		Map<String, Object> data = sqlSession.selectOne("mapper.user.UserMapper.selectUser", inData);
+		result.put("data", data);
 		
 		return result;
 	}	

@@ -13,7 +13,7 @@
 
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
-	<form id="userInfoForm" method="post">
+	<form id="signUpForm" method="post">
 		<table>
 			<colgroup>
 				<col style="width: 50%">
@@ -22,16 +22,16 @@
 			<tbody>
 				<tr>
 					<th>아이디</th>
-					<th><input type="text" name="userId"></th>
+					<th><input type="text" name="userId" onkeypress="if(event.keyCode == 13){signUp()}" required="all1"></th>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<th><input type="text" name="userPw"></th>
+					<th><input type="text" name="userPw" onkeypress="if(event.keyCode == 13){signUp()}" required="all1"></th>
 				</tr>				
 			</tbody>
 		</table>
 		
-		<button type="button" onclick="insertUserInfo()">가입</button>
+		<button type="button" onclick="signUp()">가입</button>
 	</form>
 </div>	
 

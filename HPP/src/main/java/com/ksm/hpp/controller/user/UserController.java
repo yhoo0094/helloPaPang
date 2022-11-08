@@ -31,7 +31,7 @@ public class UserController {
 	 * @생성일: 2022. 11. 2. 오후 6:59:16
 	 * @설명: 사용자 조회
 	 */
-	@RequestMapping("/selectUser")
+	@RequestMapping("/selectUser.do")
 	public void selectUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
 		Map<String, Object> outData = userService.selectUser((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
@@ -49,7 +49,7 @@ public class UserController {
 	 * @생성일: 2022. 11. 2. 오후 6:59:00
 	 * @설명: 사용자 생성
 	 */
-	@RequestMapping("/insertUser")
+	@RequestMapping("/signUp.do")
 	public void insertUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
 		Map<String, Object> outData = userService.insertUser((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);

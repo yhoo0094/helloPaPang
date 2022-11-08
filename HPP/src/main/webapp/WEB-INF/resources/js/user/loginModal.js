@@ -6,7 +6,7 @@
 **/
 
 function login(){
-	var formData = $('#userInfoForm').serialize();
+	var formData = $('#loginForm').serialize();
 	
 	//필수입력 검증(추후 구현)
 	

@@ -11,7 +11,7 @@
 <script src="<%=request.getContextPath() %>/resources/js/user/loginModal.js"></script>
 
 <div id="loginModal" class="modal" style="width: 400px;">
-	<form id="userInfoForm" method="post">
+	<form id="loginForm" method="post">
 		<table>
 			<colgroup>
 				<col style="width: 50%">
@@ -20,11 +20,11 @@
 			<tbody>
 				<tr>
 					<th>아이디</th>
-					<th><input type="text" name="userId" title="아이디"></th>
+					<th><input id="userId" type="text" name="userId" title="아이디" onkeypress="if(event.keyCode == 13){login()}"></th>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<th><input type="password" name="userPw" title="비밀번호"></th>
+					<th><input id="userPw" type="password" name="userPw" title="비밀번호" onkeypress="if(event.keyCode == 13){login()}"></th>
 				</tr>				
 			</tbody>
 		</table>

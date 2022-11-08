@@ -1,24 +1,12 @@
-$(()=>{
-	selectUser();
-})
-
-function selectUser(){
+//회원가입
+function signUp(){
+	
+	$util.checkRequired({group:["all1"]});
+	return;
+	
+	var formData = $('#signUpForm').serialize();
     $.ajax({
-        url: '/user/selectUser.do',
-        type: 'POST',
-        data: '',
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
-        dataType: 'json',
-        success: function (result) {
-                console.log(result);
-        }
-    });		
-}	
-
-function insertUserInfo(){
-	var formData = $('#userInfoForm').serialize()
-    $.ajax({
-        url: '/user/insertUser.do',
+        url: '/user/signUp.do',
         type: 'POST',
         data: formData,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 

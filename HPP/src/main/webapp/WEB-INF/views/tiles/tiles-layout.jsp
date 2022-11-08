@@ -2,6 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"  %>
 
+<%
+/**
+ * @화면명: tiles layout
+ * @작성자: 김상민
+ * @생성일: 2022. 11. 8. 오후 6:51:35
+ * @설명: 타일즈 적용을 위한 레이아웃 페이지
+**/
+%>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,7 +24,8 @@
 	<script src="https://kit.fontawesome.com/e2689e2fa2.js"></script> <!-- 아이콘 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script><!-- jQuery Modal -->
 	
-	<script src="<%=request.getContextPath() %>/resources/js/com/common.js"></script> <!-- 페이지 개별 js -->
+	<script src="<%=request.getContextPath() %>/resources/js/com/common.js"></script> <!-- 페이지 공통 js -->
+	<script src="<%=request.getContextPath() %>/resources/js/com/util.js"></script> <!-- 유틸 js -->
 	<script src="<%=request.getContextPath() %><tiles:getAsString name="js"/>"></script> <!-- 페이지 개별 js -->
 	
     <title><tiles:insertAttribute name="title" /></title>
