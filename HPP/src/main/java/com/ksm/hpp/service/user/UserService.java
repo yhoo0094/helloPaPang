@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ksm.hpp.framework.util.Constant;
+import com.ksm.hpp.framework.util.StringUtil;
 import com.ksm.hpp.service.com.BaseService;
 
 @Service("UserService")
@@ -41,8 +43,22 @@ public class UserService {
 	public Map<String, Object> insertUser(StringBuilder logStr, Map<String, Object> inData) throws Exception
 	{
 		Map<String, Object> result = new HashMap<String, Object>();
+		int cnt = 0;
 		
-		sqlSession.insert("mapper.user.UserMapper.insertUser", inData);
+		String pw = StringUtil.getSHA256((String)inData.get("userPw"));
+		inData.put("userPw", pw);
+		
+		do {
+			cnt = sqlSession.insert("mapper.user.UserMapper.insertUser", inData);
+			if(cnt == 0) {
+				result.put(Constant.RESULT, Constant.RESULT_FAILURE);
+				result.put(Constant.OUT_RESULT_MSG, "사용자 생성에 실패했습니다.");
+			}
+			
+			result.put(Constant.OUT_DATA, Constant.RESULT_SUCCESS);
+			result.put(Constant.OUT_DATA, cnt);
+		} while(false);
+		
 		
 		return result;
 	}	

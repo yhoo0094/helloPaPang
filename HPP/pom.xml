@@ -132,6 +132,13 @@
 		</dependency>	
 		<!--Gson 끝-->
 		
+		<!-- BASE64 시작 -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.15</version>
+		</dependency>
+		<!-- BASE64 끝 -->
 					
 						
 	</dependencies>	

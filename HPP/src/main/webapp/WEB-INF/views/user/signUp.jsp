@@ -22,11 +22,11 @@
 			<tbody>
 				<tr>
 					<th>아이디</th>
-					<th><input type="text" name="userId" onkeypress="if(event.keyCode == 13){signUp()}" required="all1"></th>
+					<th><input type="text" name="userId" title="아이디" onkeypress="if(event.keyCode == 13){signUp()}" required="all1"></th>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<th><input type="text" name="userPw" onkeypress="if(event.keyCode == 13){signUp()}" required="all1"></th>
+					<th><input type="text" name="userPw" title="비밀번호" onkeypress="if(event.keyCode == 13){signUp()}" required="all1"></th>
 				</tr>				
 			</tbody>
 		</table>

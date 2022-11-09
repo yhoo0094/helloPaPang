@@ -3,12 +3,14 @@ package com.ksm.hpp.framework.util;
 //시스템 전반에 사용되는 상수 값 모음
 public class Constant
 {
-	public static final String EXCEL_FILENM = "EXCEL_FILENM";
+	public static final String OUT_DATA = "OUT_DATA";	//리턴할 데이터
 	
-	//AxisJ용 입출력: 페이지 번호
-	public static final String AX_PAGENO = "pageNo";
+	public static final String RESULT = "RESULT";	//결과(RESULT_SUCCESS 혹은 RESULT_FAILURE)
 	
-	//AxisJ용 출력: 페이지 개수
-	public static final String AX_PAGESIZE = "pageCount";
+	public static final String RESULT_SUCCESS = "RESULT_SUCCESS";	//성공
+	
+	public static final String RESULT_FAILURE = "RESULT_FAILURE";	//실패
+	
+	public static final String OUT_RESULT_MSG = "OUT_RESULT_MSG";	//결과에 대한 메세지
 	
 }

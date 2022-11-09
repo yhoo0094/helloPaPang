@@ -1,8 +1,10 @@
 //회원가입
 function signUp(){
+	if(!$util.checkRequired({group:["all1"]})){return;};
 	
-	$util.checkRequired({group:["all1"]});
-	return;
+	//아이디 입력 형식 체크(추후 구현)
+	
+	//비밀번호 입력 형식 체크(추후 구현)
 	
 	var formData = $('#signUpForm').serialize();
     $.ajax({

@@ -43,13 +43,6 @@ public class RequestUtil {
 			}
 		};
 		
-		//엑셀 파라미터가 있는지에 따른 설정 추가
-		if(result.containsKey(Constant.EXCEL_FILENM)) {
-			//모든 데이터를 조회할 수 있도록 페이징 관련 인자값 제거
-			result.remove(Constant.AX_PAGENO);
-			result.remove(Constant.AX_PAGESIZE);
-		}
-		
 		return result;
 
 	}
