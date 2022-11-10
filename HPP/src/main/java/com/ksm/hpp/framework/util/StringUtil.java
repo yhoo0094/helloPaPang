@@ -7,6 +7,11 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * @작성자: 김상민
+ * @생성일: 2022. 11. 10. 오전 8:56:10
+ * @설명: JAVA 유틸 모음
+ */
 public class StringUtil {
 	private static transient Logger logger = LogManager.getLogger("Application");
 	

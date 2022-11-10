@@ -38,9 +38,8 @@ public class UserController {
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(outData);
-		
-		response.setContentType("application/x-json; charset=UTF-8");
 		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
+		response.setContentType("application/x-json; charset=UTF-8");
 	}	
 	
 	/**
@@ -56,10 +55,8 @@ public class UserController {
 
 		Gson gson = new Gson();
 		String json = gson.toJson(outData);
-		
-		response.setContentType("application/x-json; charset=UTF-8");
 		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
-		
+		response.setContentType("application/x-json; charset=UTF-8");
 	}	
 	
 	/**

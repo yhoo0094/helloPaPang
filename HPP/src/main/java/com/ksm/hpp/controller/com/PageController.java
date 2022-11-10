@@ -52,9 +52,8 @@ public class PageController {
 		ModelAndView result = new ModelAndView();
 		
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
-		
-		
-		System.out.println(inData);
+
+		//권한체크 기능 구현 필요
 		
 		result.setViewName(url1 + "/" + url2);
 		return result;
@@ -65,7 +64,6 @@ public class PageController {
 		ModelAndView result = new ModelAndView();
 		
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
-		System.out.println(inData);
 		
 		result.setViewName((String) inData.get("view_nm"));
 		result.addObject("param", inData);

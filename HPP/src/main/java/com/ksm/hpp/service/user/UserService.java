@@ -45,8 +45,8 @@ public class UserService {
 		Map<String, Object> result = new HashMap<String, Object>();
 		int cnt = 0;
 		
-		String pw = StringUtil.getSHA256((String)inData.get("userPw"));
-		inData.put("userPw", pw);
+		String pw = StringUtil.getSHA256((String)inData.get("pw"));
+		inData.put("pw", pw);
 		
 		do {
 			cnt = sqlSession.insert("mapper.user.UserMapper.insertUser", inData);
@@ -55,11 +55,9 @@ public class UserService {
 				result.put(Constant.OUT_RESULT_MSG, "사용자 생성에 실패했습니다.");
 			}
 			
-			result.put(Constant.OUT_DATA, Constant.RESULT_SUCCESS);
+			result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 			result.put(Constant.OUT_DATA, cnt);
 		} while(false);
-		
-		
 		return result;
 	}	
 	

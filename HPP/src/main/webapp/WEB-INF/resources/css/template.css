@@ -11,6 +11,9 @@ a {
 
 :root {
   --header-heigth: 70px;
+  --footer-heigth: 70px;
+  --banner-width: 70px;
+  --SideBar-width: 70px;  
   --navMnu-color: rgb(255 210 88);
 }
 
@@ -24,32 +27,35 @@ a {
 
 .Header, .content, .Footer{
 	width: 100%;
-	float: left;
 }
 
-.Header, .Footer{
-	height: 8em;
+.page_content, .SideBar, .banner{
+	height: calc(100vh - var(--footer-heigth) - var(--header-heigth));
+}
+
+.Header, .Footer, .SideBar, .banner{
+	z-index: 1;
+	position: fixed;
 }
 
 .SideBar{
-	width: 10%;
-	height: 600px;
 	background-color: #EAEAEA;
-	float: left;
+    left: 0;
+    top: var(--header-heigth);
+    width: var(--SideBar-width);
 }
 
 .banner{
-	width: 10%;
-	height: 600px;
 	background-color: cyan;
-	float: left;
+    right: 0;
+    top: var(--header-heigth);	
+    width: var(--banner-width);    
 }
 
 .page_content{
-	width: 80%;
-	height: 600px;
-	background-color: rgb(254 224 143 / 77%);
 	float: left;
+	margin: var(--header-heigth) var(--banner-width) var(--footer-heigth) var(--SideBar-width);
+	width: calc(100vw - 40px - var(--banner-width) - var(--SideBar-width));
 }
 
 .Header{
@@ -58,6 +64,8 @@ a {
 
 .Footer{
 	background-color: #FF00DD;
+	height: var(--footer-heigth);
+	bottom: 0;
 }
 
 /* 네비게이터 css 시작 */
@@ -131,6 +139,10 @@ a {
     color: var(--navMnu-color);
     font-weight: 900;
     float: right;
+}
+
+.dropdownMnu{
+	color: var(--navMnu-color);
 }
 
 .navMnuDiv{

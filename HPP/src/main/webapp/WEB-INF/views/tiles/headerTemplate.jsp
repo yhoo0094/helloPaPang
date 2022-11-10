@@ -51,7 +51,7 @@
 								<td>장터 하위메뉴1</td>
 								<td>베이비시터 하위메뉴1</td>
 								<td>활동 하위메뉴1</td>
-								<td>정보 하위메뉴1</td>
+								<td><a href="/info/notice" class="dropdownMnu">공지사항</a></td>
 							</tr>	
 							<tr>
 								<td>게시판 하위메뉴2</td>

@@ -4,15 +4,15 @@
 	
 	<!-- 사용자 조회-->
 	<select id="selectUser" parameterType="map" resultType="map">
-		SELECT USER_ID			/*아이디*/
-			 , USER_PW			/*비밀번호*/
+		SELECT ID				/*아이디*/
+			 , PW				/*비밀번호*/
 		  FROM TB_USER			/*테이블_사용자*/
 		<trim prefix="WHERE" prefixOverrides="AND">  
-			<if test='userId != null and userId != ""'>
-				AND USER_ID = #{userId}
+			<if test='id != null and id != ""'>
+				AND ID = #{id}
 			</if>
 			<if test='userPw != null and userPw != ""'>
-				AND USER_PW = #{userPw}
+				AND PW = #{pw}
 			</if>				  	 
 		</trim>
 	</select>
@@ -20,15 +20,21 @@
 	<!-- 사용자 생성 -->
 	<insert id="insertUser" parameterType="map">
 		INSERT 
-		  INTO TB_USER
+		  INTO TB_USER			/*테이블_사용자*/
 		     (
-		       USER_ID
-		     , USER_PW 
+		       ID				/*아이디*/
+		     , PW 				/*비밀번호*/
+		     , FST_REG_ID 		/*최초등록자ID*/
+		     , FST_REG_DTTI 	/*최초등록일시*/
+		     , LT_UPD_ID 		/*최종수정자ID*/
 		     )
 		VALUES
 			 (
-			   #{userId}
-			 , #{userPw}
+			   #{id}			/*아이디*/
+			 , #{pw}			/*비밀번호*/
+		     , 'SYSTEM' 		/*최초등록자ID*/
+		     , NOW() 			/*최초등록일시*/
+		     , 'SYSTEM' 		/*최종수정자ID*/			 
 			 )    
 	</insert>
 </mapper>

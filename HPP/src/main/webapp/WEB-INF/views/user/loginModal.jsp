@@ -20,11 +20,11 @@
 			<tbody>
 				<tr>
 					<th>아이디</th>
-					<th><input id="userId" type="text" name="userId" title="아이디" onkeypress="if(event.keyCode == 13){login()}"></th>
+					<th><input id="id" type="text" name="id" title="아이디" onkeypress="if(event.keyCode == 13){login()}"></th>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<th><input id="userPw" type="password" name="userPw" title="비밀번호" onkeypress="if(event.keyCode == 13){login()}"></th>
+					<th><input id="pw" type="password" name="pw" title="비밀번호" onkeypress="if(event.keyCode == 13){login()}"></th>
 				</tr>				
 			</tbody>
 		</table>
