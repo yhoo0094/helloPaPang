@@ -13,7 +13,7 @@
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
 	
-<table id="example" class="display" style="width:100%">
+<table id="mainTable" class="display" style="width:100%">
         <thead>
             <tr>
                 <th rowspan="2">Name</th>

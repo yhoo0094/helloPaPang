@@ -6,10 +6,21 @@
 **/
 
 $(document).ready(function () {
-    $('#example').DataTable({
+    $('#mainTable').DataTable({
         paging: true,
+        pagingType: "full_numbers",
         ordering: false,
         info: false,
         searching: false,
+        lengthChange: false,
+        pageLength: 15,
+        rowId: '',
+	    scrollY: 550,
+	    scroller: {
+	        rowHeight: 500
+	    },    
+	    buttons: [ 'copy', 'csv', 'excel' ]
     });
+    
+    $.fn.DataTable.ext.pager.numbers_length = 9;
 });
