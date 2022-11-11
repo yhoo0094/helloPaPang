@@ -21,15 +21,11 @@ a {
 	width: 100%;
 }
 
-.content{
-	margin-top: var(--header-heigth);
-}
-
 .Header, .content, .Footer{
 	width: 100%;
 }
 
-.page_content, .SideBar, .banner{
+.SideBar, .banner{
 	height: calc(100vh - var(--footer-heigth) - var(--header-heigth));
 }
 
@@ -54,7 +50,7 @@ a {
 
 .page_content{
 	float: left;
-	margin: var(--header-heigth) var(--banner-width) var(--footer-heigth) var(--SideBar-width);
+	margin: calc(var(--header-heigth) + 20px) calc(var(--banner-width) + 20px) calc(var(--footer-heigth) + 20px) calc(var(--SideBar-width) + 20px);
 	width: calc(100vw - 40px - var(--banner-width) - var(--SideBar-width));
 }
 
@@ -88,6 +84,7 @@ a {
     width: 100%;
     height: var(--header-heigth);
     z-index: 1;
+    background-color: white;
 }
 
 .navMnu{

@@ -6,5 +6,10 @@
 **/
 
 $(document).ready(function () {
-	$('#example').DataTable();
+    $('#example').DataTable({
+        paging: true,
+        ordering: false,
+        info: false,
+        searching: false,
+    });
 });

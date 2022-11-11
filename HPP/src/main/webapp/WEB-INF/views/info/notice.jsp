@@ -16,14 +16,18 @@
 <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th rowspan="2">Name</th>
+                <th colspan="2">HR Information</th>
+                <th colspan="3">Contact</th>
             </tr>
-        </thead>
+            <tr>
+                <th>Position</th>
+                <th>Salary</th>
+                <th>Office</th>
+                <th>Extn.</th>
+                <th>E-mail</th>
+            </tr>
+        </thead>    
         <tbody>
             <tr>
                 <td>Tiger Nixon</td>
