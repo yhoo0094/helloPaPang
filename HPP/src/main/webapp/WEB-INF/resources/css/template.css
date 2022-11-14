@@ -174,3 +174,22 @@ a {
     font-size: 11px;
     font-weight: 900;
 }
+
+/* dataTable 시작 */
+.dt-buttons{
+	float: right !important; 
+}
+/* dataTable 끝 */
+
+/* 버튼 시작 */
+.papang_btn{
+	
+}
+
+.papang-create-btn{
+    color: #0c0c0c;
+    background-color: #fdce43;
+    /* border-color: #212529; */
+    font-weight: bold;
+}    
+/* 버튼 끝 */
