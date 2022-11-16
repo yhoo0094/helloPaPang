@@ -28,19 +28,11 @@ $(document).ready(function () {
 	    scroller: {
 	        rowHeight: 500
 	    },    
-		dom : 'Bfrtip',
-        buttons: [
-            {
-                text: '신규',
-                action: function ( e, dt, node, config ) {
-                    alert( 'Button activated' );
-                },
-            }
-        ],		
-	     buttons: {
+		dom : 'Bfrtip',	
+	    buttons: {
 	        buttons: [
 	            {text: '신규', className: 'btn papang-create-btn btn-sm papang_btn' , extend: '', action: function ( e, dt, node, config ) {
-                    alert( 'Button activated' );
+                    noticeModalOpen();
                 },},
 	            {text: '삭제', className: 'btn papang-create-btn btn-sm papang_btn' , extend: '', action: function ( e, dt, node, config ) {
                     alert( 'Button activated' );
@@ -52,9 +44,8 @@ $(document).ready(function () {
         buttons: ['copy', 'excel', 'pdf', 'print'],
         */
     });
-    
-    $.fn.DataTable.ext.pager.numbers_length = 9;
 });
+
 
     var dataSet = [
         [ "Tiger Nixon", "System Architect", "Edinburgh", "5421", "2011/04/25", "$320,800" ],

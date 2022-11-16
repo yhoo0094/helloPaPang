@@ -5,6 +5,12 @@
  * @설명: 로그인 정보 입력 모달
 **/
 
+//로그인 팝업 열기
+function loginModalOpen(){
+	$('#loginModal').modal('open')	
+}	
+
+//로그인
 function login(){
 	var formData = $('#loginForm').serialize();
 	

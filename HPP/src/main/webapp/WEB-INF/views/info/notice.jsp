@@ -10,6 +10,8 @@
 **/
 %>
 
+<%@ include file="/WEB-INF/views/info/noticeModal.jsp" %><!-- 로그인 모달 -->
+
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
 	

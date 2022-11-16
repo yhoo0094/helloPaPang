@@ -10,7 +10,7 @@
 %>
 <script src="<%=request.getContextPath() %>/resources/js/user/loginModal.js"></script>
 
-<div id="loginModal" class="modal" style="width: 400px;">
+<div id="loginModal" class="modal" style="width: 400px; height: 200px">
 	<form id="loginForm" method="post">
 		<table>
 			<colgroup>

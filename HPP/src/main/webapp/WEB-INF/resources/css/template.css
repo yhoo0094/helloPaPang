@@ -182,14 +182,31 @@ a {
 /* dataTable 끝 */
 
 /* 버튼 시작 */
-.papang_btn{
-	
-}
-
 .papang-create-btn{
     color: #0c0c0c;
     background-color: #fdce43;
-    /* border-color: #212529; */
     font-weight: bold;
+    /* border-color: #212529; */
 }    
 /* 버튼 끝 */
+
+/* 모달 시작 */
+.modal {
+	max-width: none;
+}
+/* 모달 끝 */
+
+/* 테이블 시작 */
+.papang-table{
+	width: 100%;
+}
+
+.papang-table td{
+	padding: 2px;
+}
+
+.papang-table th{
+	text-align: center;
+	padding: 2px;
+}
+/* 테이블 끝 */
