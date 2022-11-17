@@ -43,17 +43,13 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>	 
 	<!-- datatable 끝 -->
 	
-	
 	<script src="https://cdn.ckeditor.com/ckeditor5/35.3.1/classic/ckeditor.js"></script><!-- ck에디터 -->
 	<script src="https://kit.fontawesome.com/e2689e2fa2.js"></script> <!-- 아이콘 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script><!-- jQuery Modal -->
-	
 	<script src="<%=request.getContextPath() %>/resources/js/com/common.js"></script> <!-- 페이지 공통 -->
 	<script src="<%=request.getContextPath() %>/resources/js/framework/util.js"></script> <!-- 유틸 -->
 	<script src="<%=request.getContextPath() %>/resources/js/framework/constant.js"></script> <!-- js 공통 변수 -->
 	<script src="<%=request.getContextPath() %><tiles:getAsString name="js"/>"></script> <!-- 페이지 개별 -->
-	
-
 	
     <title><tiles:insertAttribute name="title" /></title>
   </head>

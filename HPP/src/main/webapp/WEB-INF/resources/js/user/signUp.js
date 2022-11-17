@@ -14,7 +14,6 @@ function signUp(){
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
-			console.log(result)
             if (result.RESULT == Constant.RESULT_SUCCESS){
                 // 데이타 성공일때 이벤트 작성
                 alert("회원가입이 완료되었습니다.")

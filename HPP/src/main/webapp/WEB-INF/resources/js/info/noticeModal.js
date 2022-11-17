@@ -9,6 +9,7 @@ $(()=>{
 	
 })
 
+//에디터 생성
 function createEditor(){
     ClassicEditor
         .create( document.querySelector( '#noticeEditor' ),{
@@ -33,9 +34,29 @@ function createEditor(){
         } );
 }
 
-//로그인 팝업 열기
+//공지사항 팝업 열기
 function noticeModalOpen(){
-	//createEditor();
-	$('#noticeModal').modal('open')	
+	//createEditor();modal('open')
+	$('#noticeModal').modal('open');	
+}
+
+//공지사항 저장
+function saveNotice(){
+    $.ajax({
+        url: '/notice/saveNotice.do',
+        type: 'POST',
+        data: formData,
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+        dataType: 'json',
+        success: function (result) {
+            if (result.RESULT == Constant.RESULT_SUCCESS){
+                // 데이타 성공일때 이벤트 작성
+                alert("완료되었습니다.")
+                $('.jquery-modal').fadeOut();
+            } else {
+				alert(Constant.OUT_RESULT_MSG)
+			}
+        }
+    });
 }
 	

@@ -182,12 +182,19 @@ a {
 /* dataTable 끝 */
 
 /* 버튼 시작 */
+.papang_btn{
+	font-weight: bold;
+	color: #0c0c0c;
+	/* border-color: #212529; */
+}
+
 .papang-create-btn{
-    color: #0c0c0c;
     background-color: #fdce43;
-    font-weight: bold;
-    /* border-color: #212529; */
 }    
+
+.papang-sava-btn{
+	background-color: #0dcaf0;
+}
 /* 버튼 끝 */
 
 /* 모달 시작 */
@@ -210,3 +217,22 @@ a {
 	padding: 2px;
 }
 /* 테이블 끝 */
+
+/* 파일첨부 시작 */
+.fileListDiv{
+    height: 120px;
+    /* border: solid 1px grey; */
+}
+
+.fileAttachBtn{
+	float: right;
+}
+
+.fileAttachBtn :hover{
+	cursor: pointer;
+}
+
+.attachedFile{
+	display: inline-block;
+}
+/* 파일첨부 끝 */

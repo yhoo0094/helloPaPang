@@ -10,10 +10,10 @@
 **/
 %>
 
-<%@ include file="/WEB-INF/views/info/noticeModal.jsp" %><!-- 로그인 모달 -->
+<%@ include file="/WEB-INF/views/info/noticeModal.jsp" %><!-- 공지사항 모달 -->
 
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
 	
-<table id="mainTable" class="display" style="width:100%"></table>
+	<table id="mainTable" class="display" style="width:100%"></table>
 </div>	

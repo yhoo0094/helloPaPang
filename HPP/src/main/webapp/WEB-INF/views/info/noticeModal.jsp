@@ -33,15 +33,22 @@
 				<tr>
 					<th>내용</th>
 					<td>
-						<textarea class="form-control" rows="" cols="" ></textarea>
+						<textarea class="form-control" rows="" cols="" style="height: 500px"></textarea>
 						<!-- <div id="noticeEditor"></div> -->
 					</td>
-				</tr>				
+				</tr>
+				<tr>
+					<th>첨부파일</th>
+					<td>
+						<!-- 첨부파일 div -->
+						<%@include file="/WEB-INF/views/com/fileAttach.jsp" %>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 		
 		<div>
-			<button type="button" onclick="#">저장</button>
+			<button type="button" class="btn papang-sava-btn papang_btn dt-buttons" onclick="saveNotice()">저장</button>
 		</div>
 	</form>
 </div>
