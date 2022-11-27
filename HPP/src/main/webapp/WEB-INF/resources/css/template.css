@@ -84,7 +84,7 @@ a {
     width: 100%;
     height: var(--header-heigth);
     z-index: 1;
-    background-color: white;
+    background-color: #ffffcb;
 }
 
 .navMnu{
@@ -159,7 +159,7 @@ a {
 }
 
 .loginMnuIcon{
-	color: #6f6f6f;	
+	color: rgb(88 70 19);	
 }
 /* 네비게이터 css 끝 */
 

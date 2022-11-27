@@ -22,12 +22,10 @@ $(document).ready(function () {
         info: false,
         searching: false,
         lengthChange: false,
-        pageLength: 15,
+        pageLength: 10,
         rowId: '',
-	    scrollY: 550,
-	    scroller: {
-	        rowHeight: 500
-	    },    
+	    //scrollY: 550,
+	    //scroller: {rowHeight: 500},
 		dom : 'Bfrtip',	
 	    buttons: {
 	        buttons: [

@@ -64,7 +64,7 @@
 	  		</div>
 	  		<tiles:insertAttribute name="right"/>
   		</div>
-  		<tiles:insertAttribute name="foot"/>
+  		<%-- <tiles:insertAttribute name="foot"/> --%>
   	</div>
   </body>
   

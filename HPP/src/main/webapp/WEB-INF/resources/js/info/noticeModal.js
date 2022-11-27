@@ -42,6 +42,12 @@ function noticeModalOpen(){
 
 //공지사항 저장
 function saveNotice(){
+	var form = document.getElementById("noticeForm");
+    var formData = new FormData(form);
+    for (var i = 0; i < filesArr.length; i++) {
+        formData.append("attach_file", filesArr[i]);
+    }   
+	
     $.ajax({
         url: '/notice/saveNotice.do',
         type: 'POST',

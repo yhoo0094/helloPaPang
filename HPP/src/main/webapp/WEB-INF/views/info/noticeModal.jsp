@@ -28,7 +28,7 @@
 			<tbody>
 				<tr>
 					<th>제목</th>
-					<td><input id="title" class="form-control" type="text" name="title" title="제목" onkeypress="if(event.keyCode == 13){#}"></td>
+					<td><input id="title" class="form-control" type="text" name="title" title="제목" onkeypress="if(event.keyCode == 13){}"/></td>
 				</tr>
 				<tr>
 					<th>내용</th>
