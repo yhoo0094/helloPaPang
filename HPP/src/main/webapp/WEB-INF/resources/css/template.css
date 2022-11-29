@@ -4,6 +4,10 @@ a {
 	color: black;
 }
 
+a:hover {
+    color: black;
+}
+
 *{
 	margin: 0;
 	padding: 0;
@@ -12,8 +16,8 @@ a {
 :root {
   --header-heigth: 70px;
   --footer-heigth: 70px;
-  --banner-width: 70px;
-  --SideBar-width: 70px;  
+  --banner-width: 150px;
+  --SideBar-width: 150px;  
   --navMnu-color: rgb(255 210 88);
 }
 
@@ -200,6 +204,7 @@ a {
 /* 모달 시작 */
 .modal {
 	max-width: none;
+	overflow: visible;
 }
 /* 모달 끝 */
 

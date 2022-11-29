@@ -40,6 +40,8 @@ public class NoticeController {
 		
 		List<MultipartFile> fileList = request.getFiles("attach_file"); 
 		
+		
+		
 		Gson gson = new Gson();
 		String json = gson.toJson(outData);
 		response.getWriter().print(json);	//결과 json형태로 담아서 보내기

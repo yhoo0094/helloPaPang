@@ -42,23 +42,27 @@ function noticeModalOpen(){
 
 //공지사항 저장
 function saveNotice(){
-	var form = document.getElementById("noticeForm");
-    var formData = new FormData(form);
+	var params = jQuery("#noticeForm").serialize();
+	console.log(params);
+	
+    var formData = new FormData($("#noticeForm")[0]);
     for (var i = 0; i < filesArr.length; i++) {
-        formData.append("attach_file", filesArr[i]);
+        formData.append("files", filesArr[i]);
     }   
 	
     $.ajax({
+		type: 'POST',
+		enctype: 'multipart/form-data',
         url: '/notice/saveNotice.do',
-        type: 'POST',
         data: formData,
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
-        dataType: 'json',
+        precessData: false,
+        contentType: false,
+        cache: false, 
         success: function (result) {
             if (result.RESULT == Constant.RESULT_SUCCESS){
                 // 데이타 성공일때 이벤트 작성
                 alert("완료되었습니다.")
-                $('.jquery-modal').fadeOut();
+                //$('.jquery-modal').fadeOut();
             } else {
 				alert(Constant.OUT_RESULT_MSG)
 			}

@@ -19,7 +19,7 @@
 </style>
 
 <div id="noticeModal" class="modal" style="width: 1000px; height: 800px;">
-	<form id="noticeForm" method="post">
+	<form id="noticeForm" name="noticeForm" method="post" enctype="multipart/form-data">
 		<table class="papang-table">
 			<colgroup>
 				<col style="width: 100px">
@@ -33,7 +33,7 @@
 				<tr>
 					<th>내용</th>
 					<td>
-						<textarea class="form-control" rows="" cols="" style="height: 500px"></textarea>
+						<textarea name="content" class="form-control" rows="" cols="" style="height: 500px"></textarea>
 						<!-- <div id="noticeEditor"></div> -->
 					</td>
 				</tr>
