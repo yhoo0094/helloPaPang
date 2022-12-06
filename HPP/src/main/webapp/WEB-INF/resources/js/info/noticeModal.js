@@ -42,20 +42,20 @@ function noticeModalOpen(){
 
 //공지사항 저장
 function saveNotice(){
-	var params = jQuery("#noticeForm").serialize();
-	console.log(params);
-	
-    var formData = new FormData($("#noticeForm")[0]);
+	var formData = new FormData($("#noticeForm")[0]);
+	/*
+	var params = JSON.stringify($("#noticeForm").serialize());
+	formData.append("params", params);
+    */
     for (var i = 0; i < filesArr.length; i++) {
         formData.append("files", filesArr[i]);
     }   
-	
     $.ajax({
 		type: 'POST',
 		enctype: 'multipart/form-data',
         url: '/notice/saveNotice.do',
         data: formData,
-        precessData: false,
+        processData: false,
         contentType: false,
         cache: false, 
         success: function (result) {
@@ -64,7 +64,7 @@ function saveNotice(){
                 alert("완료되었습니다.")
                 //$('.jquery-modal').fadeOut();
             } else {
-				alert(Constant.OUT_RESULT_MSG)
+				alert(result.Constant.OUT_RESULT_MSG)
 			}
         }
     });

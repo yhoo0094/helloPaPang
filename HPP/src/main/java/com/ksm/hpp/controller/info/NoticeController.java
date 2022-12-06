@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
 import com.ksm.hpp.framework.util.RequestUtil;
+import com.ksm.hpp.service.info.NoticeService;
 import com.ksm.hpp.service.user.UserService;
 
 @Controller
@@ -24,8 +25,8 @@ public class NoticeController {
 	
 	private static final Logger logger = LogManager.getLogger("Application");
 	
-	@Resource(name = "UserService")
-	protected UserService userService;
+	@Resource(name = "NoticeService")
+	protected NoticeService noticeService;
 	
 	/**
 	 * @메소드명: saveNotice
@@ -36,10 +37,10 @@ public class NoticeController {
 	@RequestMapping("/saveNotice.do")
 	public void saveNotice(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
-		Map<String, Object> outData = userService.selectUser((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		
-		List<MultipartFile> fileList = request.getFiles("attach_file"); 
 		
+		List<MultipartFile> fileList = request.getFiles("files"); 
+		Map<String, Object> outData = noticeService.saveNotice((StringBuilder)request.getAttribute("IN_LOG_STR"), inData, fileList);
 		
 		
 		Gson gson = new Gson();
