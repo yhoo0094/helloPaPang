@@ -19,6 +19,12 @@ public class CommonService extends BaseService {
 	@Autowired
 	private ArticleDAO articleDAO;	
 	
+	/**
+	 * @메소드명: test
+	 * @작성자: 김상민
+	 * @생성일: 2022. 12. 14. 오후 2:19:06
+	 * @설명: 테스트용, 추후 삭제
+	 */
 	public List<Map<String, Object>> test() throws Exception
 	{
 		System.out.println("Service Start");
@@ -36,6 +42,12 @@ public class CommonService extends BaseService {
 		return result;
 	}	
 	
+	/**
+	 * @메소드명: viewArticleDetail
+	 * @작성자: 김상민
+	 * @생성일: 2022. 12. 14. 오후 2:19:23
+	 * @설명: 연습용, 추후 삭제
+	 */
 	public Map<String, Object> viewArticleDetail(String articleId) {
 		return this.articleDAO.selectArticleById(articleId);
 	}	

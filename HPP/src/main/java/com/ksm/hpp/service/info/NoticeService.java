@@ -2,25 +2,33 @@ package com.ksm.hpp.service.info;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ksm.hpp.framework.util.Configuration;
 import com.ksm.hpp.framework.util.Constant;
-import com.ksm.hpp.framework.util.StringUtil;
-import com.ksm.hpp.service.com.BaseService;
+import com.ksm.hpp.framework.util.OSValidator;
+import com.ksm.hpp.framework.util.OS_Type;
+import com.ksm.hpp.service.com.FileService;
 
 @Service("NoticeService")
 public class NoticeService {
 	
 	@Autowired
 	SqlSession sqlSession; //SqlSession 빈 DI	
+	
+	@Resource(name = "FileService")
+	protected FileService fileService;
 	
 	/**
 	 * @메소드명: selectUser
@@ -32,38 +40,7 @@ public class NoticeService {
 	{
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		LocalDate date = LocalDate.now();
-		DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("yyyyMMdd");
-		String nowDate = date.format(dtfDate);
-		
-		LocalDate time = LocalDate.now();
-		DateTimeFormatter dtfTime = DateTimeFormatter.ofPattern("HHmmss");
-		String nowTime = time.format(dtfTime);
-		
-		do {
-			if(fileList == null) {
-				result.put(Constant.RESULT, Constant.RESULT_FAILURE);
-				result.put(Constant.OUT_RESULT_MSG, "첨부파일이 존재하지 않습니다.");	
-				break;
-			}
-		} while(false);
-		
-		String filePath = "";	//첨부파일 저장 경로
-		
-		File dir = new File(filePath);
-		if(!dir.isDirectory()) {	//해당 경로가 디렉토리인지 확인
-			if(!dir.exists()) {		//해당 경로 디렉토리가 있는지 확인
-				dir.mkdir();
-			}
-		}
-		
-		
-		
-		/*
-		List<Object> list = sqlSession.selectList("mapper.user.UserMapper.selectUser", inData);
-		result.put("list", list);
-		*/
-		
+		fileService.saveFile(logStr, inData, fileList);	
 		return result;
 	}
 }
