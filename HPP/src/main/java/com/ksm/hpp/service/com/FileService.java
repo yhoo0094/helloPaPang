@@ -33,12 +33,12 @@ public class FileService extends BaseService {
 	List<String> excludedExtsList = Arrays.asList("exe");	//첨부파일 제외되는 확장자
 	
 	/**
-	 * @메소드명: saveFile
+	 * @메소드명: insertFile
 	 * @작성자: 김상민
 	 * @생성일: 2022. 12. 14. 오후 2:22:01
 	 * @설명: 첨부파일 저장
 	 */
-	public Map<String, Object> saveFile(StringBuilder logStr, Map<String, Object> inData, List<MultipartFile> fileList) throws Exception
+	public Map<String, Object> insertFile(StringBuilder logStr, Map<String, Object> inData, List<MultipartFile> fileList) throws Exception
 	{
 		Map<String, Object> result = new HashMap<String, Object>();
 		
@@ -67,13 +67,13 @@ public class FileService extends BaseService {
 					result.put(Constant.OUT_RESULT_MSG, ATC_FILE_NM + " 파일의 확장자가 존재하지 않습니다.");	
 					break;					
 				}
-				String ATC_FILE_EXTS_NM = ATC_FILE_NM.substring(pos + 1);	//확장자명			
+				String ATC_FILE_EXTS = ATC_FILE_NM.substring(pos + 1);	//확장자명			
 				
 				//허용된 확장자인지 검증
 				//수정필요!! (break가 do while 문이 아닌 for문에 대해서 동작)
-				if(excludedExtsList.contains(ATC_FILE_EXTS_NM)) {
+				if(excludedExtsList.contains(ATC_FILE_EXTS)) {
 					result.put(Constant.RESULT, Constant.RESULT_FAILURE);
-					result.put(Constant.OUT_RESULT_MSG, ATC_FILE_EXTS_NM + "는 허용되지 않은 확장자입니다.");	
+					result.put(Constant.OUT_RESULT_MSG, ATC_FILE_EXTS + "는 허용되지 않은 확장자입니다.");	
 					break;					
 				}			
 			}
@@ -84,10 +84,10 @@ public class FileService extends BaseService {
 				String ATC_FILE_NM = multiFile.getOriginalFilename();	//원본 파일명
 				long ATC_FILE_CAPA_VAL = multiFile.getSize();			//파일 사이즈
 				int pos = ATC_FILE_NM.lastIndexOf(".");
-				String ATC_FILE_EXTS_NM = ATC_FILE_NM.substring(pos + 1);	//확장자명
+				String ATC_FILE_EXTS = ATC_FILE_NM.substring(pos + 1);	//확장자명
 				
 				//파일명에 현재 시간 입력(파일명_현재시간.확장자)
-				String SAVE_ATC_FILE_NM = ATC_FILE_NM.substring(0, pos) + "_" + nowTime + "." + ATC_FILE_EXTS_NM;
+				String SAVE_ATC_FILE_NM = ATC_FILE_NM.substring(0, pos) + "_" + nowTime + "." + ATC_FILE_EXTS;
 				//중복된 파일명 변경
 				SAVE_ATC_FILE_NM = this.getUniqueFileName(ATC_FILE_PATH, SAVE_ATC_FILE_NM);
 				
@@ -97,6 +97,14 @@ public class FileService extends BaseService {
 				
 				//물리적인 공간에 파일 저장
 				FileUtil.saveFileOri(fi, fo);
+				
+				inData.put("ATC_FILE_NM", ATC_FILE_NM);					//파일명
+				inData.put("SAVE_ATC_FILE_NM", SAVE_ATC_FILE_NM);		//파일 저장명
+				inData.put("ATC_FILE_PATH", ATC_FILE_PATH);				//파일 경로
+				inData.put("ATC_FILE_CAPA_VAL", ATC_FILE_CAPA_VAL);		//파일 용량
+				inData.put("ATC_FILE_EXTS", ATC_FILE_EXTS);				//파일 확장자
+				
+				sqlSession.insert("mapper.com.FileMapper.insertFile", inData);
 			}
 		} while(false);
 		
@@ -154,7 +162,7 @@ public class FileService extends BaseService {
 		//기존 소스 변형
 		OS_Type os = OSValidator.getOS();	//OS타입 구하기(UNKNOWN(0), WINDOWS(1), LINUX(2), MAC(3), SOLARIS(4))
 		Configuration conf = new Configuration();
-		ATC_FILE_PATH = conf.getString("Global." + os + ".getComFilePath") + "/" + nowDate + "/";	
+		ATC_FILE_PATH = conf.getString("Global." + os + ".getComFilePath") + nowDate + "/";	
 		File dir = new File(ATC_FILE_PATH);
 		if(!dir.isDirectory()) {	//해당 경로가 디렉토리인지 확인
 			if(!dir.exists()) {		//해당 경로 디렉토리가 있는지 확인

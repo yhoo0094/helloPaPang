@@ -241,3 +241,21 @@ a:hover {
 	display: inline-block;
 }
 /* 파일첨부 끝 */
+
+/* 전체 공용 시작 */
+	table.dataTable thead th{
+		text-align: center;
+	}
+
+	.align_items_center{
+		align-items: center;
+	}
+	
+	.text_align_center{
+		text-align: center;
+	}
+	
+	.text_align_left{
+		text-align: left;
+	}	
+/* 전체 공용 끝 */

@@ -20,6 +20,9 @@
 
 <div id="noticeModal" class="modal" style="width: 1000px; height: 800px;">
 	<form id="noticeForm" name="noticeForm" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="boardType" value="01">
+		<input type="hidden" name="bizDvcd" value="001">
+		
 		<table class="papang-table">
 			<colgroup>
 				<col style="width: 100px">

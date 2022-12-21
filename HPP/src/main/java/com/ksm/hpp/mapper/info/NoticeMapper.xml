@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.info.NoticeMapper">
+	
+	<!-- 공지사항 조회-->
+	<select id="selectNotice" parameterType="map" resultType="map">
+		SELECT BIZ_ID				/*글ID*/
+		     , BOARD_TITLE 			/*제목*/
+		     , BOARD_CN				/*내용*/
+		     , BOARD_TYPE			/*분류(01:공지사항, 02:자유게시판,03:질문게시판)*/
+		     , BOARD_HIT			/*조회수*/
+		     , FST_REG_ID 			/*최초등록자ID*/
+		     , LT_UPD_ID 			/*최종수정자ID*/
+		  FROM TB_BOARD				/*테이블_게시판*/
+		<trim prefix="WHERE" prefixOverrides="AND">  
+			<if test='id != null and id != ""'>
+				AND ID = #{id}
+			</if>
+			<if test='userPw != null and userPw != ""'>
+				AND PW = #{pw}
+			</if>				  	 
+		</trim>
+	</select>	
+	
+	<!-- 공지사항 등록 -->
+	<insert id="insertNotice" parameterType="map">
+		<selectKey resultType="string" keyProperty="bizId" order="BEFORE">
+			SELECT nextval('BIZ_ID') 
+			  FROM DUAL
+		</selectKey>		
+		
+		INSERT 
+		  INTO TB_BOARD			/*테이블_게시판*/
+		     (
+		       BIZ_ID				/*글ID*/
+		     , BOARD_TITLE 			/*제목*/
+		     , BOARD_CN				/*내용*/
+		     , BOARD_TYPE			/*분류(01:공지사항, 02:자유게시판,03:질문게시판)*/
+		     , BOARD_HIT			/*조회수*/
+		     , FST_REG_ID 			/*최초등록자ID*/
+		     , LT_UPD_ID 			/*최종수정자ID*/
+		     )
+		VALUES
+			 (
+			   #{bizId}	
+			 , #{title}	
+			 , #{content}
+			 , #{boardType}
+			 , '0'			
+		     , 'SYSTEM' 	
+		     , 'SYSTEM' 				 
+			 )   
+	</insert>
+
+</mapper>

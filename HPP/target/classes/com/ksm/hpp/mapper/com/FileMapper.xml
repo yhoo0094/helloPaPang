@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.com.FileMapper">
+	
+	<!-- 파일 저장 -->
+	<insert id="insertFile" parameterType="map">
+		<selectKey resultType="string" keyProperty="ATCFILE_SEQ" order="BEFORE">
+			SELECT IFNULL(MAX(ATCFILE_SEQ), 0) + 1
+			  FROM TB_ATCFILE
+			 WHERE BIZ_ID = #{bizId}
+		</selectKey>
+	
+		INSERT 
+		  INTO TB_ATCFILE			/*테이블_첨부파일*/
+		     (
+		       BIZ_ID				/*글ID*/
+		     , ATCFILE_SEQ 			/*첨부파일 순번*/
+		     , BIZ_DVCD				/*업무구분코드(000:대분류,중분류,소분류)*/
+		     , ATC_FILE_NM			/*파일명*/
+		     , SAVE_ATC_FILE_NM		/*파일 저장명*/
+		     , ATC_FILE_PATH		/*파일 경로*/
+		     , ATC_FILE_CAPA_VAL	/*파일 용량*/
+		     , ATC_FILE_EXTS		/*파일 확장자*/
+		     , FST_REG_ID 			/*최초등록자ID*/
+		     , LT_UPD_ID 			/*최종수정자ID*/
+		     )
+		VALUES
+			 (
+			   #{bizId}				/*글ID*/
+			 , #{ATCFILE_SEQ}		/*첨부파일 순번*/
+			 , #{bizDvcd}			/*업무구분코드(000:대분류,중분류,소분류)*/
+			 , #{ATC_FILE_NM}		/*파일명*/
+			 , #{SAVE_ATC_FILE_NM}	/*파일 저장명*/
+			 , #{ATC_FILE_PATH}		/*파일 경로*/
+			 , #{ATC_FILE_CAPA_VAL}	/*파일 용량*/
+			 , #{ATC_FILE_EXTS}		/*파일 확장자*/
+		     , 'SYSTEM' 			/*최초등록자ID*/
+		     , 'SYSTEM' 			/*최종수정자ID*/			 
+			 )    
+	</insert>
+</mapper>

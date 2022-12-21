@@ -53,7 +53,7 @@ function saveNotice(){
     $.ajax({
 		type: 'POST',
 		enctype: 'multipart/form-data',
-        url: '/notice/saveNotice.do',
+        url: '/notice/insertNotice.do',
         data: formData,
         processData: false,
         contentType: false,

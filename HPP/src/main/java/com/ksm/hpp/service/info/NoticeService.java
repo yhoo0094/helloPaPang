@@ -29,18 +29,34 @@ public class NoticeService {
 	
 	@Resource(name = "FileService")
 	protected FileService fileService;
-	
+
 	/**
-	 * @메소드명: selectUser
+	 * @메소드명: selectNotice
 	 * @작성자: 김상민
-	 * @생성일: 2022. 11. 2. 오후 6:59:16
-	 * @설명: 사용자 조회
-	 */	
-	public Map<String, Object> saveNotice(StringBuilder logStr, Map<String, Object> inData, List<MultipartFile> fileList) throws Exception
-	{
+	 * @생성일: 2022. 12. 21. 오전 10:49:08
+	 * @설명: 공지사항 조회
+	 */
+	public Map<String, Object> selectNotice(StringBuilder logStr, Map<String, Object> inData) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		fileService.saveFile(logStr, inData, fileList);	
+		List<Object> list = sqlSession.selectList("mapper.info.NoticeMapper.selectNotice", inData);
+		result.put("list", list);
+		
+		return result;
+	}
+	
+	/**
+	 * @메소드명: insertNotice
+	 * @작성자: 김상민
+	 * @생성일: 2022. 11. 2. 오후 6:59:16
+	 * @설명: 공지사항 등록
+	 */	
+	public Map<String, Object> insertNotice(StringBuilder logStr, Map<String, Object> inData, List<MultipartFile> fileList) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		sqlSession.insert("mapper.info.NoticeMapper.insertNotice", inData);
+		
+		fileService.insertFile(logStr, inData, fileList);	
 		return result;
 	}
 }

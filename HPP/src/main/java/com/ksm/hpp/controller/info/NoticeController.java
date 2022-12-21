@@ -29,19 +29,35 @@ public class NoticeController {
 	protected NoticeService noticeService;
 	
 	/**
-	 * @메소드명: saveNotice
+	 * @메소드명: selectNotice
 	 * @작성자: 김상민
-	 * @생성일: 2022. 11. 22. 오전 8:43:39
-	 * @설명: 공지사항 저장
+	 * @생성일: 2022. 12. 21. 오전 10:47:34
+	 * @설명: 공지사항 조회
 	 */
-	@RequestMapping("/saveNotice.do")
-	public void saveNotice(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping("/selectNotice.do")
+	public void selectNotice(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
 		
+		Map<String, Object> outData = noticeService.selectNotice((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(outData);
+		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
+		response.setContentType("application/x-json; charset=UTF-8");
+	}	
+	
+	/**
+	 * @메소드명: insertNotice
+	 * @작성자: 김상민
+	 * @생성일: 2022. 11. 22. 오전 8:43:39
+	 * @설명: 공지사항 등록
+	 */
+	@RequestMapping("/insertNotice.do")
+	public void insertNotice(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
 		
 		List<MultipartFile> fileList = request.getFiles("files"); 
-		Map<String, Object> outData = noticeService.saveNotice((StringBuilder)request.getAttribute("IN_LOG_STR"), inData, fileList);
-		
+		Map<String, Object> outData = noticeService.insertNotice((StringBuilder)request.getAttribute("IN_LOG_STR"), inData, fileList);
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(outData);
