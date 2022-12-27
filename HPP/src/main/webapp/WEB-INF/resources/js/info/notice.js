@@ -5,6 +5,9 @@
  * @설명: 공지사항 목록 조회 페이지
 **/
 
+//전역 변수
+var mainTable
+
 $(document).ready(function () {
 	selectNotice();
 });
@@ -25,7 +28,7 @@ function selectNotice(){
 
 //DataTable 만들기
 function mkNoticeTable(data) {
-    $('#mainTable').DataTable({
+    mainTable = $('#mainTable').DataTable({
         data: data,
         columns: [
             { title: "제목"	, data: "BOARD_TITLE"	, width: "*"		, className: "text_align_left"}
@@ -53,4 +56,10 @@ function mkNoticeTable(data) {
 	        ]
 	    },       
     });	
+    
+	$('#mainTable tbody').on('dblclick', 'tr', function () {
+	    var data = mainTable.row( this ).data();
+	    noticeModalOpen(data);
+	});
+    
 }

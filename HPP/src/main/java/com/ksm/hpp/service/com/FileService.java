@@ -33,6 +33,36 @@ public class FileService extends BaseService {
 	List<String> excludedExtsList = Arrays.asList("exe");	//첨부파일 제외되는 확장자
 	
 	/**
+	 * @메소드명: selectFile
+	 * @작성자: 김상민
+	 * @생성일: 2022. 12. 27. 오후 5:27:44
+	 * @설명: 파일목록 조회
+	 */
+	public Map<String, Object> selectFile(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<Object> list = sqlSession.selectList("mapper.com.FileMapper.selectFile", inData);
+		result.put("list", list);
+		
+		return result;
+	}
+
+	/**
+	 * @메소드명: downloadFile
+	 * @작성자: 김상민
+	 * @생성일: 2022. 12. 27. 오후 5:28:45
+	 * @설명: 파일 다운로드
+	 */
+	public Map<String, Object> downloadFile(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<Object> list = sqlSession.selectList("mapper.com.FileMapper.selectFile", inData);
+		result.put("list", list);
+		
+		return result;
+	}	
+	
+	/**
 	 * @메소드명: insertFile
 	 * @작성자: 김상민
 	 * @생성일: 2022. 12. 14. 오후 2:22:01

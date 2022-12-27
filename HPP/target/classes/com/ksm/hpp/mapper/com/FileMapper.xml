@@ -2,6 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.com.FileMapper">
 	
+	<select id="selectFile" parameterType="map" resultType="map">
+		SELECT BIZ_ID				/*글ID*/
+			,  ATCFILE_SEQ			/*첨부파일 순번*/
+			,  BIZ_DVCD				/*업무구분코드(000:대분류,중분류,소분류)*/
+			,  ATC_FILE_NM			/*파일명*/
+			,  SAVE_ATC_FILE_NM		/*파일 저장명*/
+			,  ATC_FILE_PATH		/*파일 경로*/
+			,  ATC_FILE_CAPA_VAL	/*파일 용량*/
+			,  ATC_FILE_EXTS		/*파일 확장자*/
+		  FROM TB_ATCFILE			/*테이블_첨부파일*/
+		<trim prefix="WHERE" prefixOverrides="AND">  
+			<if test='BIZ_ID != null and BIZ_ID != ""'>
+				AND BIZ_ID = #{BIZ_ID}
+			</if>
+		</trim>		  
+	</select>
+	
 	<!-- 파일 저장 -->
 	<insert id="insertFile" parameterType="map">
 		<selectKey resultType="string" keyProperty="ATCFILE_SEQ" order="BEFORE">

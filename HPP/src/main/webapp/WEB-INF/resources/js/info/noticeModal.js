@@ -35,9 +35,23 @@ function createEditor(){
 }
 
 //공지사항 팝업 열기
-function noticeModalOpen(){
+function noticeModalOpen(data){
 	//createEditor();modal('open')
+	if(data == null){
+		noticeModalEmpty()
+	} else {
+		$('#title').val(data.BOARD_TITLE);
+		$('#content').val(data.BOARD_CN);
+		selectFile(data);
+	}
 	$('#noticeModal').modal('open');	
+}
+
+//공지사항 팝업 비우기
+function noticeModalEmpty(){
+	$('#title').val('');
+	$('#content').val('');
+	resetFile();
 }
 
 //공지사항 저장

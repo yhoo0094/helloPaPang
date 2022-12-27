@@ -36,7 +36,7 @@
 				<tr>
 					<th>내용</th>
 					<td>
-						<textarea name="content" class="form-control" rows="" cols="" style="height: 500px"></textarea>
+						<textarea id="content" name="content" class="form-control" rows="" cols="" style="height: 500px"></textarea>
 						<!-- <div id="noticeEditor"></div> -->
 					</td>
 				</tr>
