@@ -101,7 +101,7 @@ function downloadFile(fileData){
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
-			
+			//파일 다운로드 구현
 		}
 	})		
 }
