@@ -1,8 +1,10 @@
 package com.ksm.hpp.service.com;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -12,6 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.connector.Response;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,12 +59,19 @@ public class FileService extends BaseService {
 	 * @생성일: 2022. 12. 27. 오후 5:28:45
 	 * @설명: 파일 다운로드
 	 */
+	@SuppressWarnings("unchecked")
 	public Map<String, Object> downloadFile(StringBuilder logStr, Map<String, Object> inData) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		List<Object> list = sqlSession.selectList("mapper.com.FileMapper.selectFile", inData);
-		result.put("list", list);
+		if(list.isEmpty()) {	//DB조회를 실패한 경우
+			throw new RuntimeException("해당 파일을 찾을 수 없습니다.");
+		}
 		
+		Map<String, Object> fileInfo = new HashMap<String, Object>();
+		fileInfo = (Map<String, Object>) list.get(0);
+
+		result.put("fileInfo", fileInfo);
 		return result;
 	}	
 	

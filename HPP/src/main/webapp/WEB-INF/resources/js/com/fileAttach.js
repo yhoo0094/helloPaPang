@@ -64,7 +64,7 @@ function selectFile(data) {
 	resetFile();	//첨부파일 초기화
 	
     $.ajax({
-        url: '/file/selectFile.do',
+        url: '/file/selectFile',
         type: 'POST',
         data: data,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
@@ -82,7 +82,7 @@ function selectFile(data) {
 		        // 목록 추가
 		        let htmlData = '';
 		        htmlData += '<div id="file' + fileNo + '" class="filebox">';
-		        htmlData += '   <p class="attachedFile" onclick="downloadFile(' + fileData + ');">' + fileData.ATC_FILE_NM + ' (' + formatBytes(fileData.ATC_FILE_CAPA_VAL) + ')</p>';
+		        htmlData += '   <p class="attachedFile" onclick="downloadFile(' + fileData.BIZ_ID + ',' + fileData.ATCFILE_SEQ + ');">' + fileData.ATC_FILE_NM + ' (' + formatBytes(fileData.ATC_FILE_CAPA_VAL) + ')</p>';
 		        htmlData += '   <a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
 		        htmlData += '</div>';
 		        $('.fileListDiv').append(htmlData);
@@ -93,17 +93,45 @@ function selectFile(data) {
 }
 
 //첨부파일 다운로드
-function downloadFile(fileData){
+function downloadFile(BIZ_ID, ATCFILE_SEQ){
+    $("[id='downloadForm']").remove();	//이미 생성된 form이 있으면 제거
+    
+    //form 생성
+    var form = document.createElement("form");
+    form.id = 'downloadForm';
+    form.action = '/file/downloadFile';
+    form.method = 'post';
+    document.body.appendChild(form);
+    
+    //input 생성
+    var bizId = document.createElement("input");
+    bizId.type = "text";
+    bizId.name = "BIZ_ID";
+    bizId.value = BIZ_ID;
+    form.appendChild(bizId);
+ 
+    var atcfileSeq = document.createElement("input");
+    atcfileSeq.type = "text";
+    atcfileSeq.name = "ATCFILE_SEQ";
+    atcfileSeq.value = ATCFILE_SEQ;
+    form.appendChild(atcfileSeq);
+    
+    form.submit();
+    
+    $("[id='downloadForm']").remove();
+       
+    /*
     $.ajax({
-        url: '/file/downloadFile.do',
+        url: '/file/downloadFile',
         type: 'POST',
-        data: data,
+        data: {BIZ_ID : BIZ_ID, ATCFILE_SEQ : ATCFILE_SEQ},
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
 			//파일 다운로드 구현
 		}
-	})		
+	})
+	*/		
 }
 
 //첨부가능한 파일 타입
