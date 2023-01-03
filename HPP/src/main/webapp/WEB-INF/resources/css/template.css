@@ -258,4 +258,18 @@ a:hover {
 	.text_align_left{
 		text-align: left;
 	}	
+	
+	.delete {
+		color: red;
+	}
+	
+	.fileAttachBtn {
+		border: 1px solid #0c0c0c66;
+	    border-radius: 3px;
+	    background-color: #e9ecef;
+	    font-weight: bold;
+	    padding: 3px;
+	    color: #434343;
+	    font-size: 13px;
+	}
 /* 전체 공용 끝 */

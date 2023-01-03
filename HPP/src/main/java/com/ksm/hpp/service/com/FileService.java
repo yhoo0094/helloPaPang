@@ -81,8 +81,7 @@ public class FileService extends BaseService {
 	 * @생성일: 2022. 12. 14. 오후 2:22:01
 	 * @설명: 첨부파일 저장
 	 */
-	public Map<String, Object> insertFile(StringBuilder logStr, Map<String, Object> inData, List<MultipartFile> fileList) throws Exception
-	{
+	public Map<String, Object> insertFile(StringBuilder logStr, Map<String, Object> inData, List<MultipartFile> fileList) throws Exception{
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		//현재 시간 구하기
@@ -149,10 +148,32 @@ public class FileService extends BaseService {
 				
 				sqlSession.insert("mapper.com.FileMapper.insertFile", inData);
 			}
+			
+			//파일 삭제
+			deleteFile(inData);
 		} while(false);
 		
 		return result;
 	}	
+
+	public Map<String, Object> deleteFile(Map<String, Object> inData) throws Exception{
+		Map<String, Object> result = new HashMap<String, Object>();
+		String delFiles = (String) inData.get("delFiles");
+		if(delFiles != null && !"".equals(delFiles)) {
+			//삭제된 파일 목록이 null이나 빈값이 아닐 경우
+			String[] delFilesArr = delFiles.split(",");
+			inData.put("delFilesArr", delFilesArr);
+			
+			List<Map<String, Object>> list = sqlSession.selectList("mapper.com.FileMapper.selectDelFile", inData);
+			for(Map<String, Object> delFile : list) {
+				File file = new File((String) delFile.get("ATC_FILE_PATH"), (String) delFile.get("SAVE_ATC_FILE_NM"));
+				file.delete();
+			}
+
+			int cnt = sqlSession.delete("mapper.com.FileMapper.deleteFile", inData);
+		};
+		return result;		
+	}
 	
 	/**
 	 * @메소드명: getUniqueFileName

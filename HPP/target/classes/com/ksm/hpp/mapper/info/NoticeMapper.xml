@@ -51,5 +51,15 @@
 		     , 'SYSTEM' 				 
 			 )   
 	</insert>
+	
+	<!-- 공지사항 수정 -->
+	<update id="updateNotice" parameterType="map">
+		UPDATE TB_BOARD
+		   SET BOARD_TITLE		= #{title}	 		/*제목*/
+		     , BOARD_CN			= #{content}		/*내용*/
+		     , LT_UPD_ID 		= 'SYSTEM'			/*최종수정자ID*/
+		     , LT_UPD_DTTI		= NOW() 			/*최종수정일시*/
+		 WHERE BIZ_ID			= #{bizId}			/*글ID*/     
+	</update>
 
 </mapper>

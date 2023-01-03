@@ -22,6 +22,7 @@
 	<form id="noticeForm" name="noticeForm" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="boardType" value="01">
 		<input type="hidden" name="bizDvcd" value="001">
+		<input type="hidden" id = "bizId" name="bizId" value="">
 		
 		<table class="papang-table">
 			<colgroup>

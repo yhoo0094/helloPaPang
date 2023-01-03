@@ -7,6 +7,7 @@
 
 var fileNo = 0;
 var filesArr = new Array();
+var delFiles = new Array();
 
 //첨부파일 추가
 function addFile(obj){
@@ -92,6 +93,40 @@ function selectFile(data) {
     });		
 }
 
+//첨부파일을 포함한 페이지 저장
+function saveFile(url, formData){
+	return new Promise(function(resolve, reject){
+	    /*
+	    for (var i = 0; i < filesArr.length; i++) {
+	        formData.append("files", filesArr[i]);
+	    }	
+	    */
+	    
+	    for(var i in filesArr){
+			formData.append("files", filesArr[i]);
+			
+			//삭제된 파일 처리(undefinded면 false로 처리됨)
+			if(filesArr[i].is_delete){
+				delFiles.push(filesArr[i].ATCFILE_SEQ);
+			};
+		}
+		formData.append("delFiles", delFiles);
+	    
+	    $.ajax({
+			type: 'POST',
+			enctype: 'multipart/form-data',
+	        url: url,
+	        data: formData,
+	        processData: false,
+	        contentType: false,
+	        cache: false, 
+	        success: function (result) {
+				resolve(result);
+	        }
+	    });   
+    })
+}
+
 //첨부파일 다운로드
 function downloadFile(BIZ_ID, ATCFILE_SEQ){
     $("[id='downloadForm']").remove();	//이미 생성된 form이 있으면 제거
@@ -115,23 +150,9 @@ function downloadFile(BIZ_ID, ATCFILE_SEQ){
     atcfileSeq.name = "ATCFILE_SEQ";
     atcfileSeq.value = ATCFILE_SEQ;
     form.appendChild(atcfileSeq);
-    
     form.submit();
     
-    $("[id='downloadForm']").remove();
-       
-    /*
-    $.ajax({
-        url: '/file/downloadFile',
-        type: 'POST',
-        data: {BIZ_ID : BIZ_ID, ATCFILE_SEQ : ATCFILE_SEQ},
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
-        dataType: 'json',
-        success: function (result) {
-			//파일 다운로드 구현
-		}
-	})
-	*/		
+    $("[id='downloadForm']").remove();	
 }
 
 //첨부가능한 파일 타입
@@ -145,6 +166,7 @@ const fileTypes = [
   , 'application/haansofthwp'
   , 'application/x-hwp'
   , 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  , 'text/plain'
 ];
 
 /* 첨부파일 검증 */

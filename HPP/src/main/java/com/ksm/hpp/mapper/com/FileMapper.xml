@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.com.FileMapper">
 	
+	<!-- 파일 조회 -->
 	<select id="selectFile" parameterType="map" resultType="map">
 		SELECT BIZ_ID				/*글ID*/
 			,  ATCFILE_SEQ			/*첨부파일 순번*/
@@ -18,6 +19,25 @@
 			</if>
 		</trim>		  
 	</select>
+	
+	<!-- 삭제할 파일 조회 -->
+	<select id="selectDelFile" parameterType="map" resultType="map">
+		SELECT BIZ_ID				/*글ID*/
+			,  ATCFILE_SEQ			/*첨부파일 순번*/
+			,  BIZ_DVCD				/*업무구분코드(000:대분류,중분류,소분류)*/
+			,  ATC_FILE_NM			/*파일명*/
+			,  SAVE_ATC_FILE_NM		/*파일 저장명*/
+			,  ATC_FILE_PATH		/*파일 경로*/
+			,  ATC_FILE_CAPA_VAL	/*파일 용량*/
+			,  ATC_FILE_EXTS		/*파일 확장자*/
+		  FROM TB_ATCFILE			/*테이블_첨부파일*/
+		 WHERE BIZ_ID = #{bizId}	/*글ID*/
+		   AND ATCFILE_SEQ IN (
+				   <foreach collection="delFilesArr" item="delFilesArr" separator=",">
+				   		#{delFilesArr}
+				   </foreach>
+		   	   )	  
+	</select>	
 	
 	<!-- 파일 저장 -->
 	<insert id="insertFile" parameterType="map">
@@ -55,4 +75,15 @@
 		     , 'SYSTEM' 			/*최종수정자ID*/			 
 			 )    
 	</insert>
+	
+	<!-- 파일 삭제 -->
+	<delete id="deleteFile">
+		DELETE FROM TB_ATCFILE			/*테이블_첨부파일*/
+		 WHERE BIZ_ID = #{bizId}	/*글ID*/
+		   AND ATCFILE_SEQ IN (
+				   <foreach collection="delFilesArr" item="delFilesArr" separator=",">
+				   		#{delFilesArr}
+				   </foreach>
+		   	   )
+	</delete>
 </mapper>

@@ -14,7 +14,7 @@
 <div class="fileAttachDiv">
 	<div id="fileListDiv" class="fileListDiv form-control">
 		<label class="fileAttachBtn" for="inputFile">
-			<span>파일업로드</span>
+			<span>파일찾기</span>
 		</label>	
 	</div>
 </div>

@@ -65,6 +65,24 @@ public class NoticeController {
 		response.setContentType("application/x-json; charset=UTF-8");
 	}		
 	
+	/**
+	 * @메소드명: updateNotice
+	 * @작성자: 김상민
+	 * @생성일: 2023. 1. 3. 오전 10:43:28
+	 * @설명: 공지사항 수정
+	 */
+	@RequestMapping("/updateNotice.do")
+	public void updateNotice(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		
+		List<MultipartFile> fileList = request.getFiles("files"); 
+		Map<String, Object> outData = noticeService.updateNotice((StringBuilder)request.getAttribute("IN_LOG_STR"), inData, fileList);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(outData);
+		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
+		response.setContentType("application/x-json; charset=UTF-8");
+	}		
 }
 
 

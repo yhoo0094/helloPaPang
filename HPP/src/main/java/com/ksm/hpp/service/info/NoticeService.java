@@ -55,8 +55,25 @@ public class NoticeService {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		sqlSession.insert("mapper.info.NoticeMapper.insertNotice", inData);
-		
 		fileService.insertFile(logStr, inData, fileList);	
+		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;
 	}
+	
+	/**
+	 * @메소드명: updateNotice
+	 * @작성자: 김상민
+	 * @생성일: 2023. 1. 3. 오전 10:45:24
+	 * @설명: 공지사항 수정
+	 */
+	public Map<String, Object> updateNotice(StringBuilder logStr, Map<String, Object> inData, List<MultipartFile> fileList) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		sqlSession.update("mapper.info.NoticeMapper.updateNotice", inData);
+		fileService.insertFile(logStr, inData, fileList);	
+		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		return result;
+	}	
 }
