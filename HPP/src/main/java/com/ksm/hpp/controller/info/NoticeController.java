@@ -37,7 +37,6 @@ public class NoticeController {
 	@RequestMapping("/selectNotice.do")
 	public void selectNotice(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
-		
 		Map<String, Object> outData = noticeService.selectNotice((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		
 		Gson gson = new Gson();
@@ -83,6 +82,24 @@ public class NoticeController {
 		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
 		response.setContentType("application/x-json; charset=UTF-8");
 	}		
+	
+	/**
+	 * @메소드명: deleteNotice
+	 * @작성자: 김상민
+	 * @생성일: 2023. 1. 4. 오전 11:45:20
+	 * @설명: 게시글 삭제
+	 */
+	@RequestMapping("/deleteNotice.do")
+	public void deleteNotice(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> outData = noticeService.deleteNotice((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(outData);
+		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
+		response.setContentType("application/x-json; charset=UTF-8");
+	}			
+		
 }
 
 

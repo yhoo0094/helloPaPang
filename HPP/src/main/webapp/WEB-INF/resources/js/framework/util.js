@@ -65,7 +65,7 @@ $util.checkRequired = function(option){
 	}
 }	
 
-
+//빈 값 여부 확인
 $util.isEmpty = function(obj){
 	if(obj == null || obj == undefined || obj == ""){
 		return true;

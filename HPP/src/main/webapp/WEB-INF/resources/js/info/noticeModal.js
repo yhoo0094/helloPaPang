@@ -37,9 +37,7 @@ function createEditor(){
 //공지사항 팝업 열기
 function noticeModalOpen(data){
 	//createEditor();modal('open')
-	if(data == null){
-		noticeModalEmpty()
-	} else {
+	if(data != null){
 		$('#title').val(data.BOARD_TITLE);
 		$('#content').val(data.BOARD_CN);
 		$('#bizId').val(data.BIZ_ID);
@@ -48,14 +46,6 @@ function noticeModalOpen(data){
 	$('#noticeModal').modal({
 		clickClose: false
 	});	
-}
-
-//공지사항 팝업 비우기
-function noticeModalEmpty(){
-	$('#title').val('');
-	$('#content').val('');
-	$('#bizId').val('');
-	resetFile();
 }
 
 //공지사항 저장
@@ -74,9 +64,47 @@ function saveNotice(){
         if (result.RESULT == Constant.RESULT_SUCCESS){
             // 데이타 성공일때 이벤트 작성
             alert("완료되었습니다.");
-            $('.jquery-modal').fadeOut();
+            closeModal();
         } else {
 			alert(result.Constant.OUT_RESULT_MSG)
 		}		
 	});
 }	
+
+//모달 닫기
+function closeModal(){
+	$.modal.close();
+	
+	//모달 내용 초기화
+	$('#title').val('');
+	$('#content').val('');
+	$('#bizId').val('');
+	resetFile();
+}
+
+//게시글 삭제
+function deleteBoard(){
+		if(!confirm('정말로 삭제 하시겠습니까?')){
+			return;
+		};
+		
+		var formData = new FormData($("#noticeForm")[0]);
+	
+	    $.ajax({
+			type: 'POST',
+			enctype: 'multipart/form-data',
+	        url: '/notice/deleteNotice.do',
+	        data: formData,
+	        processData: false,
+	        contentType: false,
+	        cache: false, 
+	        success: function (result) {
+	            if (result.RESULT == Constant.RESULT_SUCCESS){
+	                alert("삭제가 완료되었습니다.")
+	                closeModal();
+	            } else {
+					alert(Constant.OUT_RESULT_MSG)
+				}
+	        }
+	    });  	
+}

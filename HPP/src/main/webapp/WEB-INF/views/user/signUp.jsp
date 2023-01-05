@@ -10,28 +10,46 @@
 **/
 %>
 
-
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
-	<form id="signUpForm" method="post">
-		<table>
-			<colgroup>
-				<col style="width: 50%">
-				<col style="width: *">
-			</colgroup>
-			<tbody>
-				<tr>
-					<th>아이디</th>
-					<th><input type="text" name="id" title="아이디" onkeypress="if(event.keyCode == 13){signUp()}" required="all1"></th>
-				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<th><input type="password" name="pw" title="비밀번호" onkeypress="if(event.keyCode == 13){signUp()}" required="all1"></th>
-				</tr>				
-			</tbody>
-		</table>
-		
-		<button type="button" onclick="signUp()">가입</button>
-	</form>
+	<div class="wrap">
+		<form id="signUpForm" method="post">
+			<table class="centerTable">
+				<colgroup>
+					<col style="width: 150px">
+					<col style="width: *">
+					<col style="width: 150px">
+				</colgroup>
+				<tbody>
+					<tr>
+						<td>아이디<span class="required">*</span></td>
+						<td><input id="userId" type="text" class="papang_input" name="userId" title="아이디" maxlength="20" required="all1"></td>
+						<td>
+							<button type="button" class="papang_btn papang-create-btn" onclick="chkUniqId()">중복확인</button>
+						</td>
+					</tr>
+					<tr>
+						<td>비밀번호<span class="required">*</span></td>
+						<td><input id="userPw" type="password" class="papang_input" name="userPw" title="비밀번호" maxlength="50" required="all1"></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>비밀번호 확인<span class="required">*</span></td>
+						<td><input id="userPwChk" type="password" class="papang_input" title="비밀번호 확인" maxlength="50" required="all1"></td>
+						<td></td>
+					</tr>					
+					<tr>
+						<td colspan="3">
+							<div style="text-align: center;">
+								<button type="button" class="papang_btn papang-create-btn" onclick="insertUser()">가입</button>
+							</div>						
+						</td>
+					</tr>									
+				</tbody>
+			</table>
+			
+
+		</form>
+	</div>
 </div>	
 

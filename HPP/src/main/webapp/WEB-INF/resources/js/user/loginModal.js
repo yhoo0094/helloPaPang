@@ -7,7 +7,9 @@
 
 //로그인 팝업 열기
 function loginModalOpen(){
-	$('#loginModal').modal('open')	
+	$('#loginModal').modal({
+		clickClose: false
+	});		
 }	
 
 //로그인

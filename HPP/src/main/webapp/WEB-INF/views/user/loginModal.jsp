@@ -10,28 +10,42 @@
 %>
 <script src="<%=request.getContextPath() %>/resources/js/user/loginModal.js"></script>
 
-<div id="loginModal" class="modal" style="width: 400px; height: 200px">
-	<form id="loginForm" method="post">
+<div id="loginModal" class="modal" style="width: 400px; height: 160px;">
+	<form id="loginForm" method="post" style="margin: 10px 0px;">
 		<table>
 			<colgroup>
-				<col style="width: 50%">
+				<col style="width: 25%">
 				<col style="width: *">
+				<col style="width: 25%">
 			</colgroup>
 			<tbody>
 				<tr>
-					<th>아이디</th>
-					<th><input id="id" type="text" name="id" title="아이디" onkeypress="if(event.keyCode == 13){login()}"></th>
+					<td>아이디</td>
+					<td><input id="userIdModal" type="text" name="userId" title="아이디" maxlength="20" onkeypress="if(event.keyCode == 13){login()}"></td>
+					<td rowspan="2"><button type="button" class="papang_btn papang-create-btn" onclick="login()" style="height: 60px;">로그인</button></td>
 				</tr>
 				<tr>
-					<th>비밀번호</th>
-					<th><input id="pw" type="password" name="pw" title="비밀번호" onkeypress="if(event.keyCode == 13){login()}"></th>
-				</tr>				
+					<td>비밀번호</td>
+					<td><input id="userPwModal" type="password" name="userPw" title="비밀번호" maxlength="50" onkeypress="if(event.keyCode == 13){login()}"></td>
+				</tr>
+				<tr>
+					<td colspan="3" style="text-align: right; font-size: 13px; padding: 5px 0 0 0;">				
+						<p style="margin-bottom: 0;">
+							<input id="rememberIdChk" type="checkbox" title="아이디 기억하기">
+							<label for="rememberIdChk" style="position: relative; top: -1.5px;">아이디 저장</label>
+						</p>
+					</td>
+				</tr>					
+				<tr>
+					<td colspan="3" style="text-align: center; font-size: 13px; padding: 10px 0 0 0;">
+						<a href="/user/signUp" style="text-decoration: underline; text-underline-position:under;">회원가입</a>
+						&nbsp;&nbsp;&nbsp;
+						<a href="#" style="text-decoration: underline; text-underline-position:under;">아이디/비밀번호 찾기</a>
+					</td>
+				</tr>								
 			</tbody>
 		</table>
 		
-		<div>
-			<button type="button" onclick="login()">로그인</button>
-			<button type="button" onclick="location.href='/user/signUp'">회원가입</button>
-		</div>
+
 	</form>
 </div>

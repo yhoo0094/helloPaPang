@@ -10,7 +10,9 @@
 		     , BOARD_TYPE			/*분류(01:공지사항, 02:자유게시판,03:질문게시판)*/
 		     , BOARD_HIT			/*조회수*/
 		     , FST_REG_ID 			/*최초등록자ID*/
+		     , DATE_FORMAT(FST_REG_DTTI, "%Y/%m/%d %H:%i") FST_REG_DTTI	/*최초등록일시*/
 		     , LT_UPD_ID 			/*최종수정자ID*/
+		     , DATE_FORMAT(LT_UPD_DTTI, "%Y/%m/%d %H:%i") LT_UPD_DTTI	/*최종수정일시*/
 		  FROM TB_BOARD				/*테이블_게시판*/
 		<trim prefix="WHERE" prefixOverrides="AND">  
 			<if test='id != null and id != ""'>
@@ -54,12 +56,19 @@
 	
 	<!-- 공지사항 수정 -->
 	<update id="updateNotice" parameterType="map">
-		UPDATE TB_BOARD
+		UPDATE TB_BOARD								/*테이블_게시판*/
 		   SET BOARD_TITLE		= #{title}	 		/*제목*/
 		     , BOARD_CN			= #{content}		/*내용*/
 		     , LT_UPD_ID 		= 'SYSTEM'			/*최종수정자ID*/
 		     , LT_UPD_DTTI		= NOW() 			/*최종수정일시*/
 		 WHERE BIZ_ID			= #{bizId}			/*글ID*/     
 	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteNotice" parameterType="map">
+		DELETE
+		  FROM TB_BOARD								/*테이블_게시판*/
+		 WHERE BIZ_ID			= #{bizId}			/*글ID*/
+	</delete>
 
 </mapper>

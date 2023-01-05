@@ -45,8 +45,8 @@ public class UserService {
 		Map<String, Object> result = new HashMap<String, Object>();
 		int cnt = 0;
 		
-		String pw = StringUtil.getSHA256((String)inData.get("pw"));
-		inData.put("pw", pw);
+		String userPw = StringUtil.getSHA256((String)inData.get("userPw"));
+		inData.put("userPw", userPw);
 		
 		do {
 			cnt = sqlSession.insert("mapper.user.UserMapper.insertUser", inData);
@@ -76,4 +76,23 @@ public class UserService {
 		
 		return result;
 	}	
+	
+	/**
+	 * 
+	 * @메소드명: chkUniqId
+	 * @작성자: 김상민
+	 * @생성일: 2023. 1. 5. 오전 9:37:43
+	 * @설명: 아이디 중복 체크
+	 */
+	public Map<String, Object> chkUniqId(StringBuilder logStr, Map<String, Object> inData) throws Exception
+	{
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		Map<String, Object> data = sqlSession.selectOne("mapper.user.UserMapper.selectUser", inData);
+		result.put("data", data);
+		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		return result;
+	}		
+	
 }

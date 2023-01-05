@@ -42,6 +42,7 @@ public class NoticeService {
 		List<Object> list = sqlSession.selectList("mapper.info.NoticeMapper.selectNotice", inData);
 		result.put("list", list);
 		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;
 	}
 	
@@ -72,6 +73,25 @@ public class NoticeService {
 		
 		sqlSession.update("mapper.info.NoticeMapper.updateNotice", inData);
 		fileService.insertFile(logStr, inData, fileList);	
+		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		return result;
+	}	
+	
+	/**
+	 * @메소드명: deleteNotice
+	 * @작성자: 김상민
+	 * @생성일: 2023. 1. 4. 오전 11:49:25
+	 * @설명: 게시글 삭제
+	 */
+	public Map<String, Object> deleteNotice(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		int cnt = sqlSession.delete("mapper.info.NoticeMapper.deleteNotice", inData);
+		result.put("cnt", cnt);
+		
+		//첨부파일 삭제
+		result.put("delResult",fileService.deleteFileAll(inData));
 		
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;

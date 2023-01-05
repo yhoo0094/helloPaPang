@@ -21,7 +21,7 @@ function selectNotice(){
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
-                mkNoticeTable(result.list);
+            mkNoticeTable(result.list);
         }
     });	
 }
@@ -33,7 +33,7 @@ function mkNoticeTable(data) {
         columns: [
             { title: "제목"	, data: "BOARD_TITLE"	, width: "*"		, className: "text_align_left"}
           , { title: "작성자"	, data: "FST_REG_ID"	, width: "100px"	, className: "text_align_center"}
-          , { title: "게시일"	, data: "LT_UPD_ID"		, width: "100px"	, className: "text_align_center"}
+          , { title: "게시일"	, data: "LT_UPD_DTTI"	, width: "150px"	, className: "text_align_center"}
           , { title: "조회수"	, data: "BOARD_HIT"		, width: "50px"		, className: "text_align_center"}
         ],		
         paging: true,
@@ -44,18 +44,23 @@ function mkNoticeTable(data) {
         lengthChange: false,
         pageLength: 10,
         rowId: '',
-		dom : 'Bfrtip',	
+        /*
+		dom : 'Bfrtip',		//버튼 다 나옴
 	    buttons: {
 	        buttons: [
 	            {text: '신규', className: 'btn papang-create-btn btn-sm papang_btn' , extend: '', action: function ( e, dt, node, config ) {
                     noticeModalOpen();
-                },},
-	            {text: '삭제', className: 'btn papang-create-btn btn-sm papang_btn' , extend: '', action: function ( e, dt, node, config ) {
-                    alert( 'Button activated' );
-                },},                
+                },}
 	        ]
-	    },       
+	    },     
+	    */  
     });	
+    
+    var $createBtn = $('<div class="table_btn_wrapper"><button type="button" class="papang-create-btn papang_btn paginate_button">신규</button></div>');
+    $createBtn.on('click', function(){
+		noticeModalOpen();
+	})
+    $('#mainTable_paginate').after($createBtn);
     
 	$('#mainTable tbody').on('dblclick', 'tr', function () {
 	    var data = mainTable.row( this ).data();

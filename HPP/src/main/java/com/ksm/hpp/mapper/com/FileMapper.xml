@@ -14,9 +14,12 @@
 			,  ATC_FILE_EXTS		/*파일 확장자*/
 		  FROM TB_ATCFILE			/*테이블_첨부파일*/
 		<trim prefix="WHERE" prefixOverrides="AND">  
-			<if test='BIZ_ID != null and BIZ_ID != ""'>
-				AND BIZ_ID = #{BIZ_ID}
+			<if test='bizId != null and bizId != ""'>
+				AND BIZ_ID = #{bizId}
 			</if>
+			<if test='atcfileSeq != null and atcfileSeq != ""'>
+				AND ATCFILE_SEQ = #{atcfileSeq}
+			</if>			
 		</trim>		  
 	</select>
 	
@@ -78,7 +81,8 @@
 	
 	<!-- 파일 삭제 -->
 	<delete id="deleteFile">
-		DELETE FROM TB_ATCFILE			/*테이블_첨부파일*/
+		DELETE 
+		  FROM TB_ATCFILE			/*테이블_첨부파일*/
 		 WHERE BIZ_ID = #{bizId}	/*글ID*/
 		   AND ATCFILE_SEQ IN (
 				   <foreach collection="delFilesArr" item="delFilesArr" separator=",">

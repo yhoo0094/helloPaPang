@@ -67,7 +67,7 @@ function selectFile(data) {
     $.ajax({
         url: '/file/selectFile',
         type: 'POST',
-        data: data,
+        data: {'bizId': data.BIZ_ID},
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
@@ -128,7 +128,7 @@ function saveFile(url, formData){
 }
 
 //첨부파일 다운로드
-function downloadFile(BIZ_ID, ATCFILE_SEQ){
+function downloadFile(bizId, atcfileSeq){
     $("[id='downloadForm']").remove();	//이미 생성된 form이 있으면 제거
     
     //form 생성
@@ -139,17 +139,17 @@ function downloadFile(BIZ_ID, ATCFILE_SEQ){
     document.body.appendChild(form);
     
     //input 생성
-    var bizId = document.createElement("input");
-    bizId.type = "text";
-    bizId.name = "BIZ_ID";
-    bizId.value = BIZ_ID;
-    form.appendChild(bizId);
+    var bizIdInput = document.createElement("input");
+    bizIdInput.type = "text";
+    bizIdInput.name = "bizId";
+    bizIdInput.value = bizId;
+    form.appendChild(bizIdInput);
  
-    var atcfileSeq = document.createElement("input");
-    atcfileSeq.type = "text";
-    atcfileSeq.name = "ATCFILE_SEQ";
-    atcfileSeq.value = ATCFILE_SEQ;
-    form.appendChild(atcfileSeq);
+    var atcfileSeqInput = document.createElement("input");
+    atcfileSeqInput.type = "text";
+    atcfileSeqInput.name = "atcfileSeq";
+    atcfileSeqInput.value = atcfileSeq;
+    form.appendChild(atcfileSeqInput);
     form.submit();
     
     $("[id='downloadForm']").remove();	

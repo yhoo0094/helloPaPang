@@ -48,7 +48,7 @@ public class UserController {
 	 * @생성일: 2022. 11. 2. 오후 6:59:00
 	 * @설명: 사용자 생성
 	 */
-	@RequestMapping("/signUp.do")
+	@RequestMapping("/insertUser.do")
 	public void insertUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
 		Map<String, Object> outData = userService.insertUser((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
@@ -68,9 +68,6 @@ public class UserController {
 	@RequestMapping("/login")
 	public void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
-        
-        logger.info(inData);
-		
 		Map<String, Object> outData = userService.login((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		
 		Gson gson = new Gson();
@@ -79,4 +76,22 @@ public class UserController {
 		response.setContentType("application/x-json; charset=UTF-8");
 		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
 	}	
+	
+	/**
+	 * @메소드명: chkUniqId
+	 * @작성자: 김상민
+	 * @생성일: 2023. 1. 5. 오전 9:37:27
+	 * @설명: 아이디 중복 체크
+	 */
+	@RequestMapping("/chkUniqId.do")
+	public void chkUniqId(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> outData = userService.chkUniqId((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+
+		Gson gson = new Gson();
+		String json = gson.toJson(outData);
+		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
+		response.setContentType("application/x-json; charset=UTF-8");
+	}	
+	
 }

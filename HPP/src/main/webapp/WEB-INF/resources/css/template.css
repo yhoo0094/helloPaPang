@@ -179,25 +179,48 @@ a:hover {
     font-weight: 900;
 }
 
-/* dataTable 시작 */
-.dt-buttons{
-	float: right !important; 
-}
-/* dataTable 끝 */
-
 /* 버튼 시작 */
+.table_btn_wrapper{
+    padding: 0.5em 1em;
+    float: right;
+}
+
+.modal_btn_wrapper{
+	float: right;
+}
+
+.right_btn_wrapper{
+	float: right;
+}
+
 .papang_btn{
-	font-weight: bold;
-	color: #0c0c0c;
-	/* border-color: #212529; */
+    font-weight: bold;
+    color: #0c0c0c;
+    padding: 0.15rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.3rem;
+    border: 2px solid #0c0c0c00;
+    margin: 0 0 0 0.2rem;
 }
 
 .papang-create-btn{
-    background-color: #fdce43;
+    background-color: #ffc107;
 }    
 
-.papang-sava-btn{
+.papang-save-btn{
 	background-color: #0dcaf0;
+}
+
+.papang-del-btn{
+	background-color: #f83b2f;
+}
+
+.papang-close-btn{
+	background-color: #8996a1;
+}
+
+table.dataTable.no-footer{
+	border-top: 1px solid #111;
 }
 /* 버튼 끝 */
 
@@ -243,33 +266,47 @@ a:hover {
 /* 파일첨부 끝 */
 
 /* 전체 공용 시작 */
-	table.dataTable thead th{
-		text-align: center;
-	}
+table.dataTable thead th{
+	text-align: center;
+}
 
-	.align_items_center{
-		align-items: center;
-	}
-	
-	.text_align_center{
-		text-align: center;
-	}
-	
-	.text_align_left{
-		text-align: left;
-	}	
-	
-	.delete {
-		color: red;
-	}
-	
-	.fileAttachBtn {
-		border: 1px solid #0c0c0c66;
-	    border-radius: 3px;
-	    background-color: #e9ecef;
-	    font-weight: bold;
-	    padding: 3px;
-	    color: #434343;
-	    font-size: 13px;
-	}
+.align_items_center{
+	align-items: center;
+}
+
+.text_align_center{
+	text-align: center;
+}
+
+.text_align_left{
+	text-align: left;
+}	
+
+.delete {
+	color: red;
+}
+
+.fileAttachBtn {
+	border: 1px solid #0c0c0c66;
+    border-radius: 3px;
+    background-color: #e9ecef;
+    font-weight: bold;
+    padding: 3px;
+    color: #434343;
+    font-size: 13px;
+}
+
+.centerTable{
+	display: inline-block;
+}
+
+.papang_input{
+	margin: 5px 0;
+}
+
+/* 필수 값에 별표 */
+.required{
+	color: red;
+	font-weight: bold;
+}
 /* 전체 공용 끝 */

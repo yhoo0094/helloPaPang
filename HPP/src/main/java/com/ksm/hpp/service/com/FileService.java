@@ -156,6 +156,12 @@ public class FileService extends BaseService {
 		return result;
 	}	
 
+	/**
+	 * @메소드명: deleteFile
+	 * @작성자: 김상민
+	 * @생성일: 2023. 1. 4. 오후 1:23:17
+	 * @설명: 첨부파일 삭제
+	 */
 	public Map<String, Object> deleteFile(Map<String, Object> inData) throws Exception{
 		Map<String, Object> result = new HashMap<String, Object>();
 		String delFiles = (String) inData.get("delFiles");
@@ -173,6 +179,25 @@ public class FileService extends BaseService {
 			int cnt = sqlSession.delete("mapper.com.FileMapper.deleteFile", inData);
 		};
 		return result;		
+	}
+	
+	/**
+	 * @메소드명: deleteFileAll
+	 * @작성자: 김상민
+	 * @생성일: 2023. 1. 4. 오후 1:26:58
+	 * @설명: 첨부파일 전체 삭제
+	 */
+	public Map<String, Object> deleteFileAll(Map<String, Object> inData) throws Exception{
+		Map<String, Object> result = new HashMap<String, Object>();
+
+		List<Map<String, Object>> list = sqlSession.selectList("mapper.com.FileMapper.selectFile", inData);
+		for(Map<String, Object> delFile : list) {
+			File file = new File((String) delFile.get("ATC_FILE_PATH"), (String) delFile.get("SAVE_ATC_FILE_NM"));
+			file.delete();
+		}		
+		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		return result;	
 	}
 	
 	/**

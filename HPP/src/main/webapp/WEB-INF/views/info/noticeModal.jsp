@@ -51,8 +51,10 @@
 			</tbody>
 		</table>
 		
-		<div>
-			<button type="button" class="btn papang-sava-btn papang_btn dt-buttons" onclick="saveNotice()">저장</button>
+		<div class="modal_btn_wrapper">
+			<button type="button" class="btn papang-save-btn papang_btn" onclick="saveNotice()">저장</button>
+			<button type="button" class="btn papang-del-btn papang_btn" onclick="deleteBoard()">삭제</button>
+			<button type="button" class="btn papang-close-btn papang_btn" onclick="closeModal()">닫기</button>
 		</div>
 	</form>
 </div>
