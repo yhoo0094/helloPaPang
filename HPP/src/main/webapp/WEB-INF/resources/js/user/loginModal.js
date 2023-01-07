@@ -7,6 +7,13 @@
 
 //로그인 팝업 열기
 function loginModalOpen(){
+	//아이디 저장 여부 확인
+	if($util.getCookie('hpp_save_id')){
+		$('#userIdModal').val($util.getCookie('hpp_user_id'));
+		$('#rememberIdChk').prop("checked", true);
+	}
+	
+	//로그인 모달 열기
 	$('#loginModal').modal({
 		clickClose: false
 	});		
@@ -14,19 +21,41 @@ function loginModalOpen(){
 
 //로그인
 function login(){
+	//필수입력 검증
+	if(!$util.checkRequired({group:["allM1"]})){return;};
+	
+	//아이디 저장 여부 확인
+	if($('#rememberIdChk').is(":checked")){
+		$util.setCookie('hpp_user_id', $('#userIdModal').val());
+		$util.setCookie('hpp_save_id', true);
+	} else {
+		$util.setCookie('hpp_user_id', '');
+		$util.setCookie('hpp_save_id', false);		
+	};
+	
 	var formData = $('#loginForm').serialize();
-	
-	//필수입력 검증(추후 구현)
-	
     $.ajax({
-        url: '/user/login',
+        url: '/user/login.do',
         type: 'POST',
         data: formData,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
-                console.log(result);
+	        if (result.RESULT == Constant.RESULT_SUCCESS){
+	            loginModalClose();
+	        } else {
+				alert(result[Constant.OUT_RESULT_MSG])
+			}
         }
     });		
+}
+
+//모달 닫기
+function loginModalClose(){
+	$.modal.close();
 	
+	//모달 내용 초기화
+	var el = $('#loginModal');
+	$util.inputTextEmpty(el, 'text');
+	$util.inputTextEmpty(el, 'password');
 }

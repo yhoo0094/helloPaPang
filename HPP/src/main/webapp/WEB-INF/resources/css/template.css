@@ -309,4 +309,15 @@ table.dataTable thead th{
 	color: red;
 	font-weight: bold;
 }
+
+.papang_disabled {
+	cursor: default;
+	background-color: #eee;
+	opacity: 1;
+	pointer-events: none;
+}
+
+label{
+	cursor: pointer;
+}
 /* 전체 공용 끝 */

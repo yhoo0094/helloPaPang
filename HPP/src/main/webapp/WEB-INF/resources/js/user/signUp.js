@@ -1,9 +1,22 @@
+$(()=>{
+	$('#userId').on('change',function(){
+		$('#chkUniqIdBtn').removeClass('papang_disabled');
+		$('#idUniChkMsg').attr('class','idUniChkBf');
+	})
+})
+
 //회원가입
 function insertUser(){
 	if(!$util.checkRequired({group:["all1"]})){return;};
 	
 	//아이디 유효성 검증
-	//if(!idValidation()){return;}
+	if(!idValidation()){return;}
+	
+	//아이디 중복확인 했는지 확인
+	if(!$('#chkUniqIdBtn').hasClass('papang_disabled')){
+		alert('아이디 중복확인이 필요합니다.');
+		return;
+	};
 	
 	//비밀번호 유효성 검증
 	if(!pwValidation()){return;}
@@ -17,9 +30,8 @@ function insertUser(){
         dataType: 'json',
         success: function (result) {
             if (result.RESULT == Constant.RESULT_SUCCESS){
-                // 데이타 성공일때 이벤트 작성
                 alert("회원가입이 완료되었습니다.")
-                location.href = "/"
+                location.href = "/"	//홈으로 이동
             } else {
 				alert(Constant.OUT_RESULT_MSG)
 			}
@@ -28,17 +40,28 @@ function insertUser(){
 }
 
 //아이디 유효성 검증
-function idValidation(value){
+function idValidation(){
+	var result;	//처리 결과
+	var value = $('#userId').val();
 	
-}
+	//아이디 입력여부 검사
+	if($util.isEmpty(value)){
+		alert('아이디가 입력되지 않았습니다.')
+		return false;
+	}
 
+	//조건: 영문과 숫자만으로 20글자 이하(추후 구현)
+	result = true;
+	
+	return result;
+}
 
 //비밀번호 유효성 검증
 function pwValidation(){
 	var result;	//처리 결과
 	var value = $('#userPw').val();
 	
-	//조건: 숫자, 영어, 특수문자를 포함하여 8글자 이상
+	//조건: 숫자, 영어, 특수문자를 포함하여 8글자 이상 50글자 이하
 	var allChk = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[~!@#\$%\^&\*()_\+\-={}\[\]\\:;"'<>,.\/]).{8,20}$/;
 	var numChk = /\d/gim;		//숫자 포함
 	var enChk = /[A-Za-z]/gim;	//영어 포함
@@ -73,13 +96,10 @@ function pwValidation(){
 
 //아이디 중복 확인
 function chkUniqId(){
-	var userId = $('#userId').val();
+	//아이디 유효성 검증
+	if(!idValidation()){return;}
 	
-	//유효성 검사
-	if($util.isEmpty(userId)){
-		alert('아이디가 입력되지 않았습니다.')
-		return;
-	}
+	var userId = $('#userId').val();
 	
     $.ajax({
         url: '/user/chkUniqId.do',
@@ -90,7 +110,9 @@ function chkUniqId(){
         success: function (result) {
             if (result.RESULT == Constant.RESULT_SUCCESS){
 				if(result.data == null){
-					alert("아이디를 사용할 수 있습니다.");
+					alert("사용 가능한 아이디입니다.");
+					$('#chkUniqIdBtn').addClass('papang_disabled');
+					$('#idUniChkMsg').attr('class','idUniChkAf');
 				} else {
 					alert("중복된 아이디입니다.");
 				}

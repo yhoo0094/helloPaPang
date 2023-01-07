@@ -18,14 +18,15 @@
 				<colgroup>
 					<col style="width: 150px">
 					<col style="width: *">
-					<col style="width: 150px">
+					<col style="width: 300px">
 				</colgroup>
 				<tbody>
 					<tr>
 						<td>아이디<span class="required">*</span></td>
 						<td><input id="userId" type="text" class="papang_input" name="userId" title="아이디" maxlength="20" required="all1"></td>
 						<td>
-							<button type="button" class="papang_btn papang-create-btn" onclick="chkUniqId()">중복확인</button>
+							<button id="chkUniqIdBtn" type="button" class="papang_btn papang-create-btn" onclick="chkUniqId()">중복확인</button>
+							<span id="idUniChkMsg" class="idUniChkBf"></span>
 						</td>
 					</tr>
 					<tr>

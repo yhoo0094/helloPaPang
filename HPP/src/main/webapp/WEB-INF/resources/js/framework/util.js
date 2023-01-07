@@ -73,3 +73,37 @@ $util.isEmpty = function(obj){
 		return false;
 	}
 };	
+
+//element 하위 input의 값 비우기
+$util.inputTextEmpty = function(el, type){
+	$(el).find('input[type="' + type + '"]').val('');
+};
+
+/**
+ * 쿠키 생성
+ * @param name 쿠키 이름
+ * @param value 쿠키 값
+ * @param days 쿠키 보존 기간
+ */
+$util.setCookie = function(name, value, days){
+	var expires = "";
+	if(days){
+		var date = new Date();
+		date.setTime(date.getTime() + (days*24*60*60*1000));
+		expires = "; expires=" + date.toUTCString();
+	}
+	document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+/**
+ * 쿠키 조회
+ * @param name 쿠키 이름
+ * @return value 쿠키 값
+ */
+$util.getCookie = function(name){
+	var value = document.cookie
+	  .split('; ')
+	  .find((row) => row.startsWith(name))
+	  ?.split('=')[1];	
+	return value;
+}

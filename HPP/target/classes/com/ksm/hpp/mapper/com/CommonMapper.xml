@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.com.CommonMapper">
+	
+	<!-- 정책 조회 -->
+	<select id="selectPoli" parameterType="map" resultType="map">
+		SELECT POLI_ID				/*식별번호*/
+			,  POLI_TYPE			/*정책분류*/
+			,  POLI_NM				/*정책명*/
+			,  POLI_VAL				/*정책값*/
+			,  RMRK					/*비고*/
+		  FROM TB_POLI				/*테이블_정책*/
+		<trim prefix="WHERE" prefixOverrides="AND">  
+			<if test='poliId != null and poliId != ""'>
+				AND POLI_ID = #{poliId}
+			</if>
+			<if test='poliType != null and poliType != ""'>
+				AND POLI_TYPE = #{poliType}
+			</if>			
+		</trim>		  
+	</select>
+</mapper>

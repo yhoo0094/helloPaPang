@@ -12,15 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
+import com.ksm.hpp.controller.com.BaseController;
 import com.ksm.hpp.framework.util.RequestUtil;
 import com.ksm.hpp.service.com.CommonService;
 import com.ksm.hpp.service.user.UserService;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
-	
-	private static final Logger logger = LogManager.getLogger("Application");
+public class UserController extends BaseController {
 	
 	@Resource(name = "UserService")
 	protected UserService userService;
@@ -65,10 +64,10 @@ public class UserController {
 	 * @생성일: 2022. 11. 8. 오전 8:58:31
 	 * @설명: 로그인
 	 */
-	@RequestMapping("/login")
+	@RequestMapping("/login.do")
 	public void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
-		Map<String, Object> outData = userService.login((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		Map<String, Object> outData = userService.login((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(outData);

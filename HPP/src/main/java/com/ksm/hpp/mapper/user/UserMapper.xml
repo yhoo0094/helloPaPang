@@ -5,14 +5,13 @@
 	<!-- 사용자 조회-->
 	<select id="selectUser" parameterType="map" resultType="map">
 		SELECT USER_ID			/*아이디*/
+			 , USER_PW			/*비밀번호*/
+			 , PW_ERR_CNT		/*비밀번호 오입력 횟수*/
 		  FROM TB_USER			/*테이블_사용자*/
 		<trim prefix="WHERE" prefixOverrides="AND">  
 			<if test='userId != null and userId != ""'>
 				AND USER_ID = #{userId}
 			</if>
-			<if test='userPw != null and userPw != ""'>
-				AND USER_PW = #{userPw}
-			</if>				  	 
 		</trim>
 	</select>
 	
@@ -20,20 +19,36 @@
 	<insert id="insertUser" parameterType="map">
 		INSERT 
 		  INTO TB_USER			/*테이블_사용자*/
-		     (
-		       USER_ID			/*아이디*/
+		     ( USER_ID			/*아이디*/
 		     , USER_PW 			/*비밀번호*/
 		     , FST_REG_ID 		/*최초등록자ID*/
 		     , FST_REG_DTTI 	/*최초등록일시*/
 		     , LT_UPD_ID 		/*최종수정자ID*/
 		     )
 		VALUES
-			 (
-			   #{userId}		/*아이디*/
+			 ( #{userId}		/*아이디*/
 			 , #{userPw}		/*비밀번호*/
 		     , 'SYSTEM' 		/*최초등록자ID*/
 		     , NOW() 			/*최초등록일시*/
 		     , 'SYSTEM' 		/*최종수정자ID*/			 
 			 )    
 	</insert>
+	
+	<!-- 패스워드 오입력 횟수 증가 -->
+	<update id="pwErr" parameterType="map">
+		UPDATE TB_USER
+		   SET PW_ERR_CNT 	= PW_ERR_CNT + 1		/*비밀번호 오입력 횟수*/
+		     , LT_UPD_ID 	= 'SYSTEM'				/*최종수정자ID*/
+		     , LT_UPD_DTTI	= NOW() 				/*최종수정일시*/		   
+		 WHERE USER_ID 		= #{userId}				/*아이디*/
+	</update>
+	
+	<!-- 비밀번호 오입력 횟수 초기화 -->
+	<update id="resetPwErrCnt" parameterType="map">
+		UPDATE TB_USER
+		   SET PW_ERR_CNT 	= 0						/*비밀번호 오입력 횟수*/
+		     , LT_UPD_ID 	= 'SYSTEM'				/*최종수정자ID*/
+		     , LT_UPD_DTTI	= NOW() 				/*최종수정일시*/		   
+		 WHERE USER_ID 		= #{userId}				/*아이디*/
+	</update>	
 </mapper>

@@ -7,23 +7,19 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
+import com.ksm.hpp.controller.com.BaseController;
 import com.ksm.hpp.framework.util.RequestUtil;
 import com.ksm.hpp.service.info.NoticeService;
-import com.ksm.hpp.service.user.UserService;
 
 @Controller
 @RequestMapping("/notice")
-public class NoticeController {
-	
-	private static final Logger logger = LogManager.getLogger("Application");
+public class NoticeController extends BaseController {
 	
 	@Resource(name = "NoticeService")
 	protected NoticeService noticeService;

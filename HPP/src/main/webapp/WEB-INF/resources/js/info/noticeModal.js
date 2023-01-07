@@ -66,7 +66,7 @@ function saveNotice(){
             alert("완료되었습니다.");
             closeModal();
         } else {
-			alert(result.Constant.OUT_RESULT_MSG)
+			alert(result[Constant.OUT_RESULT_MSG])
 		}		
 	});
 }	
@@ -76,9 +76,9 @@ function closeModal(){
 	$.modal.close();
 	
 	//모달 내용 초기화
-	$('#title').val('');
-	$('#content').val('');
-	$('#bizId').val('');
+	$util.inputTextEmpty(el, 'text');
+	$util.inputTextEmpty(el, 'hidden');
+	
 	resetFile();
 }
 
