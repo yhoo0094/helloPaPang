@@ -1,0 +1,67 @@
+#시퀀스 생성
+#----------------------------------------------------------------------------------------------------
+DELIMITER $$
+    CREATE PROCEDURE `create_sequence` (IN the_name text)
+    MODIFIES SQL DATA
+    DETERMINISTIC
+    BEGIN
+        DELETE FROM TB_SEQUENCE WHERE SEQ_NM = the_name;
+        INSERT INTO TB_SEQUENCE VALUES(the_name, 0);
+   END
+#----------------------------------------------------------------------------------------------------
+DELIMITER $$
+    CREATE FUNCTION `nextval` (the_name VARCHAR(30))
+    RETURNS BIGINT UNSIGNED
+    MODIFIES SQL DATA
+    DETERMINISTIC
+    BEGIN
+        DECLARE ret BIGINT UNSIGNED;
+        UPDATE TB_SEQUENCE SET CURRVAL = CURRVAL +1 WHERE SEQ_NM = the_name;
+        SELECT CURRVAL INTO ret FROM TB_SEQUENCE WHERE SEQ_NM = the_name LIMIT 1;
+        RETURN ret;
+   END
+#----------------------------------------------------------------------------------------------------
+CALL create_sequence('BIZ_ID');	
+CALL create_sequence('POLI_ID');
+#시퀀스 생성 끝
+
+#기초 데이터 생성
+INSERT 
+	INTO TB_POLI		/*테이블_정책*/
+	( POLI_ID			/*식별번호*/
+	, POLI_TYPE		/*정책분류*/
+	, POLI_NM		/*정책명*/
+	, POLI_VAL		/*정책값*/
+	, RMRK				/*비고*/
+	, FST_REG_ID		/*최초등록자ID*/
+	, LT_UPD_ID		/*최종수정자ID*/
+	)
+VALUES
+	( (SELECT nextval('POLI_ID') FROM DUAL)
+	, 'UESR'
+	, 'PW_ERR_CNT_LIM'
+	, 5
+	, '비밀번호 오입력 횟수 제한'
+	, 'SYSTEM'
+	, 'SYSTEM'  
+	);
+
+INSERT 
+	INTO TB_POLI		/*테이블_정책*/
+	( POLI_ID			/*식별번호*/
+	, POLI_TYPE		/*정책분류*/
+	, POLI_NM		/*정책명*/
+	, POLI_VAL		/*정책값*/
+	, RMRK				/*비고*/
+	, FST_REG_ID		/*최초등록자ID*/
+	, LT_UPD_ID		/*최종수정자ID*/
+	)
+VALUES
+	( (SELECT nextval('POLI_ID') FROM DUAL)
+	, 'UESR'
+	, 'SESSION_TIME'
+	, '3600'
+	, '세션유지시간(초단위)'
+	, 'SYSTEM'
+	, 'SYSTEM'  
+	);
