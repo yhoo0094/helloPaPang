@@ -43,6 +43,39 @@ function login(){
         success: function (result) {
 	        if (result.RESULT == Constant.RESULT_SUCCESS){
 	            loginModalClose();
+	            //$('#loginModalbtn').css('display', 'none');
+	            
+	            //비밀번호 유효기간이 만료된 경우
+	            var obj = $util.getObjFromArr(result.userPoli, 'POLI_NM', 'PSWD_LIM_DAYS');	//비밀번호 변경 주기 객체
+	            var pswdLimDays = obj['POLI_VAL'];	//비밀번호 변경 주기(일)
+	            var pswdLimDate = $dateUtil.addDate(result.loginInfo.PW_CH_DTTI, 0, 0, pswdLimDays);	//비밀번호 유효 날짜(yyyymmdd)
+	            if(pswdLimDate - $dateUtil.todayYYYYMMDD() < 0){
+					alert('비밀번호 변경 후 ' + pswdLimDays + '일 이상 경과하였습니다.\n계정 보호를 위해 비밀번호를 변경해 주십시오.');
+					//비밀번호 변경 모달 띄우기(추후 구현)
+				}
+				
+				location.reload();
+	        } else {
+				alert(result[Constant.OUT_RESULT_MSG])
+			}
+        }
+    });		
+}
+
+//로그아웃
+function loginOut() {
+	if(!confirm("정말 로그아웃 하시겠습니까?")){
+		return;
+	}
+	
+    $.ajax({
+        url: '/user/logout.do',
+        type: 'POST',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+        dataType: 'json',
+        success: function (result) {
+	        if (result.RESULT == Constant.RESULT_SUCCESS){
+	            location.reload();
 	        } else {
 				alert(result[Constant.OUT_RESULT_MSG])
 			}

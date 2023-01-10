@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <%@ include file="/WEB-INF/views/user/loginModal.jsp" %><!-- 로그인 모달 -->
@@ -9,14 +10,19 @@
 		<div class="logoDiv">  
 	    	<a href="/" class="logo-font">Hello Papang</a>
 	 	</div>
- 	
 	 	<div class="navDiv">
 		 	<div class="loginMnuDiv">
 		 		<span style="width: 15px; float: right;">&nbsp;</span>
-				<a href="javascript:loginModalOpen()" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그인</a>
-				<a href="#about" class="loginMnu"><i class="fa-solid fa-user loginMnuIcon"></i>마이페이지</a>
-				<a href="#about" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그아웃</a>
-				<a href="/user/signUp" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>회원가입</a>				
+		 		<c:choose>
+		 			<c:when test="${sessionScope.LOGIN_INFO eq null}">
+						<a href="/user/signUp" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>회원가입</a>			 			
+						<a id="loginModalbtn" class="loginMnu" href="javascript:loginModalOpen()"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그인</a>
+		 			</c:when>
+		 			<c:otherwise>
+						<a href="#about" class="loginMnu"><i class="fa-solid fa-user loginMnuIcon"></i>마이페이지</a>
+						<a href="javascript:loginOut()" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그아웃</a>		 			
+		 			</c:otherwise>
+		 		</c:choose>
 			</div>	
 			<div class="navMnuDiv">
 				<div class="navMnuThDiv">

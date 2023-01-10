@@ -74,7 +74,26 @@ public class UserController extends BaseController {
 		
 		response.setContentType("application/x-json; charset=UTF-8");
 		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
-	}	
+	}
+	
+	/**
+	 * @메소드명: logout
+	 * @작성자: 김상민
+	 * @생성일: 2023. 1. 9. 오후 1:25:02
+	 * @설명: 로그아웃
+	 */
+	@RequestMapping("/logout.do")
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> userInfo = RequestUtil.getLoginInfo(request);
+		Map<String, Object> outData = userService.logout((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(outData);
+		
+		response.setContentType("application/x-json; charset=UTF-8");
+		response.getWriter().print(json);	//결과 json형태로 담아서 보내기		
+	}
 	
 	/**
 	 * @메소드명: chkUniqId

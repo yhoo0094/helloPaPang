@@ -6,7 +6,7 @@
 
 var $util = {};
  
- /*
+/*
 필수값 입력 여부 점검
 return: true/false
 option: {
@@ -74,7 +74,11 @@ $util.isEmpty = function(obj){
 	}
 };	
 
-//element 하위 input의 값 비우기
+/**
+ * element 하위 input의 값 비우기
+ * @param el 범위 element
+ * @param type 대상 input 타입
+ */
 $util.inputTextEmpty = function(el, type){
 	$(el).find('input[type="' + type + '"]').val('');
 };
@@ -106,4 +110,23 @@ $util.getCookie = function(name){
 	  .find((row) => row.startsWith(name))
 	  ?.split('=')[1];	
 	return value;
+}
+
+/**
+ * 배열(Array)에서 객체(object) 가져오기
+ * @param arr 배열(array)
+ * @param key 키
+ * @param val 값(value)
+ * @return obj 객체(object)
+ */
+$util.getObjFromArr = function(arr, key, val){
+	var obj;
+	
+	for(i in arr){
+		if(val == (arr[i][key])){
+			obj = arr[i];
+		}
+	}
+	
+	return obj;
 }
