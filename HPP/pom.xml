@@ -139,7 +139,14 @@
 		    <version>1.15</version>
 		</dependency>
 		<!-- BASE64 끝 -->
-					
+
+		<!-- Sql Log 시작 -->
+		<dependency>
+		    <groupId>org.lazyluke</groupId>
+		    <artifactId>log4jdbc-remix</artifactId>
+		    <version>0.2.7</version>
+		</dependency>		
+		<!-- Sql Log 끝 -->			
 						
 	</dependencies>	
 </project>

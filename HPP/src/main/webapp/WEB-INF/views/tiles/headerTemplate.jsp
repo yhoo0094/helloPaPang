@@ -3,7 +3,42 @@
 
 
 <%@ include file="/WEB-INF/views/user/loginModal.jsp" %><!-- 로그인 모달 -->
-    
+
+<script>
+	//자동 로그아웃 타이머
+	let timeInterval;
+	var sessionTime = '<%= session.getMaxInactiveInterval() %>';
+	if(sessionTime != null){
+		timeInterval = setInterval(function(){
+			sessionTime = parseInt(sessionTime) - 1
+			var leftTime = $dateUtil.secondToHour(sessionTime);
+			$('#sessionTimer').text(leftTime);
+			
+			if(sessionTime == 0){
+			    $.ajax({
+			        url: '/user/logout.do',
+			        type: 'POST',
+			        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+			        dataType: 'json',
+			        success: function (result) {
+				        if (result.RESULT == Constant.RESULT_SUCCESS){
+				            alert('장시간 동작이 없어 자동 로그아웃 되었습니다.')
+				        	location.reload();
+				        } else {
+							alert(result[Constant.OUT_RESULT_MSG])
+						}
+			        }
+			    });					
+			}
+		}, 1000)
+	}	
+	
+	//세션 시간 리셋하기
+	function sessionTimeReset() {
+		sessionTime = '<%= session.getMaxInactiveInterval() %>';
+	}
+</script>
+
 <!-- Navbar (sit on top) -->
 <div class="top">
 	<div id="myNavbar">
@@ -19,8 +54,9 @@
 						<a id="loginModalbtn" class="loginMnu" href="javascript:loginModalOpen()"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그인</a>
 		 			</c:when>
 		 			<c:otherwise>
+						<span class="sessionTimer"><i class="fa-solid fa-clock loginMnuIcon"></i>자동 로그아웃: <span id="sessionTimer"></span></span> 
 						<a href="#about" class="loginMnu"><i class="fa-solid fa-user loginMnuIcon"></i>마이페이지</a>
-						<a href="javascript:loginOut()" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그아웃</a>		 			
+						<a href="javascript:loginOut()" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그아웃</a>	
 		 			</c:otherwise>
 		 		</c:choose>
 			</div>	

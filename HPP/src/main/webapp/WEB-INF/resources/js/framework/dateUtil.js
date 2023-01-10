@@ -43,3 +43,12 @@ $dateUtil.todayYYYYMMDD = function(){
     var day = ("0" + date.getDate()).slice(-2);						
 	return year + month + day;	
 }
+
+
+$dateUtil.secondToHour = function(origSecond){
+	var hour = parseInt(origSecond/3600);
+	var minute = parseInt((origSecond%3600)/60);
+	var second = parseInt((origSecond%3600)%60);
+	var result = ("0" + hour).slice(-2) + ":" + ("0" + minute).slice(-2) + ":" + ("0" + second).slice(-2)
+	return result;
+}

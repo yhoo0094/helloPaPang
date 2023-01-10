@@ -121,6 +121,7 @@ a:hover {
     padding: 5px 3px 0px 3px;
 	float: right;
 	cursor: pointer;
+	font-weight: bold;
 }
 
 .logoDiv{
@@ -319,5 +320,11 @@ table.dataTable thead th{
 
 label{
 	cursor: pointer;
+}
+
+.sessionTimer {
+	padding: 5px 3px 0px 3px;
+    float: right;
+    font-weight: bold;
 }
 /* 전체 공용 끝 */

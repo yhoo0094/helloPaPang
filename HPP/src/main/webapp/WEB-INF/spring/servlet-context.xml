@@ -42,12 +42,23 @@
 	</bean>
 
 	<!-- DB연결 설정 -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+	<bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 	    <property name="driverClass" value="${db.driverClass}"></property>
 	    <property name="url" value="${db.url}"></property>
 	    <property name="username" value="${db.username}"></property>
 	    <property name="password" value="${db.password}"></property>		
 	</bean>
+	
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource"> 
+	    <constructor-arg ref="dataSourceSpied" /> 
+	    <property name="logFormatter"> 
+	        <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter"> 
+	            <property name="loggingType" value="MULTI_LINE" /> 
+	            <property name="sqlPrefix" value="SQL : "/> 
+	        </bean> 
+	    </property> 
+	</bean>
+	
 
 	<!-- property 설정파일 경로-->
 	<context:property-placeholder location="classpath:config/database.properties"/>

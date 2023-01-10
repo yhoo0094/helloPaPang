@@ -148,7 +148,6 @@ public class UserService extends BaseService {
 				session.setAttribute(Constant.LOGIN_INFO, loginInfo);
 				
 				int sessionTime = Integer.parseInt((String) PapangUtil.getMapFromList(userPoli, "POLI_NM", "SESSION_TIME").get("POLI_VAL"));	//세션 유지시간(초단위)
-				session.setAttribute(Constant.SESSION_TIME, sessionTime);
 				session.setMaxInactiveInterval(sessionTime);
 			}
 			
@@ -181,7 +180,6 @@ public class UserService extends BaseService {
 		List<Map<String, Object>> userPoli = sqlSession.selectList("mapper.com.CommonMapper.selectPoli", inData);
 		
 		int sessionTime = Integer.parseInt((String) PapangUtil.getMapFromList(userPoli, "POLI_NM", "SESSION_TIME").get("POLI_VAL"));	//세션 유지시간(초단위)
-		session.setAttribute(Constant.SESSION_TIME, sessionTime);
 		session.setMaxInactiveInterval(sessionTime);	
 		 */
 		
