@@ -67,6 +67,12 @@
   		</div>
   		<%-- <tiles:insertAttribute name="foot"/> --%>
   	</div>
+  	
+  	<!-- 로딩 패널 -->
+  	<div id="loadingPanel" class="loadingPanel">
+  		<div class="loadingImg"></div>
+  		<div class="loadingText">L o a d i n g . . .</div>
+  	</div>
   </body>
   
 </html>

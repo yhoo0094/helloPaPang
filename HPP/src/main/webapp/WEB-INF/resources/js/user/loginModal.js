@@ -35,21 +35,23 @@ function login(){
 	};
 	
 	var formData = $('#loginForm').serialize();
+	$com.loadingStart();
     $.ajax({
         url: '/user/login.do',
         type: 'POST',
         data: formData,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
-        success: function (result) {
-	        if (result.RESULT == Constant.RESULT_SUCCESS){
+        success: function (res, textStatus, jqXHR) {
+			$com.loadingEnd();
+	        if (res.RESULT == Constant.RESULT_SUCCESS){
 	            loginModalClose();
 	            //$('#loginModalbtn').css('display', 'none');
 	            
 	            //비밀번호 유효기간이 만료된 경우
-	            var obj = $util.getObjFromArr(result.userPoli, 'POLI_NM', 'PSWD_LIM_DAYS');	//비밀번호 변경 주기 객체
+	            var obj = $util.getObjFromArr(res.userPoli, 'POLI_NM', 'PSWD_LIM_DAYS');	//비밀번호 변경 주기 객체
 	            var pswdLimDays = obj['POLI_VAL'];	//비밀번호 변경 주기(일)
-	            var pswdLimDate = $dateUtil.addDate(result.loginInfo.PW_CH_DTTI, 0, 0, pswdLimDays);	//비밀번호 유효 날짜(yyyymmdd)
+	            var pswdLimDate = $dateUtil.addDate(res.loginInfo.PW_CH_DTTI, 0, 0, pswdLimDays);	//비밀번호 유효 날짜(yyyymmdd)
 	            if(pswdLimDate - $dateUtil.todayYYYYMMDD() < 0){
 					alert('비밀번호 변경 후 ' + pswdLimDays + '일 이상 경과하였습니다.\n계정 보호를 위해 비밀번호를 변경해 주십시오.');
 					//비밀번호 변경 모달 띄우기(추후 구현)
@@ -57,9 +59,12 @@ function login(){
 				
 				location.reload();
 	        } else {
-				alert(result[Constant.OUT_RESULT_MSG])
+				alert(res[Constant.OUT_RESULT_MSG])
 			}
-        }
+        },
+        error: function(textStatus, jqXHR, thrownError){
+			$com.loadingEnd();
+		}
     });		
 }
 
@@ -76,7 +81,7 @@ function loginOut() {
         dataType: 'json',
         success: function (result) {
 	        if (result.RESULT == Constant.RESULT_SUCCESS){
-	            location.reload();
+	            location.replace('/');
 	        } else {
 				alert(result[Constant.OUT_RESULT_MSG])
 			}

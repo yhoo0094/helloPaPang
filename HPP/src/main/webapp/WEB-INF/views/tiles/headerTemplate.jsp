@@ -23,7 +23,7 @@
 			        success: function (result) {
 				        if (result.RESULT == Constant.RESULT_SUCCESS){
 				            alert('장시간 동작이 없어 자동 로그아웃 되었습니다.')
-				        	location.reload();
+				            location.replace('/');
 				        } else {
 							alert(result[Constant.OUT_RESULT_MSG])
 						}
@@ -50,7 +50,7 @@
 		 		<span style="width: 15px; float: right;">&nbsp;</span>
 		 		<c:choose>
 		 			<c:when test="${sessionScope.LOGIN_INFO eq null}">
-						<a href="/user/signUp" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>회원가입</a>			 			
+						<a href="<%=request.getContextPath() %>/user/signUp" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>회원가입</a>			 			
 						<a id="loginModalbtn" class="loginMnu" href="javascript:loginModalOpen()"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그인</a>
 		 			</c:when>
 		 			<c:otherwise>
@@ -72,6 +72,7 @@
 						</colgroup>
 						<tbody>
 							<tr>
+								<td><a href="<%=request.getContextPath() %>/admin/board" class="navMnu"><i class="fa fa-gear navIcon"></i> 관리자</a></td>
 								<td><a href="#about" class="navMnu"><i class="fa fa-comment navIcon"></i> 게시판</a></td>
 								<td><a href="#team" class="navMnu"><i class="fa-sharp fa-solid fa-store navIcon"></i> 장터</a></td>
 								<td><a href="#work" class="navMnu"><i class="fa-solid fa-baby-carriage navIcon"></i> 베이비시터</a></td>
@@ -81,6 +82,7 @@
 						</tbody>
 					</table>
 				</div>
+				<%-- 
 				<div class="dropdownDiv">
 					<table style="width: 100%; text-align: center;">
 						<colgroup>
@@ -107,7 +109,8 @@
 							</tr>							
 						</tbody>
 					</table>			
-				</div>		
+				</div>
+				 --%>		
 			</div>	
 		</div>
 	</div>

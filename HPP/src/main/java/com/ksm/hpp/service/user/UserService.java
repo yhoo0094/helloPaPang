@@ -148,7 +148,8 @@ public class UserService extends BaseService {
 				session.setAttribute(Constant.LOGIN_INFO, loginInfo);
 				
 				int sessionTime = Integer.parseInt((String) PapangUtil.getMapFromList(userPoli, "POLI_NM", "SESSION_TIME").get("POLI_VAL"));	//세션 유지시간(초단위)
-				session.setMaxInactiveInterval(sessionTime);
+				session.setMaxInactiveInterval(sessionTime);	
+				session.setAttribute(Constant.SESSION_TIME, sessionTime);	//세션 유지시간 정보 세션에 추가
 			}
 			
 			result.put("loginInfo", loginInfo);
@@ -181,6 +182,7 @@ public class UserService extends BaseService {
 		
 		int sessionTime = Integer.parseInt((String) PapangUtil.getMapFromList(userPoli, "POLI_NM", "SESSION_TIME").get("POLI_VAL"));	//세션 유지시간(초단위)
 		session.setMaxInactiveInterval(sessionTime);	
+		session.setAttribute(Constant.SESSION_TIME, sessionTime);	//세션 유지시간 정보 세션에 추가
 		 */
 		
 		//로그인 기록 테이블에 저장(추후 구현)
