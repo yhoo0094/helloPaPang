@@ -206,7 +206,11 @@ a:hover {
 
 .papang-create-btn{
     background-color: #ffc107;
-}    
+} 
+
+.papang-excel-btn{
+    background-color: rgb(5 148 77 / 89%);
+}   
 
 .papang-save-btn{
 	background-color: #0dcaf0;
@@ -307,6 +311,10 @@ table.dataTable.no-footer{
 /* 전체 공용 시작 */
 table.dataTable thead th{
 	text-align: center;
+}
+
+.dataTables_paginate{
+	float: left !important;
 }
 
 .align_items_center{

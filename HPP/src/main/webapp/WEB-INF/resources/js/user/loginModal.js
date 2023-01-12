@@ -51,7 +51,7 @@ function login(){
 	            //비밀번호 유효기간이 만료된 경우
 	            var obj = $util.getObjFromArr(res.userPoli, 'POLI_NM', 'PSWD_LIM_DAYS');	//비밀번호 변경 주기 객체
 	            var pswdLimDays = obj['POLI_VAL'];	//비밀번호 변경 주기(일)
-	            var pswdLimDate = $dateUtil.addDate(res.loginInfo.PW_CH_DTTI, 0, 0, pswdLimDays);	//비밀번호 유효 날짜(yyyymmdd)
+	            var pswdLimDate = $dateUtil.addDate(res.loginInfo.pwChDtti, 0, 0, pswdLimDays);	//비밀번호 유효 날짜(yyyymmdd)
 	            if(pswdLimDate - $dateUtil.todayYYYYMMDD() < 0){
 					alert('비밀번호 변경 후 ' + pswdLimDays + '일 이상 경과하였습니다.\n계정 보호를 위해 비밀번호를 변경해 주십시오.');
 					//비밀번호 변경 모달 띄우기(추후 구현)

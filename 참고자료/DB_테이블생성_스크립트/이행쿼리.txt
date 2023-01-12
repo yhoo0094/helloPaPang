@@ -1,5 +1,4 @@
-#시퀀스 생성
-#----------------------------------------------------------------------------------------------------
+#---------------------------------------------시퀀스 생성---------------------------------------------
 DELIMITER $$
     CREATE PROCEDURE `create_sequence` (IN the_name text)
     MODIFIES SQL DATA
@@ -23,9 +22,10 @@ DELIMITER $$
 #----------------------------------------------------------------------------------------------------
 CALL create_sequence('BIZ_ID');	
 CALL create_sequence('POLI_ID');
-#시퀀스 생성 끝
+CALL create_sequence('LOG_LOGIN_ID');
+#---------------------------------------------시퀀스 생성 끝---------------------------------------------
 
-#기초 데이터 생성
+#---------------------------------------------기초 데이터 생성---------------------------------------------
 INSERT 
 	INTO TB_POLI		/*테이블_정책*/
 	( POLI_ID			/*식별번호*/
@@ -86,30 +86,41 @@ VALUES
 	, 'SYSTEM'  
 	);
 
+####TB_CODE_GROUP####
 
-INSERT INTO TB_CODE_GROUP 
-(`CODE_GROUP_TXID`
-, `CODE_GROUP_NM`
-, `FST_REG_ID`
-, `LT_UPD_ID`) 
-VALUES 
-('LOGIN_INFO_EXCEPT_URI'
-, '로그인 정보가 필요없는 URI'
-, 'SYSTEM'
-, 'SYSTEM'
-);
+INSERT INTO TB_CODE_GROUP (`CODE_GROUP_TXID`, `CODE_GROUP_NM`, `FST_REG_ID`, `LT_UPD_ID`) 
+VALUES ('LOGIN_INFO_EXCEPT_URI', '로그인 정보가 필요없는 URI', 'SYSTEM', 'SYSTEM');
 
-INSERT INTO TB_CODE_DETAIL
-(`CODE_DETAIL_ID`
-, `CODE_GROUP_TXID`
-, `CODE_DETAIL_VAL`
-, `CODE_DETAIL_ORDER`
-, `FST_REG_ID`
-, `LT_UPD_ID`) 
-VALUES 
-('01
-', 'LOGIN_INFO_EXCEPT_URI'
-, '/user/signUp'
-, '1'
-, 'SYSTEM'
-, 'SYSTEM');
+INSERT INTO TB_CODE_GROUP (`CODE_GROUP_TXID`, `CODE_GROUP_NM`, `FST_REG_ID`, `LT_UPD_ID`) 
+VALUES ('LOGIN_CODE', '로그인 유형', 'SYSTEM', 'SYSTEM');
+
+####TB_CODE_DETAIL####
+
+INSERT INTO TB_CODE_DETAIL(`CODE_DETAIL_ID`, `CODE_GROUP_TXID`, `CODE_DETAIL_VAL`, `CODE_DETAIL_ORDER`, `FST_REG_ID`, `LT_UPD_ID`) 
+VALUES ('01', 'LOGIN_INFO_EXCEPT_URI', '/user/signUp', '1', 'SYSTEM', 'SYSTEM');
+
+INSERT INTO TB_CODE_DETAIL(`CODE_DETAIL_ID`, `CODE_GROUP_TXID`, `CODE_DETAIL_VAL`, `CODE_DETAIL_ORDER`, `FST_REG_ID`, `LT_UPD_ID`) 
+VALUES ('01', 'LOGIN_CODE', '로그인', '1', 'SYSTEM', 'SYSTEM');
+
+INSERT INTO TB_CODE_DETAIL(`CODE_DETAIL_ID`, `CODE_GROUP_TXID`, `CODE_DETAIL_VAL`, `CODE_DETAIL_ORDER`, `FST_REG_ID`, `LT_UPD_ID`) 
+VALUES ('02', 'LOGIN_CODE', '로그아웃', '2', 'SYSTEM', 'SYSTEM');
+
+INSERT INTO TB_CODE_DETAIL(`CODE_DETAIL_ID`, `CODE_GROUP_TXID`, `CODE_DETAIL_VAL`, `CODE_DETAIL_ORDER`, `FST_REG_ID`, `LT_UPD_ID`) 
+VALUES ('03', 'LOGIN_CODE', '존재하지 않는 아이디', '3', 'SYSTEM', 'SYSTEM');
+
+INSERT INTO TB_CODE_DETAIL(`CODE_DETAIL_ID`, `CODE_GROUP_TXID`, `CODE_DETAIL_VAL`, `CODE_DETAIL_ORDER`, `FST_REG_ID`, `LT_UPD_ID`) 
+VALUES ('04', 'LOGIN_CODE', '비밀번호 오입력', '4', 'SYSTEM', 'SYSTEM');
+
+INSERT INTO TB_CODE_DETAIL(`CODE_DETAIL_ID`, `CODE_GROUP_TXID`, `CODE_DETAIL_VAL`, `CODE_DETAIL_ORDER`, `FST_REG_ID`, `LT_UPD_ID`) 
+VALUES ('05', 'LOGIN_CODE', '비밀번호 오입력 횟수 초과', '5', 'SYSTEM', 'SYSTEM');
+
+#---------------------------------------------기초 데이터 끝---------------------------------------------
+
+
+
+
+
+
+
+
+

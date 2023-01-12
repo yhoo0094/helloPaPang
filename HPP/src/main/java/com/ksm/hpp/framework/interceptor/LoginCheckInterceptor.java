@@ -35,9 +35,6 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 		
 		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
 		if(loginInfo == null) {
-			//로그인 정보가 필요없는 url인지 검증
-			//commonService.selectLoginExceptUri()
-			
 			response.sendRedirect("/error/noLoginInfo");
 			return false;
 		} else {
@@ -47,7 +44,6 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 		}
 		
 		return super.preHandle(request, response, handler);
-			
 	}
 	
 }
