@@ -10,6 +10,7 @@ public class Constant
 	public static final String RESULT_FAILURE 	= "RESULT_FAILURE";		//실패
 	public static final String OUT_RESULT_MSG 	= "OUT_RESULT_MSG";		//결과에 대한 메세지
 	public static final String RESULT_DETAIL 	= "RESULT_DETAIL";		//결과 상세(결과에 대한 구체적인 분류 - DB반영 실패, 입력 형식 불일치 등)
+	public static final String IN_DATA_JOSN		= "IN_DATA_JOSN";		//전송할 데이터(json 형식)
 	
 	//RESULT_DETAIL 관련
 	public static final String PSWD_LIM_ISSUE 	= "PSWD_LIM_ISSUE";		//비밀번호 변경 주기 문제
@@ -17,4 +18,10 @@ public class Constant
 	//로그인 관련
 	public static final String LOGIN_INFO 		= "LOGIN_INFO";			//로그인 정보
 	public static final String SESSION_TIME		= "SESSION_TIME";		//세션 유지 시간
+	
+	//엑셀 관련
+	public static final String EXCEL_FILENM 	= "EXCEL_FILENM";		//파일명
+	public static final String EXCEL_SHEETNM 	= "EXCEL_SHEETNM";		//시트명	
+	public static final String EXCEL_COLUMN 	= "EXCEL_COLUMN";		//컬럼 정보
+	public static final String EXCEL_DATA 		= "EXCEL_DATA";			//입력 데이터
 }

@@ -6,14 +6,12 @@
 
 var $util = {};
  
-/*
-필수값 입력 여부 점검
-return: true/false
-option: {
-	group : [] - 검사 대상 그룹 목록 정의. "all0", "least1" 등의 형식으로 그룹 지정 가능. all = 해당 그룹 모두 입력 필요, least = 해당 그룹 중 적어도 하나 입력 필요
-	target : [] - 해당 태그만 검사
-}
-*/
+/**
+ * 필수값 입력 여부 점검
+ * @param option {group : []} 일 때 - 검사 대상 그룹 목록 정의. "all0", "least1" 등의 형식으로 그룹 지정 가능. all = 해당 그룹 모두 입력 필요, least = 해당 그룹 중 적어도 하나 입력 필요
+ 				 {target : []} 일 때 - 해당 태그만 검사
+ * @return boolean
+ */
 $util.checkRequired = function(option){
 	//해당 객체 없을 경우 빈 값 만들기
 	option = option || {};
@@ -65,14 +63,18 @@ $util.checkRequired = function(option){
 	}
 }	
 
-//빈 값 여부 확인
+/**
+ * 빈 값 여부 확인(boolean 반환)
+ * @param obj 오브젝트
+ * @return boolean
+ */
 $util.isEmpty = function(obj){
 	if(obj == null || obj == undefined || obj == ""){
 		return true;
 	} else {
 		return false;
 	}
-};	
+};
 
 /**
  * element 하위 input의 값 비우기

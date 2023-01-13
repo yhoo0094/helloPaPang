@@ -28,14 +28,16 @@ function selectData(){
 
 //DataTable 만들기
 function makeDataTable(data) {
+	var columInfo = [
+	        { title: "발생일시"	, data: "loginDtti"		, width: "25%"		, className: "text_align_center"	, colspan: "2" , rowspan: "2"}
+	      , { title: "아이디"		, data: "userId"		, width: "25%"		, className: "text_align_center"}
+	      , { title: "아이피"		, data: "userIp"		, width: "25%"		, className: "text_align_center"	, defaultContent: ""}
+	      , { title: "유형"		, data: "loginCodeNm"	, width: "25%"		, className: "text_align_center"	, defaultContent: ""}
+    ]
+	
     mainTable = $('#mainTable').DataTable({
         data: data,
-        columns: [
-            { title: "발생일시"	, data: "loginDtti"		, width: "25%"		, className: "text_align_center"}
-          , { title: "아이디"		, data: "userId"		, width: "25%"		, className: "text_align_center"}
-          , { title: "아이피"		, data: "userIp"		, width: "25%"		, className: "text_align_center"	,"defaultContent": ""}
-          , { title: "유형"		, data: "loginCodeNm"	, width: "25%"		, className: "text_align_center"	,"defaultContent": ""}
-        ],		
+        columns: columInfo,		
         paging: true,
         pagingType: "full_numbers",
         ordering: false,
@@ -45,9 +47,11 @@ function makeDataTable(data) {
         pageLength: 10,
     });	
     
-    var excelDownBtn = $('<div class="table_btn_wrapper"><button type="button" class="papang-excel-btn papang_btn paginate_button">엑셀 다운로드</button></div>');
+    mainTable.columInfo = columInfo;
+    
+    var excelDownBtn = $('<div class="table_btn_wrapper"><button type="button" class="papang-excel-btn papang_btn paginate_button">Excel</button></div>');
     excelDownBtn.on('click', function(){
-		alert('excelBtn');
+		$excelUtil.downloadData('사용자 접속기록', '사용자 접속기록', mainTable.columInfo, data);
 	})
     $('#mainTable_paginate').after(excelDownBtn);
     
@@ -55,5 +59,4 @@ function makeDataTable(data) {
 	    var data = mainTable.row( this ).data();
 	    alert(data);
 	});
-    
 }

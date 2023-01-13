@@ -1,6 +1,7 @@
 package com.ksm.hpp.framework.util;
 
 import java.net.Inet4Address;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.tomcat.util.codec.binary.StringUtils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.ksm.hpp.controller.com.BaseController;
 
 //Controller.java에서 사용하는 Request관련 유틸
@@ -29,7 +35,15 @@ public class RequestUtil {
 		Map<String, String[]> requestMap = request.getParameterMap();
 		
 		for(String key : requestMap.keySet()) {
-			//json으로 넘어온 경우_추후 필요시 구현
+			//json으로 넘어온 경우
+			if(Constant.IN_DATA_JOSN.equals(key)) {
+				//HTML 변환 문자 제거
+				String jsonStr = request.getParameter(key);
+				@SuppressWarnings("unchecked")
+				Map<String, Object> map = new ObjectMapper().readValue(jsonStr, Map.class);
+				result.putAll(map);
+				continue;
+			}
 			
 			//일반적인 주소 입력
 			String[] params = (String[]) requestMap.get(key);

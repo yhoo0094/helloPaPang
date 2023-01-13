@@ -5,18 +5,25 @@
  */
  
  var Constant = {
-   //request, response 관련
-	 OUT_DATA 		: "OUT_DATA"			//리턴할 데이터
-   , RESULT 		: "RESULT"				//결과(RESULT_SUCCESS 혹은 RESULT_FAILURE)
-   , RESULT_SUCCESS : "RESULT_SUCCESS"		//성공
-   , RESULT_FAILURE : "RESULT_FAILURE"		//실패
-   , OUT_RESULT_MSG : "OUT_RESULT_MSG"		//결과에 대한 메세지
-   , RESULT_DETAIL	: "RESULT_DETAIL"		//결과 상세(결과에 대한 구체적인 분류 - DB반영 실패, 입력 형식 불일치 등)   
+	//request, response 관련
+	  OUT_DATA			: "OUT_DATA"			//리턴할 데이터
+	, RESULT			: "RESULT"				//결과(RESULT_SUCCESS 혹은 RESULT_FAILURE)
+	, RESULT_SUCCESS 	: "RESULT_SUCCESS"		//성공
+	, RESULT_FAILURE 	: "RESULT_FAILURE"		//실패
+	, OUT_RESULT_MSG 	: "OUT_RESULT_MSG"		//결과에 대한 메세지
+	, RESULT_DETAIL		: "RESULT_DETAIL"		//결과 상세(결과에 대한 구체적인 분류 - DB반영 실패, 입력 형식 불일치 등)   
+	, IN_DATA_JOSN		: "IN_DATA_JOSN"		//전송할 데이터(json 형식)
    
-   //RESULT_DETAIL 관련
-   , PSWD_LIM_ISSUE : "PSWD_LIM_ISSUE"		//비밀번호 변경 주기 문제  
+	//RESULT_DETAIL 관련
+	, PSWD_LIM_ISSUE	: "PSWD_LIM_ISSUE"		//비밀번호 변경 주기 문제  
    
-   //로그인 관련
-   , LOGIN_INFO 	: "LOGIN_INFO"			//로그인 정보
-   , SESSION_TIME	: "SESSION_TIME"		//세션 유지 시간
+	//로그인 관련
+	, LOGIN_INFO		: "LOGIN_INFO"			//로그인 정보
+	, SESSION_TIME		: "SESSION_TIME"		//세션 유지 시간
+	
+	//엑셀 관련
+	, EXCEL_FILENM		: "EXCEL_FILENM"		//파일명
+	, EXCEL_SHEETNM		: "EXCEL_SHEETNM"		//시트명	
+	, EXCEL_COLUMN		: "EXCEL_COLUMN"		//컬럼 정보
+	, EXCEL_DATA		: "EXCEL_DATA"			//입력 데이터   
  }
