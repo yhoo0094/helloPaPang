@@ -19,10 +19,11 @@ DELIMITER $$
         SELECT CURRVAL INTO ret FROM TB_SEQUENCE WHERE SEQ_NM = the_name LIMIT 1;
         RETURN ret;
    END
-#----------------------------------------------------------------------------------------------------
-CALL create_sequence('BIZ_ID');	
-CALL create_sequence('POLI_ID');
-CALL create_sequence('LOG_LOGIN_ID');
+#----------------------------------------------------------------------------------------------------	
+CALL create_sequence('POLI_SEQ');
+CALL create_sequence('LOGIN_SEQ');
+CALL create_sequence('FREE_SEQ');
+CALL create_sequence('NOTICE_SEQ');
 #---------------------------------------------시퀀스 생성 끝---------------------------------------------
 
 #---------------------------------------------기초 데이터 생성---------------------------------------------

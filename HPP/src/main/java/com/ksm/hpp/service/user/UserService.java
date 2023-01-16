@@ -55,6 +55,7 @@ public class UserService extends BaseService {
 		int cnt = 0;
 		
 		//비밀번호 해쉬 처리
+		//1 = SXRLcrGA1f5nK8A5cvZICY86tW2d/Rekkm3lrWEgqJU=
 		String userPw = StringUtil.getSHA256("HPP" + (String)inData.get("userPw") + "MELONA");
 		inData.put("userPw", userPw);
 		
