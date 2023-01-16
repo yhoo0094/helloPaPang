@@ -18,6 +18,14 @@
 		<put-attribute name="body" value="/home.jsp" />
 		<put-attribute name="title" value="HelloPaPang!" />
 	</definition>		
+
+	<!-- 오류 페이지 이동 -->
+	<definition name="error/*" extends="layout-tiles">
+		<put-attribute name="js" value="/resources/js/error/{1}.js" />
+		<put-attribute name="css" value="/resources/css/com/errorCom.css" />
+		<put-attribute name="title" value="HelloPaPang!" />
+		<put-attribute name="body" value="/WEB-INF/views/error/{1}.jsp" />
+	</definition>
 	
 	<!-- 기본 페이지 이동 -->
 	<definition name="*/*" extends="layout-tiles">

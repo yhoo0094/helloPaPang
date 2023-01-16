@@ -8,16 +8,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ksm.hpp.framework.dao.ArticleDAO;
-
 @Service("CommonService")
 public class CommonService extends BaseService {
 	
 	@Autowired
 	SqlSession sqlSession; //SqlSession 빈 DI	
-	
-	@Autowired
-	private ArticleDAO articleDAO;	
 	
 	/**
 	 * @메소드명: test
@@ -40,15 +35,5 @@ public class CommonService extends BaseService {
 		System.out.println(result);
 		
 		return result;
-	}	
-	
-	/**
-	 * @메소드명: viewArticleDetail
-	 * @작성자: 김상민
-	 * @생성일: 2022. 12. 14. 오후 2:19:23
-	 * @설명: 연습용, 추후 삭제
-	 */
-	public Map<String, Object> viewArticleDetail(String articleId) {
-		return this.articleDAO.selectArticleById(articleId);
 	}	
 }

@@ -57,6 +57,12 @@ function login(){
 					//비밀번호 변경 모달 띄우기(추후 구현)
 				}
 				
+				//로그인 에러 페이지 였으면 이전 페이지로 이동 
+				var path = window.location.pathname;
+				if(path == '/error/noLoginInfo'){
+					window.history.back;
+				}
+				
 				location.reload();
 	        } else {
 				alert(res[Constant.OUT_RESULT_MSG])
