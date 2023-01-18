@@ -37,13 +37,13 @@
 	<insert id="insetLoginLog" parameterType="map">
 		INSERT 
 		  INTO TB_LOG_LOGIN			/*테이블_로그_로그인*/
-		     ( LOG_LOGIN_ID			/*로그인_식별번호*/
+		     ( LOGIN_SEQ			/*로그인일련번호*/
 		     , USER_ID 				/*사용자_아이디*/
 		     , USER_IP 				/*사용자_아이피*/
 		     , LOGIN_CODE 			/*로그인_코드(01:로그인, 02:로그아웃, 03:존재하지 않는 사용자, 04: 잘못된 비밀번호, 05: 비밀번호 오입력 횟수 초과)*/
 		     )
 		VALUES
-			 ( (SELECT nextval('LOG_LOGIN_ID') FROM DUAL)		/*로그인_식별번호*/
+			 ( (SELECT nextval('LOGIN_SEQ') FROM DUAL)		/*로그인일련번호*/
 			 , #{userId}			/*사용자_아이디*/
 		     , #{userIp}			/*사용자_아이피*/
 		     , #{loginCode} 		/*로그인_코드(01:로그인, 02:로그아웃, 03:존재하지 않는 사용자, 04: 잘못된 비밀번호, 05: 비밀번호 오입력 횟수 초과)*/		 

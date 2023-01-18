@@ -1,5 +1,6 @@
 package com.ksm.hpp.controller.com;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,14 +29,25 @@ public class PageController {
 	}
 	
 	/**
+	 * @throws IOException 
 	 * @메소드명: home
 	 * @작성자: 김상민
 	 * @생성일: 2022. 10. 19. 오전 7:46:01
-	 * @설명: 홈페이지 이동
+	 * @설명: 루트에서 홈페이지 이동
 	 */
 	@RequestMapping("/")
+	public void root(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.sendRedirect("/home");
+	}
+	
+	/**
+	* @메소드명: home
+	* @작성자: KimSangMin
+	* @생성일: 2023. 1. 18. 오후 3:52:21
+	* @설명: 홈페이지 이동
+	 */
+	@RequestMapping("/home")
 	public String home(HttpServletRequest request, HttpServletResponse response) {
-		
 		return "com/home";
 	}
 	

@@ -2,6 +2,7 @@ package com.ksm.hpp.controller.com;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,10 +11,16 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -25,7 +32,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.Gson;
 import com.ksm.hpp.framework.util.Constant;
 import com.ksm.hpp.framework.util.RequestUtil;
 import com.ksm.hpp.service.com.CommonService;
@@ -110,6 +120,64 @@ public class ExcelController {
 		workbook.write(sos);
 		workbook.close();
 		sos.close();
+	}
+	
+	/**
+	* @메소드명: upload
+	* @작성자: KimSangMin
+	* @생성일: 2023. 1. 17. 오후 5:29:59
+	* @설명: 엑셀 업로드
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/upload.do")
+	public void upload(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {	
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> outData = new HashMap<String, Object>();
+		List<Map<String, Object>> excelUploadOptionList = (List<Map<String, Object>>) inData.get("EXCEL_UPLOAD_OPTION");
+		MultipartFile file = request.getFile("file");
+		
+		String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+	    Workbook workbook = null;
+	    if (extension.equals("xlsx")) {
+	    	workbook = new XSSFWorkbook(file.getInputStream());
+	    } else if (extension.equals("xls")) {
+	    	workbook = new HSSFWorkbook(file.getInputStream());
+	    } else {
+	    	throw new RuntimeException(extension + "은 지원하지 않는 확장자입니다.\n xlsx 혹은 xls 확장자를 사용해 주십시오.");
+	    }
+	    int sheetsCnt = workbook.getNumberOfSheets();
+	    
+	    //sheetList에 데이터 담기
+	    List<List<Map<String, String>>> sheetList = new ArrayList<List<Map<String,String>>>();	//전체 시트 리스트
+	    for(int i = 0; i < sheetsCnt; i++) {	//시트 수만큼 반복
+	    	Map<String, Object> excelUploadOption = excelUploadOptionList.get(i);
+	    	Sheet worksheet = workbook.getSheetAt(i);
+	    	int rowOffset = (Integer) excelUploadOption.get("rowOffset");
+	    	int colOffset = (Integer) excelUploadOption.get("colOffset");
+	    	List<Map<String, Object>> colOptions = (List<Map<String, Object>>) excelUploadOption.get("colOptions"); 
+	    	
+	    	List<Map<String, String>> rowList = new ArrayList<Map<String,String>>();	//전체 행 리스트
+	    	for (int k = 0 + rowOffset; k < worksheet.getPhysicalNumberOfRows() - rowOffset; k++) {		//행 수만큼 반복
+		        Row row = worksheet.getRow(k);
+		        int cellCnt = colOptions.size();
+		        
+		        Map<String, String> colMap = new HashMap<String, String>();		//한 행에 속한 컬럼 맵
+		        for(int j = 0 + colOffset; j < cellCnt + colOffset; j++) {
+		        	String colKey = (String) colOptions.get(j - colOffset).get("data");
+		        	Cell cell = row.getCell(j);
+		        	colMap.put(colKey, cell.getStringCellValue());
+		        }
+		        rowList.add(colMap);
+		    }
+	    	sheetList.add(rowList);
+	    }
+	    outData.put(Constant.RESULT, Constant.RESULT_SUCCESS);	  
+	    outData.put(Constant.OUT_DATA, sheetList);	    
+	    
+		Gson gson = new Gson();
+		String json = gson.toJson(outData);
+		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
+		response.setContentType("application/x-json; charset=UTF-8");	    
 	}
 	
 	/**

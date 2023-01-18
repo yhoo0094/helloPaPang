@@ -3,20 +3,47 @@
 <mapper namespace="mapper.com.CommonMapper">
 	
 	<!-- 정책 조회 -->
-	<select id="selectPoli" parameterType="map" resultType="map">
-		SELECT POLI_SEQ				/*식별번호*/
-			,  POLI_TYPE			/*정책분류*/
+	<select id="selectPoli" parameterType="map" resultType="camelCaseMap">
+		SELECT POLI_SEQ				/*정책일련번호*/
+			,  POLI_CODE			/*정책분류코드(01:사용자)*/
 			,  POLI_NM				/*정책명*/
 			,  POLI_VAL				/*정책값*/
 			,  RMRK					/*비고*/
+			,  FST_REG_ID			/*최초등록자아이디*/
+			,  FST_REG_DTTI			/*최초등록일시*/
+			,  LT_UPD_ID			/*최종수정자아이디*/
+			,  LT_UPD_DTTI			/*최종수정일시*/
 		  FROM TB_POLI				/*테이블_정책*/
 		<trim prefix="WHERE" prefixOverrides="AND">  
 			<if test='poliSeq != null and poliSeq != ""'>
 				AND POLI_SEQ = #{poliSeq}
 			</if>
-			<if test='poliType != null and poliType != ""'>
-				AND POLI_TYPE = #{poliType}
+			<if test='poliCode != null and poliCode != ""'>
+				AND POLI_CODE = #{poliCode}
 			</if>			
 		</trim>		  
 	</select>
+	
+	<!-- 요청 로그 기록 -->
+	<insert id="insertReqLog" parameterType="map">
+		INSERT 
+		  INTO TB_LOG_REQ			/*테이블_요청로그*/
+		     (
+		       REQ_SEQ				/*요청일련번호*/
+		     , USER_ID				/*사용자아이디*/
+		     , USER_IP				/*사용자아이피*/
+		     , REQ_URI				/*요청경로*/
+		     , REQ_PARAM			/*요청파라미터*/
+		     , REQ_TYPE_CODE 		/*요청타입코드*/
+		     )
+		VALUES
+			 (
+			   (SELECT nextval('REQ_SEQ') FROM DUAL)	/*요청일련번호*/
+			 , #{loginInfo.userId}						/*사용자아이디*/
+			 , #{loginInfo.userIp}						/*사용자아이디*/
+			 , #{reqUri}								/*요청경로*/
+			 , #{reqParam}								/*요청파라미터*/
+		     , #{reqTypeCode} 							/*요청타입코드*/
+			 )  	
+	</insert>
 </mapper>

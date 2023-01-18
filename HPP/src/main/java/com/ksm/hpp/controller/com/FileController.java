@@ -60,10 +60,10 @@ public class FileController {
 		Map<String, Object> fileInfo = new HashMap<String, Object>();
 		fileInfo = (Map<String, Object>) outData.get("fileInfo");
 		
-		String ATC_FILE_PATH = (String) fileInfo.get("ATC_FILE_PATH");
-		String SAVE_ATC_FILE_NM = (String) fileInfo.get("SAVE_ATC_FILE_NM");
-		String ATC_FILE_NM = (String) fileInfo.get("ATC_FILE_NM");
-		File file = new File(ATC_FILE_PATH + SAVE_ATC_FILE_NM);
+		String atcFilePath = (String) fileInfo.get("atcFilePath");
+		String saveAtcFileNm = (String) fileInfo.get("saveAtcFileNm");
+		String atcFileNm = (String) fileInfo.get("atcFileNm");
+		File file = new File(atcFilePath + saveAtcFileNm);
 		if(file == null || !file.exists() || !file.isFile()) {
 			//파일이 null이거나, 파일이 존재하지 않거나, 형식이 파일이 아니면 
 			throw new RuntimeException("해당 파일이 서버에 존재하지 않습니다.");
@@ -75,10 +75,10 @@ public class FileController {
 		String fileName;
 		if ((strClient.contains("MSIE")) || (strClient.contains("Trident")) || (strClient.contains("Edge"))) {	
 			//인터넷 익스플로러 10이하 버전, 11버전, 엣지에서 인코딩		
-			fileName = URLEncoder.encode(ATC_FILE_NM, "UTF-8");
+			fileName = URLEncoder.encode(atcFileNm, "UTF-8");
 		} else {
 		    //나머지 브라우저에서 인코딩
-		    fileName = new String(ATC_FILE_NM.getBytes("UTF-8"), "iso-8859-1");			
+		    fileName = new String(atcFileNm.getBytes("UTF-8"), "iso-8859-1");			
 		}
 		//형식을 모르는 파일첨부용 contentType
 		response.setContentType("application/octet-stream");	

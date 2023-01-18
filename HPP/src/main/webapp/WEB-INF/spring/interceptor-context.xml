@@ -12,6 +12,19 @@
 	
 	<!-- 인터셉터 설정 -->
 	<mvc:interceptors>
+		<!-- 요청 로그 기록 인터셉터 -->
+		<mvc:interceptor>
+			<!-- 제외할 URL를 뺀 모든 URL에 입터셉터 적용 -->
+			<mvc:mapping path="/**/**"/>
+			
+			<!-- 제외할 URL 형식 -->
+			<mvc:exclude-mapping path="/"/>				<!-- 홈페이지 -->
+			<mvc:exclude-mapping path="/resources/**"/> <!-- 리소스 -->
+			
+			<bean id="RequestInterceptor" class="com.ksm.hpp.framework.interceptor.RequestInterceptor"></bean>
+		</mvc:interceptor>	
+		
+		<!-- 로그인 체크 인터셉터 -->
 		<mvc:interceptor>
 			<!-- 제외할 URL를 뺀 모든 URL에 입터셉터 적용 -->
 			<mvc:mapping path="/**/**"/>
@@ -26,7 +39,7 @@
 			<mvc:exclude-mapping path="/user/signUp"/> 	<!-- 회원가입 -->
 			
 			<bean id="LoginCheckInterceptor" class="com.ksm.hpp.framework.interceptor.LoginCheckInterceptor"></bean>
-		</mvc:interceptor>
+		</mvc:interceptor>			
 	</mvc:interceptors>
 
 </beans>

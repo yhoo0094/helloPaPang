@@ -52,3 +52,12 @@ $dateUtil.secondToHour = function(origSecond){
 	var result = ("0" + hour).slice(-2) + ":" + ("0" + minute).slice(-2) + ":" + ("0" + second).slice(-2)
 	return result;
 }
+
+/**
+ * yyyymmdd를 yyyy-mm-dd로 변경
+ * @param strDate 날짜(yyyymmdd)
+ * @return yyyy-mm-dd
+ */
+$dateUtil.dateHyphen = function(strDate){
+	return strDate.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3');
+}

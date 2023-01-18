@@ -72,7 +72,6 @@
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:mappers/article-mapper.xml</value>
 				<value>classpath*:com/ksm/hpp/mapper/**/*.xml</value>
 			</list>
 		</property>

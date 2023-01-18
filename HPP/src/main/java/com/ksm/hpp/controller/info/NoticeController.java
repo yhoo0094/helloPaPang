@@ -50,6 +50,8 @@ public class NoticeController extends BaseController {
 	@RequestMapping("/insertNotice.do")
 	public void insertNotice(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
+		inData.put("loginInfo", loginInfo);
 		
 		List<MultipartFile> fileList = request.getFiles("files"); 
 		Map<String, Object> outData = noticeService.insertNotice((StringBuilder)request.getAttribute("IN_LOG_STR"), inData, fileList);
@@ -69,6 +71,8 @@ public class NoticeController extends BaseController {
 	@RequestMapping("/updateNotice.do")
 	public void updateNotice(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
+		inData.put("loginInfo", loginInfo);
 		
 		List<MultipartFile> fileList = request.getFiles("files"); 
 		Map<String, Object> outData = noticeService.updateNotice((StringBuilder)request.getAttribute("IN_LOG_STR"), inData, fileList);
@@ -88,6 +92,9 @@ public class NoticeController extends BaseController {
 	@RequestMapping("/deleteNotice.do")
 	public void deleteNotice(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
+		inData.put("loginInfo", loginInfo);
+		
 		Map<String, Object> outData = noticeService.deleteNotice((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		
 		Gson gson = new Gson();

@@ -26,4 +26,5 @@
 	, EXCEL_SHEETNM		: "EXCEL_SHEETNM"		//시트명	
 	, EXCEL_COLUMN		: "EXCEL_COLUMN"		//컬럼 정보
 	, EXCEL_DATA		: "EXCEL_DATA"			//입력 데이터   
+	, EXCEL_UPLOAD_OPTION : "EXCEL_UPLOAD_OPTION"	//엑셀 업로드 옵션
  }

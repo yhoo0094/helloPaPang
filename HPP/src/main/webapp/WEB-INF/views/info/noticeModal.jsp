@@ -20,30 +20,43 @@
 
 <div id="noticeModal" class="modal" style="width: 1000px; height: 800px;">
 	<form id="noticeForm" name="noticeForm" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="boardType" value="01">
-		<input type="hidden" name="bizDvcd" value="001">
-		<input type="hidden" id = "bizId" name="bizId" value="">
+		<input type="hidden" id="boardSeq" name="boardSeq" value="">
+		<input type="hidden" id="boardCode" name="boardCode" value="01">
 		
 		<table class="papang-table">
 			<colgroup>
+				<col style="width: 100px">
+				<col style="width: 400px">
 				<col style="width: 100px">
 				<col style="width: *">
 			</colgroup>
 			<tbody>
 				<tr>
 					<th>제목</th>
-					<td><input id="title" class="form-control" type="text" name="title" title="제목" onkeypress="if(event.keyCode == 13){}"/></td>
+					<td colspan="3"><input id="noticeTitle" name="noticeTitle" class="form-control" type="text" title="제목"/></td>
 				</tr>
 				<tr>
-					<th>내용</th>
+					<th>게시기간</th>
 					<td>
-						<textarea id="content" name="content" class="form-control" rows="" cols="" style="height: 500px"></textarea>
+						<input id="noticeStrDt" name="noticeStrDt" class="form-control" type="date" title="게시시작일"/> 
+					  ~ <input id="noticeEndDt" name="noticeEndDt" class="form-control" type="date" title="게시종료일"/>
+					</td>
+					<th>팝업여부</th>
+					<th>
+						Y <input id="noticePopY" name="noticePopYn" type="radio" value="Y">
+						N <input id="noticePopN" name="noticePopYn" type="radio" value="N" checked="checked">
+					</th>
+				</tr>				
+				<tr>
+					<th>내용</th>
+					<td colspan="3">
+						<textarea id="noticeCn" name="noticeCn" class="form-control" rows="" cols="" style="height: 500px"></textarea>
 						<!-- <div id="noticeEditor"></div> -->
 					</td>
 				</tr>
 				<tr>
 					<th>첨부파일</th>
-					<td>
+					<td colspan="3">
 						<!-- 첨부파일 div -->
 						<%@include file="/WEB-INF/views/com/fileAttach.jsp" %>
 					</td>

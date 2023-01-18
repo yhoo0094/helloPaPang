@@ -41,7 +41,7 @@
 		<!--  SQL 쿼리 문장 -->
 		<logger name="jdbc.sqlonly" additivity="false" level="INFO"> 
 		    <appender-ref ref="console"/> 
-		    <patternLayout pattern="%d{yyyy-MM-dd hh:mm:ss} %5p [%c] %n%m%n"/>
+		    <patternLayout pattern="%d{yyyy-MM-dd hh:mm:ss} %5p [%c]%n %m%n"/>
 		</logger>
 		 
 		<!--  ResultSet을 제외한 모든 JDBC 호출 정보 -->

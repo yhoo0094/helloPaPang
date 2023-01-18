@@ -38,10 +38,20 @@ function createEditor(){
 function noticeModalOpen(data){
 	//createEditor();modal('open')
 	if(data != null){
-		$('#title').val(data.BOARD_TITLE);
-		$('#content').val(data.BOARD_CN);
-		$('#bizId').val(data.BIZ_ID);
-		selectFile(data);
+		//기존 입력에 대한 조회
+		$('#boardSeq').val(data.boardSeq);		//공지사항일련번호
+		$('#noticeTitle').val(data.noticeTitle);	//공지사항제목
+		$('#noticeCn').val(data.noticeCn);			//공지사항내용
+		$('#noticeStrDt').val(data.noticeStrDt.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'));	//공지사항게시시작일
+		$('#noticeEndDt').val(data.noticeEndDt.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'));	//공지사항게시종료일
+		(data.noticePopYn == 'Y')? $('#noticePopY').prop('checked','checked') : $('#noticePopN').prop('checked','checked');	//공지사항팝업여부
+		
+		data.boardCode = '01';			//게시판구분코드(01:공지사항,02:자유게시판,03:질문게시판,04:지역게시판)
+		data.boardSeq = data.boardSeq;	//게시글일련번호
+		$fileUtil.selectFile(data);		//첨부파일 조회
+	} else {
+		//모달 내용 초기화
+		resetModal();		
 	}
 	$('#noticeModal').modal({
 		clickClose: false
@@ -52,19 +62,23 @@ function noticeModalOpen(data){
 function saveNotice(){
 	var formData = new FormData($("#noticeForm")[0]);
 	
+	//날짜 하이픈(-) 제거
+	formData.set('noticeStrDt',$('#noticeStrDt').val().replace(/-/g,''));
+	formData.set('noticeEndDt',$('#noticeEndDt').val().replace(/-/g,''));
+	
 	var url;    
-    if($('#bizId').val() == ''){
+    if($util.isEmpty($('#boardSeq').val())){
 		url = '/notice/insertNotice.do';
 	} else {
 		url = '/notice/updateNotice.do';
 	}
 	
 	//파일첨부가 포함된 글 저장
-	saveFile(url, formData).then(function(result){
+	$fileUtil.saveFile(url, formData).then(function(result){
         if (result.RESULT == Constant.RESULT_SUCCESS){
             // 데이타 성공일때 이벤트 작성
             alert("완료되었습니다.");
-            closeModal();
+            location.reload();
         } else {
 			alert(result[Constant.OUT_RESULT_MSG])
 		}		
@@ -76,10 +90,21 @@ function closeModal(){
 	$.modal.close();
 	
 	//모달 내용 초기화
-	$util.inputTextEmpty(el, 'text');
-	$util.inputTextEmpty(el, 'hidden');
+	resetModal();
+	$fileUtil.resetFile();
+}
+
+//모달 내용 초기화
+function resetModal(){
+	var today = new Date();
+	document.getElementById('noticeStrDt').valueAsDate = today	//게시시작일 기본값 = 오늘 날짜
+	document.getElementById('noticeEndDt').valueAsDate = new Date(today.setDate(today.getDate() + 7));	//게시종료일 기본값 = 일주일 후
+
+	var el = $('#noticeModal');
+	$util.inputTypeEmpty(el, 'text');
 	
-	resetFile();
+	$('#boardSeq').val('');	
+	$('#noticeCn').val('');	
 }
 
 //게시글 삭제

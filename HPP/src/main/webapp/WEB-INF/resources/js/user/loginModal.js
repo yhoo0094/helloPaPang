@@ -49,8 +49,8 @@ function login(){
 	            //$('#loginModalbtn').css('display', 'none');
 	            
 	            //비밀번호 유효기간이 만료된 경우
-	            var obj = $util.getObjFromArr(res.userPoli, 'POLI_NM', 'PSWD_LIM_DAYS');	//비밀번호 변경 주기 객체
-	            var pswdLimDays = obj['POLI_VAL'];	//비밀번호 변경 주기(일)
+	            var obj = $util.getObjFromArr(res.userPoli, 'poliNm', 'PSWD_LIM_DAYS');	//비밀번호 변경 주기 객체
+	            var pswdLimDays = obj['poliVal'];	//비밀번호 변경 주기(일)
 	            var pswdLimDate = $dateUtil.addDate(res.loginInfo.pwChDtti, 0, 0, pswdLimDays);	//비밀번호 유효 날짜(yyyymmdd)
 	            if(pswdLimDate - $dateUtil.todayYYYYMMDD() < 0){
 					alert('비밀번호 변경 후 ' + pswdLimDays + '일 이상 경과하였습니다.\n계정 보호를 위해 비밀번호를 변경해 주십시오.');
@@ -60,7 +60,8 @@ function login(){
 				//로그인 에러 페이지 였으면 이전 페이지로 이동 
 				var path = window.location.pathname;
 				if(path == '/error/noLoginInfo'){
-					window.history.back;
+					location.href = "/";
+					return;
 				}
 				
 				location.reload();
@@ -80,18 +81,23 @@ function loginOut() {
 		return;
 	}
 	
+	$com.loadingStart();
     $.ajax({
         url: '/user/logout.do',
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
+			$com.loadingEnd();
 	        if (result.RESULT == Constant.RESULT_SUCCESS){
 	            location.replace('/');
 	        } else {
 				alert(result[Constant.OUT_RESULT_MSG])
 			}
-        }
+        },
+        error: function(textStatus, jqXHR, thrownError){
+			$com.loadingEnd();
+		}        
     });		
 }
 
@@ -101,6 +107,6 @@ function loginModalClose(){
 	
 	//모달 내용 초기화
 	var el = $('#loginModal');
-	$util.inputTextEmpty(el, 'text');
-	$util.inputTextEmpty(el, 'password');
+	$util.inputTypeEmpty(el, 'text');
+	$util.inputTypeEmpty(el, 'password');
 }

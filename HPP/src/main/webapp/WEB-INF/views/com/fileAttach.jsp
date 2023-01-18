@@ -19,5 +19,5 @@
 	</div>
 </div>
 <div>
-	<input type="file" id="inputFile" style="display: none;" multiple="multiple" onchange="addFile(this);">
+	<input type="file" id="inputFile" style="display: none;" multiple="multiple" onchange="$fileUtil.addFile(this);">
 </div>

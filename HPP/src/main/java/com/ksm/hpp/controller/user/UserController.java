@@ -22,23 +22,6 @@ public class UserController extends BaseController {
 	protected UserService userService;
 	
 	/**
-	 * @메소드명: selectUser
-	 * @작성자: 김상민
-	 * @생성일: 2022. 11. 2. 오후 6:59:16
-	 * @설명: 사용자 조회
-	 */
-	@RequestMapping("/selectUser.do")
-	public void selectUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<String, Object> inData = RequestUtil.getParameterMap(request);
-		Map<String, Object> outData = userService.selectUser((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
-		
-		Gson gson = new Gson();
-		String json = gson.toJson(outData);
-		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
-		response.setContentType("application/x-json; charset=UTF-8");
-	}	
-	
-	/**
 	 * @메소드명: insertUser
 	 * @작성자: 김상민
 	 * @생성일: 2022. 11. 2. 오후 6:59:00

@@ -3,72 +3,68 @@
 <mapper namespace="mapper.info.NoticeMapper">
 	
 	<!-- 공지사항 조회-->
-	<select id="selectNotice" parameterType="map" resultType="map">
-		SELECT BIZ_ID				/*글ID*/
-		     , BOARD_TITLE 			/*제목*/
-		     , BOARD_CN				/*내용*/
-		     , BOARD_TYPE			/*분류(01:공지사항, 02:자유게시판,03:질문게시판)*/
-		     , BOARD_HIT			/*조회수*/
-		     , FST_REG_ID 			/*최초등록자ID*/
+	<select id="selectNotice" parameterType="map" resultType="camelCaseMap">
+		SELECT BOARD_SEQ				/*게시글일련번호*/
+		     , NOTICE_TITLE 			/*공지사항제목*/
+		     , NOTICE_CN				/*공지사항내용*/
+		     , NOTICE_STR_DT			/*공지사항게시시작일*/
+		     , NOTICE_END_DT			/*공지사항게시종료일*/
+		     , NOTICE_POP_YN			/*공지사항팝업여부*/
+		     , NOTICE_CN				/*공지사항내용*/
+		     , NOTICE_HIT				/*공지사항조회수*/
+		     , FST_REG_ID 				/*최초등록자ID*/
 		     , DATE_FORMAT(FST_REG_DTTI, "%Y/%m/%d %H:%i") FST_REG_DTTI	/*최초등록일시*/
-		     , LT_UPD_ID 			/*최종수정자ID*/
+		     , LT_UPD_ID 				/*최종수정자ID*/
 		     , DATE_FORMAT(LT_UPD_DTTI, "%Y/%m/%d %H:%i") LT_UPD_DTTI	/*최종수정일시*/
-		  FROM TB_BOARD				/*테이블_게시판*/
-		<trim prefix="WHERE" prefixOverrides="AND">  
-			<if test='id != null and id != ""'>
-				AND ID = #{id}
-			</if>
-			<if test='userPw != null and userPw != ""'>
-				AND PW = #{pw}
-			</if>				  	 
-		</trim>
+		  FROM TB_BOARD_NOTICE			/*테이블_공지사항*/
+		 ORDER BY NOTICE_STR_DT DESC;
 	</select>	
 	
 	<!-- 공지사항 등록 -->
 	<insert id="insertNotice" parameterType="map">
-		<selectKey resultType="string" keyProperty="bizId" order="BEFORE">
-			SELECT nextval('BIZ_ID') 
-			  FROM DUAL
-		</selectKey>		
-		
 		INSERT 
-		  INTO TB_BOARD			/*테이블_게시판*/
+		  INTO TB_BOARD_NOTICE		/*테이블_공지사항*/
 		     (
-		       BIZ_ID				/*글ID*/
-		     , BOARD_TITLE 			/*제목*/
-		     , BOARD_CN				/*내용*/
-		     , BOARD_TYPE			/*분류(01:공지사항, 02:자유게시판,03:질문게시판)*/
-		     , BOARD_HIT			/*조회수*/
+		       BOARD_SEQ			/*게시글일련번호*/
+		     , NOTICE_TITLE 		/*공지사항제목*/
+		     , NOTICE_CN			/*공지사항내용*/
+		     , NOTICE_STR_DT		/*공지사항게시시작일*/
+		     , NOTICE_END_DT		/*공지사항게시종료일*/
+		     , NOTICE_POP_YN		/*공지사항팝업여부*/
 		     , FST_REG_ID 			/*최초등록자ID*/
 		     , LT_UPD_ID 			/*최종수정자ID*/
 		     )
 		VALUES
 			 (
-			   #{bizId}	
-			 , #{title}	
-			 , #{content}
-			 , #{boardType}
-			 , '0'			
-		     , 'SYSTEM' 	
-		     , 'SYSTEM' 				 
+			   (SELECT nextval('BOARD_SEQ') FROM DUAL)
+			 , #{noticeTitle}	
+			 , #{noticeCn}
+			 , #{noticeStrDt}
+			 , #{noticeEndDt}
+			 , #{noticePopYn}
+		     , #{loginInfo.userId} 	
+		     , #{loginInfo.userId}		 
 			 )   
 	</insert>
 	
 	<!-- 공지사항 수정 -->
 	<update id="updateNotice" parameterType="map">
-		UPDATE TB_BOARD								/*테이블_게시판*/
-		   SET BOARD_TITLE		= #{title}	 		/*제목*/
-		     , BOARD_CN			= #{content}		/*내용*/
-		     , LT_UPD_ID 		= 'SYSTEM'			/*최종수정자ID*/
+		UPDATE TB_BOARD_NOTICE						/*테이블_공지사항*/
+		   SET NOTICE_TITLE		= #{noticeTitle}	/*공지사항제목*/
+		     , NOTICE_CN		= #{noticeCn}		/*공지사항내용*/
+		     , NOTICE_STR_DT	= #{noticeStrDt}	/*공지사항게시시작일*/
+		     , NOTICE_END_DT	= #{noticeEndDt}	/*공지사항게시종료일*/
+		     , NOTICE_POP_YN	= #{noticePopYn}	/*공지사항팝업여부*/
+		     , LT_UPD_ID 		= #{loginInfo.userId}	/*최종수정자ID*/
 		     , LT_UPD_DTTI		= NOW() 			/*최종수정일시*/
-		 WHERE BIZ_ID			= #{bizId}			/*글ID*/     
+		 WHERE BOARD_SEQ		= #{boardSeq}		/*게시글일련번호*/    
 	</update>
 	
 	<!-- 게시글 삭제 -->
 	<delete id="deleteNotice" parameterType="map">
 		DELETE
-		  FROM TB_BOARD								/*테이블_게시판*/
-		 WHERE BIZ_ID			= #{bizId}			/*글ID*/
+		  FROM TB_BOARD_NOTICE						/*테이블_공지사항*/
+		 WHERE BOARD_SEQ		= #{boardSeq}		/*게시글일련번호*/
 	</delete>
 
 </mapper>

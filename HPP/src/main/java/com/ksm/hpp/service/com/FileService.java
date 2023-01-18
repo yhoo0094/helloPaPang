@@ -97,25 +97,25 @@ public class FileService extends BaseService {
 			}
 			
 			//오늘 날짜로 디렉토리 생성
-			String ATC_FILE_PATH = this.makeDir();
+			String atcFilePath = this.makeDir();
 			
 			//파일 검증
 			for(MultipartFile multiFile : fileList) {
-				String ATC_FILE_NM = multiFile.getOriginalFilename();	//원본 파일명
-				int pos = ATC_FILE_NM.lastIndexOf(".");
+				String atcFileNm = multiFile.getOriginalFilename();	//원본 파일명
+				int pos = atcFileNm.lastIndexOf(".");
 				//수정필요!! (break가 do while 문이 아닌 for문에 대해서 동작)
 				if(pos == -1) {
 					result.put(Constant.RESULT, Constant.RESULT_FAILURE);
-					result.put(Constant.OUT_RESULT_MSG, ATC_FILE_NM + " 파일의 확장자가 존재하지 않습니다.");	
+					result.put(Constant.OUT_RESULT_MSG, atcFileNm + " 파일의 확장자가 존재하지 않습니다.");	
 					break;					
 				}
-				String ATC_FILE_EXTS = ATC_FILE_NM.substring(pos + 1);	//확장자명			
+				String atcFileExts = atcFileNm.substring(pos + 1);	//확장자명			
 				
 				//허용된 확장자인지 검증
 				//수정필요!! (break가 do while 문이 아닌 for문에 대해서 동작)
-				if(excludedExtsList.contains(ATC_FILE_EXTS)) {
+				if(excludedExtsList.contains(atcFileExts)) {
 					result.put(Constant.RESULT, Constant.RESULT_FAILURE);
-					result.put(Constant.OUT_RESULT_MSG, ATC_FILE_EXTS + "는 허용되지 않은 확장자입니다.");	
+					result.put(Constant.OUT_RESULT_MSG, atcFileExts + "는 허용되지 않은 확장자입니다.");	
 					break;					
 				}			
 			}
@@ -123,28 +123,28 @@ public class FileService extends BaseService {
 			//파일 저장
 			for(MultipartFile multiFile : fileList) {
 				InputStream fi = multiFile.getInputStream();
-				String ATC_FILE_NM = multiFile.getOriginalFilename();	//원본 파일명
-				long ATC_FILE_CAPA_VAL = multiFile.getSize();			//파일 사이즈
-				int pos = ATC_FILE_NM.lastIndexOf(".");
-				String ATC_FILE_EXTS = ATC_FILE_NM.substring(pos + 1);	//확장자명
+				String atcFileNm = multiFile.getOriginalFilename();	//원본 파일명
+				long atcFileCapaVal = multiFile.getSize();			//파일 사이즈
+				int pos = atcFileNm.lastIndexOf(".");
+				String atcFileExts = atcFileNm.substring(pos + 1);	//확장자명
 				
 				//파일명에 현재 시간 입력(파일명_현재시간.확장자)
-				String SAVE_ATC_FILE_NM = ATC_FILE_NM.substring(0, pos) + "_" + nowTime + "." + ATC_FILE_EXTS;
+				String saveAtcFileNm = atcFileNm.substring(0, pos) + "_" + nowTime + "." + atcFileExts;
 				//중복된 파일명 변경
-				SAVE_ATC_FILE_NM = this.getUniqueFileName(ATC_FILE_PATH, SAVE_ATC_FILE_NM);
+				saveAtcFileNm = this.getUniqueFileName(atcFilePath, saveAtcFileNm);
 				
 				//업로드할 파일명(경로+파일명)
-				File uploadFile = new File(ATC_FILE_PATH + SAVE_ATC_FILE_NM);
+				File uploadFile = new File(atcFilePath + saveAtcFileNm);
 				FileOutputStream fo = new FileOutputStream(uploadFile);
 				
 				//물리적인 공간에 파일 저장
 				FileUtil.saveFileOri(fi, fo);
 				
-				inData.put("ATC_FILE_NM", ATC_FILE_NM);					//파일명
-				inData.put("SAVE_ATC_FILE_NM", SAVE_ATC_FILE_NM);		//파일 저장명
-				inData.put("ATC_FILE_PATH", ATC_FILE_PATH);				//파일 경로
-				inData.put("ATC_FILE_CAPA_VAL", ATC_FILE_CAPA_VAL);		//파일 용량
-				inData.put("ATC_FILE_EXTS", ATC_FILE_EXTS);				//파일 확장자
+				inData.put("atcFileNm", atcFileNm);					//파일명
+				inData.put("saveAtcFileNm", saveAtcFileNm);			//파일저장명
+				inData.put("atcFilePath", atcFilePath);				//파일경로
+				inData.put("atcFileCapaVal", atcFileCapaVal);		//파일용량
+				inData.put("atcFileExts", atcFileExts);				//파일확장자
 				
 				sqlSession.insert("mapper.com.FileMapper.insertFile", inData);
 			}
@@ -172,7 +172,7 @@ public class FileService extends BaseService {
 			
 			List<Map<String, Object>> list = sqlSession.selectList("mapper.com.FileMapper.selectDelFile", inData);
 			for(Map<String, Object> delFile : list) {
-				File file = new File((String) delFile.get("ATC_FILE_PATH"), (String) delFile.get("SAVE_ATC_FILE_NM"));
+				File file = new File((String) delFile.get("atcFilePath"), (String) delFile.get("saveAtcFileNm"));
 				file.delete();
 			}
 
@@ -192,7 +192,7 @@ public class FileService extends BaseService {
 
 		List<Map<String, Object>> list = sqlSession.selectList("mapper.com.FileMapper.selectFile", inData);
 		for(Map<String, Object> delFile : list) {
-			File file = new File((String) delFile.get("ATC_FILE_PATH"), (String) delFile.get("SAVE_ATC_FILE_NM"));
+			File file = new File((String) delFile.get("atcFilePath"), (String) delFile.get("saveAtcFileNm"));
 			file.delete();
 		}		
 		
@@ -232,7 +232,7 @@ public class FileService extends BaseService {
 		DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("yyyyMMdd");
 		String nowDate = date.format(dtfDate);	
 		
-		String ATC_FILE_PATH = "";	//첨부파일 저장 경로
+		String atcFilePath = "";	//첨부파일 저장 경로
 		
 		/**
 		getResource("") => 현재파일 경로 반환(URL타입)
@@ -251,14 +251,14 @@ public class FileService extends BaseService {
 		//기존 소스 변형
 		OS_Type os = OSValidator.getOS();	//OS타입 구하기(UNKNOWN(0), WINDOWS(1), LINUX(2), MAC(3), SOLARIS(4))
 		Configuration conf = new Configuration();
-		ATC_FILE_PATH = conf.getString("Global." + os + ".getComFilePath") + nowDate + "/";	
-		File dir = new File(ATC_FILE_PATH);
+		atcFilePath = conf.getString("Global." + os + ".getComFilePath") + nowDate + "/";	
+		File dir = new File(atcFilePath);
 		if(!dir.isDirectory()) {	//해당 경로가 디렉토리인지 확인
 			if(!dir.exists()) {		//해당 경로 디렉토리가 있는지 확인
 				dir.mkdir();		//해당 디렉토리가 없으면 생성
 			}
 		}
 		
-		return ATC_FILE_PATH;
+		return atcFilePath;
 	}
 }

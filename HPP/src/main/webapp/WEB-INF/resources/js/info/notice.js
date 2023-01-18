@@ -31,10 +31,11 @@ function mkNoticeTable(data) {
     mainTable = $('#mainTable').DataTable({
         data: data,
         columns: [
-            { title: "제목"	, data: "BOARD_TITLE"	, width: "*"		, className: "text_align_left"}
-          , { title: "작성자"	, data: "FST_REG_ID"	, width: "100px"	, className: "text_align_center"}
-          , { title: "게시일"	, data: "LT_UPD_DTTI"	, width: "150px"	, className: "text_align_center"}
-          , { title: "조회수"	, data: "BOARD_HIT"		, width: "50px"		, className: "text_align_center"}
+            { title: "제목"	, data: "noticeTitle"	, width: "*"		, className: "text_align_left"}
+          , { title: "작성자"	, data: "fstRegId"		, width: "100px"	, className: "text_align_center"}
+          , { title: "게시일"	, data: "noticeStrDt"	, width: "150px"	, className: "text_align_center"	
+          	, render: function(data){return $dateUtil.dateHyphen(data)}}
+          , { title: "조회수"	, data: "noticeHit"		, width: "50px"		, className: "text_align_center"}
         ],		
         paging: true,
         pagingType: "full_numbers",

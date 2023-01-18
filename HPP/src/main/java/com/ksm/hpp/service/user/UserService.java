@@ -28,22 +28,6 @@ public class UserService extends BaseService {
 	SqlSession sqlSession; //SqlSession 빈 DI	
 	
 	/**
-	 * @메소드명: selectUser
-	 * @작성자: 김상민
-	 * @생성일: 2022. 11. 2. 오후 6:59:16
-	 * @설명: 사용자 조회
-	 */	
-	public Map<String, Object> selectUser(StringBuilder logStr, Map<String, Object> inData) throws Exception
-	{
-		Map<String, Object> result = new HashMap<String, Object>();
-		
-		List<Map<String, Object>> list = sqlSession.selectList("mapper.user.UserMapper.selectUser", inData);
-		result.put("list", list);
-
-		return result;
-	}
-	
-	/**
 	 * @메소드명: insertUser
 	 * @작성자: 김상민
 	 * @생성일: 2022. 11. 2. 오후 6:59:00
@@ -98,13 +82,13 @@ public class UserService extends BaseService {
 				//throw new RuntimeException("존재하지 않는 아이디이거나 비밀번호가 일치하지 않습니다.");
 			} else {
 				//사용자 정책 조회
-				inData.put("POLI_TYPE", "UESR");
+				inData.put("poliCode", "01");	//정책분류코드(01:사용자)
 				List<Map<String, Object>> userPoli = sqlSession.selectList("mapper.com.CommonMapper.selectPoli", inData);
 				result.put("userPoli", userPoli);
 				
 				//해당 계정의 비밀번호 오입력 횟수가 초과된 경우
 				int pwErrCnt = Integer.parseInt((String) loginInfo.get("pwErrCnt"));	//사용자 비밀번호 오입력 횟수
-				int pwErrCntLim = Integer.parseInt((String) PapangUtil.getMapFromList(userPoli, "POLI_NM", "PW_ERR_CNT_LIM").get("POLI_VAL"));	//비밀번호 오입력 허용 횟수
+				int pwErrCntLim = Integer.parseInt((String) PapangUtil.getMapFromList(userPoli, "poliNm", "PW_ERR_CNT_LIM").get("poliVal"));	//비밀번호 오입력 허용 횟수
 				if(pwErrCnt >= pwErrCntLim) {	
 					loginCode = "05";
 					result.put(Constant.OUT_RESULT_MSG, "비밀번호 오입력 횟수가 초과되었습니다.");	
@@ -129,7 +113,7 @@ public class UserService extends BaseService {
 				}
 				
 				//비밀번호 유효기간이 만료된 경우
-				int pswdLimDays = Integer.parseInt((String) PapangUtil.getMapFromList(userPoli, "POLI_NM", "PSWD_LIM_DAYS").get("POLI_VAL"));	//비밀번호 변경 주기(일)
+				int pswdLimDays = Integer.parseInt((String) PapangUtil.getMapFromList(userPoli, "poliNm", "PSWD_LIM_DAYS").get("poliVal"));	//비밀번호 변경 주기(일)
 				String pwChDtti = (String) loginInfo.get("pwChDtti");	//비밀번호 최종수정일시
 				String pswdLimDate = DateUtil.addDate(pwChDtti, 0, 0, pswdLimDays);	//비밀번호 변경 기한
 				
@@ -155,7 +139,7 @@ public class UserService extends BaseService {
 				loginInfo.remove("userPw");	//비밀번호 정보는 제거
 				session.setAttribute(Constant.LOGIN_INFO, loginInfo);
 				
-				int sessionTime = Integer.parseInt((String) PapangUtil.getMapFromList(userPoli, "POLI_NM", "SESSION_TIME").get("POLI_VAL"));	//세션 유지시간(초단위)
+				int sessionTime = Integer.parseInt((String) PapangUtil.getMapFromList(userPoli, "poliNm", "SESSION_TIME").get("poliVal"));	//세션 유지시간(초단위)
 				session.setMaxInactiveInterval(sessionTime);	
 				session.setAttribute(Constant.SESSION_TIME, sessionTime);	//세션 유지시간 정보 세션에 추가
 			
@@ -194,22 +178,6 @@ public class UserService extends BaseService {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		/*	
-		//기존 스크립트
-		session.setAttribute(Constant.LOGIN_INFO, null);
-		
-		//사용자 정책 조회
-		inData.put("POLI_TYPE", "UESR");		
-		List<Map<String, Object>> userPoli = sqlSession.selectList("mapper.com.CommonMapper.selectPoli", inData);
-		
-		int sessionTime = Integer.parseInt((String) PapangUtil.getMapFromList(userPoli, "POLI_NM", "SESSION_TIME").get("POLI_VAL"));	//세션 유지시간(초단위)
-		session.setMaxInactiveInterval(sessionTime);	
-		session.setAttribute(Constant.SESSION_TIME, sessionTime);	//세션 유지시간 정보 세션에 추가
-		 */
-		
-		//로그인 기록 테이블에 저장(추후 구현)
-		//Int cnt = sqlSession.insert("mapper.user.UserMapper.insertLoginInfo", inData);
-
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;		
 	}

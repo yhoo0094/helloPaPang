@@ -1,16 +1,17 @@
 /**
- * @화면명: 파일첨부 Div
+ * @화면명: (공통) 파일첨부
  * @작성자: 김상민
  * @생성일: 2022. 11. 17. 오후 7:28:00
- * @설명: 파일첨부 Div
+ * @설명: (공통) 파일첨부
 **/
+var $fileUtil = {};
 
 var fileNo = 0;
 var filesArr = new Array();
 var delFiles = new Array();
 
 //첨부파일 추가
-function addFile(obj){
+$fileUtil.addFile = function addFile(obj){
     var maxFileCnt = 5;   // 첨부파일 최대 개수
     var attFileCnt = document.querySelectorAll('.filebox').length;    // 기존 추가된 첨부파일 개수
     var curFileCnt = obj.files.length;  // 현재 선택된 첨부파일 개수
@@ -23,7 +24,7 @@ function addFile(obj){
     
     for (const file of obj.files) {
 	    // 첨부파일 검증
-	    if (validation(file)) {
+	    if ($fileUtil.validation(file)) {
 	        // 파일 배열에 담기
 	        var reader = new FileReader();
 	        reader.onload = function () {
@@ -34,8 +35,8 @@ function addFile(obj){
 	        // 목록 추가
 	        let htmlData = '';
 	        htmlData += '<div id="file' + fileNo + '" class="filebox">';
-	        htmlData += '   <p class="attachedFile">' + file.name + ' (' + formatBytes(file.size) + ')</p>';
-	        htmlData += '   <a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
+	        htmlData += '   <p class="attachedFile">' + file.name + ' (' + $fileUtil.formatBytes(file.size) + ')</p>';
+	        htmlData += '   <a class="delete" onclick="$fileUtil.deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
 	        htmlData += '</div>';
 	        $('.fileListDiv').append(htmlData);
 	        fileNo++;
@@ -48,26 +49,26 @@ function addFile(obj){
 }
 
 //첨부파일 삭제
-function deleteFile(num) {
+$fileUtil.deleteFile = function deleteFile(num) {
     document.querySelector("#file" + num).remove();
     filesArr[num].is_delete = true;
 }
 
 //첨부파일 초기화
-function resetFile() {
+$fileUtil.resetFile = function resetFile() {
 	fileNo = 0;
 	filesArr = new Array();	
 	$('.filebox').remove();
 }
 
 //첨부파일 조회
-function selectFile(data) {
-	resetFile();	//첨부파일 초기화
+$fileUtil.selectFile = function selectFile(data) {
+	$fileUtil.resetFile();	//첨부파일 초기화
 	
     $.ajax({
         url: '/file/selectFile',
         type: 'POST',
-        data: {'bizId': data.BIZ_ID},
+        data: {'boardSeq': data.boardSeq},
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
@@ -83,8 +84,8 @@ function selectFile(data) {
 		        // 목록 추가
 		        let htmlData = '';
 		        htmlData += '<div id="file' + fileNo + '" class="filebox">';
-		        htmlData += '   <p class="attachedFile" onclick="downloadFile(' + fileData.BIZ_ID + ',' + fileData.ATCFILE_SEQ + ');">' + fileData.ATC_FILE_NM + ' (' + formatBytes(fileData.ATC_FILE_CAPA_VAL) + ')</p>';
-		        htmlData += '   <a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
+		        htmlData += '   <p class="attachedFile" onclick="$fileUtil.downloadFile(' + fileData.boardSeq + ',' + fileData.atcfileNum + ');">' + fileData.atcFileNm + ' (' + $fileUtil.formatBytes(fileData.atcFileCapaVal) + ')</p>';
+		        htmlData += '   <a class="delete" onclick="$fileUtil.deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
 		        htmlData += '</div>';
 		        $('.fileListDiv').append(htmlData);
 		        fileNo++;					
@@ -94,20 +95,14 @@ function selectFile(data) {
 }
 
 //첨부파일을 포함한 페이지 저장
-function saveFile(url, formData){
+$fileUtil.saveFile = function saveFile(url, formData){
 	return new Promise(function(resolve, reject){
-	    /*
-	    for (var i = 0; i < filesArr.length; i++) {
-	        formData.append("files", filesArr[i]);
-	    }	
-	    */
-	    
 	    for(var i in filesArr){
 			formData.append("files", filesArr[i]);
 			
 			//삭제된 파일 처리(undefinded면 false로 처리됨)
 			if(filesArr[i].is_delete){
-				delFiles.push(filesArr[i].ATCFILE_SEQ);
+				delFiles.push(filesArr[i].atcfileNum);
 			};
 		}
 		formData.append("delFiles", delFiles);
@@ -128,7 +123,7 @@ function saveFile(url, formData){
 }
 
 //첨부파일 다운로드
-function downloadFile(bizId, atcfileSeq){
+$fileUtil.downloadFile = function downloadFile(bizId, atcfileSeq){
     $("[id='downloadForm']").remove();	//이미 생성된 form이 있으면 제거
     
     //form 생성
@@ -167,21 +162,22 @@ const fileTypes = [
   , 'application/x-hwp'
   , 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
   , 'text/plain'
+  , 'text/xml'
 ];
 
 /* 첨부파일 검증 */
-function validation(obj){
+$fileUtil.validation = function validation(obj){
     if (obj.name.length > 100) {
-        alert("파일명이 100자 이상인 파일은 제외되었습니다.");
+        alert(obj.name + " 파일은 파일명이 100자를 초과하여 제외되었습니다.");
         return false;
     } else if (obj.size > (100 * 1024 * 1024)) {
-        alert("최대 파일 용량인 100MB를 초과한 파일은 제외되었습니다.");
+        alert(obj.name + " 파일은 100MB를 초과하여 제외되었습니다.");
         return false;
     } else if (obj.name.lastIndexOf('.') == -1) {
-        alert("확장자가 없는 파일은 제외되었습니다.");
+        alert(obj.name + " 파일은 확장자가 없어 제외되었습니다.");
         return false;
     } else if (!fileTypes.includes(obj.type)) {
-        alert("첨부가 불가능한 파일은 제외되었습니다.");
+        alert(obj.type + " 확장자는 불가능하여 제외되었습니다.");
         return false;
     } else {
         return true;
@@ -189,7 +185,7 @@ function validation(obj){
 }
 
 //첨부파일 사이즈 단위 변경
-function formatBytes(bytes){
+$fileUtil.formatBytes = function formatBytes(bytes){
 	var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 	if(bytes == 0) return '0 Bytes';
 	var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));

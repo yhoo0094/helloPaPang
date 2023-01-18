@@ -49,3 +49,50 @@ $excelUtil.downloadData = function(defaultFileName, sheetName, cols, data){
 	$(formTage).submit();
 	$(formTage).remove();
 };
+
+/**
+ * 엑셀 파일 업로드
+ * @param uploadOption 		업로드 관련 설정 정보
+ * @param callBackfunc 		콜백함수
+ */
+$excelUtil.upload = function(excelUploadOptions, callBackfunc){
+	var fileInputTag = document.createElement("input");
+	$(fileInputTag).attr('type','file');
+	$(fileInputTag).attr('name','tempFileObj');
+	$(fileInputTag).attr('id','tempFileObj');
+	$(fileInputTag).bind('change', function(){
+		var file = this.files[0];
+		
+		var fileName = file.name;
+		var extension = fileName.substr(fileName.lastIndexOf(".") + 1);
+		if(!$util.isSameText(extension,'xls') && !$util.isSameText(extension,'xlsx')){
+			alert(extension + "은 지원하지 않는 확장자입니다.\n xlsx 혹은 xls 확장자를 사용해 주십시오.");
+			return false;
+		};
+		
+		var fileSize = file.size;
+		if(fileSize > 100 * 1024 * 1024){
+			alert("파일 용량은 100MB를 초과할 수 없습니다.");
+			return false;
+		}
+	
+		var formData = new FormData();
+		formData.append("file", file);
+		formData.append(Constant.IN_DATA_JOSN, JSON.stringify({EXCEL_UPLOAD_OPTION:excelUploadOptions}));
+		
+	    $.ajax({
+			type: 'POST',
+			enctype: 'multipart/form-data',
+	        url: '/excel/upload.do',
+	        data: formData,
+	        processData: false,
+	        contentType: false,
+	        cache: false, 	        
+	        success: function (result) {
+	            callBackfunc(result);
+	        }
+	    });			
+	})
+	
+	$(fileInputTag).click();
+}

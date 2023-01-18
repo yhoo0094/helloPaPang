@@ -77,11 +77,25 @@ $util.isEmpty = function(obj){
 };
 
 /**
+ * 두 개의 텍스트가 같은지 확인(대소문자 구분 X)
+ * @param val1 텍스트
+ * @param val2 텍스트 
+ * @return boolean
+ */
+$util.isSameText = function(val1, val2){
+	if(val1.trim().toLowerCase() == val2.trim().toLowerCase()){
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
  * element 하위 input의 값 비우기
  * @param el 범위 element
  * @param type 대상 input 타입
  */
-$util.inputTextEmpty = function(el, type){
+$util.inputTypeEmpty = function(el, type){
 	$(el).find('input[type="' + type + '"]').val('');
 };
 
