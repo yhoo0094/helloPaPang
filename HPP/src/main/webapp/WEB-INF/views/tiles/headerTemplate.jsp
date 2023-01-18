@@ -75,8 +75,8 @@
 								<td><a href="<%=request.getContextPath() %>/admin/board" class="navMnu"><i class="fa fa-gear navIcon"></i> 관리자</a></td>
 								<td><a href="#about" class="navMnu"><i class="fa fa-comment navIcon"></i> 게시판</a></td>
 								<td><a href="#team" class="navMnu"><i class="fa-sharp fa-solid fa-store navIcon"></i> 장터</a></td>
+								<td><a href="#pricing" class="navMnu"><i class="fa-solid fa-ice-cream navIcon"></i> 활동</a></td>								
 								<td><a href="#work" class="navMnu"><i class="fa-solid fa-baby-carriage navIcon"></i> 베이비시터</a></td>
-								<td><a href="#pricing" class="navMnu"><i class="fa-solid fa-ice-cream navIcon"></i> 활동</a></td>
 								<td><a href="<%=request.getContextPath() %>/info/notice" class="navMnu"><i class="fa-sharp fa-solid fa-circle-info navIcon"></i> 정보</a></td>
 							</tr>	
 						</tbody>

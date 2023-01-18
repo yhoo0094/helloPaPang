@@ -13,6 +13,11 @@ a:hover {
 	padding: 0;
 }
 
+input[type = 'date']{
+	display: inline-block;
+    width: 140px;
+}
+
 :root {
   --header-heigth: 70px;
   --footer-heigth: 70px;

@@ -1,0 +1,36 @@
+#---------------------------------------------시퀀스 생성---------------------------------------------
+DELIMITER $$
+    CREATE PROCEDURE `create_sequence` (IN the_name text)
+    MODIFIES SQL DATA
+    DETERMINISTIC
+    BEGIN
+        DELETE FROM TB_SEQUENCE WHERE SEQ_NM = the_name;
+        INSERT INTO TB_SEQUENCE VALUES(the_name, 0);
+   END
+#----------------------------------------------------------------------------------------------------
+DELIMITER $$
+    CREATE FUNCTION `nextval` (the_name VARCHAR(30))
+    RETURNS BIGINT UNSIGNED
+    MODIFIES SQL DATA
+    DETERMINISTIC
+    BEGIN
+        DECLARE ret BIGINT UNSIGNED;
+        UPDATE TB_SEQUENCE SET CURRVAL = CURRVAL +1 WHERE SEQ_NM = the_name;
+        SELECT CURRVAL INTO ret FROM TB_SEQUENCE WHERE SEQ_NM = the_name LIMIT 1;
+        RETURN ret;
+   END
+#----------------------------------------------------------------------------------------------------	
+CALL create_sequence('POLI_SEQ');
+CALL create_sequence('LOGIN_SEQ');
+CALL create_sequence('BOARD_SEQ');
+#---------------------------------------------시퀀스 생성 끝---------------------------------------------
+
+
+
+
+
+
+
+
+
+
