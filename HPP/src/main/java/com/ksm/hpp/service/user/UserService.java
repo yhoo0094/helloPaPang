@@ -139,6 +139,10 @@ public class UserService extends BaseService {
 				loginInfo.remove("userPw");	//비밀번호 정보는 제거
 				session.setAttribute(Constant.LOGIN_INFO, loginInfo);
 				
+				//권한 정보 세션에 저장
+				List<Map<String, Object>> authList = sqlSession.selectList("mapper.user.UserMapper.selectAuthList", inData);
+				session.setAttribute(Constant.AUTH_LIST, authList);
+				
 				int sessionTime = Integer.parseInt((String) PapangUtil.getMapFromList(userPoli, "poliNm", "SESSION_TIME").get("poliVal"));	//세션 유지시간(초단위)
 				session.setMaxInactiveInterval(sessionTime);	
 				session.setAttribute(Constant.SESSION_TIME, sessionTime);	//세션 유지시간 정보 세션에 추가

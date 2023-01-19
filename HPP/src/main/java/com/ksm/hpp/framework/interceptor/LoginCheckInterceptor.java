@@ -1,5 +1,6 @@
 package com.ksm.hpp.framework.interceptor;
 
+import java.util.Enumeration;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -31,12 +32,9 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 	 */
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		logger.info("LoginCheckInterceptor 요청 URI: " + request.getRequestURI());
-		
 		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
 		if(loginInfo == null) {
-			response.sendRedirect("/error/noLoginInfo");
-			return false;
+			request.setAttribute("errorPage", "error/noLoginInfo");
 		} else {
 			HttpSession session = request.getSession();
 			int sessionTime = (Integer) session.getAttribute(Constant.SESSION_TIME);

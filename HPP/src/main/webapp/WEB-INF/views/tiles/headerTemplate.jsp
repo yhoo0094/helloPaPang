@@ -72,7 +72,7 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<td><a href="<%=request.getContextPath() %>/admin/board" class="navMnu"><i class="fa fa-gear navIcon"></i> 관리자</a></td>
+								<td><a href="<%=request.getContextPath() %>/admin/adminHome" class="navMnu"><i class="fa fa-gear navIcon"></i> 관리자</a></td>
 								<td><a href="#about" class="navMnu"><i class="fa fa-comment navIcon"></i> 게시판</a></td>
 								<td><a href="#team" class="navMnu"><i class="fa-sharp fa-solid fa-store navIcon"></i> 장터</a></td>
 								<td><a href="#pricing" class="navMnu"><i class="fa-solid fa-ice-cream navIcon"></i> 활동</a></td>								

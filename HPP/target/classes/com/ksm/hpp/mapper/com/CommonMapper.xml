@@ -8,7 +8,7 @@
 			,  POLI_CODE			/*정책분류코드(01:사용자)*/
 			,  POLI_NM				/*정책명*/
 			,  POLI_VAL				/*정책값*/
-			,  RMRK					/*비고*/
+			,  POLI_RMRK			/*비고*/
 			,  FST_REG_ID			/*최초등록자아이디*/
 			,  FST_REG_DTTI			/*최초등록일시*/
 			,  LT_UPD_ID			/*최종수정자아이디*/

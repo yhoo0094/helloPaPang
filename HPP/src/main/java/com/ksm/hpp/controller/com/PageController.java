@@ -3,6 +3,7 @@ package com.ksm.hpp.controller.com;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,9 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ksm.hpp.framework.util.RequestUtil;
+import com.ksm.hpp.service.com.CommonService;
 
 @Controller
 public class PageController {
+
+	@Resource(name = "CommonService")
+	protected CommonService commonService;	
 	
 	/**
 	 * @메소드명: tilesSample
@@ -61,12 +66,33 @@ public class PageController {
 	@RequestMapping("/{url1}/{url2}")
 	public ModelAndView pageController(HttpServletRequest request, HttpServletResponse response, @PathVariable("url1") String url1, @PathVariable("url2") String url2) throws Exception {
 		ModelAndView result = new ModelAndView();
-		
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
 
-		//권한체크 기능 구현 필요
+		do {
+			//url이 에러 관련 페이지는 권한체크 X
+			if("error".equals(url1)) { 
+				result.setViewName(url1 + "/" + url2);
+				break;
+			}
+			
+			//에러 발생해서 에러 페이지로 이동할 때
+			if(request.getAttribute("errorPage") != null) {
+				result.setViewName((String) request.getAttribute("errorPage"));
+				break;
+			}
 		
-		result.setViewName(url1 + "/" + url2);
+			//읽기 권한체크
+			inData.put("mnuUrl", url1 + "/" + url2);
+			Boolean isReadAuth = commonService.readAuthChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
+			if(!isReadAuth) {
+				//권한이 없을 경우
+				result.setViewName("error/noAuth");
+			} else {
+				//최종 권한 확인 성공
+				Map<String, Object> mnuInfo = commonService.selectMnuInfo((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);	//메뉴 정보 확인
+				result.setViewName(url1 + "/" + url2);
+			}
+		} while(false);
 		return result;
 	}	
 	

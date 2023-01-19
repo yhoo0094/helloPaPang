@@ -1,7 +1,11 @@
 package com.ksm.hpp.service.com;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +35,85 @@ public class CommonService extends BaseService {
 		
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;
-	}		
+	}
 	
+	/**
+	* @메소드명: readAuthChk
+	* @작성자: KimSangMin
+	* @생성일: 2023. 1. 19. 오후 1:50:35
+	* @설명: 읽기 권한 체크
+	 */
+	@SuppressWarnings("unchecked")
+	public Boolean readAuthChk(StringBuilder logStr, HttpServletRequest request, Map<String, Object> inData) throws Exception {
+		Boolean result = false;
+		String mnuUrl = (String) inData.get("mnuUrl");
+		
+		HttpSession session = request.getSession();
+		List<Map<String, Object>> freeAuthList = (List<Map<String, Object>>) session.getAttribute(Constant.FREE_AUTH_LIST);
+		List<Map<String, Object>> authList = (List<Map<String, Object>>) session.getAttribute(Constant.AUTH_LIST);
+		
+		//세션이 없을 경우 => 로그인 안 함 => 권한 체크 필요 여부에 따라 판단(필요:false, 불필요:true)
+		if(authList == null) {
+			freeAuthList = sqlSession.selectList("mapper.user.UserMapper.selectFreeAuthList", inData);
+			for(Map<String, Object> auth : freeAuthList) {
+				if(mnuUrl.equals(auth.get("mnuUrl"))) {
+					result = true;
+					break;
+				}
+			}			
+		}
+		//권한이 필요없는 목록에 해당 url이 있으면 통과
+		if(!result) {
+			for(Map<String, Object> auth : freeAuthList) {
+				if(mnuUrl.equals(auth.get("mnuUrl"))) {
+					result = true;
+					break;
+				}
+			}			
+		}		
+		//권한 목록에서 해당 url의 권한이 있으면 통과(읽기 가능으로 판단)
+		if(!result) {
+			for(Map<String, Object> auth : authList) {
+				if(mnuUrl.equals(auth.get("mnuUrl"))) {
+					result = true;
+					break;
+				}
+			}			
+		}
+		//권한이 필요없는 목록 DB에서 조회하여 다시 테스트
+		if(!result) {
+			freeAuthList = sqlSession.selectList("mapper.user.UserMapper.selectFreeAuthList", inData);
+			for(Map<String, Object> auth : freeAuthList) {
+				if(mnuUrl.equals(auth.get("mnuUrl"))) {
+					session.setAttribute(Constant.FREE_AUTH_LIST, freeAuthList);		//권한이 필요없는 목록 정보 최신화
+					result = true;
+					break;
+				}
+			}				
+		}		
+		//권한 목록 DB에서 조회하여 다시 테스트
+		if(!result) {
+			authList = sqlSession.selectList("mapper.user.UserMapper.selectAuthList", inData);
+			for(Map<String, Object> auth : authList) {
+				if(auth.containsKey(mnuUrl)) {
+					session.setAttribute(Constant.AUTH_LIST, authList);		//권한 정보 최신화
+					result = true;
+					break;
+				}
+			}			
+		}
+		return result;
+	}	
+	
+	/**
+	* @메소드명: selectMnuInfo
+	* @작성자: KimSangMin
+	* @생성일: 2023. 1. 19. 오후 5:55:22
+	* @설명: 메뉴 정보 조회
+	 */
+	public Map<String, Object> selectMnuInfo(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		return result;
+	}
 }

@@ -36,6 +36,7 @@
 			
 			<!-- 제외할 URL 개별 -->
 			<mvc:exclude-mapping path="/"/>				<!-- 홈페이지 -->
+			<mvc:exclude-mapping path="/home"/>			<!-- 홈페이지 -->
 			<mvc:exclude-mapping path="/user/signUp"/> 	<!-- 회원가입 -->
 			
 			<bean id="LoginCheckInterceptor" class="com.ksm.hpp.framework.interceptor.LoginCheckInterceptor"></bean>
