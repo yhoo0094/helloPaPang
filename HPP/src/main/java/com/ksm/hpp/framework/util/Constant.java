@@ -27,4 +27,5 @@ public class Constant
 	public static final String EXCEL_COLUMN 	= "EXCEL_COLUMN";		//컬럼 정보
 	public static final String EXCEL_DATA 		= "EXCEL_DATA";			//입력 데이터
 	public static final String EXCEL_UPLOAD_OPTION = "EXCEL_UPLOAD_OPTION";	//엑셀 업로드 옵션
+	
 }

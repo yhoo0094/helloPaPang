@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ksm.hpp.framework.util.Constant;
 import com.ksm.hpp.framework.util.RequestUtil;
 import com.ksm.hpp.service.com.CommonService;
 
@@ -63,19 +64,13 @@ public class PageController {
 	 * @설명: 페이지 이동 관리 컨트롤러
 	 * @throws Exception
 	 */
-	@RequestMapping("/{url1}/{url2}")
+	@RequestMapping("/{url1:^(?!error).*$}/{url2}")
 	public ModelAndView pageController(HttpServletRequest request, HttpServletResponse response, @PathVariable("url1") String url1, @PathVariable("url2") String url2) throws Exception {
 		ModelAndView result = new ModelAndView();
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
 
 		do {
-			//url이 에러 관련 페이지는 권한체크 X
-			if("error".equals(url1)) { 
-				result.setViewName(url1 + "/" + url2);
-				break;
-			}
-			
-			//에러 발생해서 에러 페이지로 이동할 때
+			//에러 발생해서 인터셉터에서 에러 페이지로 보낼 때
 			if(request.getAttribute("errorPage") != null) {
 				result.setViewName((String) request.getAttribute("errorPage"));
 				break;
@@ -84,12 +79,17 @@ public class PageController {
 			//읽기 권한체크
 			inData.put("mnuUrl", url1 + "/" + url2);
 			Boolean isReadAuth = commonService.readAuthChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
-			if(!isReadAuth) {
+			if(!isReadAuth) {	
 				//권한이 없을 경우
 				result.setViewName("error/noAuth");
-			} else {
-				//최종 권한 확인 성공
+			} else {			
+				//최종 권한 확인 성공한 경우
 				Map<String, Object> mnuInfo = commonService.selectMnuInfo((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);	//메뉴 정보 확인
+				result.addObject("mnuNm",mnuInfo.get("mnuNm"));
+				result.addObject("mnuUpperNm",mnuInfo.get("mnuUpperNm"));
+				result.addObject("mnuInfo",mnuInfo.get("mnuInfo"));
+				result.addObject("mnuUrl",mnuInfo.get("mnuUrl"));
+				result.addObject("mnuTopUrl",mnuInfo.get("mnuTopUrl"));
 				result.setViewName(url1 + "/" + url2);
 			}
 		} while(false);

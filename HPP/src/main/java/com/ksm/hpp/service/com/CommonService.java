@@ -112,8 +112,7 @@ public class CommonService extends BaseService {
 	* @설명: 메뉴 정보 조회
 	 */
 	public Map<String, Object> selectMnuInfo(StringBuilder logStr, Map<String, Object> inData) throws Exception {
-		Map<String, Object> result = new HashMap<String, Object>();
-		
-		return result;
+		Map<String, Object> mnuInfo = sqlSession.selectOne("mapper.com.CommonMapper.selectMnuInfo", inData);
+		return mnuInfo;
 	}
 }
