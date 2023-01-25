@@ -1,7 +1,6 @@
 package com.ksm.hpp.framework.util;
 
 import java.net.Inet4Address;
-import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,19 +9,19 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.apache.tomcat.util.codec.binary.StringUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.ksm.hpp.controller.com.BaseController;
+import com.ksm.hpp.framework.aop.ControllerAdvice;
 
 //Controller.java에서 사용하는 Request관련 유틸
 public class RequestUtil {
 	
 	protected static final Log log = LogFactory.getLog(BaseController.class);
+	protected static final Logger logger = Logger.getLogger(ControllerAdvice.class);
 	
 	/**
 	 * @메소드명: getParameterMap
@@ -126,7 +125,41 @@ public class RequestUtil {
 		
 		return ipAddr;
 	}
-	
+
+	/**
+	* @메소드명: getParameterStrForLog
+	* @작성자: KimSangMin
+	* @생성일: 2023. 1. 25. 오후 1:13:24
+	* @설명: 
+	 */
+	public static String getParameterStrForLog(HttpServletRequest request) {
+		String result = "";
+		
+		try {
+			Map<String, Object> paramMap = getParameterMap(request);
+			Map<String, Object> logMap = new HashMap<String, Object>();
+			
+			for(String key : paramMap.keySet()) {
+				if(!"userPw".contains(key)) {	//키 값이 userPw가 아닌 경우 logMap에 추가
+					logMap.put(key, paramMap.get(key));
+				}
+			}
+
+			// Map -> Json 문자열
+	        Gson gson = new Gson();
+	        result = gson.toJson(logMap);	
+	        
+	        //1000자 제한
+	        if(result.length() > 1000) {
+	        	result = result.substring(0, 1000);
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getCause());
+			result = "{error}";
+		}
+		return result;
+	}
 }
 
 

@@ -66,10 +66,11 @@ function login(){
 				
 				location.reload();
 	        } else {
-				alert(res[Constant.OUT_RESULT_MSG])
+				alert(res[Constant.OUT_RESULT_MSG]);
 			}
         },
         error: function(textStatus, jqXHR, thrownError){
+			alert(res[Constant.OUT_RESULT_MSG]);
 			$com.loadingEnd();
 		}
     });		

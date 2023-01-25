@@ -14,6 +14,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ksm.hpp.framework.exception.ConfigurationException;
 import com.ksm.hpp.framework.util.Constant;
 import com.ksm.hpp.framework.util.DateUtil;
 import com.ksm.hpp.framework.util.PapangUtil;
@@ -73,13 +74,10 @@ public class UserService extends BaseService {
 		
 		do {
 			if(loginInfo == null) {	//해당 계정이 조회되지 않을 때
-				loginCode = "03";
-				result.put(Constant.OUT_RESULT_MSG, "존재하지 않는 아이디이거나 비밀번호가 일치하지 않습니다.");	
-				result.put(Constant.RESULT, Constant.RESULT_FAILURE);
-				break;
-				
-				//Exception 처리를 통한 메서드 중지(추후 구현)
-				//throw new RuntimeException("존재하지 않는 아이디이거나 비밀번호가 일치하지 않습니다.");
+				//Exception 처리를 통한 메서드 중지
+				inData.put("loginCode", "03");
+				cnt = sqlSession.insert("mapper.user.UserMapper.insetLoginLog", inData);
+				throw new ConfigurationException("존재하지 않는 아이디이거나 비밀번호가 일치하지 않습니다.");
 			} else {
 				//사용자 정책 조회
 				inData.put("poliCode", "01");	//정책분류코드(01:사용자)

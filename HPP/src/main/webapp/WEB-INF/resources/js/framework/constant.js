@@ -13,6 +13,7 @@
 	, OUT_RESULT_MSG 	: "OUT_RESULT_MSG"		//결과에 대한 메세지
 	, RESULT_DETAIL		: "RESULT_DETAIL"		//결과 상세(결과에 대한 구체적인 분류 - DB반영 실패, 입력 형식 불일치 등)   
 	, IN_DATA_JOSN		: "IN_DATA_JOSN"		//전송할 데이터(json 형식)
+	, IN_LOG_STR		: "IN_LOG_STR"			//request 내의 log 생성을 위한 logbuilder가 저장된 key
    
 	//RESULT_DETAIL 관련
 	, PSWD_LIM_ISSUE	: "PSWD_LIM_ISSUE"		//비밀번호 변경 주기 문제  

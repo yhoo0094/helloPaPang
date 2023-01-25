@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration status="info">
+<configuration status="INFO">
 <!-- 로그레벨 OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
  
 <!--  
@@ -24,12 +24,41 @@
 %t: 쓰레드 이름
 -->
  
-    <appenders><!-- 로그 출력 방식 -->
+    <appenders>
+    	<!-- 콘솔 -->
         <console name="console" target="SYSTEM_OUT"><!-- 콘솔에 출력하는 방식 설정 -->
-            <patternLayout pattern="%d{yyyy-MM-dd hh:mm:ss} %5p [%c] %m%n"/>
+            <patternLayout pattern="%5p %d{yyyy-MM-dd hh:mm:ss,SSS} [%C{3}.%M] %m%n"/>
         </console>
-        <!-- <File></File> --><!-- 파일에 출력하는 방식 설정 -->
+        
+        <!-- 파일  -->
+        <RollingFile name ="RollingFile">
+            <FileName>/data/hpp/log/HPP.txt</FileName>
+            <FilePattern>/data/hpp/log/HPP_%d{yyyy-MM-dd-hh-mm}.zip</FilePattern>
+            <PatternLayout>
+                <Pattern>%5p %d{yyyy-MM-dd hh:mm:ss,SSS} [%C{3}.%M] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+                <!-- <CronTriggeringPolicy schedule="0 0/2 * 1/1 * ? *" /> -->
+            </Policies>
+            <DefaultRolloverStrategy max="5" />
+        </RollingFile>
+        
+        <RollingFile name ="RollingFileError">
+            <FileName>C:/log/mylog_error.txt</FileName>
+            <FilePattern>C:/log/%d{yyyy-MM-dd-hh-mm}/mylog_error.zip</FilePattern>
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>
+            </Policies>
+        </RollingFile>        
+        
     </appenders>
+    
+    
     
 	 <!-- SQL Logger -->
 	<loggers>	 
@@ -41,7 +70,7 @@
 		<!--  SQL 쿼리 문장 -->
 		<logger name="jdbc.sqlonly" additivity="false" level="INFO"> 
 		    <appender-ref ref="console"/> 
-		    <patternLayout pattern="%d{yyyy-MM-dd hh:mm:ss} %5p [%c]%n %m%n"/>
+		    <patternLayout pattern="%5p %d{yyyy-MM-dd hh:mm:ss} [%C.%M] %m%n"/>
 		</logger>
 		 
 		<!--  ResultSet을 제외한 모든 JDBC 호출 정보 -->
@@ -59,8 +88,9 @@
 		    <appender-ref ref="console"/> 
 		</logger>
 		
-        <root level="info">
+        <root level="INFO">
            	<appenderRef ref="console"/>
+           	<AppenderRef ref="RollingFile"/>
         </root>		
 	</loggers>
 </configuration>
