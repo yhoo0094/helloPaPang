@@ -1,0 +1,8 @@
+ INFO 2023-01-26 05:31:47,441 [web.servlet.FrameworkServlet.initServletBean] Initializing Servlet 'dispatcherServlet'
+ INFO 2023-01-26 05:31:57,365 [tiles.access.TilesAccess.setContainer] Publishing TilesContext for context: org.springframework.web.servlet.view.tiles3.SpringWildcardServletTilesApplicationContext
+ INFO 2023-01-26 05:31:57,696 [scheduling.annotation.ScheduledAnnotationBeanPostProcessor.finishRegistration] No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+ INFO 2023-01-26 05:31:58,004 [web.servlet.FrameworkServlet.initServletBean] Completed initialization in 10525 ms
+ INFO 2023-01-26 05:31:59,016 [framework.aop.ControllerAdvice.around] 요청 처리시간: 755
+ INFO 2023-01-26 05:31:59,017 [framework.aop.ControllerAdvice.around] com.PageController.root(HttpServletRequest,HttpServletResponse)/127.0.0.1/{}
+ INFO 2023-01-26 05:31:59,223 [framework.interceptor.RequestInterceptor.preHandle] ##################################RequestInterceptor 요청 URI: /notice/selectNotice.do
+ INFO 2023-01-26 05:31:59,238 [framework.util.RequestUtil.getIpAddr] > IP Address : 192.168.8.205

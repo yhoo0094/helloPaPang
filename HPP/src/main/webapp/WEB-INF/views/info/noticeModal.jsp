@@ -11,6 +11,17 @@
 
 <script src="<%=request.getContextPath() %>/resources/js/info/noticeModal.js"></script>
 
+<script type="module">
+    import editor from '/resources/js/framework/ckeditor5/build/editor.js'
+    $(document).ready(function () {
+		editor(".editor").then(editor => {
+        	alert('adfadf');
+        	// some code..
+            // then 이후에 받은 editor를 다른 변수로 받아주시는 편이 좋습니다!
+        })
+    })
+</script>
+
 <style>
 	.ck-editor__editable[role="textbox"] {
 	    /* editing area */
@@ -50,8 +61,8 @@
 				<tr>
 					<th>내용</th>
 					<td colspan="3">
-						<textarea id="noticeCn" name="noticeCn" class="form-control" rows="" cols="" style="height: 500px"></textarea>
-						<!-- <div id="noticeEditor"></div> -->
+						<!-- <textarea id="noticeCn" name="noticeCn" class="form-control" rows="" cols="" style="height: 500px"></textarea> -->
+						<div id="noticeEditor" class="editor"></div>
 					</td>
 				</tr>
 				<tr>

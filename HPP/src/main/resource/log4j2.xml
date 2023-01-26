@@ -32,14 +32,15 @@
         
         <!-- 파일  -->
         <RollingFile name ="RollingFile">
-            <FileName>/data/hpp/log/HPP.txt</FileName>
-            <FilePattern>/data/hpp/log/HPP_%d{yyyy-MM-dd-hh-mm}.zip</FilePattern>
+        	<!-- 개발환경 로그 경로 -->
+            <FileName>C:\Users\KimSangMin\git\helloPaPang\HPP\log\HPP.log</FileName>
+            <FilePattern>C:\Users\KimSangMin\git\helloPaPang\HPP\log\HPP_%d{yyyy-MM-dd-hh-mm}.log</FilePattern>
             <PatternLayout>
                 <Pattern>%5p %d{yyyy-MM-dd hh:mm:ss,SSS} [%C{3}.%M] %m%n</Pattern>
             </PatternLayout>
             <Policies>
                 <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>
-                <SizeBasedTriggeringPolicy size="100MB"/>
+                <!-- <SizeBasedTriggeringPolicy size="100MB"/> -->
                 <!-- <CronTriggeringPolicy schedule="0 0/2 * 1/1 * ? *" /> -->
             </Policies>
             <DefaultRolloverStrategy max="5" />
@@ -65,11 +66,13 @@
 		<!--  SQL문과 해당 SQL을 실행시키는데 수행된 시간 정보(milliseconds) -->
 		<logger name="jdbc.sqltiming" additivity="false" level="INFO">
 		    <appender-ref ref="console"/> 
+		    <AppenderRef ref="RollingFile"/>
 		</logger>
 		
 		<!--  SQL 쿼리 문장 -->
 		<logger name="jdbc.sqlonly" additivity="false" level="INFO"> 
 		    <appender-ref ref="console"/> 
+		    <AppenderRef ref="RollingFile"/>
 		    <patternLayout pattern="%5p %d{yyyy-MM-dd hh:mm:ss} [%C.%M] %m%n"/>
 		</logger>
 		 
