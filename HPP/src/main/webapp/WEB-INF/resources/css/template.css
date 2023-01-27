@@ -313,6 +313,13 @@ table.dataTable.no-footer{
 }
 /* 로딩바 끝 */
 
+/* 에디터 시작 */
+.editor {
+	border: 1px solid #ced4da !important;
+	height: 500px;
+}
+/* 에디터 끝 */
+
 /* 전체 공용 시작 */
 table.dataTable thead th{
 	text-align: center;

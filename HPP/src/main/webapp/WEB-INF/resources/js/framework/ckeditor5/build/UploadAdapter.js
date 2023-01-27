@@ -6,15 +6,17 @@
 */
 
 export default class UploadAdapter {
+    // 파일로더가 업로드 어댑터를 사용해서 이미지를 서버에 전송
     constructor(loader) {
-        this.loader = loader;
+        this.loader = loader; //파일로더
     }
 
+	// 업로드를 시작
     upload() {
-        return this.loader.file.then( file => new Promise(((resolve, reject) => {
+        return this.loader.file.then(file => new Promise(((resolve, reject) => {
             this._initRequest();
-            this._initListeners( resolve, reject, file );
-            this._sendRequest( file );
+            this._initListeners(resolve, reject, file);
+            this._sendRequest(file);
         })))
     }
 
@@ -24,6 +26,7 @@ export default class UploadAdapter {
         xhr.responseType = 'json';
     }
 
+	//XHR 리스너 초기화 하기
     _initListeners(resolve, reject, file) {
         const xhr = this.xhr;
         const loader = this.loader;

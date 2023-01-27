@@ -22,7 +22,6 @@
     <!-- datatable -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
-    <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css"/> -->
     <!-- datatable -->
     
     
@@ -51,8 +50,8 @@
 	<script src="<%=request.getContextPath() %>/resources/js/framework/excelUtil.js"></script> <!-- 엑셀 유틸 -->
 	<script src="<%=request.getContextPath() %>/resources/js/framework/editorUtil.js"></script> <!-- 에디터 -->
 	<script src="<%=request.getContextPath() %>/resources/js/framework/constant.js"></script> <!-- js 공통 변수 -->
+	
 	<script src="<%=request.getContextPath() %>/resources/js/framework/ckeditor5/build/ckeditor.js"></script> <!-- ck에디터 -->
-
     <script src="<%=request.getContextPath() %>/resources/js/framework/ckeditor5/build/editor.js" type="module"></script><!-- ck에디터 -->
 	
 	<script src="<%=request.getContextPath() %><tiles:getAsString name="js"/>"></script> <!-- 페이지 개별 -->

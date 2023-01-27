@@ -1,0 +1,5 @@
+ INFO 2023-01-27 11:45:03,549 [controller.com.ScheduleController.scheduleSample] 스케줄러 실행 확인
+ INFO 2023-01-27 11:45:03,574 [framework.aop.ControllerAdvice.around] 요청 처리시간: 63
+ INFO 2023-01-27 11:45:03,574 [framework.aop.ControllerAdvice.around] com.ScheduleController.scheduleSample()/request not found
+ INFO 2023-01-27 11:45:37,237 [framework.aop.ControllerAdvice.around] 요청 처리시간: 42166
+ INFO 2023-01-27 11:45:37,237 [framework.aop.ControllerAdvice.around] com.CommonController.ckUploadImage(MultipartHttpServletRequest,HttpServletResponse)/0:0:0:0:0:0:0:1/{}

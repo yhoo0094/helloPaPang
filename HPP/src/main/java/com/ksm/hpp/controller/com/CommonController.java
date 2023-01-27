@@ -2,6 +2,11 @@ package com.ksm.hpp.controller.com;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -9,11 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
 import org.json.simple.JSONObject;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.Gson;
+import com.ksm.hpp.framework.util.Configuration;
+import com.ksm.hpp.framework.util.OSValidator;
+import com.ksm.hpp.framework.util.OS_Type;
 import com.ksm.hpp.service.com.CommonService;
 
 @Controller
@@ -31,7 +44,7 @@ public class CommonController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/ckUploadImage.do")
-	public String ckUploadImage(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void ckUploadImage(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 	    PrintWriter printWriter = null;
 		
@@ -47,18 +60,47 @@ public class CommonController {
         StringBuffer tmp = new StringBuffer();
         
         //파일 저장 경로 만들기 (추후 구현)
-        
-        File imageUpload = new File("C:/data/hppnas/20230126/" + imageName + "." +  extension);
+
+		//현재 날짜 구하기
+		LocalDate date = LocalDate.now();
+		DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String nowDate = date.format(dtfDate);	
+		
+		OS_Type os = OSValidator.getOS();	//OS타입 구하기(UNKNOWN(0), WINDOWS(1), LINUX(2), MAC(3), SOLARIS(4))
+		Configuration conf = new Configuration();
+		String filePath = conf.getString("Global." + os + ".getComImagePath") + nowDate;	
+		
+		/*
+		File dir = new File(filePath);
+		if(!dir.isDirectory()) {	//해당 경로가 디렉토리인지 확인
+			if(!dir.exists()) {		//해당 경로 디렉토리가 있는지 확인
+				dir.mkdir();		//해당 디렉토리가 없으면 생성
+			}
+		}		
+		*/
+		
+        File imageUpload = new File(filePath + "/" + imageName);
         file.transferTo(imageUpload);
 	    
-        jsonObject.put("url", imageUpload);
+        //jsonObject.put("url", "/resources/images/editor/" + nowDate + "/" + imageName);
+        jsonObject.put("url", "/common/images/" + imageName);
         
         //리턴 response 작성
-        printWriter = response.getWriter();
-        response.setContentType("text/html");
-        printWriter.println(jsonObject);
+//        printWriter = response.getWriter();
+//        response.setContentType("text/html");
+//        printWriter.println(jsonObject);
         
-	    return null;
-	}		
+		Gson gson = new Gson();
+		String json = gson.toJson(jsonObject);
+		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
+		response.setContentType("text/html");
+	}	
+	
+	@ResponseBody
+	@GetMapping("/images/{filename}.{extension}")
+	public org.springframework.core.io.Resource showImage(@PathVariable String filename, @PathVariable String extension) throws
+	MalformedURLException {
+	 	return new UrlResource("file:C:/Users/KimSangMin/git/helloPaPang/HPP/src/main/webapp/WEB-INF/resources/images/editor/20230127/" + filename + "." + extension);
+	 }	
 	
 }

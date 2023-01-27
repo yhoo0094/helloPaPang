@@ -7,7 +7,6 @@ var $editorUtil = {};
 
 $editorUtil.createEditorTest = function(){
 	editor(".editor").then(editor => {
-        	alert('adfadf');
         	// some code..
             // then 이후에 받은 editor를 다른 변수로 받아주시는 편이 좋습니다!
         })

@@ -1,0 +1,186 @@
+ INFO 2023-01-27 02:08:11,646 [framework.interceptor.RequestInterceptor.preHandle] ##################################RequestInterceptor 요청 URI: /info/notice
+ INFO 2023-01-27 02:08:12,124 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionOpened] 23. Connection opened
+ INFO 2023-01-27 02:08:12,176 [log4jdbc.tools.Log4JdbcCustomFormatter.sqlOccured] SQL : INSERT 
+		  INTO TB_LOG_REQ			/*테이블_요청로그*/
+		     (
+		       REQ_SEQ				/*요청일련번호*/
+		     , USER_ID				/*사용자아이디*/
+		     , USER_IP				/*사용자아이피*/
+		     , REQ_URI				/*요청경로*/
+		     , REQ_PARAM			/*요청파라미터*/
+		     , REQ_TYPE_CODE 		/*요청타입코드*/
+		     )
+		VALUES
+			 (
+			   (SELECT nextval('REQ_SEQ') FROM DUAL)	/*요청일련번호*/
+			 , 'admin'						/*사용자아이디*/
+			 , '192.168.8.205'						/*사용자아이디*/
+			 , '/info/notice'								/*요청경로*/
+			 , '{}'								/*요청파라미터*/
+		     , 'info' 							/*요청타입코드*/
+			 )
+ INFO 2023-01-27 02:08:12,419 [sf.log4jdbc.Slf4jSpyLogDelegator.sqlTimingOccured] INSERT INTO TB_LOG_REQ /*테이블_요청로그*/ ( REQ_SEQ /*요청일련번호*/ , USER_ID /*사용자아이디*/ , USER_IP /*사용자아이피*/ 
+, REQ_URI /*요청경로*/ , REQ_PARAM /*요청파라미터*/ , REQ_TYPE_CODE /*요청타입코드*/ ) VALUES ( (SELECT nextval('REQ_SEQ') 
+FROM DUAL) /*요청일련번호*/ , 'admin' /*사용자아이디*/ , '192.168.8.205' /*사용자아이디*/ , '/info/notice' /*요청경로*/ 
+, '{}' /*요청파라미터*/ , 'info' /*요청타입코드*/ )  {executed in 242 msec}
+ INFO 2023-01-27 02:08:12,485 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionClosed] 23. Connection closed
+ INFO 2023-01-27 02:08:12,846 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionOpened] 24. Connection opened
+ INFO 2023-01-27 02:08:12,936 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionClosed] 24. Connection closed
+ INFO 2023-01-27 02:08:13,220 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionOpened] 25. Connection opened
+ INFO 2023-01-27 02:08:13,241 [log4jdbc.tools.Log4JdbcCustomFormatter.sqlOccured] SQL : SELECT T2.MNU_NM AS MNU_UPPER_NM				/*상위메뉴명*/
+			,  T1.MNU_NM						/*메뉴명*/
+			,  T1.MNU_INFO						/*메뉴정보*/
+			,  T1.MNU_URL						/*메뉴경로*/
+			,  T1.MNU_TOP_URL					/*최상위메뉴경로*/
+		  FROM TB_MNU T1						/*테이블_메뉴*/
+		  JOIN TB_MNU T2						/*테이블_메뉴*/
+		    ON T1.MNU_UPPER_URL = T2.MNU_URL
+		 WHERE T1.MNU_URL LIKE CONCAT('info/notice','%')
+ INFO 2023-01-27 02:08:13,281 [sf.log4jdbc.Slf4jSpyLogDelegator.sqlTimingOccured] SELECT T2.MNU_NM AS MNU_UPPER_NM /*상위메뉴명*/ , T1.MNU_NM /*메뉴명*/ , T1.MNU_INFO /*메뉴정보*/ , T1.MNU_URL 
+/*메뉴경로*/ , T1.MNU_TOP_URL /*최상위메뉴경로*/ FROM TB_MNU T1 /*테이블_메뉴*/ JOIN TB_MNU T2 /*테이블_메뉴*/ ON 
+T1.MNU_UPPER_URL = T2.MNU_URL WHERE T1.MNU_URL LIKE CONCAT('info/notice','%')  {executed in 40 msec}
+ INFO 2023-01-27 02:08:13,331 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionClosed] 25. Connection closed
+ INFO 2023-01-27 02:08:13,332 [framework.aop.ControllerAdvice.around] 요청 처리시간: 847
+ INFO 2023-01-27 02:08:13,332 [framework.aop.ControllerAdvice.around] com.PageController.pageController(HttpServletRequest,HttpServletResponse,String,String)/0:0:0:0:0:0:0:1/{}
+ INFO 2023-01-27 02:08:16,092 [framework.interceptor.RequestInterceptor.preHandle] ##################################RequestInterceptor 요청 URI: /notice/selectNotice.do
+ INFO 2023-01-27 02:08:16,861 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionOpened] 26. Connection opened
+ INFO 2023-01-27 02:08:16,924 [log4jdbc.tools.Log4JdbcCustomFormatter.sqlOccured] SQL : INSERT 
+		  INTO TB_LOG_REQ			/*테이블_요청로그*/
+		     (
+		       REQ_SEQ				/*요청일련번호*/
+		     , USER_ID				/*사용자아이디*/
+		     , USER_IP				/*사용자아이피*/
+		     , REQ_URI				/*요청경로*/
+		     , REQ_PARAM			/*요청파라미터*/
+		     , REQ_TYPE_CODE 		/*요청타입코드*/
+		     )
+		VALUES
+			 (
+			   (SELECT nextval('REQ_SEQ') FROM DUAL)	/*요청일련번호*/
+			 , 'admin'						/*사용자아이디*/
+			 , '192.168.8.205'						/*사용자아이디*/
+			 , '/notice/selectNotice.do'								/*요청경로*/
+			 , '{}'								/*요청파라미터*/
+		     , 'notice' 							/*요청타입코드*/
+			 )
+ INFO 2023-01-27 02:08:17,457 [sf.log4jdbc.Slf4jSpyLogDelegator.sqlTimingOccured] INSERT INTO TB_LOG_REQ /*테이블_요청로그*/ ( REQ_SEQ /*요청일련번호*/ , USER_ID /*사용자아이디*/ , USER_IP /*사용자아이피*/ 
+, REQ_URI /*요청경로*/ , REQ_PARAM /*요청파라미터*/ , REQ_TYPE_CODE /*요청타입코드*/ ) VALUES ( (SELECT nextval('REQ_SEQ') 
+FROM DUAL) /*요청일련번호*/ , 'admin' /*사용자아이디*/ , '192.168.8.205' /*사용자아이디*/ , '/notice/selectNotice.do' 
+/*요청경로*/ , '{}' /*요청파라미터*/ , 'notice' /*요청타입코드*/ )  {executed in 532 msec}
+ INFO 2023-01-27 02:08:17,563 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionClosed] 26. Connection closed
+ INFO 2023-01-27 02:08:17,921 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionOpened] 27. Connection opened
+ INFO 2023-01-27 02:08:18,013 [log4jdbc.tools.Log4JdbcCustomFormatter.sqlOccured] SQL : SELECT BOARD_SEQ				/*게시글일련번호*/
+		     , NOTICE_TITLE 			/*공지사항제목*/
+		     , NOTICE_CN				/*공지사항내용*/
+		     , NOTICE_STR_DT			/*공지사항게시시작일*/
+		     , NOTICE_END_DT			/*공지사항게시종료일*/
+		     , NOTICE_POP_YN			/*공지사항팝업여부*/
+		     , NOTICE_CN				/*공지사항내용*/
+		     , NOTICE_HIT				/*공지사항조회수*/
+		     , FST_REG_ID 				/*최초등록자ID*/
+		     , DATE_FORMAT(FST_REG_DTTI, "%Y/%m/%d %H:%i") FST_REG_DTTI	/*최초등록일시*/
+		     , LT_UPD_ID 				/*최종수정자ID*/
+		     , DATE_FORMAT(LT_UPD_DTTI, "%Y/%m/%d %H:%i") LT_UPD_DTTI	/*최종수정일시*/
+		  FROM TB_BOARD_NOTICE			/*테이블_공지사항*/
+		 ORDER BY NOTICE_STR_DT DESC;
+ INFO 2023-01-27 02:08:18,063 [sf.log4jdbc.Slf4jSpyLogDelegator.sqlTimingOccured] SELECT BOARD_SEQ /*게시글일련번호*/ , NOTICE_TITLE /*공지사항제목*/ , NOTICE_CN /*공지사항내용*/ , NOTICE_STR_DT 
+/*공지사항게시시작일*/ , NOTICE_END_DT /*공지사항게시종료일*/ , NOTICE_POP_YN /*공지사항팝업여부*/ , NOTICE_CN /*공지사항내용*/ 
+, NOTICE_HIT /*공지사항조회수*/ , FST_REG_ID /*최초등록자ID*/ , DATE_FORMAT(FST_REG_DTTI, "%Y/%m/%d %H:%i") 
+FST_REG_DTTI /*최초등록일시*/ , LT_UPD_ID /*최종수정자ID*/ , DATE_FORMAT(LT_UPD_DTTI, "%Y/%m/%d %H:%i") 
+LT_UPD_DTTI /*최종수정일시*/ FROM TB_BOARD_NOTICE /*테이블_공지사항*/ ORDER BY NOTICE_STR_DT DESC;  {executed in 48 msec}
+ INFO 2023-01-27 02:08:18,171 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionClosed] 27. Connection closed
+ INFO 2023-01-27 02:08:18,172 [framework.aop.ControllerAdvice.around] 요청 처리시간: 608
+ INFO 2023-01-27 02:08:18,172 [framework.aop.ControllerAdvice.around] info.NoticeController.selectNotice(HttpServletRequest,HttpServletResponse)/0:0:0:0:0:0:0:1/{}
+ INFO 2023-01-27 02:08:40,666 [framework.interceptor.RequestInterceptor.preHandle] ##################################RequestInterceptor 요청 URI: /info/notice
+ INFO 2023-01-27 02:08:41,319 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionOpened] 28. Connection opened
+ INFO 2023-01-27 02:08:41,345 [log4jdbc.tools.Log4JdbcCustomFormatter.sqlOccured] SQL : INSERT 
+		  INTO TB_LOG_REQ			/*테이블_요청로그*/
+		     (
+		       REQ_SEQ				/*요청일련번호*/
+		     , USER_ID				/*사용자아이디*/
+		     , USER_IP				/*사용자아이피*/
+		     , REQ_URI				/*요청경로*/
+		     , REQ_PARAM			/*요청파라미터*/
+		     , REQ_TYPE_CODE 		/*요청타입코드*/
+		     )
+		VALUES
+			 (
+			   (SELECT nextval('REQ_SEQ') FROM DUAL)	/*요청일련번호*/
+			 , 'admin'						/*사용자아이디*/
+			 , '192.168.8.205'						/*사용자아이디*/
+			 , '/info/notice'								/*요청경로*/
+			 , '{}'								/*요청파라미터*/
+		     , 'info' 							/*요청타입코드*/
+			 )
+ INFO 2023-01-27 02:08:41,608 [sf.log4jdbc.Slf4jSpyLogDelegator.sqlTimingOccured] INSERT INTO TB_LOG_REQ /*테이블_요청로그*/ ( REQ_SEQ /*요청일련번호*/ , USER_ID /*사용자아이디*/ , USER_IP /*사용자아이피*/ 
+, REQ_URI /*요청경로*/ , REQ_PARAM /*요청파라미터*/ , REQ_TYPE_CODE /*요청타입코드*/ ) VALUES ( (SELECT nextval('REQ_SEQ') 
+FROM DUAL) /*요청일련번호*/ , 'admin' /*사용자아이디*/ , '192.168.8.205' /*사용자아이디*/ , '/info/notice' /*요청경로*/ 
+, '{}' /*요청파라미터*/ , 'info' /*요청타입코드*/ )  {executed in 262 msec}
+ INFO 2023-01-27 02:08:41,680 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionClosed] 28. Connection closed
+ INFO 2023-01-27 02:08:42,350 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionOpened] 29. Connection opened
+ INFO 2023-01-27 02:08:42,417 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionClosed] 29. Connection closed
+ INFO 2023-01-27 02:08:42,910 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionOpened] 30. Connection opened
+ INFO 2023-01-27 02:08:42,939 [log4jdbc.tools.Log4JdbcCustomFormatter.sqlOccured] SQL : SELECT T2.MNU_NM AS MNU_UPPER_NM				/*상위메뉴명*/
+			,  T1.MNU_NM						/*메뉴명*/
+			,  T1.MNU_INFO						/*메뉴정보*/
+			,  T1.MNU_URL						/*메뉴경로*/
+			,  T1.MNU_TOP_URL					/*최상위메뉴경로*/
+		  FROM TB_MNU T1						/*테이블_메뉴*/
+		  JOIN TB_MNU T2						/*테이블_메뉴*/
+		    ON T1.MNU_UPPER_URL = T2.MNU_URL
+		 WHERE T1.MNU_URL LIKE CONCAT('info/notice','%')
+ INFO 2023-01-27 02:08:42,988 [sf.log4jdbc.Slf4jSpyLogDelegator.sqlTimingOccured] SELECT T2.MNU_NM AS MNU_UPPER_NM /*상위메뉴명*/ , T1.MNU_NM /*메뉴명*/ , T1.MNU_INFO /*메뉴정보*/ , T1.MNU_URL 
+/*메뉴경로*/ , T1.MNU_TOP_URL /*최상위메뉴경로*/ FROM TB_MNU T1 /*테이블_메뉴*/ JOIN TB_MNU T2 /*테이블_메뉴*/ ON 
+T1.MNU_UPPER_URL = T2.MNU_URL WHERE T1.MNU_URL LIKE CONCAT('info/notice','%')  {executed in 47 msec}
+ INFO 2023-01-27 02:08:43,124 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionClosed] 30. Connection closed
+ INFO 2023-01-27 02:08:43,125 [framework.aop.ControllerAdvice.around] 요청 처리시간: 1443
+ INFO 2023-01-27 02:08:43,125 [framework.aop.ControllerAdvice.around] com.PageController.pageController(HttpServletRequest,HttpServletResponse,String,String)/0:0:0:0:0:0:0:1/{}
+ INFO 2023-01-27 02:08:44,578 [framework.interceptor.RequestInterceptor.preHandle] ##################################RequestInterceptor 요청 URI: /notice/selectNotice.do
+ INFO 2023-01-27 02:08:45,596 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionOpened] 31. Connection opened
+ INFO 2023-01-27 02:08:45,625 [log4jdbc.tools.Log4JdbcCustomFormatter.sqlOccured] SQL : INSERT 
+		  INTO TB_LOG_REQ			/*테이블_요청로그*/
+		     (
+		       REQ_SEQ				/*요청일련번호*/
+		     , USER_ID				/*사용자아이디*/
+		     , USER_IP				/*사용자아이피*/
+		     , REQ_URI				/*요청경로*/
+		     , REQ_PARAM			/*요청파라미터*/
+		     , REQ_TYPE_CODE 		/*요청타입코드*/
+		     )
+		VALUES
+			 (
+			   (SELECT nextval('REQ_SEQ') FROM DUAL)	/*요청일련번호*/
+			 , 'admin'						/*사용자아이디*/
+			 , '192.168.8.205'						/*사용자아이디*/
+			 , '/notice/selectNotice.do'								/*요청경로*/
+			 , '{}'								/*요청파라미터*/
+		     , 'notice' 							/*요청타입코드*/
+			 )
+ INFO 2023-01-27 02:08:45,762 [sf.log4jdbc.Slf4jSpyLogDelegator.sqlTimingOccured] INSERT INTO TB_LOG_REQ /*테이블_요청로그*/ ( REQ_SEQ /*요청일련번호*/ , USER_ID /*사용자아이디*/ , USER_IP /*사용자아이피*/ 
+, REQ_URI /*요청경로*/ , REQ_PARAM /*요청파라미터*/ , REQ_TYPE_CODE /*요청타입코드*/ ) VALUES ( (SELECT nextval('REQ_SEQ') 
+FROM DUAL) /*요청일련번호*/ , 'admin' /*사용자아이디*/ , '192.168.8.205' /*사용자아이디*/ , '/notice/selectNotice.do' 
+/*요청경로*/ , '{}' /*요청파라미터*/ , 'notice' /*요청타입코드*/ )  {executed in 136 msec}
+ INFO 2023-01-27 02:08:45,853 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionClosed] 31. Connection closed
+ INFO 2023-01-27 02:08:46,497 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionOpened] 32. Connection opened
+ INFO 2023-01-27 02:08:46,567 [log4jdbc.tools.Log4JdbcCustomFormatter.sqlOccured] SQL : SELECT BOARD_SEQ				/*게시글일련번호*/
+		     , NOTICE_TITLE 			/*공지사항제목*/
+		     , NOTICE_CN				/*공지사항내용*/
+		     , NOTICE_STR_DT			/*공지사항게시시작일*/
+		     , NOTICE_END_DT			/*공지사항게시종료일*/
+		     , NOTICE_POP_YN			/*공지사항팝업여부*/
+		     , NOTICE_CN				/*공지사항내용*/
+		     , NOTICE_HIT				/*공지사항조회수*/
+		     , FST_REG_ID 				/*최초등록자ID*/
+		     , DATE_FORMAT(FST_REG_DTTI, "%Y/%m/%d %H:%i") FST_REG_DTTI	/*최초등록일시*/
+		     , LT_UPD_ID 				/*최종수정자ID*/
+		     , DATE_FORMAT(LT_UPD_DTTI, "%Y/%m/%d %H:%i") LT_UPD_DTTI	/*최종수정일시*/
+		  FROM TB_BOARD_NOTICE			/*테이블_공지사항*/
+		 ORDER BY NOTICE_STR_DT DESC;
+ INFO 2023-01-27 02:08:46,635 [sf.log4jdbc.Slf4jSpyLogDelegator.sqlTimingOccured] SELECT BOARD_SEQ /*게시글일련번호*/ , NOTICE_TITLE /*공지사항제목*/ , NOTICE_CN /*공지사항내용*/ , NOTICE_STR_DT 
+/*공지사항게시시작일*/ , NOTICE_END_DT /*공지사항게시종료일*/ , NOTICE_POP_YN /*공지사항팝업여부*/ , NOTICE_CN /*공지사항내용*/ 
+, NOTICE_HIT /*공지사항조회수*/ , FST_REG_ID /*최초등록자ID*/ , DATE_FORMAT(FST_REG_DTTI, "%Y/%m/%d %H:%i") 
+FST_REG_DTTI /*최초등록일시*/ , LT_UPD_ID /*최종수정자ID*/ , DATE_FORMAT(LT_UPD_DTTI, "%Y/%m/%d %H:%i") 
+LT_UPD_DTTI /*최종수정일시*/ FROM TB_BOARD_NOTICE /*테이블_공지사항*/ ORDER BY NOTICE_STR_DT DESC;  {executed in 68 msec}
+ INFO 2023-01-27 02:08:46,757 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionClosed] 32. Connection closed
+ INFO 2023-01-27 02:08:46,758 [framework.aop.ControllerAdvice.around] 요청 처리시간: 904
+ INFO 2023-01-27 02:08:46,758 [framework.aop.ControllerAdvice.around] info.NoticeController.selectNotice(HttpServletRequest,HttpServletResponse)/0:0:0:0:0:0:0:1/{}

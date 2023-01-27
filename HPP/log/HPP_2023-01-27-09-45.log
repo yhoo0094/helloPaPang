@@ -1,0 +1,36 @@
+ INFO 2023-01-27 09:45:30,121 [tiles.access.TilesAccess.setContainer] Removing TilesContext for context: org.springframework.web.servlet.view.tiles3.SpringWildcardServletTilesApplicationContext
+ INFO 2023-01-27 09:45:43,300 [web.servlet.FrameworkServlet.initServletBean] Initializing Servlet 'dispatcherServlet'
+ INFO 2023-01-27 09:45:48,120 [tiles.access.TilesAccess.setContainer] Publishing TilesContext for context: org.springframework.web.servlet.view.tiles3.SpringWildcardServletTilesApplicationContext
+ INFO 2023-01-27 09:45:48,194 [scheduling.annotation.ScheduledAnnotationBeanPostProcessor.finishRegistration] No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+ INFO 2023-01-27 09:45:48,237 [web.servlet.FrameworkServlet.initServletBean] Completed initialization in 4923 ms
+ INFO 2023-01-27 09:45:48,478 [framework.aop.ControllerAdvice.around] 요청 처리시간: 164
+ INFO 2023-01-27 09:45:48,479 [framework.aop.ControllerAdvice.around] com.PageController.root(HttpServletRequest,HttpServletResponse)/127.0.0.1/{}
+ INFO 2023-01-27 09:45:53,642 [framework.interceptor.RequestInterceptor.preHandle] ##################################RequestInterceptor 요청 URI: /info/notice
+ INFO 2023-01-27 09:45:58,257 [controller.com.ScheduleController.scheduleSample] 스케줄러 실행 확인
+ INFO 2023-01-27 09:45:58,258 [framework.aop.ControllerAdvice.around] 요청 처리시간: 19
+ INFO 2023-01-27 09:45:58,258 [framework.aop.ControllerAdvice.around] com.ScheduleController.scheduleSample()/request not found
+ INFO 2023-01-27 09:45:58,388 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionOpened] 1. Connection opened
+ INFO 2023-01-27 09:45:59,526 [log4jdbc.tools.Log4JdbcCustomFormatter.sqlOccured] SQL : INSERT 
+		  INTO TB_LOG_REQ			/*테이블_요청로그*/
+		     (
+		       REQ_SEQ				/*요청일련번호*/
+		     , USER_ID				/*사용자아이디*/
+		     , USER_IP				/*사용자아이피*/
+		     , REQ_URI				/*요청경로*/
+		     , REQ_PARAM			/*요청파라미터*/
+		     , REQ_TYPE_CODE 		/*요청타입코드*/
+		     )
+		VALUES
+			 (
+			   (SELECT nextval('REQ_SEQ') FROM DUAL)	/*요청일련번호*/
+			 , 'admin'						/*사용자아이디*/
+			 , '192.168.8.205'						/*사용자아이디*/
+			 , '/info/notice'								/*요청경로*/
+			 , '{}'								/*요청파라미터*/
+		     , 'info' 							/*요청타입코드*/
+			 )
+ INFO 2023-01-27 09:45:59,612 [sf.log4jdbc.Slf4jSpyLogDelegator.sqlTimingOccured] INSERT INTO TB_LOG_REQ /*테이블_요청로그*/ ( REQ_SEQ /*요청일련번호*/ , USER_ID /*사용자아이디*/ , USER_IP /*사용자아이피*/ 
+, REQ_URI /*요청경로*/ , REQ_PARAM /*요청파라미터*/ , REQ_TYPE_CODE /*요청타입코드*/ ) VALUES ( (SELECT nextval('REQ_SEQ') 
+FROM DUAL) /*요청일련번호*/ , 'admin' /*사용자아이디*/ , '192.168.8.205' /*사용자아이디*/ , '/info/notice' /*요청경로*/ 
+, '{}' /*요청파라미터*/ , 'info' /*요청타입코드*/ )  {executed in 86 msec}
+ INFO 2023-01-27 09:45:59,711 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionClosed] 1. Connection closed

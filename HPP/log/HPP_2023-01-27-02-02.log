@@ -1,0 +1,26 @@
+ INFO 2023-01-27 02:02:58,324 [framework.interceptor.RequestInterceptor.preHandle] ##################################RequestInterceptor 요청 URI: /info/notice
+ INFO 2023-01-27 02:02:58,998 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionOpened] 15. Connection opened
+ INFO 2023-01-27 02:02:59,037 [log4jdbc.tools.Log4JdbcCustomFormatter.sqlOccured] SQL : INSERT 
+		  INTO TB_LOG_REQ			/*테이블_요청로그*/
+		     (
+		       REQ_SEQ				/*요청일련번호*/
+		     , USER_ID				/*사용자아이디*/
+		     , USER_IP				/*사용자아이피*/
+		     , REQ_URI				/*요청경로*/
+		     , REQ_PARAM			/*요청파라미터*/
+		     , REQ_TYPE_CODE 		/*요청타입코드*/
+		     )
+		VALUES
+			 (
+			   (SELECT nextval('REQ_SEQ') FROM DUAL)	/*요청일련번호*/
+			 , 'admin'						/*사용자아이디*/
+			 , '192.168.8.205'						/*사용자아이디*/
+			 , '/info/notice'								/*요청경로*/
+			 , '{}'								/*요청파라미터*/
+		     , 'info' 							/*요청타입코드*/
+			 )
+ INFO 2023-01-27 02:02:59,268 [sf.log4jdbc.Slf4jSpyLogDelegator.sqlTimingOccured] INSERT INTO TB_LOG_REQ /*테이블_요청로그*/ ( REQ_SEQ /*요청일련번호*/ , USER_ID /*사용자아이디*/ , USER_IP /*사용자아이피*/ 
+, REQ_URI /*요청경로*/ , REQ_PARAM /*요청파라미터*/ , REQ_TYPE_CODE /*요청타입코드*/ ) VALUES ( (SELECT nextval('REQ_SEQ') 
+FROM DUAL) /*요청일련번호*/ , 'admin' /*사용자아이디*/ , '192.168.8.205' /*사용자아이디*/ , '/info/notice' /*요청경로*/ 
+, '{}' /*요청파라미터*/ , 'info' /*요청타입코드*/ )  {executed in 221 msec}
+ INFO 2023-01-27 02:02:59,377 [sf.log4jdbc.Slf4jSpyLogDelegator.connectionClosed] 15. Connection closed

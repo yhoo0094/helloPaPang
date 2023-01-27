@@ -1,0 +1,4 @@
+ INFO 2023-01-27 08:54:48,271 [web.servlet.FrameworkServlet.initServletBean] Initializing Servlet 'dispatcherServlet'
+ INFO 2023-01-27 08:54:53,143 [tiles.access.TilesAccess.setContainer] Publishing TilesContext for context: org.springframework.web.servlet.view.tiles3.SpringWildcardServletTilesApplicationContext
+ INFO 2023-01-27 08:54:53,226 [scheduling.annotation.ScheduledAnnotationBeanPostProcessor.finishRegistration] No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+ INFO 2023-01-27 08:54:53,259 [web.servlet.FrameworkServlet.initServletBean] Completed initialization in 4967 ms

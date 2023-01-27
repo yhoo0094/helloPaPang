@@ -10,6 +10,36 @@ import UploadAdapter from './UploadAdapter.js'
 export default function makeEditor(target) {
     return InlineEditor.create(document.querySelector(target), {
         extraPlugins: [MyCustomUploadAdapterPlugin]
+		, toolbar: {
+				items: [ 
+					'fontSize', 'fontColor', 'fontBackgroundColor', 'fontFamily', 'alignment', '|',
+					'bold', 'italic', 'underline', '|',	
+					'highlight', 'outdent', 'indent', '|',
+					'imageUpload', 'insertTable', 'undo', 'redo', 'findAndReplace',
+					//'-', 'specialCharacters', 'imageInsert', 'heading', 'style'
+				],
+				shouldNotGroupWhenFull: true
+		}     
+		, language: 'ko' 
+		, image: {
+			toolbar: [
+				'imageTextAlternative',
+				'toggleImageCaption',
+				'imageStyle:inline',
+				'imageStyle:block',
+				'imageStyle:side',
+				//'linkImage'
+			]
+		}
+		, table: {
+			contentToolbar: [
+				'tableColumn',
+				'tableRow',
+				'mergeTableCells',
+				'tableCellProperties',
+				'tableProperties'
+			]
+		}        
     })
 
 }

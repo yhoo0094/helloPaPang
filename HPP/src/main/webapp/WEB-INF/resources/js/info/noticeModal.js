@@ -6,8 +6,6 @@
 **/
 
 $(()=>{
-	//$editorUtil.createEditor();
-	//$editorUtil.createEditorTest();
 	
 })
 
@@ -16,9 +14,9 @@ function noticeModalOpen(data){
 	//createEditor();modal('open')
 	if(data != null){
 		//기존 입력에 대한 조회
-		$('#boardSeq').val(data.boardSeq);		//공지사항일련번호
+		$('#boardSeq').val(data.boardSeq);			//공지사항일련번호
 		$('#noticeTitle').val(data.noticeTitle);	//공지사항제목
-		$('#noticeCn').val(data.noticeCn);			//공지사항내용
+		noticeCn.setData(data.noticeCn);			//공지사항내용
 		$('#noticeStrDt').val(data.noticeStrDt.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'));	//공지사항게시시작일
 		$('#noticeEndDt').val(data.noticeEndDt.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'));	//공지사항게시종료일
 		(data.noticePopYn == 'Y')? $('#noticePopY').prop('checked','checked') : $('#noticePopN').prop('checked','checked');	//공지사항팝업여부
@@ -42,6 +40,9 @@ function saveNotice(){
 	//날짜 하이픈(-) 제거
 	formData.set('noticeStrDt',$('#noticeStrDt').val().replace(/-/g,''));
 	formData.set('noticeEndDt',$('#noticeEndDt').val().replace(/-/g,''));
+	
+	//에디터 내용 저장
+	formData.set('noticeCn',noticeCn.getData());
 	
 	var url;    
     if($util.isEmpty($('#boardSeq').val())){
@@ -80,8 +81,7 @@ function resetModal(){
 	var el = $('#noticeModal');
 	$util.inputTypeEmpty(el, 'text');
 	
-	$('#boardSeq').val('');	
-	$('#noticeCn').val('');	
+	noticeCn.setData('');			//공지사항내용
 }
 
 //게시글 삭제

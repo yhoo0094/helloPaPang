@@ -1,0 +1,3 @@
+ WARN 2023-01-27 01:22:18,546 [web.servlet.DispatcherServlet.noHandlerFound] No mapping for GET /webapp/resources/images/20230127/img_ebe31ff8-1e2d-484e-9675-049daa96df9d.jpg
+ WARN 2023-01-27 01:22:33,311 [web.servlet.DispatcherServlet.noHandlerFound] No mapping for GET /webapp/resources/images/20230127/img_ebe31ff8-1e2d-484e-9675-049daa96df9d.jpg
+ WARN 2023-01-27 01:22:33,386 [web.servlet.DispatcherServlet.noHandlerFound] No mapping for GET /favicon.ico

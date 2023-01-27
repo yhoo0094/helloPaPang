@@ -1,0 +1,9 @@
+ INFO 2023-01-27 01:07:27,559 [web.servlet.FrameworkServlet.initServletBean] Initializing Servlet 'dispatcherServlet'
+ INFO 2023-01-27 01:07:32,180 [tiles.access.TilesAccess.setContainer] Publishing TilesContext for context: org.springframework.web.servlet.view.tiles3.SpringWildcardServletTilesApplicationContext
+ INFO 2023-01-27 01:07:32,260 [scheduling.annotation.ScheduledAnnotationBeanPostProcessor.finishRegistration] No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+ INFO 2023-01-27 01:07:32,298 [web.servlet.FrameworkServlet.initServletBean] Completed initialization in 4717 ms
+ INFO 2023-01-27 01:07:32,513 [framework.aop.ControllerAdvice.around] 요청 처리시간: 148
+ INFO 2023-01-27 01:07:32,521 [framework.aop.ControllerAdvice.around] com.PageController.root(HttpServletRequest,HttpServletResponse)/127.0.0.1/{}
+ INFO 2023-01-27 01:07:42,301 [controller.com.ScheduleController.scheduleSample] 스케줄러 실행 확인
+ INFO 2023-01-27 01:07:42,302 [framework.aop.ControllerAdvice.around] 요청 처리시간: 11
+ INFO 2023-01-27 01:07:42,302 [framework.aop.ControllerAdvice.around] com.ScheduleController.scheduleSample()/request not found

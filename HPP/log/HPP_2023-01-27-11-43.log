@@ -1,0 +1,2 @@
+ INFO 2023-01-27 11:43:42,702 [framework.aop.ControllerAdvice.around] 요청 처리시간: 386712
+ INFO 2023-01-27 11:43:42,710 [framework.aop.ControllerAdvice.around] com.CommonController.ckUploadImage(MultipartHttpServletRequest,HttpServletResponse)/0:0:0:0:0:0:0:1/{}
