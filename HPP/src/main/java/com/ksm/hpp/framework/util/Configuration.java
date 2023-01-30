@@ -10,7 +10,7 @@ import com.ksm.hpp.framework.exception.ConfigurationException;
 /**
  * @작성자: 김상민 
  * @생성일: 2022. 12. 13 오후 05:42:30
- * @설명: properties 파일 관련 기능 구현
+ * @설명: properties 파일 관련 기능
  */
 public class Configuration {
 

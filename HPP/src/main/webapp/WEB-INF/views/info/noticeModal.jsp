@@ -45,13 +45,13 @@
 			<tbody>
 				<tr>
 					<th>제목</th>
-					<td colspan="3"><input id="noticeTitle" name="noticeTitle" class="form-control" type="text" title="제목"/></td>
+					<td colspan="3"><input id="noticeTitle" name="noticeTitle" class="form-control" type="text" title="제목" maxlength="100" required="all1"/></td>
 				</tr>
 				<tr>
 					<th>게시기간</th>
 					<td>
-						<input id="noticeStrDt" name="noticeStrDt" class="form-control" type="date" title="게시시작일"/> 
-					  ~ <input id="noticeEndDt" name="noticeEndDt" class="form-control" type="date" title="게시종료일"/>
+						<input id="noticeStrDt" name="noticeStrDt" class="form-control" type="date" title="게시시작일" required="all1"/> 
+					  ~ <input id="noticeEndDt" name="noticeEndDt" class="form-control" type="date" title="게시종료일" required="all1"/>
 					</td>
 					<th>팝업여부</th>
 					<th>
@@ -63,7 +63,7 @@
 					<th>내용</th>
 					<td colspan="3">
 						<!-- <textarea id="noticeCn" name="noticeCn" class="form-control" rows="" cols="" style="height: 500px"></textarea> -->
-						<div id="noticeCn" name="noticeCn" class="editor form-control"></div>
+						<div id="noticeCn" name="noticeCn" title="내용" class="editor form-control"></div>
 					</td>
 				</tr>
 				<tr>

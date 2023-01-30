@@ -34,9 +34,8 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		logger.info("##################################RequestInterceptor 요청 URI: " + request.getRequestURI());
-		
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		inData.remove("userPw");	//비밀번호 정보는 제거
 		inData.put("reqParam", inData.toString());
 		String reqUri = request.getRequestURI();
 		inData.put("reqUri", reqUri);

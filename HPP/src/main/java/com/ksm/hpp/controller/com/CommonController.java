@@ -97,6 +97,12 @@ public class CommonController {
 		response.setContentType("text/html");
 	}	
 	
+	/**
+	* @메소드명: showImage
+	* @작성자: KimSangMin
+	* @생성일: 2023. 1. 30. 오전 9:57:43
+	* @설명: 에디터 이미지 조회
+	 */
 	@ResponseBody
 	@GetMapping("/images/{folder}/{filename}.{extension}")
 	public org.springframework.core.io.Resource showImage(@PathVariable String folder, @PathVariable String filename, @PathVariable String extension) throws Exception {

@@ -35,6 +35,16 @@ function noticeModalOpen(data){
 
 //공지사항 저장
 function saveNotice(){
+	//유효성 검사
+	if(!$util.checkRequired({group:["all1"]})){return;};
+	if($util.isEmpty(noticeCn.getData())){
+		alert("내용이 입력되지 않았습니다.");
+		$('#noticeCn').focus();
+		return;
+	}; 	
+	
+	//에디터 글자 수를 조회하여 내용에 입력하는 데이터 최대 길이 제한(추후 구현)
+	
 	var formData = new FormData($("#noticeForm")[0]);
 	
 	//날짜 하이픈(-) 제거

@@ -325,6 +325,11 @@ table.dataTable thead th{
 	text-align: center;
 }
 
+table.dataTable td{
+	overflow: hidden;
+	white-space: pre;
+}
+
 .dataTables_paginate{
 	float: left !important;
 }
@@ -384,5 +389,13 @@ label{
 	padding: 5px 3px 0px 3px;
     float: right;
     font-weight: bold;
+}
+
+.overFlowHidden{
+	overflow: hidden;
+}
+
+.whiteSpacePre{
+	white-space: pre;
 }
 /* 전체 공용 끝 */

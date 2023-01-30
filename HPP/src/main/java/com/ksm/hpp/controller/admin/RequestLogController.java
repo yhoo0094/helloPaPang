@@ -12,25 +12,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.google.gson.Gson;
 import com.ksm.hpp.controller.com.BaseController;
 import com.ksm.hpp.framework.util.RequestUtil;
-import com.ksm.hpp.service.admin.LoginLogService;
+import com.ksm.hpp.service.admin.RequestLogService;
 
 @Controller
 @RequestMapping("/admin")
-public class LoginLogController extends BaseController {
+public class RequestLogController extends BaseController {
 	
-	@Resource(name = "LoginLogService")
-	protected LoginLogService loginLogService;
+	@Resource(name = "RequestLogService")
+	protected RequestLogService requestLogService;
 	
 	/**
-	 * @메소드명: selectLoginLog
-	 * @작성자: 김상민
-	 * @생성일: 2023. 1. 12. 오후 3:42:25
-	 * @설명: 사용자 접속 기록 조회
-	 */
-	@RequestMapping("/selectLoginLog.do")
-	public void selectLoginLog(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	* @메소드명: selectRequestLog
+	* @작성자: KimSangMin
+	* @생성일: 2023. 1. 30. 오후 2:58:09
+	* @설명: 서버에 발생한 요청 기록 조회
+	*/
+	@RequestMapping("/selectRequestLog.do")
+	public void selectRequestLog(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
-		Map<String, Object> outData = loginLogService.selectLoginLog((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		Map<String, Object> outData = requestLogService.selectRequestLog((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(outData);

@@ -23,7 +23,7 @@ $util.checkRequired = function(option){
 			var grp = option.group[i];
 			var selector = '';
 			
-			//제이쿼리 설렉터 구현
+			//제이쿼리 설렉터
 			if(option.target.length > 0){
 				for(k = 0; k < option.target.length; i++){
 					selector = selector + option.target[k] + "[required=" + grp + "] "
@@ -69,6 +69,9 @@ $util.checkRequired = function(option){
  * @return boolean
  */
 $util.isEmpty = function(obj){
+	//string이면 공백 제거
+	if(typeof(obj) == 'string'){obj = obj.trim();};
+	
 	if(obj == null || obj == undefined || obj == ""){
 		return true;
 	} else {

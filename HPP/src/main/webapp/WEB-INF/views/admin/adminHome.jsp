@@ -10,7 +10,8 @@
 %>
 
 <script>
-	location.href = "<%=request.getContextPath() %>/admin/loginLog"
+<%-- 	location.href = "<%=request.getContextPath() %>/admin/loginLog"; --%>
+	location.href = "<%=request.getContextPath() %>/admin/requestLog";
 </script>
 
 <div>
