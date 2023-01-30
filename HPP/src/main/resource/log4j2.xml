@@ -33,8 +33,8 @@
         <!-- 파일  -->
         <RollingFile name ="RollingFile">
         	<!-- 개발환경 로그 경로 -->
-            <FileName>C:\Users\KimSangMin\git\helloPaPang\HPP\log\HPP.log</FileName>
-            <FilePattern>C:\Users\KimSangMin\git\helloPaPang\HPP\log\HPP_%d{yyyy-MM-dd-hh-mm}.log</FilePattern>
+            <FileName>C:\Users\KimSangMin\OneDrive\바탕 화면\HPP\logs\HPP.log</FileName>
+            <FilePattern>C:\Users\KimSangMin\OneDrive\바탕 화면\HPP\logs\HPP_%d{yyyy-MM-dd-hh-mm}.log</FilePattern>
             <PatternLayout>
                 <Pattern>%5p %d{yyyy-MM-dd hh:mm:ss,SSS} [%C{3}.%M] %m%n</Pattern>
             </PatternLayout>

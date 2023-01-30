@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
+import com.ksm.hpp.framework.exception.ConfigurationException;
 import com.ksm.hpp.framework.util.Configuration;
 import com.ksm.hpp.framework.util.OSValidator;
 import com.ksm.hpp.framework.util.OS_Type;
@@ -68,7 +69,7 @@ public class CommonController {
 		
 		OS_Type os = OSValidator.getOS();	//OS타입 구하기(UNKNOWN(0), WINDOWS(1), LINUX(2), MAC(3), SOLARIS(4))
 		Configuration conf = new Configuration();
-		String filePath = conf.getString("Global." + os + ".getComImagePath") + nowDate;	
+		String filePath = new String(conf.getString("Global." + os + ".getComImagePath").getBytes("ISO-8859-1"), "UTF-8") + nowDate;	
 		
 		/*
 		File dir = new File(filePath);
@@ -83,7 +84,7 @@ public class CommonController {
         file.transferTo(imageUpload);
 	    
         //jsonObject.put("url", "/resources/images/editor/" + nowDate + "/" + imageName);
-        jsonObject.put("url", "/common/images/" + imageName);
+        jsonObject.put("url", "/common/images/" + nowDate + "/" + imageName);
         
         //리턴 response 작성
 //        printWriter = response.getWriter();
@@ -97,10 +98,13 @@ public class CommonController {
 	}	
 	
 	@ResponseBody
-	@GetMapping("/images/{filename}.{extension}")
-	public org.springframework.core.io.Resource showImage(@PathVariable String filename, @PathVariable String extension) throws
-	MalformedURLException {
-	 	return new UrlResource("file:C:/Users/KimSangMin/git/helloPaPang/HPP/src/main/webapp/WEB-INF/resources/images/editor/20230127/" + filename + "." + extension);
+	@GetMapping("/images/{folder}/{filename}.{extension}")
+	public org.springframework.core.io.Resource showImage(@PathVariable String folder, @PathVariable String filename, @PathVariable String extension) throws Exception {
+		OS_Type os = OSValidator.getOS();	//OS타입 구하기(UNKNOWN(0), WINDOWS(1), LINUX(2), MAC(3), SOLARIS(4))
+		Configuration conf = new Configuration();
+		String filePath = new String(conf.getString("Global." + os + ".getComImagePath").getBytes("ISO-8859-1"), "UTF-8");
+		
+	 	return new UrlResource("file:///" + filePath + folder + "/" + filename + "." + extension);
 	 }	
 	
 }
