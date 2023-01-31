@@ -54,10 +54,29 @@ public class ExcelController {
 	 * @설명: 엑셀 다운로드
 	 */
 	@RequestMapping("/downloadData.do")
-	@SuppressWarnings("unchecked")
 	public void downloadData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		XSSFWorkbook workbook = createExcel(inData);
+		
 		String fileName = (String) inData.get(Constant.EXCEL_FILENM);
+		String downloadFileName = URLEncoder.encode(fileName + ".xlsx", "UTF-8") + "\";";
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + downloadFileName.replaceAll("\\+", "%20"));
+		response.setContentType("application.octet-stream; charset=UTF-8");
+		
+		ServletOutputStream sos = response.getOutputStream();
+		workbook.write(sos);
+		workbook.close();
+		sos.close();
+	}
+	
+	/**
+	* @메소드명: createExcel
+	* @작성자: KimSangMin
+	* @생성일: 2023. 1. 31. 오전 10:41:13
+	* @설명: 엑셀 파일 생성
+	 */
+	@SuppressWarnings("unchecked")
+	public static XSSFWorkbook createExcel(Map<String, Object> inData) {
 		String sheetName = (String) inData.get(Constant.EXCEL_SHEETNM);
 		ArrayList<Map<String, Object>> columns = (ArrayList<Map<String, Object>>) inData.get(Constant.EXCEL_COLUMN);
 		ArrayList<Map<String, Object>> datas = (ArrayList<Map<String, Object>>) inData.get(Constant.EXCEL_DATA);
@@ -110,16 +129,9 @@ public class ExcelController {
 				dataKey = (String)columns.get(k).get("data");
 				cell.setCellValue((String)datas.get(i).get(dataKey));
 			}
-		}
+		}	
 		
-		response.setContentType("application.octet-stream; charset=UTF-8");
-		String downloadFileName = URLEncoder.encode(fileName + ".xlsx", "UTF-8") + "\";";
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + downloadFileName.replaceAll("\\+", "%20"));
-		
-		ServletOutputStream sos = response.getOutputStream();
-		workbook.write(sos);
-		workbook.close();
-		sos.close();
+		return workbook;
 	}
 	
 	/**

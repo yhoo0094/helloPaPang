@@ -19,6 +19,7 @@ import com.ksm.hpp.framework.util.Configuration;
 import com.ksm.hpp.framework.util.Constant;
 import com.ksm.hpp.framework.util.OSValidator;
 import com.ksm.hpp.framework.util.OS_Type;
+import com.ksm.hpp.framework.util.StringUtil;
 import com.ksm.hpp.service.com.FileService;
 
 @Service("NoticeService")
@@ -55,6 +56,8 @@ public class NoticeService {
 	public Map<String, Object> insertNotice(StringBuilder logStr, Map<String, Object> inData, List<MultipartFile> fileList) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
+		inData = StringUtil.XssReplaceInData(inData);	//XSS스크립트 방지를 위해 텍스트 변환
+		
 		sqlSession.insert("mapper.info.NoticeMapper.insertNotice", inData);
 		fileService.insertFile(logStr, inData, fileList);	
 		
@@ -70,6 +73,8 @@ public class NoticeService {
 	 */
 	public Map<String, Object> updateNotice(StringBuilder logStr, Map<String, Object> inData, List<MultipartFile> fileList) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
+		
+		inData = StringUtil.XssReplaceInData(inData);	//XSS스크립트 방지를 위해 텍스트 변환
 		
 		sqlSession.update("mapper.info.NoticeMapper.updateNotice", inData);
 		fileService.insertFile(logStr, inData, fileList);	

@@ -9,11 +9,9 @@
 **/
 %>
 
-<script>
-<%-- 	location.href = "<%=request.getContextPath() %>/admin/loginLog"; --%>
-	location.href = "<%=request.getContextPath() %>/admin/requestLog";
-</script>
-
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
+	
+	<a href="<%=request.getContextPath() %>/admin/loginLog">로그인 로그</a>
+	<a href="<%=request.getContextPath() %>/admin/requestLog">요청 로그</a>
 </div>	

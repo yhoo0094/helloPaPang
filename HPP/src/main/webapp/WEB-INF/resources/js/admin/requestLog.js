@@ -20,7 +20,7 @@ var columInfo = [
       , { title: "아이피"		, data: "userIp"		, width: "100px"	, className: "text_align_center"	, defaultContent: ""}
       , { title: "URI"		, data: "reqUri"		, width: "200px"	, className: "text_align_left"		, defaultContent: ""}      
       , { title: "파라미터"	, data: "reqParam"		, width: "*"		, className: "text_align_left"		, defaultContent: ""}      
-      , { title: "유형"		, data: "reqTypeCode"	, width: "100px"	, className: "text_align_center"	, defaultContent: ""}
+      , { title: "메뉴"		, data: "reqTypeNm"		, width: "100px"	, className: "text_align_center"	, defaultContent: ""}
 ]
 
 //엑셀 다운로드 버튼
@@ -28,10 +28,12 @@ var excelDownBtn = $('<div class="table_btn_wrapper"><button type="button" class
 
 //DataTable 만들기(페이지네이션 서버 처리)
 function makeDataTableServerSide() {
+	var url = '/admin/selectRequestLog.do';
+	
     mainTable = $('#mainTable').DataTable({
 		serverSide: true,
 		ajax: {
-			url: '/admin/selectRequestLog.do',
+			url: url,
         	type: 'POST',
         	data: function(data){
 				if($util.isEmpty(mainTable)){
@@ -76,7 +78,8 @@ function makeDataTableServerSide() {
     
     //엑셀 다운로드 버튼
     excelDownBtn.on('click', function(){
-		$excelUtil.downloadData(mnuNm, mnuNm, mainTable.columInfo, data);
+		//$excelUtil.downloadData(mnuNm, mnuNm, mainTable.columInfo, data);
+		$excelUtil.downloadURL(mnuNm, mnuNm, mainTable.columInfo, url);
 	})
     $('#mainTable_paginate').after(excelDownBtn);    
 }

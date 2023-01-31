@@ -11,7 +11,8 @@ $(()=>{
 
 //공지사항 팝업 열기
 function noticeModalOpen(data){
-	//createEditor();modal('open')
+	data = $util.XssReverseObj(data);	//XSS방지를 위한 문자열 변환 되돌리기
+	
 	if(data != null){
 		//기존 입력에 대한 조회
 		$('#boardSeq').val(data.boardSeq);			//공지사항일련번호

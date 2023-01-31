@@ -2,6 +2,8 @@ package com.ksm.hpp.framework.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.logging.log4j.LogManager;
@@ -30,6 +32,40 @@ public class StringUtil {
 		}
 		return SHA;
 	}
+	
+	/**
+	* @메소드명: XssReplace
+	* @작성자: KimSangMin
+	* @생성일: 2023. 1. 31. 오후 4:35:35
+	* @설명: XXS 방지를 위한 텍스트 변환
+	*/
+	public static String XssReplace(String param) {
+		
+		param = param.replaceAll("&", "&amp;");
+		param = param.replaceAll("\"", "&quot;");
+		param = param.replaceAll("'", "&apos;");
+		param = param.replaceAll("<", "&lt;");
+		param = param.replaceAll(">", "&gt;");
+		param = param.replaceAll("\r", "<br>");
+		param = param.replaceAll("\n", "<p>");
+
+		return param;
+	}
+
+	/**
+	* @메소드명: XssReplaceInData
+	* @작성자: KimSangMin
+	* @생성일: 2023. 1. 31. 오후 4:25:18
+	* @설명: inData에 담긴 값들에 대해 XssReplace 실행
+	*/
+	public static Map<String, Object> XssReplaceInData(Map<String, Object> inData) {
+		for (String key: inData.keySet()) {
+			if(inData.get(key) instanceof String) {
+				inData.put(key, XssReplace((String) inData.get(key))) ;
+			}
+		}
+		return inData;
+	}		
 }
 
 	

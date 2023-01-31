@@ -9,8 +9,8 @@
 var mainTable
 
 $(document).ready(function () {
-	//selectData();				//DataTable 만들기
-	makeDataTableServerSide();	//DataTable 만들기(페이지네이션 서버 처리)
+	selectData();				//DataTable 만들기
+	//makeDataTableServerSide();	//DataTable 만들기(페이지네이션 서버 처리)
 });
 
 //사용자 접속 기록 조회

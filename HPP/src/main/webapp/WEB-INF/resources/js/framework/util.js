@@ -149,3 +149,50 @@ $util.getObjFromArr = function(arr, key, val){
 	
 	return obj;
 }
+
+/**
+ * Xss 방지를 위한 텍스트 변환
+ * @param param String
+ * @return String
+ */
+$util.XssReplace = function(param) {
+		param = param.replaceAll("&", "&amp;");
+		param = param.replaceAll("\"", "&quot;");
+		param = param.replaceAll("'", "&apos;");
+		param = param.replaceAll("<", "&lt;");
+		param = param.replaceAll(">", "&gt;");
+		param = param.replaceAll("\r", "<br>");
+		param = param.replaceAll("\n", "<p>");
+
+		return param;	
+}
+
+/**
+ * XSS방지를 위한 문자열 변환 되돌리기
+ * @param param String
+ * @return String
+ */
+$util.XssReverse = function(param) {
+		param = param.replaceAll("<p>", "\n");
+		param = param.replaceAll("<br>", "\r");
+		param = param.replaceAll("&gt;", ">");
+		param = param.replaceAll("&lt;", "<");
+		param = param.replaceAll("&apos;", "'");
+		param = param.replaceAll("&quot;", "\"");
+		param = param.replaceAll("&amp;", "&");
+		return param;	
+}
+
+/**
+ * object에 대해 XSS방지를 위한 문자열 변환 되돌리기
+ * @param param object
+ * @return object
+ */
+$util.XssReverseObj = function(obj) {
+	for(key in obj){
+		if(typeof(obj[key]) == 'string'){
+			obj[key] = $util.XssReverse(obj[key]);
+		}	
+	}
+	return obj;	
+}

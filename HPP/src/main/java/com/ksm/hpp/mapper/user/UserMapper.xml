@@ -18,16 +18,16 @@
 
 	<!-- 권한 조회-->
 	<select id="selectAuthList" parameterType="map" resultType="camelCaseMap">
-		SELECT T4.MNU_URL					/*메뉴경로*/
-			 , MAX(T2.AUTH_CODE) AUTH_CODE	/*권한코드(01:읽기, 02:읽기/쓰기, 03:기타권한1, 04:기타권한2 ...)*/
-		  FROM TB_USER_ROLE_MAP T1			/*테이블_사용자_권한그룹_매핑*/
-		  JOIN TB_AUTH T2					/*테이블_권한*/
+		SELECT T4.MNU_URL						/*메뉴경로*/
+			 , MAX(T2.AUTH_GRADE) AUTH_GRADE	/*권한등급(01:읽기, 02:읽기/쓰기, 03:기타권한1, 04:기타권한2 ...)*/
+		  FROM TB_USER_ROLE_MAP T1				/*테이블_사용자_권한그룹_매핑*/
+		  JOIN TB_AUTH T2						/*테이블_권한*/
 		    ON T1.ROLE_SEQ = T2.ROLE_SEQ
-		  JOIN TB_MNU T4					/*테이블_메뉴*/
+		  JOIN TB_MNU T4						/*테이블_메뉴*/
 		    ON T2.MNU_SEQ = T4.MNU_SEQ  		    
-		 WHERE T4.MNU_LEVEL = 2				/*메뉴레벨*/
-		   AND T1.USER_ID = #{userId}		/*사용자아이디*/
-		 GROUP BY T4.MNU_URL
+		 WHERE T4.MNU_LEVEL = 2					/*메뉴레벨*/
+		   AND T1.USER_ID = #{userId}			/*사용자아이디*/
+		 GROUP BY T4.MNU_URL	
 	</select>
 	
 	<!-- 권한이 필요없는 메뉴 목록-->
