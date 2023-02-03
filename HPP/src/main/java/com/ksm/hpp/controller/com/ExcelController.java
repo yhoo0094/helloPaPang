@@ -36,6 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
+import com.ksm.hpp.framework.exception.ConfigurationException;
 import com.ksm.hpp.framework.util.Constant;
 import com.ksm.hpp.framework.util.RequestUtil;
 import com.ksm.hpp.service.com.CommonService;
@@ -155,7 +156,7 @@ public class ExcelController {
 	    } else if (extension.equals("xls")) {
 	    	workbook = new HSSFWorkbook(file.getInputStream());
 	    } else {
-	    	throw new RuntimeException(extension + "은 지원하지 않는 확장자입니다.\n xlsx 혹은 xls 확장자를 사용해 주십시오.");
+	    	throw new ConfigurationException(extension + "은 지원하지 않는 확장자입니다.\n xlsx 혹은 xls 확장자를 사용해 주십시오.");
 	    }
 	    int sheetsCnt = workbook.getNumberOfSheets();
 	    

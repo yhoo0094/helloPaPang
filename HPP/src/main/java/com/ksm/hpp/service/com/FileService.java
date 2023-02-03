@@ -65,7 +65,7 @@ public class FileService extends BaseService {
 		
 		List<Object> list = sqlSession.selectList("mapper.com.FileMapper.selectFile", inData);
 		if(list.isEmpty()) {	//DB조회를 실패한 경우
-			throw new RuntimeException("해당 파일을 찾을 수 없습니다.");
+			throw new ConfigurationException("해당 파일을 찾을 수 없습니다.");
 		}
 		
 		Map<String, Object> fileInfo = new HashMap<String, Object>();

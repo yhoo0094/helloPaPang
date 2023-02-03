@@ -101,7 +101,7 @@ public class UserService extends BaseService {
 				//비밀번호가 일치하지 않을 때
 				if(!userPw.equals(loginInfo.get("userPw"))) {		
 					cnt = sqlSession.update("mapper.user.UserMapper.pwErr", inData);
-					if(cnt != 1) {throw new RuntimeException("비밀번호 불일치 횟수 증가 오류 발생");}
+					if(cnt != 1) {throw new ConfigurationException("비밀번호 불일치 횟수 증가 오류 발생");}
 					
 					loginCode = "04";
 					result.put(Constant.OUT_RESULT_MSG, "존재하지 않는 아이디이거나 비밀번호가 일치하지 않습니다.");	
@@ -125,7 +125,7 @@ public class UserService extends BaseService {
 				
 				//비밀번호 오입력 횟수 초기화
 				cnt = sqlSession.update("mapper.user.UserMapper.resetPwErrCnt", inData);
-				if(cnt != 1) {throw new RuntimeException("비밀번호 오입력 횟수 초기화 오류 발생");}
+				if(cnt != 1) {throw new ConfigurationException("비밀번호 오입력 횟수 초기화 오류 발생");}
 				
 				//로그인 IP 파악
 				String userIp = RequestUtil.getIpAddr(request);
@@ -151,7 +151,7 @@ public class UserService extends BaseService {
 			//로그인 내역 저장
 			inData.put("loginCode", loginCode);
 			cnt = sqlSession.insert("mapper.user.UserMapper.insetLoginLog", inData);
-			if(cnt != 1) {throw new RuntimeException("로그인 내역 저장 오류 발생");}
+			if(cnt != 1) {throw new ConfigurationException("로그인 내역 저장 오류 발생");}
 			
 			result.put("loginInfo", loginInfo);
 			result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
@@ -174,7 +174,7 @@ public class UserService extends BaseService {
 		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
 		loginInfo.put("loginCode", "02");	//로그인_코드(01:로그인, 02:로그아웃, 03:존재하지 않는 사용자, 04: 잘못된 비밀번호, 05: 비밀번호 오입력 횟수 초과)
 		cnt = sqlSession.insert("mapper.user.UserMapper.insetLoginLog", loginInfo);
-		if(cnt != 1) {throw new RuntimeException("로그아웃 내역 저장 오류 발생");}
+		if(cnt != 1) {throw new ConfigurationException("로그아웃 내역 저장 오류 발생");}
 		
 		//세션 로그인 정보 파기
 		HttpSession session = request.getSession();
@@ -183,8 +183,6 @@ public class UserService extends BaseService {
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;		
 	}
-	
-	
 	
 	/**
 	 * 

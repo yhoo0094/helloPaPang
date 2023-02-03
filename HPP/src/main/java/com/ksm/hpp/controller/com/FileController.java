@@ -16,6 +16,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
+import com.ksm.hpp.framework.exception.ConfigurationException;
 import com.ksm.hpp.framework.util.RequestUtil;
 import com.ksm.hpp.service.com.FileService;
 
@@ -64,7 +65,7 @@ public class FileController {
 		File file = new File(atcFilePath + saveAtcFileNm);
 		if(file == null || !file.exists() || !file.isFile()) {
 			//파일이 null이거나, 파일이 존재하지 않거나, 형식이 파일이 아니면 
-			throw new RuntimeException("해당 파일이 서버에 존재하지 않습니다.");
+			throw new ConfigurationException("해당 파일이 서버에 존재하지 않습니다.");
 		}
 		
 		//신규 참고 소스

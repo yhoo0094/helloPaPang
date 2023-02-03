@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.google.gson.Gson;
 import com.ksm.hpp.controller.com.BaseController;
 import com.ksm.hpp.framework.util.RequestUtil;
+import com.ksm.hpp.service.com.CommonService;
 import com.ksm.hpp.service.info.NoticeService;
 
 @Controller
@@ -23,6 +24,9 @@ public class NoticeController extends BaseController {
 	
 	@Resource(name = "NoticeService")
 	protected NoticeService noticeService;
+
+	@Resource(name = "CommonService")
+	protected CommonService commonService;
 	
 	/**
 	 * @메소드명: selectNotice
@@ -52,6 +56,12 @@ public class NoticeController extends BaseController {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
 		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
 		inData.put("loginInfo", loginInfo);
+		
+		//권한 확인
+		inData.put("mnuUrl", "notice");		//메뉴 경로
+		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
+		inData.put("reqAuthGrade", 2);		//필요 권한등급
+		commonService.writeAuthChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
 		
 		List<MultipartFile> fileList = request.getFiles("files"); 
 		Map<String, Object> outData = noticeService.insertNotice((StringBuilder)request.getAttribute("IN_LOG_STR"), inData, fileList);

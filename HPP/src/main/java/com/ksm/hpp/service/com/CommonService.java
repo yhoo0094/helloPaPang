@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ksm.hpp.framework.exception.ConfigurationException;
 import com.ksm.hpp.framework.util.Constant;
 
 @Service("CommonService")
@@ -30,7 +31,7 @@ public class CommonService extends BaseService {
 		
 		int cnt = sqlSession.insert("mapper.com.CommonMapper.insertReqLog", inData);
 		if(cnt != 1) {
-			throw new RuntimeException("요청 로그 저장 중 오류 발생");
+			throw new ConfigurationException("요청 로그 저장 중 오류 발생");
 		}
 		
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
@@ -53,6 +54,7 @@ public class CommonService extends BaseService {
 		List<Map<String, Object>> authList = (List<Map<String, Object>>) session.getAttribute(Constant.AUTH_LIST);
 		
 		//세션이 없을 경우 => 로그인 안 함 => 권한 체크 필요 여부에 따라 판단(필요:false, 불필요:true)
+		//단건 조회로 바꾸기(추후 구현)
 		if(authList == null) {
 			freeAuthList = sqlSession.selectList("mapper.user.UserMapper.selectFreeAuthList", inData);
 			for(Map<String, Object> auth : freeAuthList) {
@@ -111,16 +113,19 @@ public class CommonService extends BaseService {
 	* @생성일: 2023. 1. 31. 오후 5:40:11
 	* @설명: 쓰기권한 조회
 	*/
-	public Boolean writeAuthChk(StringBuilder logStr, HttpServletRequest request, Map<String, Object> inData) throws Exception {
+	@SuppressWarnings("unchecked")
+	public void writeAuthChk(StringBuilder logStr, HttpServletRequest request, Map<String, Object> inData) throws Exception {
 		Boolean result = false;
-		String mnuUrl = (String) inData.get("mnuUrl");
-		//String[] 
+		String mnuUrl = (String) inData.get("mnuUrl");				//메뉴 경로
+		Boolean isRange = (Boolean) inData.get("isRange");			//권한등급이 정확히 일치해야 하는지
+		int reqAuthGrade = (Integer) inData.get("reqAuthGrade");	//필요 권한등급
 		
 		HttpSession session = request.getSession();
 		List<Map<String, Object>> freeAuthList = (List<Map<String, Object>>) session.getAttribute(Constant.FREE_AUTH_LIST);
 		List<Map<String, Object>> authList = (List<Map<String, Object>>) session.getAttribute(Constant.AUTH_LIST);
 		
 		//세션이 없을 경우 => 로그인 안 함 => 권한 체크 필요 여부에 따라 판단(필요:false, 불필요:true)
+		//단건 조회로 바꾸기(추후 구현)
 		if(authList == null) {
 			freeAuthList = sqlSession.selectList("mapper.user.UserMapper.selectFreeAuthList", inData);
 			for(Map<String, Object> auth : freeAuthList) {
@@ -139,18 +144,39 @@ public class CommonService extends BaseService {
 				}
 			}			
 		}
-		//권한 목록에서 해당 url의 권한이 있으면 통과
+		//권한 목록에서 해당 url의 권한등급이 필요 권한등급을 만족하면 통과
 		if(!result) {
 			for(Map<String, Object> auth : authList) {
 				if(mnuUrl.equals(auth.get("mnuUrl"))) {
-					result = true;
+					int authGrade = (Integer) auth.get("authGrade");	//사용자의 권한등급
+					if(isRange) {
+						result = (authGrade >= reqAuthGrade)? true : false;
+					} else {
+						result = (authGrade == reqAuthGrade)? true : false;
+					}
 					break;
 				}
 			}			
 		}		
-		
-		
-		return result;
+		//권한 목록 DB에서 조회하여 다시 테스트
+		if(!result) {
+			authList = sqlSession.selectList("mapper.user.UserMapper.selectAuthList", inData);
+			for(Map<String, Object> auth : authList) {
+				if(mnuUrl.equals(auth.get("mnuUrl"))) {
+					int authGrade = (Integer) auth.get("authGrade");	//사용자의 권한등급
+					if(isRange) {
+						result = (authGrade >= reqAuthGrade)? true : false;
+					} else {
+						result = (authGrade == reqAuthGrade)? true : false;
+					}
+					break;
+				}
+			}			
+		}
+		//권한이 없을 경우 예외 처리
+		if(!result) {
+			throw new ConfigurationException("해당 동작에 대한 권한이 없습니다.");
+		}
 	}
 	
 	/**
