@@ -16,6 +16,7 @@
 				<tr>
 					<th>발생일시:</th>
 					<td>
+						<input id="datetimepicker" type="text" >
 						<input id="reqDttiStr" class="" name="reqDttiStr" title="발생일시" type="datetime-local" required="all1"> ~ 
 						<input id="reqDttiEnd" class="" name="reqDttiEnd" title="발생일시" type="datetime-local" required="all1">
 					</td>	

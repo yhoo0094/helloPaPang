@@ -9,9 +9,9 @@
 var mainTable
 
 $(document).ready(function () {
-	makeDataTableServerSide();	//DataTable 만들기(페이지네이션 서버 처리)
+	jQuery('#datetimepicker').datetimepicker();
 	
-	//사용자 아이디 검색할 때 영문, 숫자만 입력하도록 제한(추후 구현)
+	makeDataTableServerSide();	//DataTable 만들기(페이지네이션 서버 처리)
 });
 
 var columInfo = [
