@@ -209,7 +209,7 @@ input[type = 'date']{
     margin: 0 0 0 0.2rem;
 }
 
-.papang-create-btn{
+.papang-create-btn, .papang-search-btn{
     background-color: #ffc107;
 } 
 
@@ -242,17 +242,26 @@ table.dataTable.no-footer{
 /* 모달 끝 */
 
 /* 테이블 시작 */
-.papang-table{
+.papang-table, .papang-search-table{
 	width: 100%;
 }
 
-.papang-table td{
+.papang-table td, .papang-search-table td{
 	padding: 2px;
 }
 
 .papang-table th{
 	text-align: center;
 	padding: 2px;
+}
+
+.papang-search-table th{
+	text-align: right;
+	padding: 2px;	
+}
+
+.papang-search-table input{
+	padding-left: 5px;	
 }
 /* 테이블 끝 */
 
@@ -397,5 +406,12 @@ label{
 
 .whiteSpacePre{
 	white-space: pre;
+}
+
+.papang-search-div{
+	margin: 5px 0px 10px 0px;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    padding: 5px 0px 5px 0px;
 }
 /* 전체 공용 끝 */

@@ -22,7 +22,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"><!-- datatable -->
     <link rel="stylesheet" type="text/css" href="/resources/lib/datetimepicker/jquery.datetimepicker.css"><!-- datetimepicker -->
     
- 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/template.css"> <!-- 전체 공통 css -->
+ 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/template.css"> <!-- 공통 css(개별 클래스) -->
+ 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/common.css"> <!-- 공통 css(단순 값) -->
     <link rel="stylesheet" href="<%=request.getContextPath() %><tiles:getAsString name="css"/>"> <!-- 페이지 개별 css -->   
 	
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
