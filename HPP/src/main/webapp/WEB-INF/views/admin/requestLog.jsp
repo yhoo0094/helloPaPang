@@ -11,25 +11,25 @@
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
 	<div class="papang-search-div">
-		<form action="#">
+		<form id="searchForm" action="#">
 			<table class="papang-search-table">
 				<tr>
 					<th>발생일시:</th>
 					<td>
-						<input id="reqDttiStr" name="reqDttiStr" class="datetimepicker" title="발생일시" type="text" required="all1" style="width: 150px;"> ~ 
-						<input id="reqDttiEnd" class="datetimepicker w45" name="reqDttiEnd" title="발생일시" type="text" required="all1" style="width: 150px;">
+						<input id="reqDttiStr" name="reqDttiStr" class="datetimepicker form-control" title="발생일시" type="text" required="all1" style="width: 150px;"> ~ 
+						<input id="reqDttiEnd" class="datetimepicker w45 form-control" name="reqDttiEnd" title="발생일시" type="text" required="all1" style="width: 150px;">
 					</td>	
 					<th>아이디:</th>
-					<td><input id="userId" class="w100" name="userId" title="아이디" type="text" maxlength="20"></td>
+					<td><input id="userId" class="w100 form-control" name="userId" title="아이디" type="text" maxlength="20"></td>
 					<th>아이피:</th>
-					<td><input id="userIp" class="w100" name="userIp" title="아이피" type="text" maxlength="39"></td>
-					<td rowspan="3"><button class="papang-search-btn papang_btn w90" style="line-height: 450%">검색</button></td>
+					<td><input id="userIp" class="w100 form-control" name="userIp" title="아이피" type="text" maxlength="39"></td>
+					<td rowspan="3"><button type="button" class="papang-search-btn papang_btn w90" onclick="doSearch()" style="line-height: 450%">검색</button></td>
 				</tr>
 				<tr>
 					<th>URI:</th>
-					<td><input id="reqUri" class="w100" name="reqUri" title="URI" type="text" maxlength="100"></td>
+					<td><input id="reqUri" class="w100 form-control" name="reqUri" title="URI" type="text" maxlength="100"></td>
 					<th>파라미터:</th>
-					<td colspan="3"><input id="reqParam" class="w100" name="reqParam" title="파라미터" type="text" maxlength="1000"></td>
+					<td colspan="3"><input id="reqParam" class="w100 form-control" name="reqParam" title="파라미터" type="text" maxlength="1000"></td>
 				</tr>
 				<tr>					
 					<th>유형:</th>

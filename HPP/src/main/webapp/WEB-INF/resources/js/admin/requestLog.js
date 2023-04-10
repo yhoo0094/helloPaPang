@@ -8,11 +8,26 @@
 //페이지 전역 변수
 var mainTable
 
-$(document).ready(function () {
-	jQuery('.datetimepicker').datetimepicker();
+$(document).ready(function() {
+	setDatetimepicker();
 	
 	makeDataTableServerSide();	//DataTable 만들기(페이지네이션 서버 처리)
 });
+
+//datetimepicker 설정
+function setDatetimepicker() {
+	var reqDttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),0,0,-1,0,0);
+	reqDttiStr = $dateUtil.dateHyphenTime(reqDttiStr);
+	
+	$com.datetimepicker('reqDttiStr',$dateUtil.todayYYYY_MM_DD_HHMM(reqDttiStr));
+	$com.datetimepicker('reqDttiEnd',$dateUtil.todayYYYY_MM_DD_HHMM());	
+}
+
+//검색
+function doSearch(){
+	var formData = $('#searchForm').serialize();
+	$com.loadingStart();
+}
 
 var columInfo = [
         { title: "발생일시"	, data: "reqDtti"		, width: "200px"	, className: "text_align_center"}
@@ -29,6 +44,7 @@ var excelDownBtn = $('<div class="table_btn_wrapper"><button type="button" class
 //DataTable 만들기(페이지네이션 서버 처리)
 function makeDataTableServerSide() {
 	var url = '/admin/selectRequestLog.do';
+	var param = $('#searchForm').serialize();
 	
     mainTable = $('#mainTable').DataTable({
 		serverSide: true,

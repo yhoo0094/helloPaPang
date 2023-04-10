@@ -1,7 +1,7 @@
 /**
  * @작성자: 김상민
  * @생성일: 2022. 11. 8. 오후 6:51:35
- * @설명: 페이지 공통 js
+ * @설명: hello papang 프로젝트의 페이지 공통 js(타 프레임워크와 공유 목적 X)
 **/
 
 var $com = {};
@@ -15,3 +15,21 @@ $com.loadingStart = function(){
 $com.loadingEnd = function(){
 	$('#loadingPanel').css('display','none');	
 };
+
+//datetimepicker
+$com.datetimepicker = function(id, defVal){
+	if($util.isEmpty(defVal)){
+		defVal = $dateUtil.todayYYYY_MM_DD();
+	}
+	
+	if($util.isEmpty(id)){
+		id = 'datetimepicker';
+	}	
+	
+	jQuery('#' + id).datetimepicker({
+		format:'Y-m-d H:i',
+		value: defVal,
+	});
+	$.datetimepicker.setLocale('ko');	
+};
+
