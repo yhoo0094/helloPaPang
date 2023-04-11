@@ -21,12 +21,12 @@
 			<tbody>
 				<tr>
 					<td>아이디</td>
-					<td><input id="userIdModal" type="text" name="userId" title="아이디" maxlength="20" onkeypress="if(event.keyCode == 13){login()}" required="allM1"></td>
+					<td><input id="userIdModal" type="text" name="userId" title="아이디" maxlength="20" onkeypress="if(event.keyCode == 13){login()}" tabindex="1" required="allM1"></td>
 					<td rowspan="2"><button type="button" class="papang_btn papang-create-btn" onclick="login()" style="height: 60px;">로그인</button></td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
-					<td><input id="userPwModal" type="password" name="userPw" title="비밀번호" maxlength="50" onkeypress="if(event.keyCode == 13){login()}" required="allM1"></td>
+					<td><input id="userPwModal" type="password" name="userPw" title="비밀번호" maxlength="50" onkeypress="if(event.keyCode == 13){login()}" tabindex="2" required="allM1"></td>
 				</tr>
 				<tr>
 					<td colspan="3" style="text-align: right; font-size: 13px; padding: 5px 0 0 0;">				
