@@ -25,8 +25,8 @@ function setDatetimepicker() {
 
 //검색
 function doSearch(){
-	var formData = $('#searchForm').serialize();
-	$com.loadingStart();
+	$('#mainTableDiv').html('<table id="mainTable" class="display" style="width:100%"></table>');
+	makeDataTableServerSide();
 }
 
 var columInfo = [
@@ -44,22 +44,33 @@ var excelDownBtn = $('<div class="table_btn_wrapper"><button type="button" class
 //DataTable 만들기(페이지네이션 서버 처리)
 function makeDataTableServerSide() {
 	var url = '/admin/selectRequestLog.do';
-	var param = $('#searchForm').serialize();
+	
+	var arr = $('#searchForm').serializeArray();
+	var param = {};    
+    $.each(arr, function() {
+        param[this.name] = this.value;
+    });
+    
+    var reqTypeCode = [];
+    $("input:checkbox[name=reqTypeCode]:checked").each(function(){
+		reqTypeCode.push(this.value);              
+	});
+    param.reqTypeCode = reqTypeCode;
+    
+	if($util.isEmpty(mainTable)){
+		param.page = 0;
+	} else {
+		param.page = parseInt(mainTable.page());
+	};
+	param.pageLength = 10;				//페이지당 레코드 수
+	param.strIdx = 1 + (10 * param.page);	//시작 레코드 인덱스   
 	
     mainTable = $('#mainTable').DataTable({
 		serverSide: true,
 		ajax: {
 			url: url,
         	type: 'POST',
-        	data: function(data){
-				if($util.isEmpty(mainTable)){
-					data.page = 0;
-				} else {
-					data.page = parseInt(mainTable.page());
-				};
-				data.pageLength = 10;				//페이지당 레코드 수
-				data.strIdx = 1 + (10 * data.page);	//시작 레코드 인덱스
-			},
+			data: param,
 		},
         columns: columInfo,		
         pagingType: "full_numbers",
@@ -95,7 +106,7 @@ function makeDataTableServerSide() {
     //엑셀 다운로드 버튼
     excelDownBtn.on('click', function(){
 		//$excelUtil.downloadData(mnuNm, mnuNm, mainTable.columInfo, data);
-		$excelUtil.downloadURL(mnuNm, mnuNm, mainTable.columInfo, url);
+		$excelUtil.downloadURL(mnuNm, mnuNm, mainTable.columInfo, url, param);
 	})
     $('#mainTable_paginate').after(excelDownBtn);    
 }

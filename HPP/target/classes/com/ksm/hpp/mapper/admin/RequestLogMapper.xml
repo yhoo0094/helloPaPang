@@ -14,12 +14,25 @@
 		     , IFNULL(T2.CODE_DETAIL_NM, '기타') REQ_TYPE_NM	/*요청타입명*/	     
 		  FROM TB_LOG_REQ T1				/*테이블_요청로그*/
 		  LEFT OUTER JOIN TB_CODE_DETAIL T2	/*테이블_코드상세*/
-		    ON T1.REQ_TYPE_CODE = T2.CODE_DETAIL	  
-		<trim prefix="WHERE" prefixOverrides="AND">  
-			<if test='userId != null and userId != ""'>
-		   AND USER_ID LIKE CONCAT('%',#{userId},'%')
-			</if>
-		</trim>
+		    ON T1.REQ_TYPE_CODE = T2.CODE_DETAIL	
+		 WHERE REQ_DTTI BETWEEN DATE_FORMAT(#{reqDttiStr}, '%Y-%m-%d %H:%i') AND DATE_FORMAT(#{reqDttiEnd}, '%Y-%m-%d %H:%i')
+		   AND T1.REQ_TYPE_CODE IN(
+		     <foreach collection="reqTypeCode" item="code" index="index" separator=",">
+		        #{code}
+		     </foreach>	
+	     	   )
+		<if test='userId != null and userId != ""'>
+		   AND T1.USER_ID LIKE CONCAT('%',#{userId},'%')
+		</if>
+		<if test='userIp != null and userIp != ""'>
+		   AND T1.USER_IP LIKE CONCAT('%',#{userIp},'%')
+		</if>		
+		<if test='reqUri != null and reqUri != ""'>
+		   AND T1.REQ_URI LIKE CONCAT('%',#{reqUri},'%')
+		</if>
+		<if test='reqParam != null and reqParam != ""'>
+		   AND T1.REQ_PARAM LIKE CONCAT('%',#{reqParam},'%')
+		</if>	
 		 ORDER BY REQ_DTTI DESC
 		<if test='strIdx != null and strIdx != ""'>
 		 LIMIT ${strIdx}, ${pageLength}

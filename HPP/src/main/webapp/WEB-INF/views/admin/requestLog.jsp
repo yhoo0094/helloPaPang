@@ -47,5 +47,5 @@
 			</table>
 		</form>
 	</div>
-	<table id="mainTable" class="display" style="width:100%"></table>
+	<div id="mainTableDiv"><table id="mainTable" class="display" style="width:100%"></table></div>
 </div>	
