@@ -109,7 +109,7 @@ $util.inputTypeEmpty = function(el, type){
  * @param days 쿠키 보존 기간
  */
 $util.setCookie = function(name, value, days){
-	var expires = "";
+	var expires = "30";
 	if(days){
 		var date = new Date();
 		date.setTime(date.getTime() + (days*24*60*60*1000));

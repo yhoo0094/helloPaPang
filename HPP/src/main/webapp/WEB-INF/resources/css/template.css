@@ -26,6 +26,10 @@ input[type = 'date']{
   --navMnu-color: rgb(255 210 88);
 }
 
+.selectedRow{
+	background-color: red;
+}
+
 .form-control{
 	display: inline-block;
 	padding: 0;	

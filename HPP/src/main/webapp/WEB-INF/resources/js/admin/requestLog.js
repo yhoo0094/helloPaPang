@@ -97,7 +97,13 @@ function makeDataTableServerSide() {
 				previous : '이전'
 			},
 			zeroRecords	: '조회된 결과가 없습니다.',
-		}		
+		},
+		select: {
+			style: 'single',
+			items: 'row',
+			className: 'selectedRow',
+			//toggleable: false,
+		},		
     });	
     
     //엑셀 작업을 위해 컬럼 정보 추가
@@ -108,5 +114,11 @@ function makeDataTableServerSide() {
 		//$excelUtil.downloadData(mnuNm, mnuNm, mainTable.columInfo, data);
 		$excelUtil.downloadURL(mnuNm, mnuNm, mainTable.columInfo, url, param);
 	})
-    $('#mainTable_paginate').after(excelDownBtn);    
+    $('#mainTable_paginate').after(excelDownBtn); 
+    
+    //테이블 클릭 이벤트
+    mainTable.on('select', function ( e, dt, type, indexes ) {
+	    //var data = mainTable.rows(indexes).data().pluck('reqDtti');
+	    var data = mainTable.rows(indexes).data();
+	} );   
 }
