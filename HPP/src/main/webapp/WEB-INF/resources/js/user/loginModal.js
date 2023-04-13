@@ -46,7 +46,6 @@ function login(){
 			$com.loadingEnd();
 	        if (res.RESULT == Constant.RESULT_SUCCESS){
 	            loginModalClose();
-	            //$('#loginModalbtn').css('display', 'none');
 	            
 	            //비밀번호 유효기간이 만료된 경우
 	            var obj = $util.getObjFromArr(res.userPoli, 'poliNm', 'PSWD_LIM_DAYS');	//비밀번호 변경 주기 객체
