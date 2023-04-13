@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<%@ include file="/WEB-INF/views/user/loginModal.jsp" %><!-- 로그인 모달 -->
+<c:if test="${sessionScope.LOGIN_INFO eq null}">
+	<%@ include file="/WEB-INF/views/user/loginModal.jsp" %><!-- 로그인 모달 -->
+</c:if>
 
 <script>
 	//자동 로그아웃 타이머
@@ -37,6 +38,32 @@
 	function sessionTimeReset() {
 		sessionTime = '<%= session.getMaxInactiveInterval() %>';
 	}
+	
+	//로그아웃
+	function loginOut() {
+		if(!confirm("정말 로그아웃 하시겠습니까?")){
+			return;
+		}
+		
+		$com.loadingStart();
+	    $.ajax({
+	        url: '/user/logout.do',
+	        type: 'POST',
+	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+	        dataType: 'json',
+	        success: function (result) {
+				$com.loadingEnd();
+		        if (result.RESULT == Constant.RESULT_SUCCESS){
+		            location.replace('/');
+		        } else {
+					alert(result[Constant.OUT_RESULT_MSG])
+				}
+	        },
+	        error: function(textStatus, jqXHR, thrownError){
+				$com.loadingEnd();
+			}        
+	    });		
+	}	
 </script>
 
 <!-- Navbar (sit on top) -->

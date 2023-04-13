@@ -54,10 +54,10 @@
 					  ~ <input id="noticeEndDt" name="noticeEndDt" class="form-control" type="date" title="게시종료일" required="all1"/>
 					</td>
 					<th>팝업여부</th>
-					<th>
+					<td>
 						Y <input id="noticePopY" name="noticePopYn" type="radio" value="Y">
 						N <input id="noticePopN" name="noticePopYn" type="radio" value="N" checked="checked">
-					</th>
+					</td>
 				</tr>				
 				<tr>
 					<th>내용</th>

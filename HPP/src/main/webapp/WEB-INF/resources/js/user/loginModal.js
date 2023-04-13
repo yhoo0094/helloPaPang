@@ -76,32 +76,6 @@ function login(){
     });		
 }
 
-//로그아웃
-function loginOut() {
-	if(!confirm("정말 로그아웃 하시겠습니까?")){
-		return;
-	}
-	
-	$com.loadingStart();
-    $.ajax({
-        url: '/user/logout.do',
-        type: 'POST',
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
-        dataType: 'json',
-        success: function (result) {
-			$com.loadingEnd();
-	        if (result.RESULT == Constant.RESULT_SUCCESS){
-	            location.replace('/');
-	        } else {
-				alert(result[Constant.OUT_RESULT_MSG])
-			}
-        },
-        error: function(textStatus, jqXHR, thrownError){
-			$com.loadingEnd();
-		}        
-    });		
-}
-
 //모달 닫기
 function loginModalClose(){
 	$.modal.close();

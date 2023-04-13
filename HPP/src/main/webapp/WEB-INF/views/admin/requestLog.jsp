@@ -8,6 +8,9 @@
  * @설명: 클라이언트에서 서버로 넘어오는 요청관련 로그 조회
 **/
  %>
+ 
+ <%@ include file="/WEB-INF/views/admin/requestLogModal.jsp" %><!-- 로그인 모달 -->
+ 
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
 	<div class="papang-search-div">

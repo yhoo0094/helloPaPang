@@ -34,7 +34,7 @@ var columInfo = [
       , { title: "아이디"		, data: "userId"		, width: "100px"	, className: "text_align_center"	, defaultContent: ""}
       , { title: "아이피"		, data: "userIp"		, width: "100px"	, className: "text_align_center"	, defaultContent: ""}
       , { title: "URI"		, data: "reqUri"		, width: "200px"	, className: "text_align_left"		, defaultContent: ""}      
-      , { title: "파라미터"	, data: "reqParam"		, width: "*"		, className: "text_align_left"		, defaultContent: ""}      
+      , { title: "파라미터"	, data: "reqParam100"	, width: "*"		, className: "text_align_left"		, defaultContent: ""}      
       , { title: "메뉴"		, data: "reqTypeNm"		, width: "100px"	, className: "text_align_center"	, defaultContent: ""}
 ]
 
@@ -117,8 +117,9 @@ function makeDataTableServerSide() {
     $('#mainTable_paginate').after(excelDownBtn); 
     
     //테이블 클릭 이벤트
-    mainTable.on('select', function ( e, dt, type, indexes ) {
+    mainTable.on('select', function(e,dt,type,indexes) {
 	    //var data = mainTable.rows(indexes).data().pluck('reqDtti');
 	    var data = mainTable.rows(indexes).data();
-	} );   
+	    requestLogModalOpen(data);
+	});   
 }
