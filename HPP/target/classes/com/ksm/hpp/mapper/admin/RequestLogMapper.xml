@@ -38,6 +38,7 @@
 		<if test='strIdx != null and strIdx != ""'>
 		 LIMIT ${strIdx}, ${pageLength}
 		</if>		
+		 ORDER BY REQ_DTTI DESC
 	</select>
 	
 	<!-- 사용자 접속 기록 개수-->

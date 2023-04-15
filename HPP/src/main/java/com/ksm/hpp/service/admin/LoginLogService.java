@@ -30,11 +30,7 @@ public class LoginLogService {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		List<Object> list = sqlSession.selectList("mapper.admin.LoginLogMapper.selectLoginLog", inData);
-		@SuppressWarnings("unused")
-		int cnt = sqlSession.selectOne("mapper.admin.LoginLogMapper.selectLoginLogCnt", inData);
 		result.put("data", list);
-		result.put("recordsTotal", cnt);	//총 레코드 수
-		result.put("recordsFiltered", cnt);	//필터링 후의 총 레코드 수
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;
 	}

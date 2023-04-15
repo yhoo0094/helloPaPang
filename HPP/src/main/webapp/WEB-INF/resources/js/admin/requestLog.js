@@ -6,17 +6,17 @@
 **/
 
 //페이지 전역 변수
-var mainTable
+var mainTable;
 
 $(document).ready(function() {
 	setDatetimepicker();
-	
 	makeDataTableServerSide();	//DataTable 만들기(페이지네이션 서버 처리)
 });
 
 //datetimepicker 설정
 function setDatetimepicker() {
-	var reqDttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),0,0,-1,0,0);
+	//var reqDttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),0,0,-1,0,0);	//1일 전
+	var reqDttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),-1,0,0,0,0);	//1년 전
 	reqDttiStr = $dateUtil.dateHyphenTime(reqDttiStr);
 	
 	$com.datetimepicker('reqDttiStr',$dateUtil.todayYYYY_MM_DD_HHMM(reqDttiStr));
@@ -50,44 +50,46 @@ function makeDataTableServerSide() {
     $.each(arr, function() {
         param[this.name] = this.value;
     });
-    
     var reqTypeCode = [];
     $("input:checkbox[name=reqTypeCode]:checked").each(function(){
 		reqTypeCode.push(this.value);              
 	});
     param.reqTypeCode = reqTypeCode;
-    
-	if($util.isEmpty(mainTable)){
-		param.page = 0;
-	} else {
-		param.page = parseInt(mainTable.page());
-	};
-	param.pageLength = 10;				//페이지당 레코드 수
-	param.strIdx = 1 + (10 * param.page);	//시작 레코드 인덱스   
+	param.pageLength = 10;						//페이지당 레코드 수
 	
     mainTable = $('#mainTable').DataTable({
-		serverSide: true,
+		serverSide: true,						//페이징 처리 서버에서 수행
 		ajax: {
 			url: url,
         	type: 'POST',
-			data: param,
+			data: function(){
+				if($util.isEmpty(mainTable)){
+					param.strIdx = 1;
+				} else {
+					param.strIdx = 1 + (param.pageLength * parseInt(mainTable.page()));		//시작 레코드 인덱스 
+				};
+				return param;
+			},
 		},
-        columns: columInfo,		
-        pagingType: "full_numbers",
+        columns: columInfo,
+	  	createdRow: function( row, data, dataIndex ) {
+			$(row).addClass('pointer');			//행에 pointer css 적용
+	  	},       		
+        pagingType: "numbers",					//v페이지 표시 옵션
         ordering: false,
         info: false,
         searching: false,
         lengthChange: false,
-        autoWidth: false,		//자동 열 너비 조정
+        autoWidth: false,						//자동 열 너비 조정
         
-  		scrollY: 600,			//테이블 높이
-  		scrollCollapse: true,   //테이블 최대 높이 고정 여부     
+  		scrollY: 600,							//테이블 높이
+  		scrollCollapse: true,   				//테이블 최대 높이 고정 여부     
         
         preDrawCallback : function(settings){	//테이블 그리기 전에 동작
-			$com.loadingStart();	//로딩패널 보이기
+			$com.loadingStart();				//로딩패널 보이기
 		},
         drawCallback : function(settings){		//테이블 그리기 후에 동작
-			$com.loadingEnd();		//로딩패널 숨기기
+			$com.loadingEnd();					//로딩패널 숨기기
 		},
 		language : {
 			paginate : {
@@ -102,7 +104,7 @@ function makeDataTableServerSide() {
 			style: 'single',
 			items: 'row',
 			className: 'selectedRow',
-			//toggleable: false,
+			toggleable: true,
 		},		
     });	
     
@@ -121,5 +123,6 @@ function makeDataTableServerSide() {
 	    //var data = mainTable.rows(indexes).data().pluck('reqDtti');
 	    var data = mainTable.rows(indexes).data();
 	    requestLogModalOpen(data);
+	    mainTable.rows(indexes).deselect();
 	});   
 }

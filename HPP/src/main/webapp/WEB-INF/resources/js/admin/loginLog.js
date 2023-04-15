@@ -9,16 +9,33 @@
 var mainTable
 
 $(document).ready(function () {
+	setDatetimepicker();
 	selectData();				//DataTable 만들기
 	//makeDataTableServerSide();	//DataTable 만들기(페이지네이션 서버 처리)
 });
+
+//datetimepicker 설정
+function setDatetimepicker() {
+	//var dttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),0,0,-1,0,0);	//1일 전
+	var dttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),-1,0,0,0,0);	//1년 전
+	dttiStr = $dateUtil.dateHyphenTime(dttiStr);
+	
+	$com.datetimepicker('dttiStr',$dateUtil.todayYYYY_MM_DD_HHMM(dttiStr));
+	$com.datetimepicker('dttiEnd',$dateUtil.todayYYYY_MM_DD_HHMM());	
+}
+
+//검색
+function doSearch(){
+	$('#mainTableDiv').html('<table id="mainTable" class="display" style="width:100%"></table>');
+	selectData();
+}
 
 //사용자 접속 기록 조회
 function selectData(){
     $.ajax({
         url: '/admin/selectLoginLog.do',
         type: 'POST',
-        data: {},
+        data: $('#searchForm').serialize(),
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
@@ -45,13 +62,31 @@ function makeDataTable(data) {
     mainTable = $('#mainTable').DataTable({
         data: data,
         columns: columInfo,		
-        paging: true,
-        pagingType: "full_numbers",
+        pagingType: "numbers",					//v페이지 표시 옵션
         ordering: false,
         info: false,
         searching: false,
         lengthChange: false,
-        pageLength: 10,
+        autoWidth: false,						//자동 열 너비 조정
+        
+  		scrollY: 600,							//테이블 높이
+  		scrollCollapse: true,   				//테이블 최대 높이 고정 여부     
+        
+        preDrawCallback : function(settings){	//테이블 그리기 전에 동작
+			$com.loadingStart();				//로딩패널 보이기
+		},
+        drawCallback : function(settings){		//테이블 그리기 후에 동작
+			$com.loadingEnd();					//로딩패널 숨기기
+		},
+		language : {
+			paginate : {
+				first : '처음',
+				last : '마지막',
+				next : '다음',
+				previous : '이전'
+			},
+			zeroRecords	: '조회된 결과가 없습니다.',
+		},
     });	
     
     //엑셀 작업을 위해 컬럼 정보 추가
@@ -78,49 +113,6 @@ function makeDataTable(data) {
 	excelUploadOption["colOptions"] = mainTable.columInfo;
 	
 	excelUploadOptions.push(excelUploadOption);
-}
-
-//DataTable 만들기(페이지네이션 서버 처리)
-function makeDataTableServerSide() {
-    mainTable = $('#mainTable').DataTable({
-		serverSide: true,
-		ajax: {
-			url: '/admin/selectLoginLog.do',
-        	type: 'POST',
-        	data: function(data){
-				if($util.isEmpty(mainTable)){
-					data.page = 0;
-				} else {
-					data.page = parseInt(mainTable.page());
-				};
-				data.pageLength = 10;				//페이지당 레코드 수
-				data.strIdx = 1 + (10 * data.page);	//시작 레코드 인덱스
-			},
-		},
-        columns: columInfo,		
-        //paging: true,
-        pagingType: "full_numbers",
-        ordering: false,
-        info: false,
-        searching: false,
-        lengthChange: false,
-        preDrawCallback : function(settings){	//테이블 그리기 전에 동작
-			$com.loadingStart();	//로딩패널 보이기
-		},
-        drawCallback : function(settings){		//테이블 그리기 후에 동작
-			$com.loadingEnd();		//로딩패널 숨기기
-		},
-		language : {
-			paginate : {
-				first : '처음',
-				last : '마지막',
-				next : '다음',
-				previous : '이전'
-			},
-			zeroRecords	: '조회된 결과가 없습니다.',
-			//info : '전체 _TOTAL_건',
-		}		
-    });	
 }
 
 //엑셀 업로드 후 콜백

@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+.pointer{cursor: pointer;}
+.tr{text-align: right;}
+.tl{text-align: left;}
+.tc{text-align: center;}
+
 .w0{width:0%;} 
 .w5{width:5%;} 
 .w10 {width:10%;} 

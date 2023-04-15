@@ -14,29 +14,16 @@
 		 INNER JOIN TB_CODE_DETAIL T2
     		ON T2.CODE_GROUP = 'LOGIN_CODE'
 		   AND T1.LOGIN_CODE = T2.CODE_DETAIL	
-		<trim prefix="WHERE" prefixOverrides="AND">  
-			<if test='userId != null and userId != ""'>
-		   AND USER_ID = #{userId}
-			</if>
-		</trim>
+		 WHERE LOGIN_DTTI BETWEEN DATE_FORMAT(#{dttiStr}, '%Y-%m-%d %H:%i') AND DATE_FORMAT(#{dttiEnd}, '%Y-%m-%d %H:%i')		   
+		<if test='userId != null and userId != ""'>
+		   AND T1.USER_ID LIKE CONCAT('%',#{userId},'%')
+		</if>
+		<if test='userIp != null and userIp != ""'>
+		   AND T1.USER_IP LIKE CONCAT('%',#{userIp},'%')
+		</if>	
+		<if test='loginCode != null and loginCode != ""'>
+		   AND T1.LOGIN_CODE = #{loginCode}
+		</if>			
 		 ORDER BY LOGIN_DTTI DESC
-		<if test='strIdx != null and strIdx != ""'>
-		 LIMIT ${strIdx}, ${pageLength}
-		</if>		 
 	</select>
-	
-	
-	<!-- 사용자 접속 기록 개수-->
-	<select id="selectLoginLogCnt" parameterType="map" resultType="int">
-		SELECT COUNT(*)
-		  FROM TB_LOG_LOGIN T1				/*테이블_로그_로그인*/
-		 INNER JOIN TB_CODE_DETAIL T2
-    		ON T2.CODE_GROUP = 'LOGIN_CODE'
-		   AND T1.LOGIN_CODE = T2.CODE_DETAIL	
-		<trim prefix="WHERE" prefixOverrides="AND">  
-			<if test='userId != null and userId != ""'>
-				AND USER_ID = #{userId}
-			</if>
-		</trim>
-	</select>	
 </mapper>

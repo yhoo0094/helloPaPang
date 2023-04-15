@@ -19,14 +19,14 @@
 				<tr>
 					<th>발생일시:</th>
 					<td>
-						<input id="reqDttiStr" name="reqDttiStr" class="datetimepicker form-control" title="발생일시" type="text" required="all1" style="width: 150px;"> ~ 
-						<input id="reqDttiEnd" class="datetimepicker w45 form-control" name="reqDttiEnd" title="발생일시" type="text" required="all1" style="width: 150px;">
+						<input id="reqDttiStr" name="reqDttiStr" class="datetimepicker form-control" title="발생일시" type="text" style="width: 150px;"> ~ 
+						<input id="reqDttiEnd" class="datetimepicker form-control" name="reqDttiEnd" title="발생일시" type="text" style="width: 150px;">
 					</td>	
 					<th>아이디:</th>
 					<td><input id="userId" class="w100 form-control" name="userId" title="아이디" type="text" maxlength="20"></td>
 					<th>아이피:</th>
 					<td><input id="userIp" class="w100 form-control" name="userIp" title="아이피" type="text" maxlength="39"></td>
-					<td rowspan="3"><button type="button" class="papang-search-btn papang_btn w90" onclick="doSearch()" style="line-height: 450%">검색</button></td>
+					<td rowspan="3"><button type="button" class="papang-search-btn papang_btn w90" onclick="doSearch()" style="height: 105px;">검색</button></td>
 				</tr>
 				<tr>
 					<th>URI:</th>
@@ -37,18 +37,18 @@
 				<tr>					
 					<th>유형:</th>
 					<td colspan="5">
-						<input class="" name="reqTypeCode" title="메뉴" type="checkbox" value="admin" checked="checked"> 관리자
-						<input class="" name="reqTypeCode" title="메뉴" type="checkbox" value="active" checked="checked"> 활동
-						<input class="" name="reqTypeCode" title="메뉴" type="checkbox" value="board" checked="checked"> 게시판
-						<input class="" name="reqTypeCode" title="메뉴" type="checkbox" value="info" checked="checked"> 정보
-						<input class="" name="reqTypeCode" title="메뉴" type="checkbox" value="market" checked="checked"> 장터
-						<input class="" name="reqTypeCode" title="메뉴" type="checkbox" value="sitter" checked="checked"> 베이비시터
-						<input class="" name="reqTypeCode" title="메뉴" type="checkbox" value="user" checked="checked"> 사용자
-						<input class="" name="reqTypeCode" title="메뉴" type="checkbox" value="etc" checked="checked"> 기타
+						<input id="adminChk" name="reqTypeCode" title="메뉴" type="checkbox" value="admin" checked="checked"><label for="adminChk"> 관리자</label>
+						<input id="activeChk" name="reqTypeCode" title="메뉴" type="checkbox" value="active" checked="checked"><label for="activeChk"> 활동</label> 
+						<input id="boardChk" name="reqTypeCode" title="메뉴" type="checkbox" value="board" checked="checked"><label for="boardChk"> 게시판</label> 
+						<input id="infoChk" name="reqTypeCode" title="메뉴" type="checkbox" value="info" checked="checked"><label for="infoChk"> 정보</label> 
+						<input id="marketChk" name="reqTypeCode" title="메뉴" type="checkbox" value="market" checked="checked"><label for="marketChk"> 장터</label> 
+						<input id="sitterChk" name="reqTypeCode" title="메뉴" type="checkbox" value="sitter" checked="checked"><label for="sitterChk"> 베이비시터</label> 
+						<input id="userChk" name="reqTypeCode" title="메뉴" type="checkbox" value="user" checked="checked"><label for="userChk"> 사용자</label> 
+						<input id="etcChk" name="reqTypeCode" title="메뉴" type="checkbox" value="etc" checked="checked"><label for="etcChk"> 기타</label> 
 					</td>
 				</tr>
 			</table>
 		</form>
 	</div>
-	<div id="mainTableDiv"><table id="mainTable" class="display" style="width:100%"></table></div>
+	<div id="mainTableDiv"><table id="mainTable" class="display" style="width:100%;"></table></div>
 </div>	
