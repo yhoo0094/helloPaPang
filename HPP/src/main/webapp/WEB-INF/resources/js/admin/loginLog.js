@@ -10,8 +10,8 @@ var mainTable
 
 $(document).ready(function () {
 	setDatetimepicker();
-	selectData();				//DataTable 만들기
-	//makeDataTableServerSide();	//DataTable 만들기(페이지네이션 서버 처리)
+	//selectData();				//DataTable 만들기
+	makeDataTableServerSide();	//DataTable 만들기(페이지네이션 서버 처리)
 });
 
 //datetimepicker 설정
@@ -26,8 +26,7 @@ function setDatetimepicker() {
 
 //검색
 function doSearch(){
-	$('#mainTableDiv').html('<table id="mainTable" class="display" style="width:100%"></table>');
-	selectData();
+	mainTable.ajax.reload();
 }
 
 //사용자 접속 기록 조회
@@ -71,7 +70,6 @@ function makeDataTable(data) {
         
   		scrollY: 600,							//테이블 높이
   		scrollCollapse: true,   				//테이블 최대 높이 고정 여부     
-        
         preDrawCallback : function(settings){	//테이블 그리기 전에 동작
 			$com.loadingStart();				//로딩패널 보이기
 		},
@@ -97,6 +95,83 @@ function makeDataTable(data) {
 		$excelUtil.downloadData(mnuNm, mnuNm, mainTable.columInfo, data);
 	})
     $('#mainTable_paginate').after(excelDownBtn);
+    
+    //엑셀 업로드 버튼
+    excelUploadBtn.on('click', function(){
+		$excelUtil.upload(excelUploadOptions, excelUploadCallBack);
+	})
+    $('#mainTable_paginate').after(excelUploadBtn);    
+    
+	var excelUploadOptions = [];
+	
+	//excel 업로드 옵션 입력(사용할 시트 수 만큼 반복)
+	var excelUploadOption={};
+	excelUploadOption["rowOffset"] = 4;		//빈 행 개수(테이블 헤드도 빈 행으로 취급)
+	excelUploadOption["colOffset"] = 1;		//빈 열 개수
+	excelUploadOption["colOptions"] = mainTable.columInfo;
+	
+	excelUploadOptions.push(excelUploadOption);
+}
+
+//DataTable 만들기(페이지네이션 서버 처리)
+function makeDataTableServerSide() {
+	var url = '/admin/selectLoginLog.do';
+	var param = {};    
+	param.pageLength = 10;						//페이지당 레코드 수
+	
+    mainTable = $('#mainTable').DataTable({
+		serverSide: true,						//페이징 처리 서버에서 수행
+		ajax: {
+			url: url,
+        	type: 'POST',
+			data: function(){
+				//검색 조건 object에 담기
+			    $.each($('#searchForm').serializeArray(), function() {
+			        param[this.name] = this.value;
+			    });
+				
+				if($util.isEmpty(mainTable)){
+					param.strIdx = 1;
+				} else {
+					param.strIdx = 1 + (param.pageLength * parseInt(mainTable.page()));		//시작 레코드 인덱스 
+				};
+				return param;
+			},
+		},
+        columns: columInfo,
+        pagingType: "numbers",					//v페이지 표시 옵션
+        ordering: false,
+        info: false,
+        searching: false,
+        lengthChange: false,
+        autoWidth: false,						//자동 열 너비 조정
+  		scrollY: 600,							//테이블 높이
+  		scrollCollapse: true,   				//테이블 최대 높이 고정 여부     
+        preDrawCallback : function(settings){	//테이블 그리기 전에 동작
+			$com.loadingStart();				//로딩패널 보이기
+		},
+        drawCallback : function(settings){		//테이블 그리기 후에 동작
+			$com.loadingEnd();					//로딩패널 숨기기
+		},
+		language : {
+			paginate : {
+				first : '처음',
+				last : '마지막',
+				next : '다음',
+				previous : '이전'
+			},
+			zeroRecords	: '조회된 결과가 없습니다.',
+		},
+    });	
+    
+    //엑셀 작업을 위해 컬럼 정보 추가
+    mainTable.columInfo = columInfo;
+    
+    //엑셀 다운로드 버튼
+    excelDownBtn.on('click', function(){
+		$excelUtil.downloadURL(mnuNm, mnuNm, mainTable.columInfo, url, param);
+	})
+    $('#mainTable_paginate').after(excelDownBtn); 
     
     //엑셀 업로드 버튼
     excelUploadBtn.on('click', function(){

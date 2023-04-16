@@ -17,7 +17,7 @@
 		     , LT_UPD_ID 				/*최종수정자ID*/
 		     , DATE_FORMAT(LT_UPD_DTTI, "%Y/%m/%d %H:%i") LT_UPD_DTTI	/*최종수정일시*/
 		  FROM TB_BOARD_NOTICE			/*테이블_공지사항*/
-		 ORDER BY NOTICE_STR_DT DESC;
+		 ORDER BY LT_UPD_DTTI DESC;
 	</select>	
 	
 	<!-- 공지사항 등록 -->

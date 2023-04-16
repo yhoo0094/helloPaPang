@@ -8,8 +8,8 @@
 //요청 로그 모달 열기
 function requestLogModalOpen(data){
 	//모달 값 입력
-	for(var i in data[0]){
-		$('#' + i + "Modal").val(data[0][i]);
+	for(var i in data){
+		$('#' + i + "Modal").val(data[i]);
 	}
 	
 	//요청 로그 모달 열기

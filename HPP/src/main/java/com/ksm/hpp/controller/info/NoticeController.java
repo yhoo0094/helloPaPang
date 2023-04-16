@@ -28,6 +28,8 @@ public class NoticeController extends BaseController {
 	@Resource(name = "CommonService")
 	protected CommonService commonService;
 	
+	String mnuUrl = "info/notice";
+	
 	/**
 	 * @메소드명: selectNotice
 	 * @작성자: 김상민
@@ -58,7 +60,7 @@ public class NoticeController extends BaseController {
 		inData.put("loginInfo", loginInfo);
 		
 		//권한 확인
-		inData.put("mnuUrl", "notice");		//메뉴 경로
+		inData.put("mnuUrl", mnuUrl);		//메뉴 경로
 		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
 		inData.put("reqAuthGrade", 2);		//필요 권한등급
 		commonService.writeAuthChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);

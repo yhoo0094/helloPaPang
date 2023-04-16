@@ -1,9 +1,5 @@
 package com.ksm.hpp.service.info;
 
-import java.io.File;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ksm.hpp.framework.util.Configuration;
 import com.ksm.hpp.framework.util.Constant;
-import com.ksm.hpp.framework.util.OSValidator;
-import com.ksm.hpp.framework.util.OS_Type;
 import com.ksm.hpp.framework.util.StringUtil;
 import com.ksm.hpp.service.com.FileService;
 

@@ -25,9 +25,8 @@ function setDatetimepicker() {
 
 //검색
 function doSearch(){
-	$('#mainTableDiv').html('<table id="mainTable" class="display" style="width:100%"></table>');
-	makeDataTableServerSide();
-}
+	mainTable.ajax.reload();
+};
 
 var columInfo = [
         { title: "발생일시"	, data: "reqDtti"		, width: "200px"	, className: "text_align_center"}
@@ -44,17 +43,7 @@ var excelDownBtn = $('<div class="table_btn_wrapper"><button type="button" class
 //DataTable 만들기(페이지네이션 서버 처리)
 function makeDataTableServerSide() {
 	var url = '/admin/selectRequestLog.do';
-	
-	var arr = $('#searchForm').serializeArray();
 	var param = {};    
-    $.each(arr, function() {
-        param[this.name] = this.value;
-    });
-    var reqTypeCode = [];
-    $("input:checkbox[name=reqTypeCode]:checked").each(function(){
-		reqTypeCode.push(this.value);              
-	});
-    param.reqTypeCode = reqTypeCode;
 	param.pageLength = 10;						//페이지당 레코드 수
 	
     mainTable = $('#mainTable').DataTable({
@@ -63,6 +52,16 @@ function makeDataTableServerSide() {
 			url: url,
         	type: 'POST',
 			data: function(){
+				//검색 조건 object에 담기
+			    $.each($('#searchForm').serializeArray(), function() {
+			        param[this.name] = this.value;
+			    });
+			    var reqTypeCode = [];
+			    $("input:checkbox[name=reqTypeCode]:checked").each(function(){
+					reqTypeCode.push(this.value);              
+				});
+			    param.reqTypeCode = reqTypeCode;				
+				
 				if($util.isEmpty(mainTable)){
 					param.strIdx = 1;
 				} else {
@@ -81,7 +80,6 @@ function makeDataTableServerSide() {
         searching: false,
         lengthChange: false,
         autoWidth: false,						//자동 열 너비 조정
-        
   		scrollY: 600,							//테이블 높이
   		scrollCollapse: true,   				//테이블 최대 높이 고정 여부     
         
@@ -100,12 +98,6 @@ function makeDataTableServerSide() {
 			},
 			zeroRecords	: '조회된 결과가 없습니다.',
 		},
-		select: {
-			style: 'single',
-			items: 'row',
-			className: 'selectedRow',
-			toggleable: true,
-		},		
     });	
     
     //엑셀 작업을 위해 컬럼 정보 추가
@@ -113,16 +105,13 @@ function makeDataTableServerSide() {
     
     //엑셀 다운로드 버튼
     excelDownBtn.on('click', function(){
-		//$excelUtil.downloadData(mnuNm, mnuNm, mainTable.columInfo, data);
 		$excelUtil.downloadURL(mnuNm, mnuNm, mainTable.columInfo, url, param);
 	})
     $('#mainTable_paginate').after(excelDownBtn); 
     
-    //테이블 클릭 이벤트
-    mainTable.on('select', function(e,dt,type,indexes) {
-	    //var data = mainTable.rows(indexes).data().pluck('reqDtti');
-	    var data = mainTable.rows(indexes).data();
+    //테이블 더블 클릭 이벤트
+	$('#mainTable tbody').on('dblclick', 'tr', function () {
+	    var data = mainTable.row(this).data();
 	    requestLogModalOpen(data);
-	    mainTable.rows(indexes).deselect();
-	});   
+	});	 
 }

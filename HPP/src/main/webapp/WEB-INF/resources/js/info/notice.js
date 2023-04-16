@@ -67,5 +67,4 @@ function mkNoticeTable(data) {
 	    var data = mainTable.row( this ).data();
 	    noticeModalOpen(data);
 	});
-    
 }

@@ -31,6 +31,12 @@ public class LoginLogService {
 		
 		List<Object> list = sqlSession.selectList("mapper.admin.LoginLogMapper.selectLoginLog", inData);
 		result.put("data", list);
+		result.put(Constant.OUT_DATA, list);
+		
+		int cnt = sqlSession.selectOne("mapper.admin.LoginLogMapper.selectLoginLogCnt", inData);
+		result.put("recordsTotal", cnt);	//총 레코드 수
+		result.put("recordsFiltered", cnt);	//필터링 후의 총 레코드 수	
+		
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;
 	}
