@@ -23,7 +23,7 @@
 				<tbody>
 					<tr>
 						<td>아이디<span class="required">*</span></td>
-						<td><input id="userId" type="text" class="papang_input" name="userId" title="아이디" maxlength="20" required="all1"></td>
+						<td><input id="id" name="id" type="text" class="papang_input" title="아이디" maxlength="20" required="all1"></td>
 						<td>
 							<button id="chkUniqIdBtn" type="button" class="papang_btn papang-create-btn" onclick="chkUniqId()">중복확인</button>
 							<span id="idUniChkMsg" class="idUniChkBf"></span>
@@ -31,12 +31,12 @@
 					</tr>
 					<tr>
 						<td>비밀번호<span class="required">*</span></td>
-						<td><input id="userPw" type="password" class="papang_input" name="userPw" title="비밀번호" maxlength="50" required="all1"></td>
+						<td><input id="pw" type="password" class="papang_input" name="pw" title="비밀번호" maxlength="50" required="all1"></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>비밀번호 확인<span class="required">*</span></td>
-						<td><input id="userPwChk" type="password" class="papang_input" title="비밀번호 확인" maxlength="50" required="all1"></td>
+						<td><input id="pwChk" type="password" class="papang_input" title="비밀번호 확인" maxlength="50" required="all1"></td>
 						<td></td>
 					</tr>					
 					<tr>

@@ -41,8 +41,8 @@ public class UserService extends BaseService {
 		
 		//비밀번호 해쉬 처리
 		//1 = SXRLcrGA1f5nK8A5cvZICY86tW2d/Rekkm3lrWEgqJU=
-		String userPw = StringUtil.getSHA256("HPP" + (String)inData.get("userPw") + "MELONA");
-		inData.put("userPw", userPw);
+		String pw = StringUtil.getSHA256("HPP" + (String)inData.get("pw") + "MELONA");
+		inData.put("pw", pw);
 		
 		do {
 			cnt = sqlSession.insert("mapper.user.UserMapper.insertUser", inData);
@@ -95,18 +95,18 @@ public class UserService extends BaseService {
 				}
 				
 				//비밀번호 해쉬 처리
-				String userPw = StringUtil.getSHA256("HPP" + (String)inData.get("userPw") + "MELONA");
-				inData.put("userPw", userPw);				
+				String pw = StringUtil.getSHA256("HPP" + (String)inData.get("pw") + "MELONA");
+				inData.put("pw", pw);				
 				
 				//비밀번호가 일치하지 않을 때
-				if(!userPw.equals(loginInfo.get("userPw"))) {		
+				if(!pw.equals(loginInfo.get("pw"))) {		
 					cnt = sqlSession.update("mapper.user.UserMapper.pwErr", inData);
 					if(cnt != 1) {throw new ConfigurationException("비밀번호 불일치 횟수 증가 오류 발생");}
 					
 					loginCode = "04";
 					result.put(Constant.OUT_RESULT_MSG, "존재하지 않는 아이디이거나 비밀번호가 일치하지 않습니다.");	
 					result.put(Constant.RESULT, Constant.RESULT_FAILURE);
-					log.info(inData.get("userId") + " 계정 비밀번호 오입력 횟수 " + cnt + "회 증가");
+					log.info(inData.get("id") + " 계정 비밀번호 오입력 횟수 " + cnt + "회 증가");
 					break;					
 				}
 				
@@ -128,13 +128,13 @@ public class UserService extends BaseService {
 				if(cnt != 1) {throw new ConfigurationException("비밀번호 오입력 횟수 초기화 오류 발생");}
 				
 				//로그인 IP 파악
-				String userIp = RequestUtil.getIpAddr(request);
-				inData.put("userIp", userIp);
-				loginInfo.put("userIp", userIp);
+				String ip = RequestUtil.getIpAddr(request);
+				inData.put("ip", ip);
+				loginInfo.put("ip", ip);
 				
 				//사용자 정보 세션에 저장
 				HttpSession session = request.getSession();
-				loginInfo.remove("userPw");	//비밀번호 정보는 제거
+				loginInfo.remove("pw");	//비밀번호 정보는 제거
 				session.setAttribute(Constant.LOGIN_INFO, loginInfo);
 				
 				//권한 정보 세션에 저장

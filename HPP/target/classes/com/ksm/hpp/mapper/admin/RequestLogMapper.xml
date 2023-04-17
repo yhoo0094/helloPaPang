@@ -6,8 +6,8 @@
 	<select id="selectRequestLog" parameterType="map" resultType="camelCaseMap">
 		SELECT T1.REQ_SEQ					/*요청일련번호*/
 		     , DATE_FORMAT(T1.REQ_DTTI, '%Y/%m/%d %H:%i:%s') AS REQ_DTTI 				/*요청일시*/
-		     , T1.USER_ID					/*사용자아이디*/
-		     , T1.USER_IP					/*사용자아이피*/
+		     , T1.ID					/*사용자아이디*/
+		     , T1.IP					/*사용자아이피*/
 		     , T1.REQ_URI					/*요청경로*/
 		     , IF(LENGTH(T1.REQ_PARAM)  <![CDATA[>]]>  100, CONCAT(SUBSTR(T1.REQ_PARAM, 1, 100),'...'), T1.REQ_PARAM) REQ_PARAM_100		/*요청파라미터_100글자*/
 		     , T1.REQ_PARAM					/*요청파라미터*/
@@ -22,11 +22,11 @@
 		        #{code}
 		     </foreach>	
 	     	   )
-		<if test='userId != null and userId != ""'>
-		   AND T1.USER_ID LIKE CONCAT('%',#{userId},'%')
+		<if test='id != null and id != ""'>
+		   AND T1.ID LIKE CONCAT('%',#{id},'%')
 		</if>
-		<if test='userIp != null and userIp != ""'>
-		   AND T1.USER_IP LIKE CONCAT('%',#{userIp},'%')
+		<if test='ip != null and ip != ""'>
+		   AND T1.IP LIKE CONCAT('%',#{ip},'%')
 		</if>		
 		<if test='reqUri != null and reqUri != ""'>
 		   AND T1.REQ_URI LIKE CONCAT('%',#{reqUri},'%')
@@ -51,11 +51,11 @@
 		        #{code}
 		     </foreach>	
 	     	   )
-		<if test='userId != null and userId != ""'>
-		   AND T1.USER_ID LIKE CONCAT('%',#{userId},'%')
+		<if test='id != null and id != ""'>
+		   AND T1.ID LIKE CONCAT('%',#{id},'%')
 		</if>
-		<if test='userIp != null and userIp != ""'>
-		   AND T1.USER_IP LIKE CONCAT('%',#{userIp},'%')
+		<if test='ip != null and ip != ""'>
+		   AND T1.IP LIKE CONCAT('%',#{ip},'%')
 		</if>		
 		<if test='reqUri != null and reqUri != ""'>
 		   AND T1.REQ_URI LIKE CONCAT('%',#{reqUri},'%')

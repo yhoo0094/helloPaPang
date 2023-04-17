@@ -4,14 +4,14 @@
 	
 	<!-- 사용자 조회-->
 	<select id="selectUser" parameterType="map" resultType="camelCaseMap">
-		SELECT USER_ID			/*아이디*/
-			 , USER_PW			/*비밀번호*/
-			 , PW_ERR_CNT		/*비밀번호 오입력 횟수*/
+		SELECT ID											/*아이디*/
+			 , PW											/*비밀번호*/
+			 , PW_ERR_CNT									/*비밀번호 오입력 횟수*/
 			 , DATE_FORMAT(PW_CH_DTTI, '%Y%m%d') PW_CH_DTTI	/*비밀번호 최종수정일시*/
-		  FROM TB_USER			/*테이블_사용자*/
+		  FROM TB_USER										/*테이블_사용자*/
 		<trim prefix="WHERE" prefixOverrides="AND">  
-			<if test='userId != null and userId != ""'>
-				AND USER_ID = #{userId}
+			<if test='id != null and id != ""'>
+				AND ID = #{id}
 			</if>
 		</trim>
 	</select>
@@ -26,7 +26,7 @@
 		  JOIN TB_MNU T4						/*테이블_메뉴*/
 		    ON T2.MNU_SEQ = T4.MNU_SEQ  		    
 		 WHERE T4.MNU_LEVEL = 2					/*메뉴레벨*/
-		   AND T1.USER_ID = #{userId}			/*사용자아이디*/
+		   AND T1.ID = #{id}					/*사용자아이디*/
 		 GROUP BY T4.MNU_URL	
 	</select>
 	
@@ -41,14 +41,14 @@
 	<insert id="insertUser" parameterType="map">
 		INSERT 
 		  INTO TB_USER			/*테이블_사용자*/
-		     ( USER_ID			/*아이디*/
-		     , USER_PW 			/*비밀번호*/
+		     ( ID				/*아이디*/
+		     , PW 				/*비밀번호*/
 		     , FST_REG_ID 		/*최초등록자ID*/
 		     , LT_UPD_ID 		/*최종수정자ID*/
 		     )
 		VALUES
-			 ( #{userId}		/*아이디*/
-			 , #{userPw}		/*비밀번호*/
+			 ( #{id}			/*아이디*/
+			 , #{pw}			/*비밀번호*/
 		     , 'SYSTEM' 		/*최초등록자ID*/
 		     , 'SYSTEM' 		/*최종수정자ID*/			 
 			 )    
@@ -59,14 +59,14 @@
 		INSERT 
 		  INTO TB_LOG_LOGIN			/*테이블_로그_로그인*/
 		     ( LOGIN_SEQ			/*로그인일련번호*/
-		     , USER_ID 				/*사용자_아이디*/
-		     , USER_IP 				/*사용자_아이피*/
+		     , ID 				/*사용자_아이디*/
+		     , IP 				/*사용자_아이피*/
 		     , LOGIN_CODE 			/*로그인_코드(01:로그인, 02:로그아웃, 03:존재하지 않는 사용자, 04: 잘못된 비밀번호, 05: 비밀번호 오입력 횟수 초과)*/
 		     )
 		VALUES
 			 ( (SELECT nextval('LOGIN_SEQ') FROM DUAL)		/*로그인일련번호*/
-			 , #{userId}			/*사용자_아이디*/
-		     , #{userIp}			/*사용자_아이피*/
+			 , #{id}			/*사용자_아이디*/
+		     , #{ip}			/*사용자_아이피*/
 		     , #{loginCode} 		/*로그인_코드(01:로그인, 02:로그아웃, 03:존재하지 않는 사용자, 04: 잘못된 비밀번호, 05: 비밀번호 오입력 횟수 초과)*/		 
 			 )    
 	</insert>	
@@ -77,7 +77,7 @@
 		   SET PW_ERR_CNT 	= PW_ERR_CNT + 1		/*비밀번호 오입력 횟수*/
 		     , LT_UPD_ID 	= 'SYSTEM'				/*최종수정자ID*/
 		     , LT_UPD_DTTI	= NOW() 				/*최종수정일시*/		   
-		 WHERE USER_ID 		= #{userId}				/*아이디*/
+		 WHERE ID 		= #{id}				/*아이디*/
 	</update>
 	
 	<!-- 비밀번호 오입력 횟수 초기화 -->
@@ -86,6 +86,6 @@
 		   SET PW_ERR_CNT 	= 0						/*비밀번호 오입력 횟수*/
 		     , LT_UPD_ID 	= 'SYSTEM'				/*최종수정자ID*/
 		     , LT_UPD_DTTI	= NOW() 				/*최종수정일시*/		   
-		 WHERE USER_ID 		= #{userId}				/*아이디*/
+		 WHERE ID 		= #{id}				/*아이디*/
 	</update>	
 </mapper>

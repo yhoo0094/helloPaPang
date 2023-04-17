@@ -23,9 +23,9 @@
 						<input id="reqDttiEnd" class="datetimepicker form-control" name="reqDttiEnd" title="발생일시" type="text" style="width: 150px;">
 					</td>	
 					<th>아이디:</th>
-					<td><input id="userId" class="w100 form-control" name="userId" title="아이디" type="text" maxlength="20"></td>
+					<td><input id="id" class="w100 form-control" name="id" title="아이디" type="text" maxlength="20"></td>
 					<th>아이피:</th>
-					<td><input id="userIp" class="w100 form-control" name="userIp" title="아이피" type="text" maxlength="39"></td>
+					<td><input id="ip" class="w100 form-control" name="ip" title="아이피" type="text" maxlength="39"></td>
 					<td rowspan="3"><button type="button" class="papang-search-btn papang_btn w90" onclick="doSearch()" style="height: 105px;">검색</button></td>
 				</tr>
 				<tr>

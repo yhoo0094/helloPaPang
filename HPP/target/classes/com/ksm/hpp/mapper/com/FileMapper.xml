@@ -77,8 +77,8 @@
 			 , #{atcFilePath}		/*파일경로*/
 			 , #{atcFileCapaVal}	/*파일용량*/
 			 , #{atcFileExts}		/*파일확장자*/
-		     , #{loginInfo.userId} 	/*최초등록자ID*/
-		     , #{loginInfo.userId}	/*최종수정자ID*/		 
+		     , #{loginInfo.id} 	/*최초등록자ID*/
+		     , #{loginInfo.id}	/*최종수정자ID*/		 
 			 )
 	</insert>
 	

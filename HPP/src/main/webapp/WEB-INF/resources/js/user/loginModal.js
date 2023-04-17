@@ -10,7 +10,7 @@
 function loginModalOpen(){
 	//아이디 저장 여부 확인
 	if($util.getCookie('hpp_save_id')){
-		$('#userIdModal').val($util.getCookie('hpp_user_id'));
+		$('#idModal').val($util.getCookie('hpp_user_id'));
 		$('#rememberIdChk').prop("checked", true);
 	}
 	
@@ -27,7 +27,7 @@ function login(){
 	
 	//아이디 저장 여부 확인
 	if($('#rememberIdChk').is(":checked")){
-		$util.setCookie('hpp_user_id', $('#userIdModal').val());
+		$util.setCookie('hpp_user_id', $('#idModal').val());
 		$util.setCookie('hpp_save_id', true);
 	} else {
 		$util.setCookie('hpp_user_id', '');

@@ -1,5 +1,5 @@
 $(()=>{
-	$('#userId').on('change',function(){
+	$('#id').on('change',function(){
 		$('#chkUniqIdBtn').removeClass('papang_disabled');
 		$('#idUniChkMsg').attr('class','idUniChkBf');
 	})
@@ -42,7 +42,7 @@ function insertUser(){
 //아이디 유효성 검증
 function idValidation(){
 	var result;	//처리 결과
-	var value = $('#userId').val();
+	var value = $('#id').val();
 	
 	//아이디 입력여부 검사
 	if($util.isEmpty(value)){
@@ -59,7 +59,7 @@ function idValidation(){
 //비밀번호 유효성 검증
 function pwValidation(){
 	var result;	//처리 결과
-	var value = $('#userPw').val();
+	var value = $('#pw').val();
 	
 	//조건: 숫자, 영어, 특수문자를 포함하여 8글자 이상 50글자 이하
 	var allChk = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[~!@#\$%\^&\*()_\+\-={}\[\]\\:;"'<>,.\/]).{8,20}$/;
@@ -70,7 +70,7 @@ function pwValidation(){
 	var maxLenChk = /.{,50}$/gim;	//최대 길이
 	
 	if(allChk.test(value)){ //비밀번호 입력 조건 검증
-		if(value == $('#userPwChk').val()){ //비밀번호와 비밀번호 확인이 같은지 검증
+		if(value == $('#pwChk').val()){ //비밀번호와 비밀번호 확인이 같은지 검증
 			result = true;
 		} else {
 			alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
@@ -99,12 +99,12 @@ function chkUniqId(){
 	//아이디 유효성 검증
 	if(!idValidation()){return;}
 	
-	var userId = $('#userId').val();
+	var id = $('#id').val();
 	
     $.ajax({
         url: '/user/chkUniqId.do',
         type: 'POST',
-        data: {userId : userId},
+        data: {id : id},
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
