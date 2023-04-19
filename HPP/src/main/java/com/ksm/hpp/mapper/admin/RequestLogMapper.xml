@@ -6,11 +6,11 @@
 	<select id="selectRequestLog" parameterType="map" resultType="camelCaseMap">
 		SELECT T1.REQ_SEQ					/*요청일련번호*/
 		     , DATE_FORMAT(T1.REQ_DTTI, '%Y/%m/%d %H:%i:%s') AS REQ_DTTI 				/*요청일시*/
-		     , T1.ID					/*사용자아이디*/
+		     , T1.USER_ID					/*사용자아이디*/
 		     , T1.IP					/*사용자아이피*/
-		     , T1.REQ_URI					/*요청경로*/
-		     , IF(LENGTH(T1.REQ_PARAM)  <![CDATA[>]]>  100, CONCAT(SUBSTR(T1.REQ_PARAM, 1, 100),'...'), T1.REQ_PARAM) REQ_PARAM_100		/*요청파라미터_100글자*/
-		     , T1.REQ_PARAM					/*요청파라미터*/
+		     , T1.URI					/*요청경로*/
+		     , IF(LENGTH(T1.PARAM)  <![CDATA[>]]>  100, CONCAT(SUBSTR(T1.PARAM, 1, 100),'...'), T1.PARAM) PARAM_100		/*요청파라미터_100글자*/
+		     , T1.PARAM					/*요청파라미터*/
 		     , T1.REQ_TYPE_CODE				/*요청타입코드*/
 		     , IFNULL(T2.CODE_DETAIL_NM, '기타') REQ_TYPE_NM	/*요청타입명*/	     
 		  FROM TB_LOG_REQ T1				/*테이블_요청로그*/
@@ -22,17 +22,17 @@
 		        #{code}
 		     </foreach>	
 	     	   )
-		<if test='id != null and id != ""'>
-		   AND T1.ID LIKE CONCAT('%',#{id},'%')
+		<if test='userId != null and userId != ""'>
+		   AND T1.USER_ID LIKE CONCAT('%',#{userId},'%')
 		</if>
 		<if test='ip != null and ip != ""'>
 		   AND T1.IP LIKE CONCAT('%',#{ip},'%')
 		</if>		
-		<if test='reqUri != null and reqUri != ""'>
-		   AND T1.REQ_URI LIKE CONCAT('%',#{reqUri},'%')
+		<if test='uri != null and uri != ""'>
+		   AND T1.URI LIKE CONCAT('%',#{uri},'%')
 		</if>
-		<if test='reqParam != null and reqParam != ""'>
-		   AND T1.REQ_PARAM LIKE CONCAT('%',#{reqParam},'%')
+		<if test='param != null and param != ""'>
+		   AND T1.PARAM LIKE CONCAT('%',#{param},'%')
 		</if>	
 		 ORDER BY REQ_DTTI DESC
 		 
@@ -51,17 +51,17 @@
 		        #{code}
 		     </foreach>	
 	     	   )
-		<if test='id != null and id != ""'>
-		   AND T1.ID LIKE CONCAT('%',#{id},'%')
+		<if test='userId != null and userId != ""'>
+		   AND T1.USER_ID LIKE CONCAT('%',#{userId},'%')
 		</if>
 		<if test='ip != null and ip != ""'>
 		   AND T1.IP LIKE CONCAT('%',#{ip},'%')
 		</if>		
-		<if test='reqUri != null and reqUri != ""'>
-		   AND T1.REQ_URI LIKE CONCAT('%',#{reqUri},'%')
+		<if test='uri != null and uri != ""'>
+		   AND T1.URI LIKE CONCAT('%',#{uri},'%')
 		</if>
-		<if test='reqParam != null and reqParam != ""'>
-		   AND T1.REQ_PARAM LIKE CONCAT('%',#{reqParam},'%')
+		<if test='param != null and param != ""'>
+		   AND T1.PARAM LIKE CONCAT('%',#{param},'%')
 		</if>	
 	</select>	
 </mapper>

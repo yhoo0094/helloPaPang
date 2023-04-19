@@ -58,7 +58,7 @@
 		     , NOTICE_STR_DT	= #{noticeStrDt}	/*공지사항게시시작일*/
 		     , NOTICE_END_DT	= #{noticeEndDt}	/*공지사항게시종료일*/
 		     , NOTICE_POP_YN	= #{noticePopYn}	/*공지사항팝업여부*/
-		     , LT_UPD_ID 		= #{loginInfo.id}	/*최종수정자ID*/
+		     , LT_UPD_ID 		= #{loginInfo.userId}	/*최종수정자ID*/
 		     , LT_UPD_DTTI		= NOW() 			/*최종수정일시*/
 		 WHERE BOARD_SEQ		= #{boardSeq}		/*게시글일련번호*/    
 	</update>
@@ -71,7 +71,7 @@
 		     , NOTICE_STR_DT	= #{noticeStrDt}	/*공지사항게시시작일*/
 		     , NOTICE_END_DT	= #{noticeEndDt}	/*공지사항게시종료일*/
 		     , NOTICE_POP_YN	= #{noticePopYn}	/*공지사항팝업여부*/
-		     , LT_UPD_ID 		= #{loginInfo.id}	/*최종수정자ID*/
+		     , LT_UPD_ID 		= #{loginInfo.userId}	/*최종수정자ID*/
 		     , LT_UPD_DTTI		= NOW() 			/*최종수정일시*/
 		 WHERE BOARD_SEQ		= #{boardSeq}		/*게시글일련번호*/    
 	</update>	

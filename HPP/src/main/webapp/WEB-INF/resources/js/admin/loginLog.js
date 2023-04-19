@@ -45,7 +45,7 @@ function selectData(){
 
 var columInfo = [
         { title: "발생일시"	, data: "loginDtti"		, width: "25%"		, className: "text_align_center"}
-      , { title: "아이디"		, data: "id"		, width: "25%"		, className: "text_align_center"}
+      , { title: "아이디"		, data: "userId"		, width: "25%"		, className: "text_align_center"}
       , { title: "아이피"		, data: "ip"		, width: "25%"		, className: "text_align_center"	, defaultContent: ""}
       , { title: "유형"		, data: "loginCodeNm"	, width: "25%"		, className: "text_align_center"	, defaultContent: ""}
 ]

@@ -140,7 +140,7 @@ public class RequestUtil {
 			Map<String, Object> logMap = new HashMap<String, Object>();
 			
 			for(String key : paramMap.keySet()) {
-				if(!"pw".contains(key)) {	//키 값이 pw가 아닌 경우 logMap에 추가
+				if(!"userPw".contains(key)) {	//키 값이 userPw가 아닌 경우 logMap에 추가
 					logMap.put(key, paramMap.get(key));
 				}
 			}

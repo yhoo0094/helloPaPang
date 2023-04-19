@@ -42,13 +42,13 @@
 			<tr class="h50px">
 				<th>URI</th>
 				<td colspan="3">
-					<input id="reqUriModal" class="form-control" type="text" readonly="readonly"/>
+					<input id="uriModal" class="form-control" type="text" readonly="readonly"/>
 				</td>
 			</tr>			
 			<tr>
 				<th>파라미터</th>
 				<td colspan="3">
-					<textarea id="reqParamModal" class="form-control" readonly="readonly" style="height: 400px; resize: none;"></textarea>
+					<textarea id="paramModal" class="form-control" readonly="readonly" style="height: 400px; resize: none;"></textarea>
 				</td>
 			</tr>
 		</tbody>

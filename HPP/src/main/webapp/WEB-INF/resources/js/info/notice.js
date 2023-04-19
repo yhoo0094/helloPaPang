@@ -33,8 +33,7 @@ function mkNoticeTable(data) {
         columns: [
             { title: "제목"	, data: "noticeTitle"	, width: "*"		, className: "text_align_left"}
           , { title: "작성자"	, data: "fstRegId"		, width: "100px"	, className: "text_align_center"}
-          , { title: "게시일"	, data: "noticeStrDt"	, width: "150px"	, className: "text_align_center"	
-          	, render: function(data){return $dateUtil.dateHyphen(data)}}
+          , { title: "게시일"	, data: "noticeStrDt"	, width: "150px"	, className: "text_align_center"	, render: function(data){return $dateUtil.dateHyphen(data)}}	
           , { title: "조회수"	, data: "noticeHit"		, width: "50px"		, className: "text_align_center"}
         ],		
         paging: true,

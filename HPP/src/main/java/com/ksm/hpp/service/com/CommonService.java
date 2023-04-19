@@ -47,7 +47,7 @@ public class CommonService extends BaseService {
 	@SuppressWarnings("unchecked")
 	public Boolean readAuthChk(StringBuilder logStr, HttpServletRequest request, Map<String, Object> inData) throws Exception {
 		Boolean result = false;
-		String mnuUrl = (String) inData.get("mnuUrl");
+		String url = (String) inData.get("url");
 		
 		HttpSession session = request.getSession();
 		List<Map<String, Object>> freeAuthList = (List<Map<String, Object>>) session.getAttribute(Constant.FREE_AUTH_LIST);
@@ -58,7 +58,7 @@ public class CommonService extends BaseService {
 		if(authList == null) {
 			freeAuthList = sqlSession.selectList("mapper.user.UserMapper.selectFreeAuthList", inData);
 			for(Map<String, Object> auth : freeAuthList) {
-				if(mnuUrl.equals(auth.get("mnuUrl"))) {
+				if(url.equals(auth.get("url"))) {
 					result = true;
 					break;
 				}
@@ -67,7 +67,7 @@ public class CommonService extends BaseService {
 		//권한이 필요없는 목록에 해당 url이 있으면 통과
 		if(!result) {
 			for(Map<String, Object> auth : freeAuthList) {
-				if(mnuUrl.equals(auth.get("mnuUrl"))) {
+				if(url.equals(auth.get("url"))) {
 					result = true;
 					break;
 				}
@@ -76,7 +76,7 @@ public class CommonService extends BaseService {
 		//권한 목록에서 해당 url의 권한이 있으면 통과(읽기 가능으로 판단)
 		if(!result) {
 			for(Map<String, Object> auth : authList) {
-				if(mnuUrl.equals(auth.get("mnuUrl"))) {
+				if(url.equals(auth.get("url"))) {
 					result = true;
 					break;
 				}
@@ -86,7 +86,7 @@ public class CommonService extends BaseService {
 		if(!result) {
 			freeAuthList = sqlSession.selectList("mapper.user.UserMapper.selectFreeAuthList", inData);
 			for(Map<String, Object> auth : freeAuthList) {
-				if(mnuUrl.equals(auth.get("mnuUrl"))) {
+				if(url.equals(auth.get("url"))) {
 					session.setAttribute(Constant.FREE_AUTH_LIST, freeAuthList);		//권한이 필요없는 목록 정보 최신화
 					result = true;
 					break;
@@ -97,7 +97,7 @@ public class CommonService extends BaseService {
 		if(!result) {
 			authList = sqlSession.selectList("mapper.user.UserMapper.selectAuthList", inData);
 			for(Map<String, Object> auth : authList) {
-				if(auth.containsKey(mnuUrl)) {
+				if(auth.containsKey(url)) {
 					session.setAttribute(Constant.AUTH_LIST, authList);		//권한 정보 최신화
 					result = true;
 					break;
@@ -116,7 +116,7 @@ public class CommonService extends BaseService {
 	@SuppressWarnings("unchecked")
 	public void writeAuthChk(StringBuilder logStr, HttpServletRequest request, Map<String, Object> inData) throws Exception {
 		Boolean result = false;
-		String mnuUrl = (String) inData.get("mnuUrl");				//메뉴 경로
+		String url = (String) inData.get("url");				//메뉴 경로
 		Boolean isRange = (Boolean) inData.get("isRange");			//권한등급이 정확히 일치해야 하는지
 		int reqAuthGrade = (Integer) inData.get("reqAuthGrade");	//필요 권한등급
 		
@@ -129,7 +129,7 @@ public class CommonService extends BaseService {
 		if(authList == null) {
 			freeAuthList = sqlSession.selectList("mapper.user.UserMapper.selectFreeAuthList", inData);
 			for(Map<String, Object> auth : freeAuthList) {
-				if(mnuUrl.equals(auth.get("mnuUrl"))) {
+				if(url.equals(auth.get("url"))) {
 					result = true;
 					break;
 				}
@@ -138,7 +138,7 @@ public class CommonService extends BaseService {
 		//권한이 필요없는 목록에 해당 url이 있으면 통과
 		if(!result) {
 			for(Map<String, Object> auth : freeAuthList) {
-				if(mnuUrl.equals(auth.get("mnuUrl"))) {
+				if(url.equals(auth.get("url"))) {
 					result = true;
 					break;
 				}
@@ -147,7 +147,7 @@ public class CommonService extends BaseService {
 		//권한 목록에서 해당 url의 권한등급이 필요 권한등급을 만족하면 통과
 		if(!result) {
 			for(Map<String, Object> auth : authList) {
-				if(mnuUrl.equals(auth.get("mnuUrl"))) {
+				if(url.equals(auth.get("url"))) {
 					int authGrade = (Integer) auth.get("authGrade");	//사용자의 권한등급
 					if(isRange) {
 						result = (authGrade >= reqAuthGrade)? true : false;
@@ -162,7 +162,7 @@ public class CommonService extends BaseService {
 		if(!result) {
 			authList = sqlSession.selectList("mapper.user.UserMapper.selectAuthList", inData);
 			for(Map<String, Object> auth : authList) {
-				if(mnuUrl.equals(auth.get("mnuUrl"))) {
+				if(url.equals(auth.get("url"))) {
 					int authGrade = (Integer) auth.get("authGrade");	//사용자의 권한등급
 					if(isRange) {
 						result = (authGrade >= reqAuthGrade)? true : false;

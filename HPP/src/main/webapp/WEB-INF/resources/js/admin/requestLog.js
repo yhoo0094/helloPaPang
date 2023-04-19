@@ -14,6 +14,7 @@ $(document).ready(function() {
 });
 
 //datetimepicker 설정
+852
 function setDatetimepicker() {
 	//var reqDttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),0,0,-1,0,0);	//1일 전
 	var reqDttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),-1,0,0,0,0);	//1년 전
@@ -30,10 +31,10 @@ function doSearch(){
 
 var columInfo = [
         { title: "발생일시"	, data: "reqDtti"		, width: "200px"	, className: "text_align_center"}
-      , { title: "아이디"		, data: "id"			, width: "100px"	, className: "text_align_center"	, defaultContent: ""}
+      , { title: "아이디"		, data: "userId"		, width: "100px"	, className: "text_align_center"	, defaultContent: ""}
       , { title: "아이피"		, data: "ip"			, width: "100px"	, className: "text_align_center"	, defaultContent: ""}
-      , { title: "URI"		, data: "reqUri"		, width: "200px"	, className: "text_align_left"		, defaultContent: ""}      
-      , { title: "파라미터"	, data: "reqParam100"	, width: "*"		, className: "text_align_left"		, defaultContent: ""}      
+      , { title: "URI"		, data: "uri"		, width: "200px"	, className: "text_align_left"		, defaultContent: ""}      
+      , { title: "파라미터"	, data: "param100"	, width: "*"		, className: "text_align_left"		, defaultContent: ""}      
       , { title: "메뉴"		, data: "reqTypeNm"		, width: "100px"	, className: "text_align_center"	, defaultContent: ""}
 ]
 

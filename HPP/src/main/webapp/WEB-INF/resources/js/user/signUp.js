@@ -1,5 +1,5 @@
 $(()=>{
-	$('#id').on('change',function(){
+	$('#userId').on('change',function(){
 		$('#chkUniqIdBtn').removeClass('papang_disabled');
 		$('#idUniChkMsg').attr('class','idUniChkBf');
 	})
@@ -42,7 +42,7 @@ function insertUser(){
 //아이디 유효성 검증
 function idValidation(){
 	var result;	//처리 결과
-	var value = $('#id').val();
+	var value = $('#userId').val();
 	
 	//아이디 입력여부 검사
 	if($util.isEmpty(value)){
@@ -59,7 +59,7 @@ function idValidation(){
 //비밀번호 유효성 검증
 function pwValidation(){
 	var result;	//처리 결과
-	var value = $('#pw').val();
+	var value = $('#userPw').val();
 	
 	//조건: 숫자, 영어, 특수문자를 포함하여 8글자 이상 50글자 이하
 	var allChk = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[~!@#\$%\^&\*()_\+\-={}\[\]\\:;"'<>,.\/]).{8,20}$/;
@@ -99,12 +99,12 @@ function chkUniqId(){
 	//아이디 유효성 검증
 	if(!idValidation()){return;}
 	
-	var id = $('#id').val();
+	var userId = $('#userId').val();
 	
     $.ajax({
         url: '/user/chkUniqId.do',
         type: 'POST',
-        data: {id : id},
+        data: {userId : userId},
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {

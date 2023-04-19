@@ -35,18 +35,18 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
-		inData.remove("pw");	//비밀번호 정보는 제거
-		inData.put("reqParam", inData.toString());
-		String reqUri = request.getRequestURI();
-		inData.put("reqUri", reqUri);
-		inData.put("reqTypeCode", reqUri.split("/")[1]);
+		inData.remove("userPw");	//비밀번호 정보는 제거
+		inData.put("param", inData.toString());
+		String uri = request.getRequestURI();
+		inData.put("uri", uri);
+		inData.put("reqTypeCode", uri.split("/")[1]);
 		
 		HttpSession session = request.getSession();
 		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
 		
 		if(loginInfo == null) {
 			loginInfo = new HashMap<String, Object>();
-			loginInfo.put("id", null);
+			loginInfo.put("userId", null);
 			
 			//로그인 IP 파악
 			String ip = RequestUtil.getIpAddr(request);
