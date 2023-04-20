@@ -5,13 +5,13 @@
 	<!-- 공지사항 조회-->
 	<select id="selectNotice" parameterType="map" resultType="camelCaseMap">
 		SELECT BOARD_SEQ				/*게시글일련번호*/
-		     , NOTICE_TITLE 			/*공지사항제목*/
-		     , NOTICE_CN				/*공지사항내용*/
-		     , NOTICE_STR_DT			/*공지사항게시시작일*/
-		     , NOTICE_END_DT			/*공지사항게시종료일*/
-		     , NOTICE_POP_YN			/*공지사항팝업여부*/
-		     , NOTICE_CN				/*공지사항내용*/
-		     , NOTICE_HIT				/*공지사항조회수*/
+		     , TITLE 			/*공지사항제목*/
+		     , CN				/*공지사항내용*/
+		     , STR_DT			/*공지사항게시시작일*/
+		     , END_DT			/*공지사항게시종료일*/
+		     , POP_YN			/*공지사항팝업여부*/
+		     , CN				/*공지사항내용*/
+		     , HIT				/*공지사항조회수*/
 		     , FST_REG_ID 				/*최초등록자ID*/
 		     , DATE_FORMAT(FST_REG_DTTI, "%Y/%m/%d %H:%i") FST_REG_DTTI	/*최초등록일시*/
 		     , LT_UPD_ID 				/*최종수정자ID*/
@@ -26,61 +26,61 @@
 			SELECT nextval('BOARD_SEQ') FROM DUAL
 		</selectKey>	
 		INSERT 
-		  INTO TB_BOARD_NOTICE		/*테이블_공지사항*/
+		  INTO TB_BOARD_NOTICE			/*테이블_공지사항*/
 		     (
-		       BOARD_SEQ			/*게시글일련번호*/
-		     , NOTICE_TITLE 		/*공지사항제목*/
-		     , NOTICE_CN			/*공지사항내용*/
-		     , NOTICE_STR_DT		/*공지사항게시시작일*/
-		     , NOTICE_END_DT		/*공지사항게시종료일*/
-		     , NOTICE_POP_YN		/*공지사항팝업여부*/
-		     , FST_REG_ID 			/*최초등록자ID*/
-		     , LT_UPD_ID 			/*최종수정자ID*/
+		       BOARD_SEQ				/*게시글일련번호*/
+		     , TITLE 					/*공지사항제목*/
+		     , CN						/*공지사항내용*/
+		     , STR_DT					/*공지사항게시시작일*/
+		     , END_DT					/*공지사항게시종료일*/
+		     , POP_YN					/*공지사항팝업여부*/
+		     , FST_REG_ID 				/*최초등록자ID*/
+		     , LT_UPD_ID 				/*최종수정자ID*/
 		     )
 		VALUES
 			 (
 			   #{boardSeq}	
-			 , #{noticeTitle}	
-			 , #{noticeCn}
-			 , #{noticeStrDt}
-			 , #{noticeEndDt}
-			 , #{noticePopYn}
-		     , #{loginInfo.id} 	
-		     , #{loginInfo.id}		 
+			 , #{title}	
+			 , #{cn}
+			 , #{strDt}
+			 , #{endDt}
+			 , #{popYn}
+		     , #{loginInfo.userId} 	
+		     , #{loginInfo.userId}		 
 			 )   
 	</insert>
 	
 	<!-- 공지사항 수정 -->
 	<update id="updateNotice" parameterType="map">
-		UPDATE TB_BOARD_NOTICE						/*테이블_공지사항*/
-		   SET NOTICE_TITLE		= #{noticeTitle}	/*공지사항제목*/
-		     , NOTICE_CN		= #{noticeCn}		/*공지사항내용*/
-		     , NOTICE_STR_DT	= #{noticeStrDt}	/*공지사항게시시작일*/
-		     , NOTICE_END_DT	= #{noticeEndDt}	/*공지사항게시종료일*/
-		     , NOTICE_POP_YN	= #{noticePopYn}	/*공지사항팝업여부*/
+		UPDATE TB_BOARD_NOTICE							/*테이블_공지사항*/
+		   SET TITLE			= #{title}				/*공지사항제목*/
+		     , CN				= #{cn}					/*공지사항내용*/
+		     , STR_DT			= #{strDt}				/*공지사항게시시작일*/
+		     , END_DT			= #{endDt}				/*공지사항게시종료일*/
+		     , POP_YN			= #{popYn}				/*공지사항팝업여부*/
 		     , LT_UPD_ID 		= #{loginInfo.userId}	/*최종수정자ID*/
-		     , LT_UPD_DTTI		= NOW() 			/*최종수정일시*/
-		 WHERE BOARD_SEQ		= #{boardSeq}		/*게시글일련번호*/    
+		     , LT_UPD_DTTI		= NOW() 				/*최종수정일시*/
+		 WHERE BOARD_SEQ		= #{boardSeq}			/*게시글일련번호*/    
 	</update>
 	
 	
 	<update id="test" parameterType="map">
-		UPDATE test						/*테이블_공지사항*/
-		   SET NOTICE_TITLE		= #{noticeTitle}	/*공지사항제목*/
-		     , NOTICE_CN		= #{noticeCn}		/*공지사항내용*/
-		     , NOTICE_STR_DT	= #{noticeStrDt}	/*공지사항게시시작일*/
-		     , NOTICE_END_DT	= #{noticeEndDt}	/*공지사항게시종료일*/
-		     , NOTICE_POP_YN	= #{noticePopYn}	/*공지사항팝업여부*/
+		UPDATE test										/*테이블_공지사항*/
+		   SET TITLE			= #{title}				/*공지사항제목*/
+		     , CN				= #{cn}					/*공지사항내용*/
+		     , STR_DT			= #{strDt}				/*공지사항게시시작일*/
+		     , END_DT			= #{endDt}				/*공지사항게시종료일*/
+		     , POP_YN			= #{popYn}				/*공지사항팝업여부*/
 		     , LT_UPD_ID 		= #{loginInfo.userId}	/*최종수정자ID*/
-		     , LT_UPD_DTTI		= NOW() 			/*최종수정일시*/
-		 WHERE BOARD_SEQ		= #{boardSeq}		/*게시글일련번호*/    
+		     , LT_UPD_DTTI		= NOW() 				/*최종수정일시*/
+		 WHERE BOARD_SEQ		= #{boardSeq}			/*게시글일련번호*/    
 	</update>	
 	
 	<!-- 게시글 삭제 -->
 	<delete id="deleteNotice" parameterType="map">
 		DELETE
-		  FROM TB_BOARD_NOTICE						/*테이블_공지사항*/
-		 WHERE BOARD_SEQ		= #{boardSeq}		/*게시글일련번호*/
+		  FROM TB_BOARD_NOTICE							/*테이블_공지사항*/
+		 WHERE BOARD_SEQ		= #{boardSeq}			/*게시글일련번호*/
 	</delete>
 
 </mapper>

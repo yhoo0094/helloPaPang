@@ -77,7 +77,7 @@
 		</logger>
 		 
 		<!--  ResultSet을 제외한 모든 JDBC 호출 정보 -->
-		<logger name="jdbc.audit" additivity="false" level="OFF"> 
+		<logger name="jdbc.audit" additivity="false" level="INFO"> 
 		    <appender-ref ref="console"/> 
 		</logger>
 		 

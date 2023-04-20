@@ -22,7 +22,7 @@
 			<tr class="h50px">
 				<th>아이디</th>
 				<td>
-					<input id="idModal" class="form-control" type="text" readonly="readonly"/>
+					<input id="userIdModal" class="form-control" type="text" readonly="readonly"/>
 				</td>
 				<th>아이피</th>
 				<td>

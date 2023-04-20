@@ -32,9 +32,9 @@
 						<input id="dttiEnd" name="dttiEnd" class="datetimepicker w45 form-control" title="발생일시" type="text">
 					</td>	
 					<th>아이디:</th>
-					<td><input id="userId" name="userId" class="w100 form-control" title="아이디" type="text" maxlength="20"></td>
+					<td><input id="userId" name="userId" class="w100 form-control forSearch" title="아이디" type="text" maxlength="20"></td>
 					<th>아이피:</th>
-					<td><input id="ip" name="ip" class="w100 form-control" title="아이피" type="text" maxlength="39"></td>						
+					<td><input id="ip" name="ip" class="w100 form-control forSearch" title="아이피" type="text" maxlength="39"></td>						
 					<th>유형:</th>
 					<td>
 						<select id="loginCode" name="loginCode" class="w100 form-select">

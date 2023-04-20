@@ -31,11 +31,11 @@ function doSearch(){
 
 var columInfo = [
         { title: "발생일시"	, data: "reqDtti"		, width: "200px"	, className: "text_align_center"}
-      , { title: "아이디"		, data: "userId"		, width: "100px"	, className: "text_align_center"	, defaultContent: ""}
-      , { title: "아이피"		, data: "ip"			, width: "100px"	, className: "text_align_center"	, defaultContent: ""}
-      , { title: "URI"		, data: "uri"		, width: "200px"	, className: "text_align_left"		, defaultContent: ""}      
-      , { title: "파라미터"	, data: "param100"	, width: "*"		, className: "text_align_left"		, defaultContent: ""}      
-      , { title: "메뉴"		, data: "reqTypeNm"		, width: "100px"	, className: "text_align_center"	, defaultContent: ""}
+      , { title: "아이디"		, data: "userId"		, width: "200px"	, className: "text_align_center"	, defaultContent: ""}
+      , { title: "아이피"		, data: "ip"			, width: "200px"	, className: "text_align_center"	, defaultContent: ""}
+      , { title: "URI"		, data: "uri"			, width: "200px"	, className: "text_align_left"		, defaultContent: ""}      
+      , { title: "파라미터"	, data: "param100"		, width: "*"		, className: "text_align_left"		, defaultContent: ""}      
+      , { title: "메뉴"		, data: "reqTypeNm"		, width: "200px"	, className: "text_align_center"	, defaultContent: ""}
 ]
 
 //엑셀 다운로드 버튼

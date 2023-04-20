@@ -16,7 +16,7 @@
 
     $(document).ready(function () {
 		editor(".editor").then(editor => {
-			window.noticeCn = editor;	//noticeCn 전역변수
+			window.cn = editor;	//cn 전역변수
         	// some code..
             // then 이후에 받은 editor를 다른 변수로 받아주시는 편이 좋습니다!
         })
@@ -45,25 +45,24 @@
 			<tbody>
 				<tr>
 					<th>제목</th>
-					<td colspan="3"><input id="noticeTitle" name="noticeTitle" class="form-control" type="text" title="제목" maxlength="100" required="all1"/></td>
+					<td colspan="3"><input id="title" name="title" class="form-control" type="text" title="제목" maxlength="100" required="all1"/></td>
 				</tr>
 				<tr>
 					<th>게시기간</th>
 					<td>
-						<input id="noticeStrDt" name="noticeStrDt" class="form-control" type="date" title="게시시작일" required="all1"/> 
-					  ~ <input id="noticeEndDt" name="noticeEndDt" class="form-control" type="date" title="게시종료일" required="all1"/>
+						<input id="strDt" name="strDt" class="form-control" type="date" title="게시시작일" required="all1"/> 
+					  ~ <input id="endDt" name="endDt" class="form-control" type="date" title="게시종료일" required="all1"/>
 					</td>
 					<th>팝업여부</th>
 					<td>
-						Y <input id="noticePopY" name="noticePopYn" type="radio" value="Y">
-						N <input id="noticePopN" name="noticePopYn" type="radio" value="N" checked="checked">
+						Y <input id="popY" name="popYn" type="radio" value="Y">
+						N <input id="popN" name="popYn" type="radio" value="N" checked="checked">
 					</td>
 				</tr>				
 				<tr>
 					<th>내용</th>
 					<td colspan="3">
-						<!-- <textarea id="noticeCn" name="noticeCn" class="form-control" rows="" cols="" style="height: 500px"></textarea> -->
-						<div id="noticeCn" name="noticeCn" title="내용" class="editor form-control"></div>
+						<div id="cn" name="cn" title="내용" class="editor form-control"></div>
 					</td>
 				</tr>
 				<tr>

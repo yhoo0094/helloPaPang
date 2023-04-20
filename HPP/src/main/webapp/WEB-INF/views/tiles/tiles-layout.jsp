@@ -44,6 +44,8 @@
 	<script src="https://kit.fontawesome.com/e2689e2fa2.js"></script> <!-- 아이콘 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script><!-- jQuery Modal -->
 	<script src="<%=request.getContextPath() %>/resources/js/com/common.js"></script> <!-- 페이지 공통 -->
+	<script src="<%=request.getContextPath() %>/resources/js/com/tiles-layout.js"></script> <!-- 페이지 공통 -->
+<%-- 	<script src="<%=request.getContextPath() %>/views/tiles/tiles-layout.js"></script> <!-- tiles-layout.js --> --%>
 	<script src="<%=request.getContextPath() %>/resources/js/framework/util.js"></script> <!-- 유틸 -->
 	<script src="<%=request.getContextPath() %>/resources/js/framework/dateUtil.js"></script> <!-- 날짜 유틸 -->
 	<script src="<%=request.getContextPath() %>/resources/js/framework/excelUtil.js"></script> <!-- 엑셀 유틸 -->
@@ -59,7 +61,7 @@
 	
     <title><tiles:insertAttribute name="title" /></title>
   </head>
-  
+
   <body>
   	<div class='wrap'>
   		<tiles:insertAttribute name="header"/>
