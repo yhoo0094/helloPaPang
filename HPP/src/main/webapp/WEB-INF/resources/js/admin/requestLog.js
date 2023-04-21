@@ -83,7 +83,6 @@ function makeDataTableServerSide() {
         autoWidth: false,						//자동 열 너비 조정
   		scrollY: 600,							//테이블 높이
   		scrollCollapse: true,   				//테이블 최대 높이 고정 여부     
-        
         preDrawCallback : function(settings){	//테이블 그리기 전에 동작
 			$com.loadingStart();				//로딩패널 보이기
 		},

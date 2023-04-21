@@ -30,7 +30,7 @@ public class RequestLogService {
 		result.put(Constant.OUT_DATA, list);
 		
 		int cnt = sqlSession.selectOne("mapper.admin.RequestLogMapper.selectRequestLogCnt", inData);
-		result.put("recordsTotal", cnt);	//총 레코드 수
+//		result.put("recordsTotal", cnt);	//총 레코드 수
 		result.put("recordsFiltered", cnt);	//필터링 후의 총 레코드 수
 		
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.google.gson.Gson;
 import com.ksm.hpp.controller.com.BaseController;
 import com.ksm.hpp.framework.util.RequestUtil;
+import com.ksm.hpp.framework.util.ResponseUtil;
 import com.ksm.hpp.service.com.CommonService;
 import com.ksm.hpp.service.info.NoticeService;
 
@@ -41,10 +42,12 @@ public class NoticeController extends BaseController {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
 		Map<String, Object> outData = noticeService.selectNotice((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		
-		Gson gson = new Gson();
-		String json = gson.toJson(outData);
-		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
-		response.setContentType("application/x-json; charset=UTF-8");
+		ResponseUtil.setResAuto(response, inData, outData);
+		
+//		Gson gson = new Gson();
+//		String json = gson.toJson(outData);
+//		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
+//		response.setContentType("application/x-json; charset=UTF-8");
 	}	
 	
 	/**

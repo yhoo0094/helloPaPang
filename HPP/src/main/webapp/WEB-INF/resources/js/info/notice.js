@@ -67,3 +67,64 @@ function mkNoticeTable(data) {
 	    noticeModalOpen(data);
 	});
 }
+
+//DataTable 만들기(페이지네이션 서버 처리)
+function makeDataTableServerSide() {
+	var url = '/notice/selectNotice.do';
+	var param = {};    
+	param.pageLength = 10;						//페이지당 레코드 수
+	
+    mainTable = $('#mainTable').DataTable({
+		serverSide: true,						//페이징 처리 서버에서 수행
+		ajax: {
+			url: url,
+        	type: 'POST',
+			data: function(){
+				//검색 조건 object에 담기
+//			    $.each($('#searchForm').serializeArray(), function() {
+//			        param[this.name] = this.value;
+//			    });
+				
+				if($util.isEmpty(mainTable)){
+					param.strIdx = 1;
+				} else {
+					param.strIdx = 1 + (param.pageLength * parseInt(mainTable.page()));		//시작 레코드 인덱스 
+				};
+				return param;
+			},
+		},
+        columns: columInfo,
+	  	createdRow: function( row, data, dataIndex ) {
+			$(row).addClass('pointer');			//행에 pointer css 적용
+	  	},       		
+        pagingType: "numbers",					//v페이지 표시 옵션
+        ordering: false,
+        info: false,
+        searching: false,
+        lengthChange: false,
+        autoWidth: false,						//자동 열 너비 조정
+  		scrollY: 600,							//테이블 높이
+  		scrollCollapse: true,   				//테이블 최대 높이 고정 여부     
+        preDrawCallback : function(settings){	//테이블 그리기 전에 동작
+			$com.loadingStart();				//로딩패널 보이기
+		},
+        drawCallback : function(settings){		//테이블 그리기 후에 동작
+			$com.loadingEnd();					//로딩패널 숨기기
+		},
+		language : {
+			zeroRecords	: '조회된 결과가 없습니다.',
+		},
+    });	
+   
+    var $createBtn = $('<div class="table_btn_wrapper"><button type="button" class="papang-create-btn papang_btn paginate_button">신규</button></div>');
+    $createBtn.on('click', function(){
+		noticeModalOpen();
+	})
+    $('#mainTable_paginate').after($createBtn);
+    
+    //테이블 더블 클릭 이벤트
+	$('#mainTable tbody').on('dblclick', 'tr', function () {
+	    var data = mainTable.row( this ).data();
+	    noticeModalOpen(data);
+	});
+}
