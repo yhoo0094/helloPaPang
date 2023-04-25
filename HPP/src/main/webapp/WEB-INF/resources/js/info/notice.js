@@ -9,7 +9,7 @@
 var mainTable
 
 $(document).ready(function () {
-	selectNotice();
+	makeDataTableServerSide();
 });
 
 //공지사항 목록 조회
@@ -27,46 +27,59 @@ function selectNotice(){
 }
 
 //DataTable 만들기
-function mkNoticeTable(data) {
-    mainTable = $('#mainTable').DataTable({
-        data: data,
-        columns: [
-            { title: "제목"	, data: "title"			, width: "*"		, className: "text_align_left"}
-          , { title: "작성자"	, data: "fstRegId"		, width: "100px"	, className: "text_align_center"}
-          , { title: "게시일"	, data: "strDt"			, width: "150px"	, className: "text_align_center"	, render: function(data){return $dateUtil.dateHyphen(data)}}	
-          , { title: "조회수"	, data: "hit"			, width: "50px"		, className: "text_align_center"}
-        ],		
-        paging: true,
-        pagingType: "full_numbers",
-        ordering: false,
-        info: false,
-        searching: false,
-        lengthChange: false,
-        pageLength: 10,
-        rowId: '',
-        /*
-		dom : 'Bfrtip',		//버튼 다 나옴
-	    buttons: {
-	        buttons: [
-	            {text: '신규', className: 'btn papang-create-btn btn-sm papang_btn' , extend: '', action: function ( e, dt, node, config ) {
-                    noticeModalOpen();
-                },}
-	        ]
-	    },     
-	    */  
-    });	
-    
-    var $createBtn = $('<div class="table_btn_wrapper"><button type="button" class="papang-create-btn papang_btn paginate_button">신규</button></div>');
-    $createBtn.on('click', function(){
-		noticeModalOpen();
-	})
-    $('#mainTable_paginate').after($createBtn);
-    
-	$('#mainTable tbody').on('dblclick', 'tr', function () {
-	    var data = mainTable.row( this ).data();
-	    noticeModalOpen(data);
-	});
-}
+//function mkNoticeTable(data) {
+//    mainTable = $('#mainTable').DataTable({
+//        data: data,
+//        columns: [
+//            { title: "제목"	, data: "title"			, width: "*"		, className: "text_align_left"}
+//          , { title: "작성자"	, data: "fstRegId"		, width: "100px"	, className: "text_align_center"}
+//          , { title: "게시일"	, data: "strDt"			, width: "150px"	, className: "text_align_center"	, render: function(data){return $dateUtil.dateHyphen(data)}}	
+//          , { title: "조회수"	, data: "hit"			, width: "50px"		, className: "text_align_center"}
+//        ],		
+//        paging: true,
+//        pagingType: "full_numbers",
+//        ordering: false,
+//        info: false,
+//        searching: false,
+//        lengthChange: false,
+//        pageLength: 10,
+//        rowId: '',
+//        /*
+//		dom : 'Bfrtip',		//버튼 다 나옴
+//	    buttons: {
+//	        buttons: [
+//	            {text: '신규', className: 'btn papang-create-btn btn-sm papang_btn' , extend: '', action: function ( e, dt, node, config ) {
+//                    noticeModalOpen();
+//                },}
+//	        ]
+//	    },     
+//	    */  
+//    });	
+//    
+//    var $createBtn = $('<div class="table_btn_wrapper"><button type="button" class="papang-create-btn papang_btn paginate_button">신규</button></div>');
+//    $createBtn.on('click', function(){
+//		noticeModalOpen();
+//	})
+//    $('#mainTable_paginate').after($createBtn);
+//    
+//	$('#mainTable tbody').on('dblclick', 'tr', function () {
+//	    var data = mainTable.row( this ).data();
+//	    noticeModalOpen(data);
+//	});
+//}
+
+//검색
+function doSearch(){
+	mainTable.ajax.reload();
+};
+
+var columInfo = [
+            { title: "제목"		, data: "title"			, width: "*"		, className: "text_align_left"}
+          , { title: "작성자"		, data: "fstRegId"		, width: "100px"	, className: "text_align_center"}
+          , { title: "게시기간"	, data: "period"		, width: "150px"	, className: "text_align_center"}
+          , { title: "게시일"		, data: "fstRegDtti"	, width: "150px"	, className: "text_align_center"	, render: function(data){return data.replace(/\//g,'-')}}	
+          , { title: "조회수"		, data: "hit"			, width: "50px"		, className: "text_align_center"}
+]
 
 //DataTable 만들기(페이지네이션 서버 처리)
 function makeDataTableServerSide() {
@@ -81,14 +94,12 @@ function makeDataTableServerSide() {
         	type: 'POST',
 			data: function(){
 				//검색 조건 object에 담기
-//			    $.each($('#searchForm').serializeArray(), function() {
-//			        param[this.name] = this.value;
-//			    });
+				param.periodToggle = $('#periodToggle').prop('checked');
 				
 				if($util.isEmpty(mainTable)){
-					param.strIdx = 1;
+					param.strIdx = 0;
 				} else {
-					param.strIdx = 1 + (param.pageLength * parseInt(mainTable.page()));		//시작 레코드 인덱스 
+					param.strIdx = 0 + (param.pageLength * parseInt(mainTable.page()));		//시작 레코드 인덱스 
 				};
 				return param;
 			},

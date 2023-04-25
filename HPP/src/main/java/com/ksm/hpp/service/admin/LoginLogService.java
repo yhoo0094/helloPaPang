@@ -29,13 +29,14 @@ public class LoginLogService {
 	public Map<String, Object> selectLoginLog(StringBuilder logStr, Map<String, Object> inData) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		List<Object> list = sqlSession.selectList("mapper.admin.LoginLogMapper.selectLoginLog", inData);
+		List<Map<String, Object>> list = sqlSession.selectList("mapper.admin.LoginLogMapper.selectLoginLog", inData);
 		result.put("data", list);
 		result.put(Constant.OUT_DATA, list);
+		result.put("recordsFiltered", list.get(0).get("rowCnt"));	//필터링 후의 총 레코드 수
 		
-		int cnt = sqlSession.selectOne("mapper.admin.LoginLogMapper.selectLoginLogCnt", inData);
-		result.put("recordsTotal", cnt);	//총 레코드 수
-		result.put("recordsFiltered", cnt);	//필터링 후의 총 레코드 수	
+//		int cnt = sqlSession.selectOne("mapper.admin.LoginLogMapper.selectLoginLogCnt", inData);
+//		result.put("recordsTotal", cnt);	//총 레코드 수
+//		result.put("recordsFiltered", cnt);	//필터링 후의 총 레코드 수	
 		
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;

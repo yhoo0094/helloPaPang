@@ -64,9 +64,9 @@ function makeDataTableServerSide() {
 			    param.reqTypeCode = reqTypeCode;				
 				
 				if($util.isEmpty(mainTable)){
-					param.strIdx = 1;
+					param.strIdx = 0;
 				} else {
-					param.strIdx = 1 + (param.pageLength * parseInt(mainTable.page()));		//시작 레코드 인덱스 
+					param.strIdx = 0 + (param.pageLength * parseInt(mainTable.page()));		//시작 레코드 인덱스 
 				};
 				return param;
 			},

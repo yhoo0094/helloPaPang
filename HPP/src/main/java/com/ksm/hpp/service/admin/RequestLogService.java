@@ -25,13 +25,10 @@ public class RequestLogService {
 	public Map<String, Object> selectRequestLog(StringBuilder logStr, Map<String, Object> inData) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		List<Object> list = sqlSession.selectList("mapper.admin.RequestLogMapper.selectRequestLog", inData);
+		List<Map<String, Object>> list = sqlSession.selectList("mapper.admin.RequestLogMapper.selectRequestLog", inData);
 		result.put("data", list);
 		result.put(Constant.OUT_DATA, list);
-		
-		int cnt = sqlSession.selectOne("mapper.admin.RequestLogMapper.selectRequestLogCnt", inData);
-//		result.put("recordsTotal", cnt);	//총 레코드 수
-		result.put("recordsFiltered", cnt);	//필터링 후의 총 레코드 수
+		result.put("recordsFiltered", list.get(0).get("rowCnt"));	//필터링 후의 총 레코드 수
 		
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;

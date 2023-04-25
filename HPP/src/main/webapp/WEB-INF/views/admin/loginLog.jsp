@@ -10,7 +10,7 @@
 %>
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
-	<div class="papang-search-div">
+	<div class="papang-search-div lh50px">
 		<form id="searchForm" action="#">
 			<table class="papang-search-table">
 				<colgroup>
@@ -47,7 +47,7 @@
 						</select>
 					</td>
 					<td class="tc">
-						<button type="button" class="papang-search-btn papang_btn" onclick="doSearch()">검색</button>
+						<button type="button" class="papang-search-btn papang_btn lh30px" onclick="doSearch()">검색</button>
 					</td>	
 				</tr>
 				</tbody>
