@@ -91,16 +91,10 @@
 		 WHERE BOARD_SEQ		= #{boardSeq}			/*게시글일련번호*/    
 	</update>
 	
-	
-	<update id="test" parameterType="map">
-		UPDATE test										/*테이블_공지사항*/
-		   SET TITLE			= #{title}				/*공지사항제목*/
-		     , CN				= #{cn}					/*공지사항내용*/
-		     , STR_DT			= #{strDt}				/*공지사항게시시작일*/
-		     , END_DT			= #{endDt}				/*공지사항게시종료일*/
-		     , POP_YN			= #{popYn}				/*공지사항팝업여부*/
-		     , LT_UPD_ID 		= #{loginInfo.userId}	/*최종수정자ID*/
-		     , LT_UPD_DTTI		= NOW() 				/*최종수정일시*/
+	<!-- 공지사항 조회수 증가 -->
+	<update id="increaseHit" parameterType="map">
+		UPDATE TB_BOARD_NOTICE							/*테이블_공지사항*/
+		   SET HIT				= HIT + 1				/*공지사항제목*/
 		 WHERE BOARD_SEQ		= #{boardSeq}			/*게시글일련번호*/    
 	</update>	
 	

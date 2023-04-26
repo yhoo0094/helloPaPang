@@ -80,18 +80,19 @@ public class PageController {
 		
 			//읽기 권한체크
 			inData.put("url", url1 + "/" + url2);
-			Boolean isReadAuth = commonService.readAuthChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
-			if(!isReadAuth) {	
+			Map<String, Object> readAuth = commonService.readAuthChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
+			if(!(Boolean)readAuth.get("result")) {	
 				//권한이 없을 경우
 				result.setViewName("error/noAuth");
 			} else {			
 				//최종 권한 확인 성공한 경우
 				Map<String, Object> mnuInfo = commonService.selectMnuInfo((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);	//메뉴 정보 확인
-				result.addObject("mnuNm",mnuInfo.get("mnuNm"));
-				result.addObject("mnuUpperNm",mnuInfo.get("mnuUpperNm"));
-				result.addObject("info",mnuInfo.get("info"));
-				result.addObject("url",mnuInfo.get("url"));
-				result.addObject("mnuTopUrl",mnuInfo.get("mnuTopUrl"));
+				result.addObject("mnuNm", mnuInfo.get("mnuNm"));
+				result.addObject("mnuUpperNm", mnuInfo.get("mnuUpperNm"));
+				result.addObject("info", mnuInfo.get("info"));
+				result.addObject("url", mnuInfo.get("url"));
+				result.addObject("mnuTopUrl", mnuInfo.get("mnuTopUrl"));
+				result.addObject("authGrade", readAuth.get("authGrade"));
 				result.setViewName(url1 + "/" + url2);
 			}
 		} while(false);

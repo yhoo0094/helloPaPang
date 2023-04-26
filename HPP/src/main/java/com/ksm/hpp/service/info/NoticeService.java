@@ -96,4 +96,20 @@ public class NoticeService {
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;
 	}	
+	
+	/**
+	* @메소드명: increaseHit
+	* @작성자: KimSangMin
+	* @생성일: 2023. 4. 26. 오후 6:40:23
+	* @설명: 공지사항 조회수 증가
+	*/
+	public Map<String, Object> increaseHit(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		int cnt = sqlSession.update("mapper.info.NoticeMapper.increaseHit", inData);
+		result.put("cnt", cnt);
+		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		return result;
+	}	
 }

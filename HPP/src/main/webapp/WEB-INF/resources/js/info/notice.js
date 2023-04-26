@@ -26,48 +26,6 @@ function selectNotice(){
     });	
 }
 
-//DataTable 만들기
-//function mkNoticeTable(data) {
-//    mainTable = $('#mainTable').DataTable({
-//        data: data,
-//        columns: [
-//            { title: "제목"	, data: "title"			, width: "*"		, className: "text_align_left"}
-//          , { title: "작성자"	, data: "fstRegId"		, width: "100px"	, className: "text_align_center"}
-//          , { title: "게시일"	, data: "strDt"			, width: "150px"	, className: "text_align_center"	, render: function(data){return $dateUtil.dateHyphen(data)}}	
-//          , { title: "조회수"	, data: "hit"			, width: "50px"		, className: "text_align_center"}
-//        ],		
-//        paging: true,
-//        pagingType: "full_numbers",
-//        ordering: false,
-//        info: false,
-//        searching: false,
-//        lengthChange: false,
-//        pageLength: 10,
-//        rowId: '',
-//        /*
-//		dom : 'Bfrtip',		//버튼 다 나옴
-//	    buttons: {
-//	        buttons: [
-//	            {text: '신규', className: 'btn papang-create-btn btn-sm papang_btn' , extend: '', action: function ( e, dt, node, config ) {
-//                    noticeModalOpen();
-//                },}
-//	        ]
-//	    },     
-//	    */  
-//    });	
-//    
-//    var $createBtn = $('<div class="table_btn_wrapper"><button type="button" class="papang-create-btn papang_btn paginate_button">신규</button></div>');
-//    $createBtn.on('click', function(){
-//		noticeModalOpen();
-//	})
-//    $('#mainTable_paginate').after($createBtn);
-//    
-//	$('#mainTable tbody').on('dblclick', 'tr', function () {
-//	    var data = mainTable.row( this ).data();
-//	    noticeModalOpen(data);
-//	});
-//}
-
 //검색
 function doSearch(){
 	mainTable.ajax.reload();
@@ -135,7 +93,9 @@ function makeDataTableServerSide() {
     
     //테이블 더블 클릭 이벤트
 	$('#mainTable tbody').on('dblclick', 'tr', function () {
-	    var data = mainTable.row( this ).data();
+	    var data = mainTable.row(this).data();
 	    noticeModalOpen(data);
+	    data.hit++;
+	    mainTable.row(this).data(data).draw();
 	});
 }

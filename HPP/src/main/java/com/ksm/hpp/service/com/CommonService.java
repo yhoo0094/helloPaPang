@@ -45,27 +45,35 @@ public class CommonService extends BaseService {
 	* @설명: 읽기 권한 체크
 	 */
 	@SuppressWarnings("unchecked")
-	public Boolean readAuthChk(StringBuilder logStr, HttpServletRequest request, Map<String, Object> inData) throws Exception {
+	public Map<String, Object> readAuthChk(StringBuilder logStr, HttpServletRequest request, Map<String, Object> inData) throws Exception {
 		Boolean result = false;
 		String url = (String) inData.get("url");
+		int authGrade = 0;
 		
 		HttpSession session = request.getSession();
 		List<Map<String, Object>> freeAuthList = (List<Map<String, Object>>) session.getAttribute(Constant.FREE_AUTH_LIST);
 		List<Map<String, Object>> authList = (List<Map<String, Object>>) session.getAttribute(Constant.AUTH_LIST);
 		
 		//세션이 없을 경우 => 로그인 안 함 => 권한 체크 필요 여부에 따라 판단(필요:false, 불필요:true)
-		if(authList.isEmpty()) {
+		if(authList == null) {
 			Boolean isFreeAuth =  sqlSession.selectOne("mapper.user.UserMapper.isFreeAuth", inData);
 			if(isFreeAuth) {
 				result = true;
+			} else {
+				throw new ConfigurationException("로그인이 불필요하며 권한이 필요한 메뉴 발생!(" + url +")");
 			}
 		}
 		//세션이 있을 경우 => 세션을 통해 권한 체크 => 권한 없을 경우 세션 최신화 후 다시 체크
 		//권한이 필요없는 목록에 해당 url이 있으면 통과
 		if(!result) {
+			//세션에 freeAuthList가 없는 경우
+			if(freeAuthList == null) {
+				freeAuthList = sqlSession.selectList("mapper.user.UserMapper.selectFreeAuthList", inData);
+			}
+			
 			for(Map<String, Object> auth : freeAuthList) {
 				if(url.equals(auth.get("url"))) {
-					result = true;
+					result = true;														//권한 조회 성공 여부
 					break;
 				}
 			}			
@@ -74,7 +82,8 @@ public class CommonService extends BaseService {
 		if(!result) {
 			for(Map<String, Object> auth : authList) {
 				if(url.equals(auth.get("url"))) {
-					result = true;
+					authGrade = (Integer) auth.get("authGrade");						//조회된 권한 등급
+					result = true;														//권한 조회 성공 여부
 					break;
 				}
 			}			
@@ -85,7 +94,7 @@ public class CommonService extends BaseService {
 			for(Map<String, Object> auth : freeAuthList) {
 				if(url.equals(auth.get("url"))) {
 					session.setAttribute(Constant.FREE_AUTH_LIST, freeAuthList);		//권한이 필요없는 목록 정보 최신화
-					result = true;
+					result = true;														//권한 조회 성공 여부					
 					break;
 				}
 			}				
@@ -95,13 +104,17 @@ public class CommonService extends BaseService {
 			authList = sqlSession.selectList("mapper.user.UserMapper.selectAuthList", inData);
 			for(Map<String, Object> auth : authList) {
 				if(auth.containsKey(url)) {
-					session.setAttribute(Constant.AUTH_LIST, authList);		//권한 정보 최신화
-					result = true;
+					session.setAttribute(Constant.AUTH_LIST, authList);					//권한 정보 최신화
+					authGrade = (Integer) auth.get("authGrade");						//조회된 권한 등급
+					result = true;														//권한 조회 성공 여부
 					break;
 				}
 			}			
 		}
-		return result;
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("result", result);
+		resultMap.put("authGrade", authGrade);
+		return resultMap;
 	}	
 	
 	/**
@@ -113,7 +126,7 @@ public class CommonService extends BaseService {
 	@SuppressWarnings("unchecked")
 	public void writeAuthChk(StringBuilder logStr, HttpServletRequest request, Map<String, Object> inData) throws Exception {
 		Boolean result = false;
-		String url = (String) inData.get("url");				//메뉴 경로
+		String url = (String) inData.get("url");					//메뉴 경로
 		Boolean isRange = (Boolean) inData.get("isRange");			//권한등급이 정확히 일치해야 하는지
 		int reqAuthGrade = (Integer) inData.get("reqAuthGrade");	//필요 권한등급
 		

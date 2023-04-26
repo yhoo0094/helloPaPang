@@ -20,7 +20,7 @@ public class Constant
 	public static final String LOGIN_INFO 		= "LOGIN_INFO";			//로그인 정보
 	public static final String SESSION_TIME		= "SESSION_TIME";		//세션 유지 시간
 	public static final String AUTH_LIST		= "AUTH_LIST";			//권한 목록
-	public static final String FREE_AUTH_LIST	= "AUTH_LIST";			//권한이 필요없는 목록
+	public static final String FREE_AUTH_LIST	= "FREE_AUTH_LIST";		//권한이 필요없는 목록
 	
 	//엑셀 관련
 	public static final String EXCEL_FILENM 	= "EXCEL_FILENM";		//파일명

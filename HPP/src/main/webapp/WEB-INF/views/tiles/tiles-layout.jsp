@@ -45,7 +45,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script><!-- jQuery Modal -->
 	<script src="<%=request.getContextPath() %>/resources/js/com/common.js"></script> <!-- 페이지 공통 -->
 	<script src="<%=request.getContextPath() %>/resources/js/com/tiles-layout.js"></script> <!-- 페이지 공통 -->
-<%-- 	<script src="<%=request.getContextPath() %>/views/tiles/tiles-layout.js"></script> <!-- tiles-layout.js --> --%>
 	<script src="<%=request.getContextPath() %>/resources/js/framework/util.js"></script> <!-- 유틸 -->
 	<script src="<%=request.getContextPath() %>/resources/js/framework/dateUtil.js"></script> <!-- 날짜 유틸 -->
 	<script src="<%=request.getContextPath() %>/resources/js/framework/excelUtil.js"></script> <!-- 엑셀 유틸 -->
@@ -54,10 +53,12 @@
 	
 	<script src="<%=request.getContextPath() %>/resources/js/framework/ckeditor5/build/ckeditor.js"></script> <!-- ck에디터 -->
     <script src="<%=request.getContextPath() %>/resources/js/framework/ckeditor5/build/editor.js" type="module"></script><!-- ck에디터 -->
-    
     <script src="<%=request.getContextPath() %>/resources/lib/datetimepicker/jquery.datetimepicker.full.min.js"></script><!-- datetimepicker -->
-	
 	<script src="<%=request.getContextPath() %><tiles:getAsString name="js"/>"></script> <!-- 페이지 개별 -->
+	
+	<script>
+	var authGrade = '<%= request.getAttribute("authGrade") %>';
+	</script>
 	
     <title><tiles:insertAttribute name="title" /></title>
   </head>

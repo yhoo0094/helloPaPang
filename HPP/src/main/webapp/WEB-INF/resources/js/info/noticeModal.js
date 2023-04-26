@@ -25,6 +25,9 @@ function noticeModalOpen(data){
 		data.boardCode = '01';			//게시판구분코드(01:공지사항,02:자유게시판,03:질문게시판,04:지역게시판)
 		data.boardSeq = data.boardSeq;	//게시글일련번호
 		$fileUtil.selectFile(data);		//첨부파일 조회
+		
+		//조회수 +1
+		increaseHit();
 	} else {
 		//모달 내용 초기화
 		resetModal();		
@@ -97,27 +100,49 @@ function resetModal(){
 
 //게시글 삭제
 function deleteBoard(){
-		if(!confirm('정말로 삭제 하시겠습니까?')){
-			return;
-		};
-		
-		var formData = new FormData($("#noticeForm")[0]);
+	if(!confirm('정말로 삭제 하시겠습니까?')){
+		return;
+	};
 	
-	    $.ajax({
-			type: 'POST',
-			enctype: 'multipart/form-data',
-	        url: '/notice/deleteNotice.do',
-	        data: formData,
-	        processData: false,
-	        contentType: false,
-	        cache: false, 
-	        success: function (result) {
-	            if (result.RESULT == Constant.RESULT_SUCCESS){
-	                alert("삭제가 완료되었습니다.")
-	                closeModal();
-	            } else {
-					alert(Constant.OUT_RESULT_MSG)
-				}
-	        }
-	    });  	
+	var formData = new FormData($("#noticeForm")[0]);
+
+    $.ajax({
+		type: 'POST',
+		enctype: 'multipart/form-data',
+        url: '/notice/deleteNotice.do',
+        data: formData,
+        processData: false,
+        contentType: false,
+        cache: false, 
+        success: function (result) {
+            if (result.RESULT == Constant.RESULT_SUCCESS){
+                alert("삭제가 완료되었습니다.")
+                closeModal();
+            } else {
+				alert(Constant.OUT_RESULT_MSG)
+			}
+        }
+    });  	
+}
+
+//조회수 증가
+function increaseHit(){
+	var formData = new FormData($("#noticeForm")[0]);
+	
+    $.ajax({
+		type: 'POST',
+		enctype: 'multipart/form-data',
+        url: '/notice/increaseHit.do',
+        data: formData,
+        processData: false,
+        contentType: false,
+        cache: false, 
+        success: function (result) {
+            if (result.RESULT == Constant.RESULT_SUCCESS){
+                
+            } else {
+				alert(Constant.OUT_RESULT_MSG)
+			}
+        }
+    });	
 }

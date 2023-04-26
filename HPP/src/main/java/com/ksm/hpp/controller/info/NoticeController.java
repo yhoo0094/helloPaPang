@@ -43,11 +43,6 @@ public class NoticeController extends BaseController {
 		Map<String, Object> outData = noticeService.selectNotice((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		
 		ResponseUtil.setResAuto(response, inData, outData);
-		
-//		Gson gson = new Gson();
-//		String json = gson.toJson(outData);
-//		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
-//		response.setContentType("application/x-json; charset=UTF-8");
 	}	
 	
 	/**
@@ -63,7 +58,7 @@ public class NoticeController extends BaseController {
 		inData.put("loginInfo", loginInfo);
 		
 		//권한 확인
-		inData.put("url", url);		//메뉴 경로
+		inData.put("url", url);				//메뉴 경로
 		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
 		inData.put("reqAuthGrade", 2);		//필요 권한등급
 		commonService.writeAuthChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
@@ -116,7 +111,28 @@ public class NoticeController extends BaseController {
 		String json = gson.toJson(outData);
 		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
 		response.setContentType("application/x-json; charset=UTF-8");
-	}			
+	}		
+	
+	/**
+	* 
+	* @메소드명: increaseHit
+	* @작성자: KimSangMin
+	* @생성일: 2023. 4. 26. 오후 6:38:51
+	* @설명:
+	*/
+	@RequestMapping("/increaseHit.do")
+	public void increaseHit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
+		inData.put("loginInfo", loginInfo);
+		
+		Map<String, Object> outData = noticeService.increaseHit((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(outData);
+		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
+		response.setContentType("application/x-json; charset=UTF-8");
+	}	
 		
 }
 
