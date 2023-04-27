@@ -281,14 +281,16 @@ table.dataTable.no-footer{
 
 .fileAttachBtn{
 	float: right;
-}
-
-.fileAttachBtn :hover{
 	cursor: pointer;
 }
 
+/* .fileAttachBtn :hover{ */
+	
+/* } */
+
 .attachedFile{
 	display: inline-block;
+	cursor: pointer;
 }
 /* 파일첨부 끝 */
 
@@ -363,8 +365,9 @@ table.dataTable td{
 	text-align: left;
 }	
 
-.delete {
+.deleteFileBtn {
 	color: red;
+	display: none;
 }
 
 .fileAttachBtn {

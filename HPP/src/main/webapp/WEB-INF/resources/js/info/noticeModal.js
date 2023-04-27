@@ -16,21 +16,21 @@ function noticeModalOpen(data){
 	if(data != null){
 		//기존 입력에 대한 조회
 		$('#boardSeq').val(data.boardSeq);			//공지사항일련번호
-		$('#title').val(data.title);	//공지사항제목
-		cn.setData(data.cn);			//공지사항내용
+		$('#title').val(data.title);				//공지사항제목
+		cn.setData(data.cn);						//공지사항내용
 		$('#strDt').val(data.strDt.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'));	//공지사항게시시작일
 		$('#endDt').val(data.endDt.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'));	//공지사항게시종료일
 		(data.popYn == 'Y')? $('#popY').prop('checked','checked') : $('#popN').prop('checked','checked');	//공지사항팝업여부
 		
-		data.boardCode = '01';			//게시판구분코드(01:공지사항,02:자유게시판,03:질문게시판,04:지역게시판)
-		data.boardSeq = data.boardSeq;	//게시글일련번호
-		$fileUtil.selectFile(data);		//첨부파일 조회
+		data.boardCode = '01';						//게시판구분코드(01:공지사항,02:자유게시판,03:질문게시판,04:지역게시판)
+		data.boardSeq = data.boardSeq;				//게시글일련번호
+		$fileUtil.selectFile(data);					//첨부파일 조회
 		
 		//조회수 +1
 		increaseHit();
 	} else {
-		//모달 내용 초기화
-		resetModal();		
+		//readonly 제거
+		$('*[readonly="readonly"]').removeAttr('readonly');		
 	}
 	$('#noticeModal').modal({
 		clickClose: false
@@ -96,6 +96,11 @@ function resetModal(){
 	$util.inputTypeEmpty(el, 'text');
 	$('#boardSeq').val('');
 	cn.setData('');			//공지사항내용
+	
+	//readonly 추가
+	$('#title').attr('readonly','readonly');
+	$('#strDt').attr('readonly','readonly');
+	$('#endDt').attr('readonly','readonly');
 }
 
 //게시글 삭제

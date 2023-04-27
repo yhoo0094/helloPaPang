@@ -85,7 +85,7 @@ $fileUtil.selectFile = function selectFile(data) {
 		        let htmlData = '';
 		        htmlData += '<div id="file' + fileNo + '" class="filebox">';
 		        htmlData += '   <p class="attachedFile" onclick="$fileUtil.downloadFile(' + fileData.boardSeq + ',' + fileData.atcfileNum + ');">' + fileData.atcFileNm + ' (' + $fileUtil.formatBytes(fileData.atcFileCapaVal) + ')</p>';
-		        htmlData += '   <a class="delete" onclick="$fileUtil.deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
+		        htmlData += '   <a class="deleteFileBtn" onclick="$fileUtil.deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
 		        htmlData += '</div>';
 		        $('.fileListDiv').append(htmlData);
 		        fileNo++;					
