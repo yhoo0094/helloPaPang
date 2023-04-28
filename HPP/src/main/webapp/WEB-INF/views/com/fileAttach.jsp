@@ -13,7 +13,7 @@
 
 <div class="fileAttachDiv">
 	<div id="fileListDiv" class="fileListDiv form-control">
-		<label class="fileAttachBtn" for="inputFile">
+		<label id="fileAttachBtn" class="fileAttachBtn" for="inputFile">
 			<span>파일찾기</span>
 		</label>	
 	</div>
