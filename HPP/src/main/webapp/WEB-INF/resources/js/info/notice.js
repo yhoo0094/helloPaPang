@@ -36,7 +36,7 @@ var columInfo = [
           , { title: "작성자"		, data: "fstRegId"		, width: "100px"	, className: "text_align_center"}
           , { title: "게시기간"	, data: "period"		, width: "150px"	, className: "text_align_center"}
           , { title: "게시일"		, data: "fstRegDtti"	, width: "150px"	, className: "text_align_center"	, render: function(data){return data.replace(/\//g,'-')}}	
-          , { title: "조회수"		, data: "hit"			, width: "50px"		, className: "text_align_center"}
+          , { title: "조회수"		, data: "hit"			, width: "50px"		, className: "text_align_center hit"}
 ]
 
 //DataTable 만들기(페이지네이션 서버 처리)
@@ -95,7 +95,6 @@ function makeDataTableServerSide() {
 	$('#mainTable tbody').on('dblclick', 'tr', function () {
 	    var data = mainTable.row(this).data();
 	    noticeModalOpen(data);
-	    data.hit++;
-	    mainTable.row(this).data(data).draw();
+	    $(this).children('.hit').text(++data.hit);
 	});
 }

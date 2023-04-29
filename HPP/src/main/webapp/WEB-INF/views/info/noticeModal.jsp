@@ -45,13 +45,13 @@
 			<tbody>
 				<tr>
 					<th>제목</th>
-					<td colspan="3"><input id="title" name="title" class="form-control writeInput" type="text" title="제목" maxlength="100" readonly="readonly" required="all1"/></td>
+					<td colspan="3"><input id="title" name="title" class="form-control writeInput" type="text" title="제목" maxlength="100" required="all1"/></td>
 				</tr>
 				<tr>
 					<th>게시기간</th>
 					<td>
-						<input id="strDt" name="strDt" class="form-control writeInput" type="date" title="게시시작일" readonly="readonly" required="all1"/> 
-					  ~ <input id="endDt" name="endDt" class="form-control writeInput" type="date" title="게시종료일" readonly="readonly" required="all1"/>
+						<input id="strDt" name="strDt" class="form-control writeInput" type="date" title="게시시작일" required="all1"/> 
+					  ~ <input id="endDt" name="endDt" class="form-control writeInput" type="date" title="게시종료일" required="all1"/>
 					</td>
 					<th>팝업여부</th>
 					<td>
@@ -65,7 +65,7 @@
 				<tr>
 					<th>내용</th>
 					<td colspan="3">
-						<div id="cnRead" title="내용" class="form-control" style="height: 500px;"></div>
+						<div id="cnRead" title="내용" class="form-control" style="height: 500px; overflow: auto"></div>
 						<div id="cn" title="내용" class="editor form-control"></div>
 					</td>
 				</tr>
@@ -80,10 +80,10 @@
 		</table>
 		
 		<div class="modal_btn_wrapper">
-			<button type="button" id="madalSaveBtn" class="btn papang-save-btn papang_btn" onclick="saveNotice()" style="display: none;">저장</button>
-			<button type="button" id="madalModifyBtn" class="btn papang-save-btn papang_btn" onclick="setModifyMode()" style="display: none;">수정</button>
-			<button type="button" id="madalDelBtn" class="btn papang-del-btn papang_btn" onclick="deleteBoard()" style="display: none;">삭제</button>
-			<button type="button" id="madalCloseBtn" class="btn papang-close-btn papang_btn" onclick="closeModal()">닫기</button>
+			<button type="button" id="modalSaveBtn" class="btn papang-save-btn papang_btn" onclick="saveNotice()" style="display: none;">저장</button>
+			<button type="button" id="modalModifyBtn" class="btn papang-save-btn papang_btn" onclick="setModifyMode()" style="display: none;">수정</button>
+			<button type="button" id="modalDelBtn" class="btn papang-del-btn papang_btn" onclick="deleteBoard()" style="display: none;">삭제</button>
+			<button type="button" id="modalCloseBtn" class="btn papang-close-btn papang_btn" onclick="closeModal()">닫기</button>
 		</div>
 	</form>
 </div>

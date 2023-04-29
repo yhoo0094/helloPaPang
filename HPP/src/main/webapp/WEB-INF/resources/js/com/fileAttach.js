@@ -36,7 +36,7 @@ $fileUtil.addFile = function addFile(obj){
 	        let htmlData = '';
 	        htmlData += '<div id="file' + fileNo + '" class="filebox">';
 	        htmlData += '   <p class="attachedFile">' + file.name + ' (' + $fileUtil.formatBytes(file.size) + ')</p>';
-	        htmlData += '   <a class="delete" onclick="$fileUtil.deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
+	        htmlData += '   <a class="deleteFileBtn" onclick="$fileUtil.deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
 	        htmlData += '</div>';
 	        $('.fileListDiv').append(htmlData);
 	        fileNo++;
@@ -89,6 +89,10 @@ $fileUtil.selectFile = function selectFile(data) {
 		        htmlData += '</div>';
 		        $('.fileListDiv').append(htmlData);
 		        fileNo++;					
+			}
+			
+			if(data.readonly == 'Y'){
+				$('.deleteFileBtn').css('display','none');			//파일 제거 버튼
 			}
         }
     });		

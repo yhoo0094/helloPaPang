@@ -5,56 +5,57 @@
  * @설명: 로그인 정보 입력 모달
 **/
 
-$(()=>{
-	
-})
-
 //공지사항 팝업 열기
 function noticeModalOpen(data){
 	data = $util.XssReverseObj(data);	//XSS방지를 위한 문자열 변환 되돌리기
+	resetModal();
 	
-	if(data != null){	//기존 입력에 대한 조회
+	if(data != null){	//조회
 		//데이터 입력
 		$('#boardSeq').val(data.boardSeq);			//공지사항일련번호
 		$('#title').val(data.title);				//공지사항제목
 		cn.setData(data.cn);						//공지사항내용
-		$('#cnRead').append(data.cn);				//공지사항내용
+		$('#cnRead').html(data.cn);					//공지사항내용
 		$('#strDt').val(data.strDt.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'));	//공지사항게시시작일
 		$('#endDt').val(data.endDt.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'));	//공지사항게시종료일
 		(data.popYn == 'Y')? $('#popY').prop('checked','checked') : $('#popN').prop('checked','checked');	//공지사항팝업여부
 		(data.popYn == 'Y')? $('#popYnRead').text('Y') : $('#popYnRead').text('N');	//공지사항팝업여부
 		
 		//요소 출력 여부
-		$('.writeInput').attr('readonly','readonly');		//readonly 적용
+		$('#noticeForm .form-control').attr('readonly','readonly');		//readonly 적용
 		$('#popYnWrite').css('display','none');				//공지사항팝업여부
 		$('#popYnRead').css('display','inline-block');		//공지사항팝업여부
 		$('#cn').css('display','none');						//내용
 		$('#cnRead').css('display','inline-block');			//내용
 		$('#fileAttachBtn').css('display','none');			//첨부파일 버튼
 		
+		$('#modalSaveBtn').css('display','none');
 		if(authGrade > 1){
-			$('#madalModifyBtn').css('display','inline-block');
-			$('#madalDelBtn').css('display','inline-block');
+			$('#modalModifyBtn').css('display','inline-block');
+			$('#modalDelBtn').css('display','inline-block');
+		} else {
+			$('#modalModifyBtn').css('display','none');
+			$('#modalDelBtn').css('display','none');
 		}
 		
 		data.boardCode = '01';								//게시판구분코드(01:공지사항,02:자유게시판,03:질문게시판,04:지역게시판)
 		data.boardSeq = data.boardSeq;						//게시글일련번호
+		data.readonly = 'Y'									//파일 제거 버튼 출력 여부
 		$fileUtil.selectFile(data);							//첨부파일 조회
 		
 		//조회수 +1
 		increaseHit();
 	} else {	//신규 입력
-		$('.writeInput').removeAttr('readonly');			//readonly 제거	
+		$('#noticeForm .form-control').removeAttr('readonly');			//readonly 제거	
 		$('#popYnWrite').css('display','inline-block');		//공지사항팝업여부
 		$('#popYnRead').css('display','none');				//공지사항팝업여부
 		$('#cn').css('display','inline-block');				//내용
 		$('#cnRead').css('display','none');					//내용
 		$('#fileAttachBtn').css('display','inline-block');	//첨부파일 버튼
 		
-		if(authGrade > 1){
-			$('#madalSaveBtn').css('display','inline-block');
-			$('#madalDelBtn').css('display','inline-block');
-		}
+		$('#modalSaveBtn').css('display','inline-block');
+		$('#modalModifyBtn').css('display','none');
+		$('#modalDelBtn').css('display','none');
 	}
 	$('#noticeModal').modal({
 		clickClose: false
@@ -63,14 +64,15 @@ function noticeModalOpen(data){
 
 //수정 모드로 바꾸기
 function setModifyMode(){
-	$('#madalModifyBtn').css('display','none');			//수정 버튼
-	$('#madalSaveBtn').css('display','inline-block');	//저장 버튼
-	$('.writeInput').removeAttr('readonly');			//readonly 제거	
+	$('#modalModifyBtn').css('display','none');			//수정 버튼
+	$('#modalSaveBtn').css('display','inline-block');	//저장 버튼
+	$('#noticeForm .form-control').removeAttr('readonly');			//readonly 제거		
 	$('#popYnWrite').css('display','inline-block');		//공지사항팝업여부
 	$('#popYnRead').css('display','none');				//공지사항팝업여부
 	$('#cn').css('display','inline-block');				//내용
 	$('#cnRead').css('display','none');					//내용
 	$('#fileAttachBtn').css('display','inline-block');	//첨부파일 버튼
+	$('.deleteFileBtn').css('display','inline-block');			//파일 제거 버튼
 }
 
 //공지사항 저장
@@ -93,6 +95,7 @@ function saveNotice(){
 	
 	//에디터 내용 저장
 	formData.set('cn',cn.getData());
+	debugger;
 	
 	var url;    
     if($util.isEmpty($('#boardSeq').val())){
@@ -132,11 +135,6 @@ function resetModal(){
 	$util.inputTypeEmpty(el, 'text');
 	$('#boardSeq').val('');
 	cn.setData('');			//공지사항내용
-	
-	//readonly 추가
-	$('#title').attr('readonly','readonly');
-	$('#strDt').attr('readonly','readonly');
-	$('#endDt').attr('readonly','readonly');
 }
 
 //게시글 삭제
