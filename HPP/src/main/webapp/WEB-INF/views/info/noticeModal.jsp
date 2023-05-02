@@ -65,7 +65,6 @@
 				<tr>
 					<th>내용</th>
 					<td colspan="3">
-						<div id="cnRead" title="내용" class="form-control" style="height: 500px; overflow: auto"></div>
 						<div id="cn" title="내용" class="editor form-control"></div>
 					</td>
 				</tr>

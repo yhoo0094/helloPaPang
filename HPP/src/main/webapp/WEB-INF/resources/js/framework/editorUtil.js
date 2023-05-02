@@ -88,6 +88,15 @@ $editorUtil.createEditor = function(){
 				})
 				.then( editor => {
 					window.editor = editor;
+					
+					const toolbarElement = editor.ui.view.toolbar.element;
+			        editor.on( 'change:isReadOnly', ( evt, propertyName, isReadOnly ) => {
+			            if ( isReadOnly ) {
+			                toolbarElement.style.display = 'none';
+			            } else {
+			                toolbarElement.style.display = 'flex';
+			            }
+			        });					
 				} )
 				.catch( error => {
 					console.error( error );

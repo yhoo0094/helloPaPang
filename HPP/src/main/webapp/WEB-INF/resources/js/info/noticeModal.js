@@ -15,7 +15,7 @@ function noticeModalOpen(data){
 		$('#boardSeq').val(data.boardSeq);			//공지사항일련번호
 		$('#title').val(data.title);				//공지사항제목
 		cn.setData(data.cn);						//공지사항내용
-		$('#cnRead').html(data.cn);					//공지사항내용
+//		$('#cnRead').html(data.cn);					//공지사항내용
 		$('#strDt').val(data.strDt.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'));	//공지사항게시시작일
 		$('#endDt').val(data.endDt.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'));	//공지사항게시종료일
 		(data.popYn == 'Y')? $('#popY').prop('checked','checked') : $('#popN').prop('checked','checked');	//공지사항팝업여부
@@ -25,8 +25,7 @@ function noticeModalOpen(data){
 		$('#noticeForm .form-control').attr('readonly','readonly');		//readonly 적용
 		$('#popYnWrite').css('display','none');				//공지사항팝업여부
 		$('#popYnRead').css('display','inline-block');		//공지사항팝업여부
-		$('#cn').css('display','none');						//내용
-		$('#cnRead').css('display','inline-block');			//내용
+		cn.enableReadOnlyMode('noticeModal');				//내용
 		$('#fileAttachBtn').css('display','none');			//첨부파일 버튼
 		
 		$('#modalSaveBtn').css('display','none');
@@ -49,8 +48,7 @@ function noticeModalOpen(data){
 		$('#noticeForm .form-control').removeAttr('readonly');			//readonly 제거	
 		$('#popYnWrite').css('display','inline-block');		//공지사항팝업여부
 		$('#popYnRead').css('display','none');				//공지사항팝업여부
-		$('#cn').css('display','inline-block');				//내용
-		$('#cnRead').css('display','none');					//내용
+		cn.disableReadOnlyMode('noticeModal');				//내용
 		$('#fileAttachBtn').css('display','inline-block');	//첨부파일 버튼
 		
 		$('#modalSaveBtn').css('display','inline-block');
@@ -64,15 +62,15 @@ function noticeModalOpen(data){
 
 //수정 모드로 바꾸기
 function setModifyMode(){
-	$('#modalModifyBtn').css('display','none');			//수정 버튼
-	$('#modalSaveBtn').css('display','inline-block');	//저장 버튼
+	$('#modalModifyBtn').css('display','none');						//수정 버튼
+	$('#modalSaveBtn').css('display','inline-block');				//저장 버튼
 	$('#noticeForm .form-control').removeAttr('readonly');			//readonly 제거		
-	$('#popYnWrite').css('display','inline-block');		//공지사항팝업여부
-	$('#popYnRead').css('display','none');				//공지사항팝업여부
-	$('#cn').css('display','inline-block');				//내용
-	$('#cnRead').css('display','none');					//내용
-	$('#fileAttachBtn').css('display','inline-block');	//첨부파일 버튼
-	$('.deleteFileBtn').css('display','inline-block');			//파일 제거 버튼
+	$('#popYnWrite').css('display','inline-block');					//공지사항팝업여부
+	$('#popYnRead').css('display','none');							//공지사항팝업여부
+	cn.disableReadOnlyMode('noticeModal');							//내용
+	$('#fileAttachBtn').css('display','inline-block');				//첨부파일 버튼
+	$('.deleteFileBtn').css('display','inline-block');				//파일 제거 버튼
+
 }
 
 //공지사항 저장
@@ -95,7 +93,6 @@ function saveNotice(){
 	
 	//에디터 내용 저장
 	formData.set('cn',cn.getData());
-	debugger;
 	
 	var url;    
     if($util.isEmpty($('#boardSeq').val())){
