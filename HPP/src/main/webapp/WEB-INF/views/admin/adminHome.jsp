@@ -12,6 +12,7 @@
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
 	
-	<a href="<%=request.getContextPath() %>/admin/loginLog">로그인 로그</a>
-	<a href="<%=request.getContextPath() %>/admin/requestLog">요청 로그</a>
+	<p><a href="<%=request.getContextPath() %>/admin/loginLog">로그인 로그</a></p>
+	<p><a href="<%=request.getContextPath() %>/admin/requestLog">요청 로그</a></p>
+	<p><a href="<%=request.getContextPath() %>/admin/manageRole">권한그룹 관리</a></p>
 </div>	

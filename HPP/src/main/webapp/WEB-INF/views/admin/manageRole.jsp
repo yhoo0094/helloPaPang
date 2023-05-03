@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <% 
 /**
- * @화면명: 요청 로그 조회 
+ * @화면명: 권한그룹 관리
  * @작성자: KimSangMin
- * @생성일: 2023. 1. 30. 오후 2:25:23
- * @설명: 클라이언트에서 서버로 넘어오는 요청관련 로그 조회
+ * @생성일: 2023. 5. 3. 오후 8:18:17
+ * @설명:
 **/
  %>
- 
-<%@ include file="/WEB-INF/views/admin/requestLogModal.jsp" %><!-- 요청 로그 상세 모달 -->
- 
+
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
 	<div class="papang-search-div">
