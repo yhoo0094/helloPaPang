@@ -9,29 +9,28 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.google.gson.Gson;
 import com.ksm.hpp.controller.com.BaseController;
 import com.ksm.hpp.framework.util.RequestUtil;
 import com.ksm.hpp.framework.util.ResponseUtil;
-import com.ksm.hpp.service.admin.LoginLogService;
+import com.ksm.hpp.service.admin.ManageRoleService;
 
 @Controller
 @RequestMapping("/admin")
 public class ManageRoleController extends BaseController {
 	
-	@Resource(name = "LoginLogService")
-	protected LoginLogService loginLogService;
+	@Resource(name = "ManageRoleService")
+	protected ManageRoleService manageRoleService;
 	
 	/**
 	* @메소드명: selectRoleList
 	* @작성자: KimSangMin
 	* @생성일: 2023. 5. 4. 오후 9:50:14
-	* @설명:
+	* @설명: 권한그룹 목록 조회
 	*/
 	@RequestMapping("/selectRoleList.do")
 	public void selectRoleList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
-		Map<String, Object> outData = loginLogService.selectLoginLog((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		Map<String, Object> outData = manageRoleService.selectRoleList((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		
 		ResponseUtil.setResAuto(response, inData, outData);
 		
