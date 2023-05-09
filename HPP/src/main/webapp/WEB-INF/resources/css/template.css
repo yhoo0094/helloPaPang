@@ -187,6 +187,12 @@ input[type = 'date']{
     font-weight: 900;	
 }
 
+.tableTitleDiv{
+	font-size: 16px;
+    padding: 5px;
+    font-weight: 900;	
+}
+
 .menuPathDiv{
     padding: 5px 10px;
     font-size: 11px;

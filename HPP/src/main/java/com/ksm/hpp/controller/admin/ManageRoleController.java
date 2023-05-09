@@ -33,12 +33,23 @@ public class ManageRoleController extends BaseController {
 		Map<String, Object> outData = manageRoleService.selectRoleList((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		
 		ResponseUtil.setResAuto(response, inData, outData);
-		
-//		Gson gson = new Gson();
-//		String json = gson.toJson(outData);
-//		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
-//		response.setContentType("application/x-json; charset=UTF-8");
 	}	
+	
+	
+	/**
+	* @메소드명: selectGroupUser
+	* @작성자: KimSangMin
+	* @생성일: 2023. 5. 9. 오후 7:56:43
+	* @설명: 권한그룹에 속한 사용자 목록 조회
+	*/
+	@RequestMapping("/selectGroupUser.do")
+	public void selectGroupUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> outData = manageRoleService.selectGroupUser((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		
+		ResponseUtil.setResAuto(response, inData, outData);
+	}		
+	
 }
 
 

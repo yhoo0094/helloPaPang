@@ -71,7 +71,7 @@ table.dataTable tbody tr.selected {
 }
 table.dataTable tbody th,
 table.dataTable tbody td {
-  padding: 15px 10px;
+/*   padding: 15px 10px; */
   font-size:16px;
 }
 @media screen and (max-width:768px){

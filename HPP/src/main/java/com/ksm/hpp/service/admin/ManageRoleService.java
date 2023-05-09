@@ -35,4 +35,23 @@ public class ManageRoleService {
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;
 	}
+	
+	/**
+	* @메소드명: selectGroupUser
+	* @작성자: KimSangMin
+	* @생성일: 2023. 5. 9. 오후 7:58:04
+	* @설명: 권한그룹에 속한 사용자 목록 조회
+	 */
+	public Map<String, Object> selectGroupUser(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<Map<String, Object>> list = sqlSession.selectList("mapper.admin.ManageRoleMapper.selectGroupUser", inData);
+		result.put("data", list);
+		result.put(Constant.OUT_DATA, list);
+		result.put("recordsFiltered", list.get(0).get("rowCnt"));	//필터링 후의 총 레코드 수
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		return result;
+	}	
+	
+	
 }
