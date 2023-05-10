@@ -31,6 +31,7 @@ var columInfo = [
 ]
 
 //DataTable 만들기
+var mainTable;
 function makeDataTable(data) {
     mainTable = $('#mainTable').DataTable({
         data: data,
@@ -52,44 +53,47 @@ function makeDataTable(data) {
 		language : {
 			zeroRecords	: '조회된 결과가 없습니다.',
 		},
-		
-        rowReorder: {
-            selector: 'tr'
+        rowReorder: {							//행 드래그해서 순서 바꾸기
+            selector: 'td:first-child'
         },
-//	    columnDefs: [
-//            { targets: 0, visible: false }
-//        ]
     });	
+    
+    //테이블 클릭 이벤트
+	$('#mainTable tr').on('click', function () {
+	    var data = mainTable.row(this).data();
+	    $('#roleNmSpan').text(data.roleNm);
+	    param.roleSeq = data.roleSeq;
+	    groupUserTable.ajax.reload();
+	});	    
+	
+	$('#mainTable tr').eq(1).click();
 }
 
 var groupUserCol = [
+	{ title: "ID"		, data: "userId"		, width: "100px"		, className: "text_align_center"},
 	{ title: "ID"		, data: "userId"		, width: "100px"		, className: "text_align_center"},
 	{ title: "이름"		, data: "userName"		, width: "100px"		, className: "text_align_center"},
 ]
 
 //권한그룹에 속한 사용자 목록 테이블 만들기
+var param = {
+	pageLength : '10',
+	roleSeq : '1',
+}
+
+var groupUserTable;
 function makeGroupUserDataTable(){
-	var url = '/admin/selectGroupUser.do';
-	var param = {
-		pageLength : '10',		//페이지당 레코드 수
-	};    
-	
-    mainTable = $('#groupUserTable').DataTable({
+    groupUserTable = $('#groupUserTable').DataTable({
 		serverSide: true,						//페이징 처리 서버에서 수행
 		ajax: {
-			url: url,
+			url: '/admin/selectGroupUser.do',
         	type: 'POST',
 			data: function(){
-				//검색 조건 object에 담기
-//			    $.each($('#searchForm').serializeArray(), function() {
-//			        param[this.name] = this.value;
-//			    });
-//				
-//				if($util.isEmpty(mainTable)){
-//					param.strIdx = 0;
-//				} else {
-//					param.strIdx = 0 + (param.pageLength * parseInt(mainTable.page()));		//시작 레코드 인덱스 
-//				};
+				if($util.isEmpty(mainTable)){
+					param.strIdx = 0;
+				} else {
+					param.strIdx = 0 + (param.pageLength * parseInt(mainTable.page()));		//시작 레코드 인덱스 
+				};
 				return param;
 			},
 		},

@@ -74,6 +74,7 @@ public class CommonService extends BaseService {
 			
 			for(Map<String, Object> auth : freeAuthList) {
 				if(url.equals(auth.get("url"))) {
+					authGrade = (Integer) auth.get("authGrade");						//조회된 권한 등급
 					result = true;														//권한 조회 성공 여부
 					break;
 				}

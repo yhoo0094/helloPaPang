@@ -5,9 +5,6 @@
  * @설명: 공지사항 목록 조회 페이지
 **/
 
-//전역 변수
-var mainTable
-
 $(document).ready(function () {
 	makeDataTableServerSide();
 });
@@ -40,6 +37,7 @@ var columInfo = [
 ]
 
 //DataTable 만들기(페이지네이션 서버 처리)
+var mainTable
 function makeDataTableServerSide() {
 	var url = '/notice/selectNotice.do';
 	var param = {};    

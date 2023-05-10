@@ -105,8 +105,9 @@ function saveNotice(){
 	$fileUtil.saveFile(url, formData).then(function(result){
         if (result.RESULT == Constant.RESULT_SUCCESS){
             // 데이타 성공일때 이벤트 작성
+            closeModal();
+            mainTable.ajax.reload(null,false);
             alert("완료되었습니다.");
-            location.reload();
         } else {
 			alert(result[Constant.OUT_RESULT_MSG])
 		}		
@@ -152,8 +153,9 @@ function deleteBoard(){
         cache: false, 
         success: function (result) {
             if (result.RESULT == Constant.RESULT_SUCCESS){
+				closeModal();
+				mainTable.ajax.reload(null,false);
                 alert("삭제가 완료되었습니다.")
-                closeModal();
             } else {
 				alert(Constant.OUT_RESULT_MSG)
 			}

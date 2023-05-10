@@ -36,8 +36,11 @@ public class NoticeService {
 		List<Map<String, Object>> list = sqlSession.selectList("mapper.info.NoticeMapper.selectNotice", inData);
 		result.put("data", list);
 		result.put(Constant.OUT_DATA, list);
-		result.put("recordsFiltered", list.get(0).get("rowCnt"));	//필터링 후의 총 레코드 수
-		
+		if(!list.isEmpty()) {
+			result.put("recordsFiltered", list.get(0).get("rowCnt"));	//필터링 후의 총 레코드 수
+		} else {
+			result.put("recordsFiltered", "0");	//필터링 후의 총 레코드 수
+		}		
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;
 	}

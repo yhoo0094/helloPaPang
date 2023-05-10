@@ -41,7 +41,7 @@
 		<if test='periodToggle == "true"'>
 		   AND DATE_FORMAT(NOW(), "%Y%m%d") BETWEEN T1.STR_DT AND T1.END_DT
 		</if>		   
-		 ORDER BY T1.LT_UPD_DTTI DESC
+		 ORDER BY T1.STR_DT DESC
 		 
 		<if test='strIdx != null and strIdx != ""'>
 		 LIMIT ${strIdx}, ${pageLength}

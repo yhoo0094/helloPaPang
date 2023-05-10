@@ -22,6 +22,7 @@
 		  	 , TB_ROLE T3							/*테이블_권한그룹*/
 		 WHERE T1.USER_ID = T2.USER_ID
 		   AND T3.ROLE_SEQ = T2.ROLE_SEQ
+		   AND T3.ROLE_SEQ = #{roleSeq}
 		 ORDER BY T1.USER_NAME ASC
 	</select>	
 	
