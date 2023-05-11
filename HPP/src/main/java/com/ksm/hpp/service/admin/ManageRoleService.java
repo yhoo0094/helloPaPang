@@ -57,5 +57,19 @@ public class ManageRoleService {
 		return result;
 	}	
 	
-	
+	/**
+	* @메소드명: deleteGroupUser
+	* @작성자: KimSangMin
+	* @생성일: 2023. 5. 11. 오후 7:45:03
+	* @설명: 권한그룹 사용자 제거
+	*/
+	public Map<String, Object> deleteGroupUser(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		int cnt = sqlSession.delete("mapper.admin.ManageRoleMapper.deleteGroupUser", inData);
+		result.put("cnt", cnt);
+		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		return result;
+	}		
 }

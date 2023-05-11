@@ -70,10 +70,33 @@ function makeDataTable(data) {
 }
 
 var groupUserCol = [
-	{ title: "ID"		, data: "userId"		, width: "100px"		, className: "text_align_center"},
-	{ title: "ID"		, data: "userId"		, width: "100px"		, className: "text_align_center"},
-	{ title: "이름"		, data: "userName"		, width: "100px"		, className: "text_align_center"},
-]
+	{ 
+		title: '<input type="checkBox" onclick="checkAll(this)">'		
+		, data: 'userId'		
+		, width: '100px'		
+		, className: 'text_align_center'
+	    , render: function (data, type, row, meta) {
+	    	return '<input type="checkBox" name="userChk" data-userId="' + data + '">';
+	    }		
+	},
+	{ 
+		title: "ID"		
+		, data: "userId"		
+		, width: "100px"		
+		, className: "text_align_center"
+	},
+	{ 
+		title: "이름"		
+		, data: "userName"		
+		, width: "100px"		
+		, className: "text_align_center"
+	},
+];
+
+//체크박스 전체 선택
+function checkAll(obj){
+	$('#groupUserTable').find('input[type="checkBox"]').prop('checked',$(obj).prop('checked'));
+}
 
 //권한그룹에 속한 사용자 목록 테이블 만들기
 var param = {
@@ -89,7 +112,7 @@ function makeGroupUserDataTable(){
 			url: '/admin/selectGroupUser.do',
         	type: 'POST',
 			data: function(){
-				if($util.isEmpty(mainTable)){
+				if($util.isEmpty(groupUserTable)){
 					param.strIdx = 0;
 				} else {
 					param.strIdx = 0 + (param.pageLength * parseInt(mainTable.page()));		//시작 레코드 인덱스 
@@ -104,7 +127,7 @@ function makeGroupUserDataTable(){
         searching: false,
         lengthChange: false,
         autoWidth: false,						//자동 열 너비 조정
-  		scrollY: 600,							//테이블 높이
+  		scrollY: 300,							//테이블 높이
   		scrollCollapse: true,   				//테이블 최대 높이 고정 여부     
         preDrawCallback : function(settings){	//테이블 그리기 전에 동작
 			$com.loadingStart();				//로딩패널 보이기
@@ -116,4 +139,29 @@ function makeGroupUserDataTable(){
 			zeroRecords	: '조회된 결과가 없습니다.',
 		},
     });	
+    
+    var $createBtn = $('<div class="table_btn_wrapper"><button type="button" class="papang-del-btn papang_btn paginate_button">삭제</button></div>');
+    $createBtn.on('click', function(){
+		deleteGroupUser();
+	})
+    $('#groupUserTable_paginate').after($createBtn);   
+}
+
+//권한그룹 사용자 제거
+function deleteGroupUser(){
+	var userIdList = [];
+	$('input[name="userChk"]:checked').each(function(idx, itm){
+		userIdList.push(itm.dataset.userid);
+	});
+
+    $.ajax({
+        url: '/admin/deleteGroupUser.do',
+        type: 'POST',
+        data: {userIdList : JSON.stringify(userIdList)},
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+        dataType: 'json',
+        success: function (result) {
+            groupUserTable.ajax.reload();
+        }
+    });		
 }

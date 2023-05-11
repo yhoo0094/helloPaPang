@@ -1,6 +1,7 @@
 package com.ksm.hpp.framework.util;
 
 import java.net.Inet4Address;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,9 +39,19 @@ public class RequestUtil {
 			if(Constant.IN_DATA_JOSN.equals(key)) {
 				//HTML 변환 문자 제거
 				String jsonStr = request.getParameter(key);
-				@SuppressWarnings("unchecked")
-				Map<String, Object> map = new ObjectMapper().readValue(jsonStr, Map.class);
-				result.putAll(map);
+				
+				if(jsonStr.startsWith("[")) {	//array일 때
+					Gson gson = new Gson();
+					@SuppressWarnings("unchecked")
+					ArrayList<Map<String,Object>> list = gson.fromJson(jsonStr, ArrayList.class);
+					for(Map<String,Object> map : list) {
+						result.putAll(map);
+					}
+				} else if(jsonStr.startsWith("{")) {	//object일 때
+					@SuppressWarnings("unchecked")
+					Map<String, Object> map = new ObjectMapper().readValue(jsonStr, Map.class);
+					result.putAll(map);					
+				}
 				continue;
 			}
 			

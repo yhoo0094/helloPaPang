@@ -24,6 +24,16 @@
 		   AND T3.ROLE_SEQ = T2.ROLE_SEQ
 		   AND T3.ROLE_SEQ = #{roleSeq}
 		 ORDER BY T1.USER_NAME ASC
+		 
+		<if test='strIdx != null and strIdx != ""'>
+		 LIMIT ${strIdx}, ${pageLength}
+		</if>			 
 	</select>	
 	
+	<!-- 권한그룹 사용자 제거 -->
+	<delete id="deleteGroupUser" parameterType="map">
+		DELETE
+		  FROM TB_USER_ROLE_MAP						/*테이블_사용자_권한그룹_매핑*/
+		 WHERE USER_ID IN (${userIdList}) 				
+	</delete>	
 </mapper>
