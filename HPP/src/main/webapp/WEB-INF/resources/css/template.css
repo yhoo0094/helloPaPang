@@ -13,6 +13,19 @@ a:hover {
 	padding: 0;
 }
 
+/* 스크롤바 시작*/
+/*webkit 브라우저*/
+::-webkit-scrollbar {	/* 스크롤바 배경 */
+    width: 10px;  
+    background: #c0c0c0; 
+}
+
+::-webkit-scrollbar-thumb {	/* 스크롤바 막대 */
+	background: #404036; 
+    border-radius: 10px;
+}
+/* 스크롤바 끝*/
+
 input[type = 'date']{
 	display: inline-block;
     width: 140px;

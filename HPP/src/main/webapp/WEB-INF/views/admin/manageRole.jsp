@@ -12,14 +12,20 @@
 
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
-	<div id="mainTableDiv"><table id="mainTable" class="display" style="width:100%;"></table></div>
-	
-	<div class="tableTitleDiv">
-		<span id="tableTitle">
+	<div id="mainTableDiv" style="display: inline-block; width: 50%;">
+		<div class="tableTitleDiv">
 			<img src="<%=request.getContextPath() %>/resources/images/title-logo/arrow.png" style="width: 30px; margin-bottom: 4px; margin-right: -10px;">
-			그룹 사용자 목록[<span id="roleNmSpan"></span>]
-		</span>
+			권한그룹 목록
+		</div>		
+		<table id="mainTable" class="display" style="width:100%;"></table>
+		<div class="table_btn_wrapper"><button type="button" class="papang-create-btn papang_btn paginate_button" onclick="userSelectModalOpen()">신규</button></div>
 	</div>
 	
-	<div id="groupUserTableDiv"><table id="groupUserTable" class="display" style="width:100%;"></table></div>
+	<div id="groupUserTableDiv" style="display: inline-block; width: 47%; float: right;">
+		<div class="tableTitleDiv">
+			<img src="<%=request.getContextPath() %>/resources/images/title-logo/arrow.png" style="width: 30px; margin-bottom: 4px; margin-right: -10px;">
+			그룹 사용자 목록[<span id="roleNmSpan"></span>]
+		</div>	
+		<table id="groupUserTable" class="display" style="width:100%;"></table>
+	</div>
 </div>	

@@ -73,7 +73,7 @@ var groupUserCol = [
 	{ 
 		title: '<input type="checkBox" onclick="checkAll(this)">'		
 		, data: 'userId'		
-		, width: '100px'		
+		, width: '25px'		
 		, className: 'text_align_center'
 	    , render: function (data, type, row, meta) {
 	    	return '<input type="checkBox" name="userChk" data-userId="' + data + '">';
@@ -127,7 +127,7 @@ function makeGroupUserDataTable(){
         searching: false,
         lengthChange: false,
         autoWidth: false,						//자동 열 너비 조정
-  		scrollY: 300,							//테이블 높이
+  		scrollY: 600,							//테이블 높이
   		scrollCollapse: true,   				//테이블 최대 높이 고정 여부     
         preDrawCallback : function(settings){	//테이블 그리기 전에 동작
 			$com.loadingStart();				//로딩패널 보이기
