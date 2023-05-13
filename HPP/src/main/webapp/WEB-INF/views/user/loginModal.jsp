@@ -8,7 +8,7 @@
  * @설명: 로그인 정보 입력 모달
 **/
 %>
-<script src="<%=request.getContextPath() %>/resources/js/user/loginModal.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/user/loginModal.js"></script>
 
 <div id="loginModal" class="modal" style="width: 400px; height: 160px;">
 	<form id="loginForm" method="post" style="margin: 10px 0px;">

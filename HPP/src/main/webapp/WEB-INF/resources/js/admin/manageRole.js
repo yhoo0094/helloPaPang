@@ -149,6 +149,8 @@ function makeGroupUserDataTable(){
 
 //권한그룹 사용자 제거
 function deleteGroupUser(){
+	if(!confirm('정말 삭제하시겠습니까?')){return false;}
+	
 	var userIdList = [];
 	$('input[name="userChk"]:checked').each(function(idx, itm){
 		userIdList.push(itm.dataset.userid);

@@ -12,9 +12,9 @@
 
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
-	<div id="mainTableDiv" style="display: inline-block; width: 50%;">
-		<div class="tableTitleDiv">
-			<img src="<%=request.getContextPath() %>/resources/images/title-logo/arrow.png" style="width: 30px; margin-bottom: 4px; margin-right: -10px;">
+	<div style="display: inline-block; width: 50%;">
+		<div class="titleDiv">
+			<img src="<%=request.getContextPath()%>/resources/images/title-logo/arrow.png" style="width: 30px; margin-bottom: 4px; margin-right: -10px;">
 			권한그룹 목록
 		</div>		
 		<table id="mainTable" class="display" style="width:100%;"></table>
@@ -22,9 +22,9 @@
 	</div>
 	
 	<div id="groupUserTableDiv" style="display: inline-block; width: 47%; float: right;">
-		<div class="tableTitleDiv">
-			<img src="<%=request.getContextPath() %>/resources/images/title-logo/arrow.png" style="width: 30px; margin-bottom: 4px; margin-right: -10px;">
-			그룹 사용자 목록[<span id="roleNmSpan"></span>]
+		<div class="titleDiv">
+			<img src="<%=request.getContextPath()%>/resources/images/title-logo/arrow.png" style="width: 30px; margin-bottom: 4px; margin-right: -10px;">
+			권한그룹 사용자 목록[<span id="roleNmSpan"></span>]
 		</div>	
 		<table id="groupUserTable" class="display" style="width:100%;"></table>
 	</div>

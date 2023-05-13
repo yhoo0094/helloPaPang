@@ -8,7 +8,7 @@
  * @설명: 요청 로그 상세 정보 조회 
 **/
  %>
-<script src="<%=request.getContextPath() %>/resources/js/admin/requestLogModal.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/admin/requestLogModal.js"></script>
 
 <div id="requestLogModal" class="modal" style="width: 800px; height: 600px; padding: 15px;">
 	<table class="papang-table" style="width: 700px; height: 500px;">

@@ -9,7 +9,7 @@
 **/
 %>
 
-<script src="<%=request.getContextPath() %>/resources/js/com/fileAttach.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/com/fileAttach.js"></script>
 
 <div class="fileAttachDiv">
 	<div id="fileListDiv" class="fileListDiv form-control" style="line-height: 1; overflow: auto;">

@@ -9,7 +9,7 @@
 **/
 %>
 
-<script src="<%=request.getContextPath() %>/resources/js/info/noticeModal.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/info/noticeModal.js"></script>
 
 <script type="module">
     import editor from '/resources/js/framework/ckeditor5/build/editor.js'
