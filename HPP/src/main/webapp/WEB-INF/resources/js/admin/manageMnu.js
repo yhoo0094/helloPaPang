@@ -6,7 +6,7 @@
 **/
 
 $(document).ready(function () {
-	makeJstree();
+	selectMnuList()
 });	
 
 var data = [
@@ -29,42 +29,45 @@ function test(){
 	jsTree.jstree(true).refresh();
 }
 
+var mnuList;
+function selectMnuList(){
+    $.ajax({
+        url: '/admin/selectMnuList.do',
+        type: 'POST',
+        data: {},
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+        dataType: 'json',
+        success: function (result) {
+            mnuList = result.OUT_DATA;
+            makeJstree();
+        }
+    });		
+}
+
 //js트리 만들기
 var jsTree;
 function makeJstree(){
-		jsTree = $('#jstree').jstree({ 
-  "core" : {
-    "animation" : 0,
-    "check_callback" : true,
-    "themes" : { "stripes" : true },
-    'data' : data,
-//       "url" : "/some/path",
-//      "data" : function (nodes) {
-//        return { "ids" : nodes.join(",") };
-//      }   
-    
-  },
-  "types" : {
-    "#" : {
-      "max_children" : 1,
-      "max_depth" : 4,
-      "valid_children" : ["root"]
-    },
-    "root" : {
-      "icon" : "/static/3.3.15/assets/images/tree_icon.png",
-      "valid_children" : ["default"]
-    },
-    "default" : {
-      "valid_children" : ["default","file"]
-    },
-    "file" : {
-      "icon" : "glyphicon glyphicon-file",
-      "valid_children" : []
-    }
-  },
-  "plugins" : [
-    "contextmenu", "dnd", "search",
-    "state", "types", "wholerow"
-  ]    
-	    });
+	jsTree = $('#jstree').jstree({ 
+  	"core" : {
+	    "animation" : 0,
+	    "check_callback" : true,
+	    "themes" : { "stripes" : true },
+	    "data" : mnuList,
+  	},
+  	"types" : {
+	    "#" : {
+			"icon" : "/resources/images/tree-icon/next.png",
+	    },
+	    "root" : {
+	    	"icon" : "/resources/images/tree-icon/next.png",
+	    },
+	    "default" : {
+			"icon" : "/resources/images/tree-icon/next.png",
+	    },
+	    "file" : {
+	    	"icon" : "/resources/images/tree-icon/next.png",
+	    }
+	},
+	"plugins" : ["contextmenu", "dnd", "search", "state", "types", "wholerow"] 
+	});
 }
