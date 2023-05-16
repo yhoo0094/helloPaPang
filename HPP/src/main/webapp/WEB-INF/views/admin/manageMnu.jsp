@@ -22,7 +22,8 @@
 	
 	<div id="mnuInfoTableDiv" style="display: inline-block; width: 47%; float: right;">
 		<div class="titleDiv">
-			<img src="<%=request.getContextPath()%>/resources/images/title-logo/arrow.png" style="width: 30px; margin-bottom: 4px; margin-right: -10px;">메뉴정보
+			<img src="<%=request.getContextPath()%>/resources/images/title-logo/arrow.png" style="width: 30px; margin-bottom: 4px; margin-right: -10px;">
+			메뉴정보
 		</div>
 		<table id="mnuInfoTable" class="display" style="width:100%;"></table>
 	</div>
