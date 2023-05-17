@@ -62,7 +62,12 @@ function makeJstree(){
 	});
 
 	jsTree.on('select_node.jstree', function (event, data) {
-//	    console.log(data)
+	    var origin = data.node.original;
+	    for(var i in origin){
+			$('#writeForm input[id="' + i + '"]').val(origin[i]);
+		}
+		
+		$('input[type="radio"][name="openYn"][value="' + origin.openYn + '"]').prop("checked",true);
 	});
 	
 	// 트리 열 때 아이콘 세팅

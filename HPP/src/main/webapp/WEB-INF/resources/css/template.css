@@ -269,11 +269,11 @@ table.dataTable.no-footer{
 /* 모달 끝 */
 
 /* 테이블 시작 */
-.papang-table, .papang-search-table{
+.papang-table, .papang-search-table, .papang-info-table{
 	width: 100%;
 }
 
-.papang-table td, .papang-search-table td{
+.papang-table td, .papang-search-table td, .papang-info-table td{
 	padding: 2px;
 }
 
@@ -282,12 +282,12 @@ table.dataTable.no-footer{
 	padding: 2px;
 }
 
-.papang-search-table th{
+.papang-search-table th, .papang-info-table th{
 	text-align: right;
 	padding: 2px;	
 }
 
-.papang-search-table input{
+.papang-search-table input, .papang-info-table input{
 	padding-left: 5px;	
 }
 /* 테이블 끝 */
@@ -437,7 +437,7 @@ label{
 	white-space: pre;
 }
 
-.papang-search-div{
+.papang-search-div, .papang-info-div{
 	margin: 5px 0px 10px 0px;
     background-color: #f3f3f3;
     border-radius: 10px;
