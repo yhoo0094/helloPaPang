@@ -10,7 +10,7 @@
 			 , T1.TOP_URL					/*최상위메뉴경로*/
 			 , T1.UPPER_URL					/*상위메뉴경로*/
 			 , T1.OPEN_YN					/*메뉴노출여부*/
-			 , T1.AUTH_YN					/*권한체크여부*/
+			 , T1.AUTH_YN					/*권한검사여부*/
 			 , T1.MNU_LV					/*메뉴레벨*/
 			 , T1.INFO						/*메뉴정보*/
 			 , T1.MNU_ORDER					/*메뉴표시순서*/

@@ -40,7 +40,7 @@
 		  JOIN TB_MNU T4						/*테이블_메뉴*/
 		    ON T2.MNU_SEQ = T4.MNU_SEQ  		    
 		 WHERE T4.MNU_LV = 2					/*메뉴레벨*/
-		   AND T4.AUTH_YN = 'N'					/*권한체크여부*/
+		   AND T4.AUTH_YN = 'N'					/*권한검사여부*/
 		   AND T1.USER_ID = #{loginInfo.userId}			/*사용자아이디*/
 		 GROUP BY T4.URL		
 	</select>		
@@ -49,7 +49,7 @@
 	<select id="isFreeAuth" parameterType="map" resultType="boolean">
 		SELECT IF(COUNT(*) = 1, 1, 0)		
 		  FROM TB_MNU						/*테이블_메뉴*/
-		 WHERE AUTH_YN = 'N'				/*권한체크여부*/
+		 WHERE AUTH_YN = 'N'				/*권한검사여부*/
 		   AND URL = #{url}					/*메뉴경로*/
 	</select>	
 	

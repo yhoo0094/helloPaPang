@@ -78,7 +78,7 @@ public class PageController {
 				break;
 			}
 		
-			//읽기 권한체크
+			//읽기 권한검사
 			inData.put("url", url1 + "/" + url2);
 			Map<String, Object> readAuth = commonService.readAuthChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
 			if(!(Boolean)readAuth.get("result")) {	

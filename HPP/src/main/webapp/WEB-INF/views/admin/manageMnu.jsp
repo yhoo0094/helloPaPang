@@ -17,7 +17,7 @@
 			<img src="<%=request.getContextPath()%>/resources/images/title-logo/arrow.png" style="width: 30px; margin-bottom: 4px; margin-right: -10px;">
 			메뉴 목록
 		</div>
-		<div id="jstree"></div>
+		<div class="papang-info-div" style="height:630px;"><div id="jstree"></div></div>
 	</div>
 	
 	<div id="mnuInfoTableDiv" style="display: inline-block; width: 67%; float: right;">
@@ -25,7 +25,7 @@
 			<img src="<%=request.getContextPath()%>/resources/images/title-logo/arrow.png" style="width: 30px; margin-bottom: 4px; margin-right: -10px;">
 			메뉴정보
 		</div>
-		<div class="papang-info-div">
+		<div class="papang-info-div" style="height:630px; vertical-align: middle; line-height: 50px;">
 			<form id="writeForm" action="#">		
 				<table id="mnuInfoTable" class="display papang-info-table" style="width:100%;">
 					<colgroup>
@@ -47,11 +47,11 @@
 					<tr>
 						<th>최상위메뉴경로</th>
 						<td>
-							<input type="text" id="topUrl" name="topUrl" class="form-control" title="최상위메뉴경로">
+							<input type="text" id="topUrl" name="topUrl" class="form-control" title="최상위메뉴경로" disabled="disabled">
 						</td>	
 						<th>상위메뉴경로</th>
 						<td>
-							<input type="text" id="upperUrl" name="upperUrl" class="form-control" title="상위메뉴경로">
+							<input type="text" id="upperUrl" name="upperUrl" class="form-control" title="상위메뉴경로" disabled="disabled">
 						</td>				
 					</tr>
 					<tr>
@@ -61,19 +61,21 @@
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<label for="openN">숨기기 </label> <input type="radio" value="N" id="openN" name="openYn">
 						</td>	
-						<th>권한체크여부</th>
-						<td>
-							<input type="text" id="authYn" name="authYn" class="form-control" title="권한체크여부">
-						</td>				
+						<th>권한검사여부</th>
+						<td class="tc">
+							<label for="authY">Y </label> <input type="radio" value="Y" id="authY" name="authYn" title="검사필요">
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<label for="authN">N </label> <input type="radio" value="N" id="authN" name="authYn" title="검사불필요">
+						</td>
 					</tr>	
 					<tr>
 						<th>메뉴레벨</th>
 						<td>
-							<input type="text" id="mnuLv" name="mnuLv" class="form-control" title="메뉴레벨">
+							<input type="text" id="mnuLv" name="mnuLv" class="form-control" title="메뉴레벨" disabled="disabled">
 						</td>	
 						<th>표시순서</th>
 						<td>
-							<input type="text" id="mnuOrder" name="mnuOrder" class="form-control" title="표시순서">
+							<input type="text" id="mnuOrder" name="mnuOrder" class="form-control" title="표시순서" disabled="disabled">
 						</td>				
 					</tr>					
 					<tr>
@@ -84,8 +86,14 @@
 					</tr>	
 					<tr>
 						<th>비고</th>
-						<td colspan="3">
+						<td colspan="3" style="line-height: initial;">
 							<textarea id="rmrk" name="rmrk" class="form-control" title="비고" style="height: 300px; resize: none;"></textarea>
+						</td>				
+					</tr>
+					<tr>
+						<td colspan="4" style="text-align: right; line-height: normal;">
+							<button type="button" class="papang-create-btn papang_btn paginate_button" onclick="userSelectModalOpen()">저장</button>
+							<button type="button" class="papang-create-btn papang_btn paginate_button" onclick="userSelectModalOpen()">삭제</button>
 						</td>				
 					</tr>																			
 				</table>

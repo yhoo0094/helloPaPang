@@ -68,6 +68,7 @@ function makeJstree(){
 		}
 		
 		$('input[type="radio"][name="openYn"][value="' + origin.openYn + '"]').prop("checked",true);
+		$('input[type="radio"][name="authYn"][value="' + origin.authYn + '"]').prop("checked",true);
 	});
 	
 	// 트리 열 때 아이콘 세팅
