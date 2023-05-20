@@ -19,10 +19,9 @@
 		     , T1.FST_REG_DTTI				/*최초등록일시*/
 		     , T1.LT_UPD_ID					/*최종수정자아이디*/
 		     , T1.LT_UPD_DTTI				/*최종수정일시*/
-		     , T1.URL					AS id
-		     , T1.UPPER_URL				AS parent
-		     , T1.MNU_NM				AS text
-		     , T1.MNU_LV				AS types
+		     , T1.URL						AS id
+		     , T1.UPPER_URL					AS parent
+		     , T1.MNU_NM					AS text
 		  FROM TB_MNU T1					/*테이블_권한그룹*/
 	</select>
 </mapper>
