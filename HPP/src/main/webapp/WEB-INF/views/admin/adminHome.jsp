@@ -16,4 +16,5 @@
 	<p><a href="<%=request.getContextPath()%>/admin/requestLog">요청 로그</a></p>
 	<p><a href="<%=request.getContextPath()%>/admin/manageRole">권한그룹 관리</a></p>
 	<p><a href="<%=request.getContextPath()%>/admin/manageMnu">메뉴 관리</a></p>
+	<p><a href="<%=request.getContextPath()%>/admin/manageAuth">권한 관리</a></p>
 </div>	
