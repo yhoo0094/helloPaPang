@@ -5,16 +5,12 @@
  * @설명: 클라이언트에서 서버로 넘어오는 요청관련 로그 조회
 **/
 
-//페이지 전역 변수
-var mainTable;
-
 $(document).ready(function() {
 	setDatetimepicker();
 	makeDataTableServerSide();	//DataTable 만들기(페이지네이션 서버 처리)
 });
 
 //datetimepicker 설정
-852
 function setDatetimepicker() {
 	//var reqDttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),0,0,-1,0,0);	//1일 전
 	var reqDttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),-1,0,0,0,0);	//1년 전
@@ -42,6 +38,7 @@ var columInfo = [
 var excelDownBtn = $('<div class="table_btn_wrapper"><button type="button" class="papang-excel-btn papang_btn paginate_button">Excel</button></div>');
 
 //DataTable 만들기(페이지네이션 서버 처리)
+var mainTable;
 function makeDataTableServerSide() {
 	var url = '/admin/selectRequestLog.do';
 	var param = {};    
@@ -72,10 +69,10 @@ function makeDataTableServerSide() {
 			},
 		},
         columns: columInfo,
-	  	createdRow: function( row, data, dataIndex ) {
+	  	createdRow: function( row, data, dataIndex ) {	//행 옵션
 			$(row).addClass('pointer');			//행에 pointer css 적용
 	  	},       		
-        pagingType: "numbers",					//v페이지 표시 옵션
+        pagingType: "numbers",					//페이지 표시 옵션
         ordering: false,
         info: false,
         searching: false,

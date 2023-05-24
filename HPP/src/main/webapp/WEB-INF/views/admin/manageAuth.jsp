@@ -25,20 +25,25 @@
 				<tr>
 					<th>메뉴:</th>
 					<td>
-						<select id="mnuSeq" name="mnuSeq" class="form-select" style="width: 230px;">
+						<select id="url" name="url" class="form-select" style="width: 230px;" onchange="javaScript:doSearch()">
 							<option value="">전체
 						</select>
 					</td>
 					<th>권한그룹:</th>
 					<td>
-						<select id="roleSeq" name="roleSeq" class="form-select" style="width: 230px;">
-							<option value="">전체
-						</select>
+						<select id="roleSeq" name="roleSeq" class="form-select" style="width: 230px;" onchange="javaScript:doSearch()"></select>
 					</td>	
 				</tr>
 				</tbody>
 			</table>
 		</form>
-		
+	</div>
+	
+	<form id="writeForm" action="#">
+		<table id="mainTable" style="width:100%;"></table>
+	</form>
+	<div class="table_btn_wrapper">
+		<button type="button" class="papang-create-btn papang_btn paginate_button" onclick="">저장</button>
+		<button type="button" class="papang-close-btn papang_btn paginate_button" onclick="">되돌리기</button>
 	</div>
 </div>	
