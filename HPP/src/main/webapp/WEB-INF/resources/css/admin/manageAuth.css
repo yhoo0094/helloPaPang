@@ -1,0 +1,8 @@
+.non-form-control{
+	padding: 0;
+	line-height: 1;
+}
+
+.non-form-control[readonly]{
+	background-color: transparent;
+}

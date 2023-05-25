@@ -81,9 +81,9 @@ var columInfo = [
 		, className: "text_align_center"	
 		, defaultContent: ""
         , render: function ( data, type, row, meta ) {
-			 var result = '<a href="#"><b>&lt;</b> </a>' 
-			 			+ data
-			 			+ '<a href="#"> <b>&gt;</b></a>';
+			 var result = '<a href="#" onclick="authMinus(this)"><b>&lt;</b> </a>' 
+			 			+ '<span name="authGrade" data-rowidx="' + meta.row + '">' + data + '</span>'
+			 			+ '<a href="#" onclick="authPlus(this)"> <b>&gt;</b></a>';
 			 return result;
 		  }		
 		}
@@ -92,11 +92,63 @@ var columInfo = [
 		, width: "300px"	
 		, className: "text_align_center"	
 		, defaultContent: ""
+        , render: function ( data, type, row, meta ) {
+			 var isReadonly = (row.authGrade > 3)?'':'readonly';
+			 var result = '<input type="text" id="authNm' + meta.row +'" name="authNm" value="' + data +'" ' + isReadonly + ' data-rowidx="' + meta.row + '" '
+			 			+ 'class="invisibleInput non-form-control tc form-control" '
+			 			+ 'onchange="setMainTableData()">';
+			 return result;
+		  }			
 		}
 ]
 
+//권한등급 -1
+function authMinus(obj){
+	var $authGrade = $(obj).next('span[name="authGrade"]');
+	var curVal = $authGrade.text();
+	var nextVal = parseInt(curVal) - 1;
+	if(curVal > 1){
+		setAuthGrade($authGrade, nextVal);
+	}
+}
+
+//권한등급 +1
+function authPlus(obj){
+	var $authGrade = $(obj).prev('span[name="authGrade"]');
+	var curVal = $authGrade.text();
+	var nextVal = parseInt(curVal) + 1;
+	if(curVal < 10){
+		setAuthGrade($authGrade, nextVal);
+	}
+}
+
+//권한등급 변화에 따른 값 세팅
+function setAuthGrade($authGrade, nextVal){
+	$authGrade.text(nextVal);
+	var rowIdx = $authGrade[0].dataset.rowidx;
+	mainTableData[rowIdx].authGrade = nextVal;
+	mainTableData[rowIdx].isChng = true;
+	var $authNm = $('#authNm' + rowIdx);
+	if(nextVal == 1){
+		$authNm.val('읽기');
+	} else if(nextVal == 2){
+		$authNm.val('쓰기');
+		$authNm.prop('readonly',true);
+		$authNm.addClass('invisibleInput');
+	} else if(nextVal == 3){
+		$authNm.prop('readonly',false);
+		$authNm.removeClass('invisibleInput');
+	}	
+}
+
+//권한명 수정
+function chgAuthNm(obj){
+	
+}
+
 //DataTable 만들기(페이지네이션 서버 처리)
 var mainTable;
+var mainTableData;
 function makeDataTableServerSide() {
 	var param = {};    
     mainTable = $('#mainTable').DataTable({
@@ -128,6 +180,7 @@ function makeDataTableServerSide() {
 		},
         drawCallback : function(settings){		//테이블 그리기 후에 동작
 			$com.loadingEnd();					//로딩패널 숨기기
+        	mainTableData = this.api().rows({page:'current'}).data();
 		},
 		language : {
 			zeroRecords	: '조회된 결과가 없습니다.',
