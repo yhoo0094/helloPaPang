@@ -43,7 +43,7 @@
 		<table id="mainTable" style="width:100%;"></table>
 	</form>
 	<div class="table_btn_wrapper">
-		<button type="button" class="papang-create-btn papang_btn paginate_button" onclick="">저장</button>
-		<button type="button" class="papang-close-btn papang_btn paginate_button" onclick="">되돌리기</button>
+		<button type="button" class="papang-create-btn papang_btn paginate_button" onclick="saveAuth()">저장</button>
+		<button type="button" class="papang-close-btn papang_btn paginate_button" onclick="resetMainTable()">되돌리기</button>
 	</div>
 </div>	

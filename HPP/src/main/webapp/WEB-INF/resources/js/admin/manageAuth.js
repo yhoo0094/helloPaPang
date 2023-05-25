@@ -96,11 +96,18 @@ var columInfo = [
 			 var isReadonly = (row.authGrade > 3)?'':'readonly';
 			 var result = '<input type="text" id="authNm' + meta.row +'" name="authNm" value="' + data +'" ' + isReadonly + ' data-rowidx="' + meta.row + '" '
 			 			+ 'class="invisibleInput non-form-control tc form-control" '
-			 			+ 'onchange="setMainTableData()">';
+			 			+ 'onchange="setMainTableData(this)">';
 			 return result;
 		  }			
 		}
 ]
+
+//권한명 변경
+function setMainTableData(obj){
+	var rowIdx = obj.dataset.rowidx;
+	mainTableData[rowIdx].authNm = $(obj).val();
+	mainTableData[rowIdx].isChng = true;
+}
 
 //권한등급 -1
 function authMinus(obj){
@@ -139,11 +146,6 @@ function setAuthGrade($authGrade, nextVal){
 		$authNm.prop('readonly',false);
 		$authNm.removeClass('invisibleInput');
 	}	
-}
-
-//권한명 수정
-function chgAuthNm(obj){
-	
 }
 
 //DataTable 만들기(페이지네이션 서버 처리)
@@ -186,4 +188,14 @@ function makeDataTableServerSide() {
 			zeroRecords	: '조회된 결과가 없습니다.',
 		},
     });	
+}
+
+//저장
+function saveAuth(){
+	
+}
+
+//되돌리기
+function resetMainTable(){
+	mainTable.ajax.reload();
 }
