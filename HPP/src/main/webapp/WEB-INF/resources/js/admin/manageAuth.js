@@ -131,7 +131,10 @@ function authPlus(obj){
 
 //권한등급 변화에 따른 값 세팅
 function setAuthGrade($authGrade, nextVal){
-	$authGrade.text(nextVal);
+//	$authGrade.text(nextVal);
+	var $td = $authGrade.closest('td');
+	mainTable.cell($td).data(nextVal).draw();
+	
 	var rowIdx = $authGrade[0].dataset.rowidx;
 	mainTableData[rowIdx].authGrade = nextVal;
 	mainTableData[rowIdx].isChng = true;
@@ -150,7 +153,7 @@ function setAuthGrade($authGrade, nextVal){
 
 //DataTable 만들기(페이지네이션 서버 처리)
 var mainTable;
-var mainTableData;
+var mainTableData;		//테이블 데이터 array
 function makeDataTableServerSide() {
 	var param = {};    
     mainTable = $('#mainTable').DataTable({
@@ -191,8 +194,20 @@ function makeDataTableServerSide() {
 }
 
 //저장
-function saveAuth(){
+function updateAuth(){
+	var param = {};
+	param[Constant.IN_DATA_JOSN] = JSON.stringify(mainTableData);
 	
+    $.ajax({
+        url: '/admin/updateAuth.do',
+        type: 'POST',
+        data: param,
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+        dataType: 'json',
+        success: function (result) {
+            console.log(result);
+        }
+    });		
 }
 
 //되돌리기

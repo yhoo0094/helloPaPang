@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ksm.hpp.framework.exception.ConfigurationException;
 import com.ksm.hpp.framework.util.Constant;
+import com.ksm.hpp.framework.util.StringUtil;
 import com.ksm.hpp.service.com.FileService;
 
 @Service("ManageAuthService")
@@ -68,4 +70,27 @@ public class ManageAuthService {
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;
 	}	
+	
+	
+	public Map<String, Object> updateAuth(StringBuilder logStr, Map<String, Object> inData) throws Exception
+	{
+		Map<String, Object> result = new HashMap<String, Object>();
+		int cnt = 0;
+		if(cnt == 0) {
+			throw new ConfigurationException("저장 과정에서 오류가 발생하였습니다.");
+		}
+		
+//		do {
+//			cnt = sqlSession.insert("mapper.user.UserMapper.insertUser", inData);
+//			if(cnt == 0) {
+//				result.put(Constant.RESULT, Constant.RESULT_FAILURE);
+//				result.put(Constant.OUT_RESULT_MSG, "사용자 생성에 실패했습니다.");
+//			}
+//			
+//			result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+//			result.put(Constant.OUT_DATA, cnt);
+//		} while(false);
+			result.put(Constant.OUT_DATA, cnt);
+		return result;
+	}		
 }
