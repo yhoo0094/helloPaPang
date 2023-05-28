@@ -48,6 +48,7 @@
 			 			 FROM TB_MNU
 			 			WHERE URL = T1.UPPER_URL)
 			 	 ) AS ORDER_VAL				/*메뉴순서 값(lv1 order * 1000 + lv2 order)*/
+			 , false 	AS isChng			/*변경 여부*/
 		  FROM TB_MNU T1					/*테이블_메뉴*/
 		  	 , TB_AUTH T2					/*테이블_권한*/
 		 WHERE T1.MNU_SEQ = T2.MNU_SEQ

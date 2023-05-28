@@ -64,7 +64,7 @@ var columInfo = [
         { title: "메뉴명"		
         , data: "mnuNm"			
         , width: "*"	
-        , className: "text_align_left"
+        , className: "mnuNm text_align_left"
         , render: function ( data, type, row, meta ) {
 			var result;
 			if(row.mnuLv == 1){
@@ -78,29 +78,38 @@ var columInfo = [
       , { title: "권한등급"	
 		, data: "authGrade"		
 		, width: "100px"	
-		, className: "text_align_center"	
+		, className: "authGrade text_align_center"	
 		, defaultContent: ""
         , render: function ( data, type, row, meta ) {
-			 var result = '<a href="#" onclick="authMinus(this)"><b>&lt;</b> </a>' 
+			 var result = '<a href="#" onclick="authChng(this)" data-val="-1"><b>&lt;</b> </a>' 
 			 			+ '<span name="authGrade" data-rowidx="' + meta.row + '">' + data + '</span>'
-			 			+ '<a href="#" onclick="authPlus(this)"> <b>&gt;</b></a>';
+			 			+ '<a href="#" onclick="authChng(this)" data-val="+1"> <b>&gt;</b></a>';
 			 return result;
 		  }		
 		}
       , { title: "권한명"		
 		, data: "authNm"			
 		, width: "300px"	
-		, className: "text_align_center"	
+		, className: "authNm text_align_center"	
 		, defaultContent: ""
         , render: function ( data, type, row, meta ) {
-			 var isReadonly = (row.authGrade > 3)?'':'readonly';
+			 var isReadonly = (row.authGrade > 2)?'':'readonly';
+			 var isInvisibleInput = (row.authGrade > 2)?'':'invisibleInput';
 			 var result = '<input type="text" id="authNm' + meta.row +'" name="authNm" value="' + data +'" ' + isReadonly + ' data-rowidx="' + meta.row + '" '
-			 			+ 'class="invisibleInput non-form-control tc form-control" '
+			 			+ 'class="non-form-control tc form-control ' + isInvisibleInput + '" '
 			 			+ 'onchange="setMainTableData(this)">';
 			 return result;
-		  }			
+		  }	
 		}
+      , { title: "수정 여부"		
+		, data: "isChng"	
+		, className: "isChng"			
+		, defaultContent: false
+		, visible: false
+		}		
 ]
+
+
 
 //권한명 변경
 function setMainTableData(obj){
@@ -109,51 +118,25 @@ function setMainTableData(obj){
 	mainTableData[rowIdx].isChng = true;
 }
 
-//권한등급 -1
-function authMinus(obj){
-	var $authGrade = $(obj).next('span[name="authGrade"]');
-	var curVal = $authGrade.text();
-	var nextVal = parseInt(curVal) - 1;
-	if(curVal > 1){
-		setAuthGrade($authGrade, nextVal);
-	}
-}
-
-//권한등급 +1
-function authPlus(obj){
-	var $authGrade = $(obj).prev('span[name="authGrade"]');
-	var curVal = $authGrade.text();
-	var nextVal = parseInt(curVal) + 1;
-	if(curVal < 10){
-		setAuthGrade($authGrade, nextVal);
-	}
-}
-
-//권한등급 변화에 따른 값 세팅
-function setAuthGrade($authGrade, nextVal){
-//	$authGrade.text(nextVal);
-	var $td = $authGrade.closest('td');
-	mainTable.cell($td).data(nextVal).draw();
-	
-	var rowIdx = $authGrade[0].dataset.rowidx;
-	mainTableData[rowIdx].authGrade = nextVal;
-	mainTableData[rowIdx].isChng = true;
-	var $authNm = $('#authNm' + rowIdx);
-	if(nextVal == 1){
-		$authNm.val('읽기');
-	} else if(nextVal == 2){
-		$authNm.val('쓰기');
-		$authNm.prop('readonly',true);
-		$authNm.addClass('invisibleInput');
-	} else if(nextVal == 3){
-		$authNm.prop('readonly',false);
-		$authNm.removeClass('invisibleInput');
+//권한등급 변동
+function authChng(obj){
+	var $tr = mainTable.row(obj.closest('tr'));
+	var rowData = $tr.data();
+	var authGrade = rowData.authGrade + parseInt(obj.dataset.val); 
+	if(authGrade > 0){
+		rowData.authGrade = authGrade;
+		rowData.isChng = true;
+		if(authGrade == 1){
+			rowData.authNm = '읽기';
+		} else if(authGrade == 2){
+			rowData.authNm = '쓰기';
+		} 
+		$tr.data(rowData).draw();
 	}	
 }
 
 //DataTable 만들기(페이지네이션 서버 처리)
 var mainTable;
-var mainTableData;		//테이블 데이터 array
 function makeDataTableServerSide() {
 	var param = {};    
     mainTable = $('#mainTable').DataTable({
