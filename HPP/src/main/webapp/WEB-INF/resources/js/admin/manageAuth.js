@@ -109,13 +109,12 @@ var columInfo = [
 		}		
 ]
 
-
-
 //권한명 변경
 function setMainTableData(obj){
-	var rowIdx = obj.dataset.rowidx;
-	mainTableData[rowIdx].authNm = $(obj).val();
-	mainTableData[rowIdx].isChng = true;
+	var $tr = mainTable.row(obj.closest('tr'));
+	var rowData = $tr.data();
+	rowData.authNm = $(obj).val();
+	rowData.isChng = true;
 }
 
 //권한등급 변동
@@ -168,7 +167,7 @@ function makeDataTableServerSide() {
 		},
         drawCallback : function(settings){		//테이블 그리기 후에 동작
 			$com.loadingEnd();					//로딩패널 숨기기
-        	mainTableData = this.api().rows({page:'current'}).data();
+//        	mainTableData = this.api().rows({page:'current'}).data();	//테이블 데이터 변수에 담기
 		},
 		language : {
 			zeroRecords	: '조회된 결과가 없습니다.',
@@ -179,7 +178,12 @@ function makeDataTableServerSide() {
 //저장
 function updateAuth(){
 	var param = {};
-	param[Constant.IN_DATA_JOSN] = JSON.stringify(mainTableData);
+	var mainTableData = [];
+	var data = mainTable.data();
+	for(var i = 0; i < data.length; i++){
+		mainTableData.push(data[i])
+	}
+	param[Constant.IN_DATA_JOSN] = JSON.stringify({mainTableData : mainTableData});
 	
     $.ajax({
         url: '/admin/updateAuth.do',

@@ -66,6 +66,25 @@ public class StringUtil {
 		}
 		return inData;
 	}		
+	
+	/**
+	* @메소드명: XssReverse
+	* @작성자: KimSangMin
+	* @생성일: 2023. 5. 29. 오후 4:43:04
+	* @설명: XXS 위험이 있는 문자 대체한 것 되돌리기
+	*/
+	public static String XssReverse(String value) {
+		value = value.replaceAll("&amp;", "&");
+		value = value.replaceAll("&#x2F;", "/");
+		value = value.replaceAll("&quot;", "\"");
+		value = value.replaceAll("&#x27;", "'");
+		value = value.replaceAll("&lt;", "<");
+		value = value.replaceAll("&gt;", ">");
+		value = value.replaceAll("&nbsp;", " ");
+		value = value.replaceAll("<br>", "\r");
+		value = value.replaceAll("<p>", "\n");
+		return value;
+	}		
 }
 
 	

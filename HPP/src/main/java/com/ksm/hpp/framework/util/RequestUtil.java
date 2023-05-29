@@ -36,22 +36,28 @@ public class RequestUtil {
 		
 		for(String key : requestMap.keySet()) {
 			//json으로 넘어온 경우
-			if(Constant.IN_DATA_JOSN.equals(key)) {
-				//HTML 변환 문자 제거
+//			if(Constant.IN_DATA_JOSN.equals(key)) {
+			if(Constant.IN_DATA_JOSN.equals(key)) {	
 				String jsonStr = request.getParameter(key);
 				
-				if(jsonStr.startsWith("[")) {	//array일 때
-					Gson gson = new Gson();
-					@SuppressWarnings("unchecked")
-					ArrayList<Map<String,Object>> list = gson.fromJson(jsonStr, ArrayList.class);
-					for(Map<String,Object> map : list) {
-						result.putAll(map);
-					}
-				} else if(jsonStr.startsWith("{")) {	//object일 때
-					@SuppressWarnings("unchecked")
-					Map<String, Object> map = new ObjectMapper().readValue(jsonStr, Map.class);
-					result.putAll(map);					
-				}
+				//HTML 변환 문자 제거
+				jsonStr = StringUtil.XssReverse(jsonStr);
+				@SuppressWarnings("unchecked")
+				Map<String, Object> map = new ObjectMapper().readValue(jsonStr, Map.class);
+				result.putAll(map);					
+				
+//				if(jsonStr.startsWith("[")) {	//array일 때
+//					Gson gson = new Gson();
+//					@SuppressWarnings("unchecked")
+//					ArrayList<Map<String,Object>> list = gson.fromJson(jsonStr, ArrayList.class);
+//					for(Map<String,Object> map : list) {
+//						result.putAll(map);
+//					}
+//				} else if(jsonStr.startsWith("{")) {	//object일 때
+//					@SuppressWarnings("unchecked")
+//					Map<String, Object> map = new ObjectMapper().readValue(jsonStr, Map.class);
+//					result.putAll(map);					
+//				}
 				continue;
 			}
 			
