@@ -71,26 +71,17 @@ public class ManageAuthService {
 		return result;
 	}	
 	
-	
-	public Map<String, Object> updateAuth(StringBuilder logStr, Map<String, Object> inData) throws Exception
-	{
+	/**
+	* @메소드명: updateAuth
+	* @작성자: KimSangMin
+	* @생성일: 2023. 5. 27. 오후 7:58:30
+	* @설명: 권한 수정
+	*/
+	public Map<String, Object> updateAuth(StringBuilder logStr, Map<String, Object> inData) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
-		int cnt = 0;
-		if(cnt == 0) {
-			throw new ConfigurationException("저장 과정에서 오류가 발생하였습니다.");
-		}
-		
-//		do {
-//			cnt = sqlSession.insert("mapper.user.UserMapper.insertUser", inData);
-//			if(cnt == 0) {
-//				result.put(Constant.RESULT, Constant.RESULT_FAILURE);
-//				result.put(Constant.OUT_RESULT_MSG, "사용자 생성에 실패했습니다.");
-//			}
-//			
-//			result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
-//			result.put(Constant.OUT_DATA, cnt);
-//		} while(false);
-			result.put(Constant.OUT_DATA, cnt);
+		int cnt = sqlSession.update("mapper.admin.ManageAuthMapper.updateAuth", inData);
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		result.put(Constant.OUT_DATA, cnt);
 		return result;
 	}		
 }

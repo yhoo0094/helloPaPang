@@ -175,9 +175,13 @@ function makeDataTableServerSide() {
     });	
 }
 
-//저장
+//권한 수정
 function updateAuth(){
 	var param = {};
+	$.each($('#searchForm').serializeArray(), function() {
+        param[this.name] = this.value;
+    });
+	
 	var mainTableData = [];
 	var data = mainTable.data();
 	for(var i = 0; i < data.length; i++){
@@ -192,7 +196,8 @@ function updateAuth(){
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
-            console.log(result);
+			mainTable.ajax.reload();
+            alert('저장 완료하였습니다.');
         }
     });		
 }

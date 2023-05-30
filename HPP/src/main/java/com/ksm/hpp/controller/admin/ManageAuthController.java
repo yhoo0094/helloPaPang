@@ -77,7 +77,7 @@ public class ManageAuthController extends BaseController {
 	* @메소드명: updateAuth
 	* @작성자: KimSangMin
 	* @생성일: 2023. 5. 27. 오후 7:58:30
-	* @설명:
+	* @설명: 권한 수정
 	*/
 	@RequestMapping("/updateAuth.do")
 	public void updateAuth(HttpServletRequest request, HttpServletResponse response) throws Exception {

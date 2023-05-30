@@ -133,33 +133,25 @@ public class CommonService extends BaseService {
 		int reqAuthGrade = (Integer) inData.get("reqAuthGrade");	//필요 권한등급
 		
 		HttpSession session = request.getSession();
-		List<Map<String, Object>> freeAuthList = (List<Map<String, Object>>) session.getAttribute(Constant.FREE_AUTH_LIST);
 		List<Map<String, Object>> authList = (List<Map<String, Object>>) session.getAttribute(Constant.AUTH_LIST);
 		
-		//세션을 통해 권한 체크 => 권한 없을 경우 세션 최신화 후 다시 체크
-		//권한이 필요없는 목록에 해당 url이 있으면 통과
-		if(freeAuthList.isEmpty() || freeAuthList == null) {
-			for(Map<String, Object> auth : freeAuthList) {
-				if(url.equals(auth.get("url"))) {
-					result = true;
-					break;
-				}
-			}			
+		//세션에 권한 정보가 없을 경우 => 비정상적인 접근
+		if(authList.isEmpty() || authList == null) {
+			throw new ConfigurationException("비정산적인 접근이 감지되었습니다.");
 		}
+		
 		//권한 목록에서 해당 url의 권한등급이 필요 권한등급을 만족하면 통과
-		if(!result) {
-			for(Map<String, Object> auth : authList) {
-				if(url.equals(auth.get("url"))) {
-					int authGrade = (Integer) auth.get("authGrade");	//사용자의 권한등급
-					if(isRange) {
-						result = (authGrade >= reqAuthGrade)? true : false;
-					} else {
-						result = (authGrade == reqAuthGrade)? true : false;
-					}
-					break;
+		for(Map<String, Object> auth : authList) {
+			if(url.equals(auth.get("url"))) {
+				int authGrade = (Integer) auth.get("authGrade");	//사용자의 권한등급
+				if(isRange) {
+					result = (authGrade >= reqAuthGrade)? true : false;
+				} else {
+					result = (authGrade == reqAuthGrade)? true : false;
 				}
-			}			
-		}		
+				break;
+			}
+		}			
 		//권한 목록 DB에서 조회하여 다시 테스트
 		if(!result) {
 			authList = sqlSession.selectList("mapper.user.UserMapper.selectAuthList", inData);

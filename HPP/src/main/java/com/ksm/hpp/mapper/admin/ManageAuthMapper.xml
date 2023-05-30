@@ -58,4 +58,20 @@
 		</if>
 		 ORDER BY ORDER_VAL ASC
 	</select>	
+	
+	<!-- 메뉴 목록 조회-->
+	<update id="updateAuth" parameterType="java.util.List">
+		<foreach collection="mainTableData" index="index" item="item">
+		UPDATE TB_AUTH  										/*테이블_권한*/
+           SET AUTH_NM 					= #{item.authNm}		/*권한그룹명*/
+			 , AUTH_GRADE 				= #{item.authGrade}		/*권한명*/
+		     , LT_UPD_ID 				= #{loginInfo.userId}	/*최종수정자ID*/
+		     , LT_UPD_DTTI				= NOW() 				/*최종수정일시*/
+         WHERE ROLE_SEQ 				= #{roleSeq}
+           AND MNU_SEQ 					= #{item.mnuSeq}
+           AND AUTH_NM 					!= #{item.authNm}	
+           AND AUTH_GRADE 				!= #{item.authGrade}
+          	 ;
+ 		</foreach>
+	</update>
 </mapper>
