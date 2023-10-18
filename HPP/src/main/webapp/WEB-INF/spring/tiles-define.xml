@@ -4,8 +4,20 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
+	<!-- 홈페이지 -->
+	<definition name="com/home" template="/WEB-INF/views/tiles/home-layout.jsp">
+		<put-attribute name="title" value="HelloPaPang!" />
+	    <put-attribute name="header" value="/WEB-INF/views/tiles/headerTemplate.jsp" />
+	    <put-attribute name="body" value="/home.jsp" />
+	    <put-attribute name="foot" value="/WEB-INF/views/tiles/footerTemplate.jsp" />
+	    <put-attribute name="js" value="/resources/js/com/home.js" />
+		<put-attribute name="css" value="/resources/css/com/home.css" />
+		<put-attribute name="body" value="/WEB-INF/views/com/home.jsp" />
+	</definition>	
+
 	<!-- main layout -->
 	<definition name="layout-tiles" template="/WEB-INF/views/tiles/tiles-layout.jsp">
+		<put-attribute name="title" value="HelloPaPang!" />
 		<put-attribute name="header" value="/WEB-INF/views/tiles/headerTemplate.jsp" />
 		<put-attribute name="left" value="/WEB-INF/views/tiles/sidebarTemplate.jsp" />
 		<put-attribute name="right" value="/WEB-INF/views/tiles/bannerTemplate.jsp" />
@@ -13,25 +25,10 @@
 		<put-attribute name="foot" value="/WEB-INF/views/tiles/footerTemplate.jsp" />
 	</definition>
 	
-	<!-- 홈페이지 -->
-	<definition name="/" extends="layout-tiles">
-		<put-attribute name="body" value="/home.jsp" />
-		<put-attribute name="title" value="HelloPaPang!" />
-	</definition>		
-
-	<!-- 오류 페이지 이동 -->
-<!-- 	<definition name="error/*" extends="layout-tiles"> -->
-<!-- 		<put-attribute name="js" value="/resources/js/error/{1}.js" /> -->
-<!-- 		<put-attribute name="css" value="/resources/css/com/errorCom.css" /> -->
-<!-- 		<put-attribute name="title" value="HelloPaPang!" /> -->
-<!-- 		<put-attribute name="body" value="/WEB-INF/views/error/{1}.jsp" /> -->
-<!-- 	</definition> -->
-	
 	<!-- 기본 페이지 이동 -->
 	<definition name="*/*" extends="layout-tiles">
 		<put-attribute name="js" value="/resources/js/{1}/{2}.js" />
 		<put-attribute name="css" value="/resources/css/{1}/{2}.css" />
-		<put-attribute name="title" value="HelloPaPang!" />
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
 </tiles-definitions>

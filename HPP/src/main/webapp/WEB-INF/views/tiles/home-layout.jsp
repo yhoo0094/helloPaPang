@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"  %>
 
-<%
+<% 
 /**
- * @화면명: tiles layout
- * @작성자: 김상민
- * @생성일: 2022. 11. 8. 오후 6:51:35
- * @설명: 타일즈 적용을 위한 레이아웃 페이지
+ * @화면명: 홈페이지 레이아웃
+ * @작성자: KimSangMin
+ * @생성일: 2023. 9. 14. 오전 9:20:41
+ * @설명: 홈페이지 타일즈 적용을 위한 레이아웃 페이지
 **/
-%>
+ %>
 
 <!DOCTYPE html>
 <html>
@@ -72,11 +72,9 @@
   	<div class='wrap'>
   		<tiles:insertAttribute name="header"/>
 		<div class='content'>  	
-  			<tiles:insertAttribute name="left"/>
-	  		<div class="page_content">
+	  		<div class="home_content">
 	  			<tiles:insertAttribute name="body"/>
 	  		</div>
-	  		<tiles:insertAttribute name="right"/>
 	  		<tiles:insertAttribute name="foot"/>
   		</div>
   	</div>

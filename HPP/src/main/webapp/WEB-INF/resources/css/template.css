@@ -1,7 +1,15 @@
 @charset "UTF-8";
-a {
+/* 스타일 초기화 */
+body, html, div {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a, p {
 	text-decoration: none;
 	color: black;
+	margin: 0;
 }
 
 a:hover {
@@ -35,8 +43,9 @@ input[type = 'date']{
   --header-heigth: 70px;
   --footer-heigth: 70px;
   --banner-width: 150px;
-  --SideBar-width: 150px;  
-  --navMnu-color: rgb(255 210 88);
+  --sideBar-width: 150px;  
+  --navMnu-color: #692626;
+  --navMnu-backGround: rgb(255 255 142);
 }
 
 .selectedRow{
@@ -51,47 +60,84 @@ input[type = 'date']{
 	width: 100%;
 }
 
-.Header, .content, .Footer{
-	width: 100%;
+/* 헤더, 사이드, 바디, 푸터 설정 시작 */
+.top {
+	top: 0;
+    position: fixed;
+    width: 100%;
+    height: var(--header-heigth);
+    z-index: 1;
+    background-color: var(--navMnu-backGround);
 }
 
-.SideBar, .banner{
-	height: calc(100vh - var(--footer-heigth) - var(--header-heigth));
-}
-
-.Header, .Footer, .SideBar, .banner{
-	z-index: 1;
+.sideBar, .banner{
+	height: calc(100vh - var(--header-heigth) - var(--footer-heigth));
 	position: fixed;
+	top: var(--header-heigth);
 }
 
-.SideBar{
+.sideBar{
 	background-color: #EAEAEA;
     left: 0;
-    top: var(--header-heigth);
-    width: var(--SideBar-width);
+    width: var(--sideBar-width);
+/*     padding: 20px; */
 }
 
 .banner{
-	background-color: cyan;
     right: 0;
-    top: var(--header-heigth);	
-    width: var(--banner-width);    
+    width: var(--banner-width);  
+    text-align: center;
+/*     line-height: calc(100vh - var(--header-heigth) - var(--footer-heigth)); */
+/* 	vertical-align: middle;   */
 }
 
 .page_content{
-	float: left;
-	margin: calc(var(--header-heigth) + 20px) calc(var(--banner-width) + 20px) calc(var(--footer-heigth) + 20px) calc(var(--SideBar-width) + 20px);
-	width: calc(100vw - 40px - var(--banner-width) - var(--SideBar-width));
+	margin: calc(var(--header-heigth)) 
+			calc(var(--banner-width) + 20px) 
+			calc(var(--footer-heigth) + 18px) 
+			calc(var(--sideBar-width) + 20px);
+	width: calc(100vw - 40px - var(--banner-width) - var(--sideBar-width));
+	min-height: 710px;
 }
 
-.Header{
-	background-color: #ABF200;
+.home_content{
+	margin: calc(var(--header-heigth)) 
+			20px
+			calc(var(--footer-heigth) + 18px) 
+			20px;
+	width: calc(100vw - 40px - var(--banner-width) - var(--sideBar-width));
+	min-height: 710px;	
 }
 
-.Footer{
-	background-color: #FF00DD;
+.bottom{
+	background-color: var(--navMnu-backGround);
 	height: var(--footer-heigth);
-	bottom: 0;
+	text-align: center;
+	vertical-align: middle;
+    line-height: var(--footer-heigth);
+    position: relative;
+    z-index: 1;
+}
+
+.bottom .devInfo{
+	color: var(--navMnu-color);
+	font-family: 나눔손글씨 가람연꽃;
+	font-weight: 900;
+    font-size: x-large;
+}
+
+.bottom .blank{
+	width: 10px;
+	display: inline-block;
+}
+
+/* 헤더, 사이드, 바디, 푸터 설정 끝 */
+
+.closeBtn {
+	position: absolute;
+    top: -10px;
+    right: 5px;
+    font-size: 36px;
 }
 
 /* 네비게이터 css 시작 */
@@ -106,15 +152,6 @@ input[type = 'date']{
     display: block;
     outline: 0;	
     letter-spacing: 4px;
-}
-
-.top {
-	top: 0;
-    position: fixed;
-    width: 100%;
-    height: var(--header-heigth);
-    z-index: 1;
-    background-color: #ffffcb;
 }
 
 .navMnu{
@@ -175,10 +212,6 @@ input[type = 'date']{
 
 .navMnuDiv{
 	display: inline-block;	
-}
-
-.navMnuDiv:hover .dropdownDiv{
-  	display: inline-block;
 }
 
 .navMnuCol{

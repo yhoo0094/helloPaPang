@@ -1,5 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    
+<% 
+/**
+ * @화면명: 메뉴 경로
+ * @작성자: KimSangMin
+ * @생성일: 2023. 9. 11. 오후 1:27:30
+ * @설명: 메뉴 접속 경로를 보여준다
+**/
+ %>
+
+    
 <script>
 	var mnuUpperNm = '<%= request.getAttribute("mnuUpperNm") %>';
 	var mnuNm = '<%= request.getAttribute("mnuNm") %>';
