@@ -2,28 +2,44 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.ksm.hpp</groupId>
   <artifactId>HPP</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>war</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version> <!-- 또는 더 나중 버전 사용 -->
+                <configuration>
+                    <source>11</source> <!-- 사용하려는 Java 버전 설정 -->
+                    <target>11</target> <!-- 컴파일된 클래스 파일 버전 설정 -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 	<properties>
     	<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
 	 	<project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>	
 		<org.apache.tiles-version>3.0.8</org.apache.tiles-version>
         <slf4j.version>1.7.32</slf4j.version>
-        <log4j2.version>2.17.1</log4j2.version>		
-	</properties>
- 
+        <log4j2.version>2.17.1</log4j2.version>	
+        <java.version>11</java.version>
+        <spring.version>5.2.22.RELEASE</spring.version>
+    </properties>
+        	
   	<dependencies>
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-context</artifactId>
-		    <version>5.2.22.RELEASE</version>
+		    <version>${spring.version}</version>
 		</dependency> 	
 	  
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-webmvc</artifactId>
-		    <version>5.2.22.RELEASE</version>
+		    <version>${spring.version}</version>
 		</dependency> 
 
 		<dependency>
@@ -72,7 +88,7 @@
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-jdbc</artifactId>
-		    <version>5.2.22.RELEASE</version>
+		    <version>${spring.version}</version>
 		</dependency>
 
 		<!--mysql-->
@@ -172,7 +188,7 @@
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-aop</artifactId>
-		    <version>6.0.3</version>
+		    <version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
@@ -189,6 +205,14 @@
 		    <version>1.1.1</version>
 		</dependency>
 		<!-- json 관련 끝 -->
+		
+		<dependency>
+		    <groupId>javax.annotation</groupId>
+		    <artifactId>javax.annotation-api</artifactId>
+		    <version>1.3.2</version>
+		</dependency>
+		
+
 		
 	</dependencies>	
 </project>
