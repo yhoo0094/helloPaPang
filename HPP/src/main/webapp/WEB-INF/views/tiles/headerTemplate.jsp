@@ -86,20 +86,20 @@
 <div class="top">
 	<div id="myNavbar">
 		<div class="logoDiv">  
-	    	<a href="/" class="logo-font">Hello Papang</a>
+	    	<a href="/" class="logo-font color-black">Hello Papang</a>
 	 	</div>
 	 	<div class="navDiv">
 		 	<div class="loginMnuDiv">
 		 		<span style="width: 15px; float: right;">&nbsp;</span>
 		 		<c:choose>
 		 			<c:when test="${sessionScope.LOGIN_INFO eq null}">
-						<a href="<%=request.getContextPath()%>/user/signUp" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>회원가입</a>			 			
-						<a id="loginModalbtn" class="loginMnu" href="javascript:loginModalOpen()"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그인</a>
+						<a href="<%=request.getContextPath()%>/user/signUp" class="loginMnu color-black"><i class="fa-solid fa-door-open loginMnuIcon"></i>회원가입</a>			 			
+						<a id="loginModalbtn" class="loginMnu color-black" href="javascript:loginModalOpen()"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그인</a>
 		 			</c:when>
 		 			<c:otherwise>
 						<span class="sessionTimer"><i class="fa-solid fa-clock loginMnuIcon"></i>자동 로그아웃: <span id="sessionTimer">02:00:00</span></span> 
-						<a href="#about" class="loginMnu"><i class="fa-solid fa-user loginMnuIcon"></i>마이페이지</a>
-						<a href="javascript:loginOut()" class="loginMnu"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그아웃</a>	
+						<a href="#about" class="loginMnu color-black"><i class="fa-solid fa-user loginMnuIcon"></i>마이페이지</a>
+						<a href="javascript:loginOut()" class="loginMnu color-black"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그아웃</a>	
 		 			</c:otherwise>
 		 		</c:choose>
 			</div>	
@@ -115,12 +115,12 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<td class="navIcon"><a href="<%=request.getContextPath()%>/admin/adminHome" class="navMnu"><i class="fa fa-gear navIcon"></i> 관리자</a></td>
-								<td class="navIcon"><a href="#about" class="navMnu"><i class="fa fa-comment navIcon"></i> 게시판</a></td>
-								<td class="navIcon"><a href="#team" class="navMnu"><i class="fa-sharp fa-solid fa-store navIcon"></i> 장터</a></td>
-								<td class="navIcon"><a href="#pricing" class="navMnu"><i class="fa-solid fa-ice-cream navIcon"></i> 활동</a></td>								
-								<td class="navIcon"><a href="#work" class="navMnu"><i class="fa-solid fa-baby-carriage navIcon"></i> 베이비시터</a></td>
-								<td class="navIcon"><a href="<%=request.getContextPath()%>/info/notice" class="navMnu"><i class="fa-sharp fa-solid fa-circle-info navIcon"></i> 정보</a></td>
+								<td class="navIcon"><a href="<%=request.getContextPath()%>/admin/adminHome" class="navMnu color-black"><i class="fa fa-gear navIcon"></i> 관리자</a></td>
+								<td class="navIcon"><a href="#about" class="navMnu color-black"><i class="fa fa-comment navIcon"></i> 게시판</a></td>
+								<td class="navIcon"><a href="#team" class="navMnu color-black"><i class="fa-sharp fa-solid fa-store navIcon"></i> 장터</a></td>
+								<td class="navIcon"><a href="#pricing" class="navMnu color-black"><i class="fa-solid fa-ice-cream navIcon"></i> 활동</a></td>								
+								<td class="navIcon"><a href="#work" class="navMnu color-black"><i class="fa-solid fa-baby-carriage navIcon"></i> 베이비시터</a></td>
+								<td class="navIcon"><a href="<%=request.getContextPath()%>/info/notice" class="navMnu color-black"><i class="fa-sharp fa-solid fa-circle-info navIcon"></i> 정보</a></td>
 							</tr>	
 						</tbody>
 					</table>

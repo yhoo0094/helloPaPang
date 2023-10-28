@@ -22,8 +22,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"><!-- datatable -->
     <link rel="stylesheet" type="text/css" href="/resources/lib/datetimepicker/jquery.datetimepicker.css"><!-- datetimepicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" /><!-- jstree(트리구조) -->
-    
- 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/template.css"> <!-- 공통 css(개별 클래스) -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /><!-- 이미지 슬라이드 -->
+
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/template.css"> <!-- 공통 css(개별 클래스) -->
  	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/common.css"> <!-- 공통 css(단순 값) -->
     <link rel="stylesheet" href="<%=request.getContextPath()%><tiles:getAsString name="css"/>"> <!-- 페이지 개별 css -->   
 	
@@ -47,6 +48,7 @@
 	<script src="https://kit.fontawesome.com/e2689e2fa2.js"></script> <!-- 아이콘 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script><!-- jQuery Modal -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script><!-- jstree(트리구조) -->
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script><!-- 이미지 슬라이드 -->
 	
 	<script src="<%=request.getContextPath()%>/resources/js/com/common.js"></script> <!-- 페이지 공통 -->
 	<script src="<%=request.getContextPath()%>/resources/js/com/tiles-layout.js"></script> <!-- 페이지 공통 -->

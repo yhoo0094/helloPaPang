@@ -1,5 +1,10 @@
 @charset "UTF-8";
 /* 스타일 초기화 */
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+}
+
 body, html, div {
     margin: 0;
     padding: 0;
@@ -7,9 +12,15 @@ body, html, div {
 }
 
 a, p {
+/* 	text-decoration: none; */
+/* 	color: black; */
+/* 	margin: 0; */
+}
+
+.color-black {
 	text-decoration: none;
 	color: black;
-	margin: 0;
+	margin: 0;	
 }
 
 a:hover {
@@ -45,7 +56,11 @@ input[type = 'date']{
   --banner-width: 150px;
   --sideBar-width: 150px;  
   --navMnu-color: #692626;
-  --navMnu-backGround: rgb(255 255 142);
+  --navMnu-backGround: rgb(255 224 112);
+}
+
+.content {
+	background-color: rgb(254 255 187); 
 }
 
 .selectedRow{
@@ -60,13 +75,17 @@ input[type = 'date']{
 	width: 100%;
 }
 
+.fadeIn {
+  animation-name: fadeIn;
+}
+
 /* 헤더, 사이드, 바디, 푸터 설정 시작 */
 .top {
 	top: 0;
     position: fixed;
     width: 100%;
     height: var(--header-heigth);
-    z-index: 1;
+    z-index: 10;
     background-color: var(--navMnu-backGround);
 }
 
@@ -102,10 +121,9 @@ input[type = 'date']{
 
 .home_content{
 	margin: calc(var(--header-heigth)) 
-			20px
+			0px
 			calc(var(--footer-heigth) + 18px) 
-			20px;
-	width: calc(100vw - 40px - var(--banner-width) - var(--sideBar-width));
+			0px;
 	min-height: 710px;	
 }
 

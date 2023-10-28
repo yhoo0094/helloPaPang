@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,17 @@ public class PageController {
 
 	@Resource(name = "CommonService")
 	protected CommonService commonService;	
+	
+	/**
+	* @메소드명: handleAwsRequest
+	* @작성자: KimSangMin
+	* @생성일: 2023. 10. 26. 오후 4:14:18
+	* @설명: AWS 대상 그룹 상태 검사 API
+	*/
+	@RequestMapping("/aws")
+    public ResponseEntity<String> handleAwsRequest() {
+        return new ResponseEntity<>("GET 요청이 성공적으로 처리되었습니다.", HttpStatus.OK);
+    }
 	
 	/**
 	 * @메소드명: tilesSample
