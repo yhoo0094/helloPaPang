@@ -19,7 +19,13 @@ export default function makeEditor(target) {
 					//'-', 'specialCharacters', 'imageInsert', 'heading', 'style'
 				],
 				shouldNotGroupWhenFull: true
-		}     
+		}  
+		, allow: [{
+			name: /.*/
+			, attributes: true
+			, classes: true
+			, styles: true
+		}]   
 		, language: 'ko' 
 		, image: {
 			toolbar: [

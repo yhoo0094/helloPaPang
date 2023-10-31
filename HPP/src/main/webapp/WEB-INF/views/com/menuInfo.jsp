@@ -32,8 +32,8 @@
 	<span id='mnuTitle'></span>
 </div>
 <div class="menuPathDiv">
-	<a href="/"><span>Hello Papang</span></a> &gt
-	<a href="/" id='mnuTopUrl'><span id='mnuUpperNm'></span></a> &gt
-	<a href="/" id='mnuUrl'><span id='mnuNm'></span></a> -
+	<a href="/" class="remove-a"><span>Hello Papang</span></a> &gt
+	<a href="/" id='mnuTopUrl' class="remove-a"><span id='mnuUpperNm'></span></a> &gt
+	<a href="/" id='mnuUrl' class="remove-a"><span id='mnuNm'></span></a> -
 	<span id='info'></span>
 </div>

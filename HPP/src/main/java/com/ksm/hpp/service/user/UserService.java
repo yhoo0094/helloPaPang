@@ -138,6 +138,7 @@ public class UserService extends BaseService {
 				session.setAttribute(Constant.LOGIN_INFO, loginInfo);
 				
 				//권한 정보 세션에 저장
+				inData.put("loginInfo", loginInfo);
 				List<Map<String, Object>> authList = sqlSession.selectList("mapper.user.UserMapper.selectAuthList", inData);
 				session.setAttribute(Constant.AUTH_LIST, authList);
 				

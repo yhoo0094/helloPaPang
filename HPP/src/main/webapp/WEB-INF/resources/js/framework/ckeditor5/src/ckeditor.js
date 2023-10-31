@@ -200,7 +200,13 @@ Editor.defaultConfig = {
 			'tableCellProperties',
 			'tableProperties'
 		]
-	}
+	}, 
+	allow: [{
+		name: /.*/
+		, attributes: true
+		, classes: true
+		, styles: true
+	}]
 };
 
 export default Editor;

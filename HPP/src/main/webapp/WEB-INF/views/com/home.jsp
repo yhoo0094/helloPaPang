@@ -79,30 +79,139 @@
 	<hr />
 	
 	<!-- Portfolio Section -->
-	<h2 class="homeTitle">Papang SHOP</h2>
+	<p class="homeTitle display-inb">Papang SHOP</p>
 	<p class="moreClass" id="moreBtn">더보기 ></p>
 	<div class="row">
-	
-			<div class="col-lg-4 col-sm-6 portfolio-item mainBox sample_image">
-				<div class="card h-100">
-					<p class="pro_no">${product.pro_no}</p>
-					<a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/market/보행기.jpg" alt="상품 사진이없습니다"></a>
-					<div class="card-body">
-						<div class="proNameDiv">
-							<h4 class="card-title">
-								<a class="card_title2" href="#">${product.pro_name}</a>
-							</h4>
-						</div>
-						<div class="proPriceDiv">
-							<p class="card-text">&#8361;${product.pro_price}</p>
-						</div>
+		<div class="col-lg-4 portfolio-item sample_image">
+			<div class="card h100">
+				<a href="#"><img class="card-img-top"
+					src="${pageContext.request.contextPath}/resources/images/market/보행기.jpg"
+					alt="상품 사진이없습니다"></a>
+				<div class="card-body">
+					<h4 class="card-title">
+						<a class="card_title2" href="#">card_title</a>
+					</h4>
+					<div>
+						<p class="card-text">&#8361;card-text</p>
 					</div>
 				</div>
 			</div>
-			
+		</div>
+
+		<div class="col-lg-4 portfolio-item sample_image">
+			<div class="card h100">
+				<a href="#"><img class="card-img-top"
+					src="${pageContext.request.contextPath}/resources/images/market/상품2.jpg"
+					alt="상품 사진이없습니다"></a>
+				<div class="card-body">
+					<h4 class="card-title">
+						<a class="card_title2" href="#">card_title</a>
+					</h4>
+					<div>
+						<p class="card-text">&#8361;card-text</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4 portfolio-item sample_image">
+			<div class="card h100">
+				<a href="#"><img class="card-img-top"
+					src="${pageContext.request.contextPath}/resources/images/market/상품3.jpg"
+					alt="상품 사진이없습니다"></a>
+				<div class="card-body">
+					<h4 class="card-title">
+						<a class="card_title2" href="#">card_title</a>
+					</h4>
+					<div>
+						<p class="card-text">&#8361;card-text</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+				<div class="col-lg-4 portfolio-item sample_image">
+			<div class="card h100">
+				<a href="#"><img class="card-img-top"
+					src="${pageContext.request.contextPath}/resources/images/market/상품4.jpg"
+					alt="상품 사진이없습니다"></a>
+				<div class="card-body">
+					<h4 class="card-title">
+						<a class="card_title2" href="#">card_title</a>
+					</h4>
+					<div>
+						<p class="card-text">&#8361;card-text</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+				<div class="col-lg-4 portfolio-item sample_image">
+			<div class="card h100">
+				<a href="#"><img class="card-img-top"
+					src="${pageContext.request.contextPath}/resources/images/market/상품5.jpg"
+					alt="상품 사진이없습니다"></a>
+				<div class="card-body">
+					<h4 class="card-title">
+						<a class="card_title2" href="#">card_title</a>
+					</h4>
+					<div>
+						<p class="card-text">&#8361;card-text</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+				<div class="col-lg-4 portfolio-item sample_image">
+			<div class="card h100">
+				<a href="#"><img class="card-img-top"
+					src="${pageContext.request.contextPath}/resources/images/market/상품6.jpg"
+					alt="상품 사진이없습니다"></a>
+				<div class="card-body">
+					<h4 class="card-title">
+						<a class="card_title2" href="#">card_title</a>
+					</h4>
+					<div>
+						<p class="card-text">&#8361;card-text</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- /.row -->
 
+	<hr />
+	<!-- Features Section -->
+	<div class="row introDiv">
+		<div class="col-lg-6">
+			<h2>HelloPapang</h2>
+			<p>파파존스는 고객님의 편리를 위해 항상 노력하겠습니다.</p>
+			<ul>
+				<p>
+					<strong>주요 서비스</strong>
+				</p>
+				<li>베이비시터 예약</li>
+				<li>파파존스 SHOP</li>
+				<li>육아 정보</li>
+				<li>육아 예방접종 일지 캘린더</li>
+			</ul>
+			<p>믿고 맏길 수 있는 베이비시터 서비스 제공. 100% 순면 무형광 제작된 파파존스 핸드메이드 상품 판매.초보
+				육아대디를 위한 유용한 정보 제공.육아 예방접종 일지 등록 제공.</p>
+		</div>
+		<div class="col-lg-6">
+			<img class="img-fluid rounded famImage"
+				src="${pageContext.request.contextPath}/resources/images/etc/team-papang.png">
+		</div>
+	</div>
+	<!-- /.row -->
+
+	<hr>
+
+
+	<div>
+		<a href="#" class="f-right"><img class="topnav" src="${pageContext.request.contextPath}/resources/images/etc/topnav.png" /></a>
+	</div>
+			
 </div>
 
 

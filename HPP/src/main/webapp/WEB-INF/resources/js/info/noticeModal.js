@@ -15,6 +15,7 @@ function noticeModalOpen(data){
 		$('#boardSeq').val(data.boardSeq);			//공지사항일련번호
 		$('#title').val(data.title);				//공지사항제목
 		cn.setData(data.cn);						//공지사항내용
+		
 //		$('#cnRead').html(data.cn);					//공지사항내용
 		$('#strDt').val(data.strDt.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'));	//공지사항게시시작일
 		$('#endDt').val(data.endDt.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'));	//공지사항게시종료일
@@ -56,7 +57,8 @@ function noticeModalOpen(data){
 		$('#modalDelBtn').css('display','none');
 	}
 	$('#noticeModal').modal({
-		clickClose: false
+		clickClose: false,
+		showClose: false,	//닫기 버튼 제거
 	});	
 }
 

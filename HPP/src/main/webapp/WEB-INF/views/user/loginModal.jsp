@@ -38,9 +38,9 @@
 				</tr>					
 				<tr>
 					<td colspan="3" style="text-align: center; font-size: 13px; padding: 10px 0 0 0;">
-						<a href="/user/signUp" style="text-decoration: underline; text-underline-position:under;">회원가입</a>
+						<a href="/user/signUp" class="remove-a" style="text-decoration: underline; text-underline-position:under;">회원가입</a>
 						&nbsp;&nbsp;&nbsp;
-						<a href="#" style="text-decoration: underline; text-underline-position:under;">아이디/비밀번호 찾기</a>
+						<a href="#" class="remove-a" style="text-decoration: underline; text-underline-position:under;">아이디/비밀번호 찾기</a>
 					</td>
 				</tr>								
 			</tbody>

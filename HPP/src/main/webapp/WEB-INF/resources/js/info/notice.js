@@ -90,7 +90,7 @@ function makeDataTableServerSide() {
     $('#mainTable_paginate').after($createBtn);
     
     //테이블 더블 클릭 이벤트
-	$('#mainTable tbody').on('dblclick', 'tr', function () {
+	$('#mainTable tbody').on('click', 'tr', function () {
 	    var data = mainTable.row(this).data();
 	    noticeModalOpen(data);
 	    $(this).children('.hit').text(++data.hit);

@@ -17,10 +17,14 @@ a, p {
 /* 	margin: 0; */
 }
 
-.color-black {
+.remove-a {
 	text-decoration: none;
 	color: black;
 	margin: 0;	
+}
+
+color-black{
+	color: black;
 }
 
 a:hover {
@@ -52,11 +56,15 @@ input[type = 'date']{
 
 :root {
   --header-heigth: 70px;
-  --footer-heigth: 70px;
+  --footer-heigth: 100px;
   --banner-width: 150px;
   --sideBar-width: 150px;  
   --navMnu-color: #692626;
   --navMnu-backGround: rgb(255 224 112);
+}
+
+.modal, .blocker{
+	z-index: 100;
 }
 
 .content {
@@ -79,6 +87,10 @@ input[type = 'date']{
   animation-name: fadeIn;
 }
 
+.navMnu-color{
+	color: var(--navMnu-color);
+}
+
 /* 헤더, 사이드, 바디, 푸터 설정 시작 */
 .top {
 	top: 0;
@@ -96,10 +108,20 @@ input[type = 'date']{
 }
 
 .sideBar{
-	background-color: #EAEAEA;
     left: 0;
     width: var(--sideBar-width);
-/*     padding: 20px; */
+    padding: 20px;
+    line-height: 2;
+   	font-weight: bold;
+	font-size: 15px;
+	background-color: #faf6f6;
+    border-right: 10px solid #818e99;
+    border-radius: 0 8% 5% 0;
+}
+
+.sideMnuTop{
+	font-size: 20px;
+	font-weight: 900;
 }
 
 .banner{
@@ -113,10 +135,10 @@ input[type = 'date']{
 .page_content{
 	margin: calc(var(--header-heigth)) 
 			calc(var(--banner-width) + 20px) 
-			calc(var(--footer-heigth) + 18px) 
+			0 
 			calc(var(--sideBar-width) + 20px);
 	width: calc(100vw - 40px - var(--banner-width) - var(--sideBar-width));
-	min-height: 710px;
+	min-height: calc(100vh - var(--header-heigth) - var(--footer-heigth));
 }
 
 .home_content{
@@ -132,16 +154,21 @@ input[type = 'date']{
 	height: var(--footer-heigth);
 	text-align: center;
 	vertical-align: middle;
-    line-height: var(--footer-heigth);
+/*     line-height: var(--footer-heigth); */
     position: relative;
     z-index: 1;
+    padding: 10px 0px;
 }
 
 .bottom .devInfo{
 	color: var(--navMnu-color);
-	font-family: 나눔손글씨 가람연꽃;
+	/* font-family: 나눔손글씨 가람연꽃; */
 	font-weight: 900;
-    font-size: x-large;
+    font-size: small;
+}
+
+.devInfo{
+	margin-bottom: 10px;
 }
 
 .bottom .blank{
