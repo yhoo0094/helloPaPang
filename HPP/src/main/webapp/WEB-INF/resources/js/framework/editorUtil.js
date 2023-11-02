@@ -5,19 +5,13 @@
  */
 var $editorUtil = {};
 
-$editorUtil.createEditorTest = function(){
-	editor(".editor").then(editor => {
-        	// some code..
-            // then 이후에 받은 editor를 다른 변수로 받아주시는 편이 좋습니다!
-        })
-}
-
 /**
  * 에디터 생성하기
  */
 $editorUtil.createEditor = function(){
 	
-	InlineEditor.defaultConfig = {
+	//InlineEditor.defaultConfig = {
+	ClassicEditor.defaultConfig = {
 		toolbar: {
 			items: [
 				'fontSize',
@@ -70,7 +64,8 @@ $editorUtil.createEditor = function(){
 		}
 	};	
 	
-	InlineEditor.create( document.querySelector('.editor'),{
+	//InlineEditor.create( document.querySelector('.editor'),{
+	ClassicEditor.create( document.querySelector('.editor'),{
 					//plugins: [ SimpleUploadAdapter]
 			        simpleUpload: {
 			            // The URL that the images are uploaded to.

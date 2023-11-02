@@ -56,8 +56,20 @@
 	<script src="<%=request.getContextPath()%>/resources/js/framework/editorUtil.js"></script> <!-- 에디터 -->
 	<script src="<%=request.getContextPath()%>/resources/js/framework/constant.js"></script> <!-- js 공통 변수 -->
 
-	<script src="<%=request.getContextPath()%>/resources/js/framework/ckeditor5/build/ckeditor.js"></script> <!-- ck에디터 -->
-    <script src="<%=request.getContextPath()%>/resources/js/framework/ckeditor5/build/editor.js" type="module"></script><!-- ck에디터 -->
+
+	<%-- <script src="<%=request.getContextPath()%>/resources/js/framework/ckeditor5_inline/build/ckeditor.js"></script> --%> <!-- ck에디터 -->
+    <%-- <script src="<%=request.getContextPath()%>/resources/js/framework/ckeditor5_inline/build/editor.js" type="module"></script> --%><!-- ck에디터 -->
+    
+    <script src="<%=request.getContextPath()%>/resources/js/framework/ckeditor5_inline/build/ckeditor.js"></script> <!-- ck에디터 -->
+    <script src="<%=request.getContextPath()%>/resources/js/framework/ckeditor5_inline/build/editor.js"></script><!-- ck에디터 -->
+    <script src="<%=request.getContextPath()%>/resources/js/framework/ckeditor5_inline/build/UploadAdapter.js"></script><!-- ck에디터 -->
+    
+    <%-- 
+    <script src="<%=request.getContextPath()%>/resources/js/framework/ckeditor5_classic/build/ckeditor.js"></script> <!-- ck에디터 -->
+    <script src="<%=request.getContextPath()%>/resources/js/framework/ckeditor5_classic/build/editor.js"></script><!-- ck에디터 -->
+    <script src="<%=request.getContextPath()%>/resources/js/framework/ckeditor5_classic/build/UploadAdapter.js"></script><!-- ck에디터 -->
+     --%>
+    
     <script src="<%=request.getContextPath()%>/resources/lib/datetimepicker/jquery.datetimepicker.full.min.js"></script><!-- datetimepicker -->
 	<script src="<%=request.getContextPath()%><tiles:getAsString name="js"/>"></script> <!-- 페이지 개별 -->
 	

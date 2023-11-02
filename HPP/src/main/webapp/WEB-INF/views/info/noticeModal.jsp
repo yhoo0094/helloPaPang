@@ -11,18 +11,6 @@
 
 <script src="<%=request.getContextPath()%>/resources/js/info/noticeModal.js"></script>
 
-<script type="module">
-    import editor from '/resources/js/framework/ckeditor5/build/editor.js'
-
-    $(document).ready(function () {
-		editor(".editor").then(editor => {
-			window.cn = editor;	//cn 전역변수
-        	// some code..
-            // then 이후에 받은 editor를 다른 변수로 받아주시는 편이 좋습니다!
-        })
-    })
-</script> 
-
 <style>
 	.ck-editor__editable[role="textbox"] {
 	    /* editing area */
