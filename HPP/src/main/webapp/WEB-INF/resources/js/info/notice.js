@@ -87,7 +87,11 @@ function makeDataTableServerSide() {
     $createBtn.on('click', function(){
 		noticeModalOpen();
 	})
-    $('#mainTable_paginate').after($createBtn);
+	
+	if(authGrade > 1){
+		//쓰기 권한이 있을 떄
+		$('#mainTable_paginate').after($createBtn);
+	}
     
     //테이블 클릭 이벤트
 	$('#mainTable tbody').on('click', 'tr', function () {

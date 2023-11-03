@@ -1,19 +1,38 @@
 package com.ksm.hpp.controller.com;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.LaxRedirectStrategy;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -112,5 +131,83 @@ public class CommonController {
 		
 	 	return new UrlResource("file:///" + filePath + folder + "/" + filename + "." + extension);
 	 }	
+	
+	/**
+	* @메소드명: apitest
+	* @작성자: KimSangMin
+	* @생성일: 2023. 11. 3. 오후 5:55:29
+	* @설명: 예방접종 정보를 가져오기 위한 api 테스트(form 기반)
+	*/
+	@RequestMapping("/apitest.do")
+	public void apitest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// HttpClient 초기화
+        //HttpClient httpClient = HttpClients.createDefault();
+        
+        HttpClient httpClient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
+        HttpPost httpPost = new HttpPost("https://nip.kdca.go.kr/irhp/mngm/goBthVcnSchedule.do");
+
+        try {
+            // 폼 데이터 설정
+            List<NameValuePair> formData = new ArrayList<>();
+            formData.add(new BasicNameValuePair("menuLv", "3"));     
+            formData.add(new BasicNameValuePair("menuCd", "322"));     
+            formData.add(new BasicNameValuePair("menuSection", "3"));     
+            formData.add(new BasicNameValuePair("_csrf", "afe6b4b9-4637-43f5-b9c7-95f5fbda8715"));    
+            formData.add(new BasicNameValuePair("relBirdte", "20231103"));     
+            formData.add(new BasicNameValuePair("bthYear", "2023"));     
+            formData.add(new BasicNameValuePair("bthMonth", "11"));     
+            formData.add(new BasicNameValuePair("bthDay", "03"));     
+            formData.add(new BasicNameValuePair("_csrf", "afe6b4b9-4637-43f5-b9c7-95f5fbda8715"));     
+            
+            // 더 많은 폼 데이터 필드를 추가할 수 있습니다.
+
+            // 폼 데이터를 HTTP 요청 엔티티로 변환
+            HttpEntity entity = new UrlEncodedFormEntity(formData);
+
+            // HTTP POST 요청 엔티티 설정
+            httpPost.setEntity(entity);
+
+            // HTTP 요청 실행 및 응답 가져오기
+            HttpResponse response1 = httpClient.execute(httpPost);
+
+            // 응답 엔티티에서 데이터 추출
+            HttpEntity responseEntity = response1.getEntity();
+            String responseBody = EntityUtils.toString(responseEntity, StandardCharsets.UTF_8); // 문자 인코딩 지정
+
+            // 화면 정보를 responseBody 변수에 저장하고 활용
+            System.out.println(responseBody);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
+	
+	/**
+	* @메소드명: apitest2
+	* @작성자: KimSangMin
+	* @생성일: 2023. 11. 3. 오후 5:56:01
+	* @설명: 예방접종 정보를 가져오기 위한 테스트2
+	*/
+	@RequestMapping("/apitest2.do")
+	public void apitest2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		try {
+            // 웹 사이트 URL 설정
+            String url = "https://nip.kdca.go.kr/irhp/mngm/goVcntMngm.do?menuLv=3&menuCd=322&menuSection=3";
+
+            // Jsoup을 사용하여 웹 페이지에 연결
+            Document doc = Jsoup.connect(url).get();
+            System.out.println("Text: " + doc);
+
+            // 원하는 요소를 선택하기 위한 CSS 선택자를 사용하여 데이터 추출
+            Elements elements = doc.select(".class-name"); // 클래스 이름을 사용한 예시
+
+            // 선택한 요소에서 데이터 추출 및 출력
+            for (Element element : elements) {
+                System.out.println("Text: " + element.text());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
 	
 }

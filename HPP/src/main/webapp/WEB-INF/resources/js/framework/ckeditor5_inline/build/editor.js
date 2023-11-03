@@ -18,7 +18,7 @@ $(()=>{
 			.then( editor => {
 				return editor;
 			} );
-	} );
+	});
 	
 	//에디터 제거 함수 정의
 	watchdog.setDestructor( editor => {

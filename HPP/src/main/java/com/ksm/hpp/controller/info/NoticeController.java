@@ -129,7 +129,6 @@ public class NoticeController extends BaseController {
 		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
 		response.setContentType("application/x-json; charset=UTF-8");
 	}	
-		
 }
 
 

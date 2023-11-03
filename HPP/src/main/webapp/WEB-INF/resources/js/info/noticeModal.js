@@ -39,11 +39,13 @@ function noticeModalOpen(data){
 		
 		$('#modalSaveBtn').css('display','none');
 		if(authGrade > 1){
+			//쓰기 권한이 있을 떄
 			$('#modalModifyBtn').css('display','inline-block');
 			$('#modalDelBtn').css('display','inline-block');
 		} else {
 			$('#modalModifyBtn').css('display','none');
 			$('#modalDelBtn').css('display','none');
+			$('.popYn').css('visibility','hidden');
 		}
 		
 		data.boardCode = '01';								//게시판구분코드(01:공지사항,02:자유게시판,03:질문게시판,04:지역게시판)

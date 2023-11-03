@@ -41,8 +41,8 @@
 						<input id="strDt" name="strDt" class="form-control writeInput" type="date" title="게시시작일" required="all1"/> 
 					  ~ <input id="endDt" name="endDt" class="form-control writeInput" type="date" title="게시종료일" required="all1"/>
 					</td>
-					<th>팝업여부</th>
-					<td>
+					<th class="popYn">팝업여부</th>
+					<td class="popYn">
 						<div id="popYnRead" style="font-weight: bold;"></div>
 						<div id="popYnWrite" style="display: none;">
 							<label for="popY">Y </label> <input id="popY" name="popYn" type="radio" value="Y">

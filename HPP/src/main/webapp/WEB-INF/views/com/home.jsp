@@ -116,9 +116,7 @@
 
 		<div class="col-lg-4 portfolio-item sample_image">
 			<div class="card h100">
-				<a href="#"><img class="card-img-top"
-					src="${pageContext.request.contextPath}/resources/images/market/상품3.jpg"
-					alt="상품 사진이없습니다"></a>
+				<a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/market/상품3.jpg" alt="상품 사진이없습니다"></a>
 				<div class="card-body">
 					<h4 class="card-title">
 						<a class="card_title2" href="#">card_title</a>
@@ -129,12 +127,10 @@
 				</div>
 			</div>
 		</div>
-		
-				<div class="col-lg-4 portfolio-item sample_image">
+
+		<div class="col-lg-4 portfolio-item sample_image">
 			<div class="card h100">
-				<a href="#"><img class="card-img-top"
-					src="${pageContext.request.contextPath}/resources/images/market/상품4.jpg"
-					alt="상품 사진이없습니다"></a>
+				<a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/market/상품4.jpg" alt="상품 사진이없습니다"></a>
 				<div class="card-body">
 					<h4 class="card-title">
 						<a class="card_title2" href="#">card_title</a>
@@ -145,8 +141,8 @@
 				</div>
 			</div>
 		</div>
-		
-				<div class="col-lg-4 portfolio-item sample_image">
+
+		<div class="col-lg-4 portfolio-item sample_image">
 			<div class="card h100">
 				<a href="#"><img class="card-img-top"
 					src="${pageContext.request.contextPath}/resources/images/market/상품5.jpg"
@@ -161,12 +157,10 @@
 				</div>
 			</div>
 		</div>
-		
-				<div class="col-lg-4 portfolio-item sample_image">
+
+		<div class="col-lg-4 portfolio-item sample_image">
 			<div class="card h100">
-				<a href="#"><img class="card-img-top"
-					src="${pageContext.request.contextPath}/resources/images/market/상품6.jpg"
-					alt="상품 사진이없습니다"></a>
+				<a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/market/상품6.jpg" alt="상품 사진이없습니다"></a>
 				<div class="card-body">
 					<h4 class="card-title">
 						<a class="card_title2" href="#">card_title</a>
