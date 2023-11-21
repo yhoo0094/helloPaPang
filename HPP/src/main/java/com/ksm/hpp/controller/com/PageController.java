@@ -1,6 +1,7 @@
 package com.ksm.hpp.controller.com;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -17,12 +18,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ksm.hpp.framework.util.Constant;
 import com.ksm.hpp.framework.util.RequestUtil;
 import com.ksm.hpp.service.com.CommonService;
+import com.ksm.hpp.service.info.NoticeService;
 
 @Controller
 public class PageController {
 
 	@Resource(name = "CommonService")
 	protected CommonService commonService;	
+	
+	@Resource(name = "NoticeService")
+	protected NoticeService noticeService;
 	
 	/**
 	* @메소드명: handleAwsRequest
@@ -34,18 +39,6 @@ public class PageController {
     public ResponseEntity<String> handleAwsRequest() {
         return new ResponseEntity<>("GET 요청이 성공적으로 처리되었습니다.", HttpStatus.OK);
     }
-	
-	/**
-	 * @메소드명: tilesSample
-	 * @작성자: 김상민
-	 * @생성일: 2022. 10. 18. 오후 7:29:38
-	 * @설명: tiles 테스트
-	 */
-	@RequestMapping("/tiles")
-	public String tilesSample(HttpServletRequest request, HttpServletResponse response) {
-		
-		return "com/tilesSample";
-	}
 	
 	/**
 	 * @throws IOException 
@@ -112,15 +105,21 @@ public class PageController {
 		return result;
 	}	
 	
+	/**
+	* @메소드명: popupController
+	* @작성자: KimSangMin
+	* @생성일: 2023. 11. 21. 오후 6:54:36
+	* @설명:
+	 */
 	@RequestMapping("/popup.do")
 	public ModelAndView popupController(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView result = new ModelAndView();
 		
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
 		
-		result.setViewName((String) inData.get("view_nm"));
+		result.setViewName("popup/" + (String) inData.get("view_nm"));
 		result.addObject("param", inData);
 		
 		return result;
-	}			
+	}		
 }

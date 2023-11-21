@@ -14,6 +14,14 @@
 		<put-attribute name="css" value="/resources/css/com/home.css" />
 		<put-attribute name="body" value="/WEB-INF/views/com/home.jsp" />
 	</definition>	
+	
+	<!-- popup은 tiles 제외 -->
+	<definition name="popup/*" template="/WEB-INF/views/tiles/popup-layout.jsp">
+		<put-attribute name="title" value="HelloPaPang!" />
+		<put-attribute name="js" value="/resources/js/popup/{1}.js" />
+		<put-attribute name="css" value="/resources/css/popup/{1}.css" />
+		<put-attribute name="body" value="/WEB-INF/views/popup/{1}.jsp" />
+	</definition>
 
 	<!-- main layout -->
 	<definition name="layout-tiles" template="/WEB-INF/views/tiles/tiles-layout.jsp">

@@ -196,3 +196,18 @@ $util.XssReverseObj = function(obj) {
 	}
 	return obj;	
 }
+
+/**
+ * url에 포함된 파라미터 값 가져오기
+ * @param name string 파라미터명
+ * @return string 파라미터값
+ */
+$util.getParameterByName = function getParameterByName(name) {
+	var url = window.location.href
+    name = name.replace(/[\[\]]/g, '\\$&');
+    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}

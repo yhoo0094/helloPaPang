@@ -194,7 +194,7 @@
 		</div>
 		<div class="col-lg-6">
 			<img class="img-fluid rounded famImage"
-				src="${pageContext.request.contextPath}/resources/images/etc/team-papang.png">
+				src="${pageContext.request.contextPath}/resources/images/etc/team_papang_ai.png">
 		</div>
 	</div>
 	<!-- /.row -->

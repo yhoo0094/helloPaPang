@@ -33,13 +33,13 @@
 			<tbody>
 				<tr>
 					<th>제목</th>
-					<td colspan="3"><input id="title" name="title" class="form-control writeInput" type="text" title="제목" maxlength="100" required="all1"/></td>
+					<td colspan="3"><input id="title" name="title" class="form-control" type="text" title="제목" maxlength="100" required="all1"/></td>
 				</tr>
 				<tr>
 					<th>게시기간</th>
 					<td>
-						<input id="strDt" name="strDt" class="form-control writeInput" type="date" title="게시시작일" required="all1"/> 
-					  ~ <input id="endDt" name="endDt" class="form-control writeInput" type="date" title="게시종료일" required="all1"/>
+						<input id="strDt" name="strDt" class="form-control" type="date" title="게시시작일" required="all1"/> 
+					  ~ <input id="endDt" name="endDt" class="form-control" type="date" title="게시종료일" required="all1"/>
 					</td>
 					<th class="popYn">팝업여부</th>
 					<td class="popYn">
