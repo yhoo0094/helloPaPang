@@ -5,6 +5,7 @@
 	<%@ include file="/WEB-INF/views/user/loginModal.jsp" %><!-- 로그인 모달 -->
 </c:if>
 
+<script src="<%=request.getContextPath()%>/resources/js/tiles/headerTemplate.js"></script> <!-- 헤더 템플릿 -->
 <script>
 	//자동 로그아웃 타이머
 	let timeInterval;
@@ -38,48 +39,6 @@
 	function sessionTimeReset() {
 		sessionTime = '<%= session.getMaxInactiveInterval() %>';
 	}
-	
-	//로그아웃
-	function loginOut() {
-		if(!confirm("정말 로그아웃 하시겠습니까?")){
-			return;
-		}
-		
-		$com.loadingStart();
-	    $.ajax({
-	        url: '/user/logout.do',
-	        type: 'POST',
-	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
-	        dataType: 'json',
-	        success: function (result) {
-				$com.loadingEnd();
-		        if (result.RESULT == Constant.RESULT_SUCCESS){
-		            location.replace('/');
-		        } else {
-					alert(result[Constant.OUT_RESULT_MSG])
-				}
-	        },
-	        error: function(textStatus, jqXHR, thrownError){
-				$com.loadingEnd();
-			}        
-	    });		
-	}	
-	
-	//헤더 메뉴 hover하면 서브 메뉴 나타나기
-	function headerHover() {
-		$(".navMnuDiv").hover(
-	        function() {
-	            $(this).find('.dropdownDiv').show();
-	        },
-	        function() {
-	            $(this).find('.dropdownDiv').hide();
-	        }
-	    );
-	}
-	
-	$(document).ready(function() {
-		headerHover();
-	});
 </script>
 
 <!-- Navbar (sit on top) -->
@@ -115,8 +74,10 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<td class="navIcon"><a href="<%=request.getContextPath()%>/admin/adminHome" class="navMnu remove-a navMnu-color"><i class="fa fa-gear navIcon"></i> 관리자</a></td>
-								<td class="navIcon"><a href="#about" class="navMnu remove-a navMnu-color"><i class="fa fa-comment navIcon"></i> 게시판</a></td>
+								<c:if test="${sessionScope.LOGIN_INFO ne null}">
+									<td class="navIcon"><a href="<%=request.getContextPath()%>/admin/adminHome" class="navMnu remove-a navMnu-color"><i class="fa fa-gear navIcon"></i> 관리자</a></td>
+								</c:if>
+								<td class="navIcon"><a href="<%=request.getContextPath()%>/board/freeBoard" class="navMnu remove-a navMnu-color"><i class="fa fa-comment navIcon"></i> 게시판</a></td>
 								<td class="navIcon"><a href="#team" class="navMnu remove-a navMnu-color"><i class="fa-sharp fa-solid fa-store navIcon"></i> 장터</a></td>
 								<td class="navIcon"><a href="#pricing" class="navMnu remove-a navMnu-color"><i class="fa-solid fa-ice-cream navIcon"></i> 활동</a></td>								
 								<td class="navIcon"><a href="#work" class="navMnu remove-a navMnu-color"><i class="fa-solid fa-baby-carriage navIcon"></i> 베이비시터</a></td>

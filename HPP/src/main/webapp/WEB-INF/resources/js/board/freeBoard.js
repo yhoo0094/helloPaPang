@@ -1,8 +1,8 @@
 /**
- * @화면명: 공지사항 목록
- * @작성자: 김상민
- * @생성일: 2022. 11. 10. 오후 6:12:31
- * @설명: 공지사항 목록 조회 페이지
+ * @화면명: 자유게시판 
+ * @작성자: KimSangMin
+ * @생성일: 2023. 11. 23. 오후 7:01:06
+ * @설명: 자유롭운 주제로 이야기를 나눌 수 있는 게시판입니다.
 **/
 
 $(document).ready(function () {
@@ -32,13 +32,13 @@ function doSearch(){
 var columInfo = [
             { title: "제목"		, data: "title"			, width: "*"		, className: "text_align_left"}
           , { title: "작성자"		, data: "fstRegId"		, width: "100px"	, className: "text_align_center"}
-          , { title: "게시기간"	, data: "period"		, width: "150px"	, className: "text_align_center"}
-          , { title: "게시일"		, data: "fstRegDtti"	, width: "150px"	, className: "text_align_center"	, render: function(data){return data.replace(/\//g,'-')}}	
+          , { title: "분류"		, data: "freeCode"		, width: "150px"	, className: "text_align_center"}
+          , { title: "게시일"		, data: "ltUpdDtti"		, width: "150px"	, className: "text_align_center"	, render: function(data){return data.replace(/\//g,'-')}}	
           , { title: "조회수"		, data: "hit"			, width: "50px"		, className: "text_align_center hit"}
 ]
 var mainTable
 function makeDataTableServerSide() {
-	var url = '/notice/selectNotice.do';
+	var url = '/freeBoard/selectFreeBoard.do';
 	var param = {};    
 	param.pageLength = 10;						//페이지당 레코드 수
 	
@@ -84,7 +84,7 @@ function makeDataTableServerSide() {
    
     var $createBtn = $('<div class="table_btn_wrapper"><button type="button" class="papang-create-btn papang_btn paginate_button">신규</button></div>');
     $createBtn.on('click', function(){
-		noticeModalOpen();
+		window.location.href = '/board/freeBoard/freeBoardView';
 	})
 	
 	if(authGrade > 1){
@@ -98,4 +98,5 @@ function makeDataTableServerSide() {
 	    noticeModalOpen(data);
 	    $(this).children('.hit').text(++data.hit);
 	});
-}
+}	
+	

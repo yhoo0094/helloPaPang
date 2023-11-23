@@ -14,6 +14,19 @@ $(()=>{
 	} );
 
 	selectNotice();
+	
+	$('#noticePopX').on({
+		change : function(){
+			var boardSeq = $util.getParameterByName('boardSeq');
+			if (this.checked) {
+	            // 체크되었을 때: '1'을 쿠키에 추가
+	            $util.addToCookie('noticePopX', boardSeq, 1);
+	        } else {
+	            // 체크 해제되었을 때: 쿠키에서 '1' 제거
+	            $util.rmFromCookie('noticePopX', boardSeq, 1);
+	        }
+		}
+	});
 })
 
 //공지사항 조회

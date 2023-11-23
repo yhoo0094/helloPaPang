@@ -12,10 +12,15 @@ function noticePop(){
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
+			var noticePopX = $util.getCookie('noticePopX');
+			if(noticePopX == null){
+				$util.setCookie('noticePopX', '');
+				noticePopX = $util.getCookie('noticePopX');
+			}
 			for (var i in result.OUT_DATA){
-				//window.open("popup/noticePop?boardSeq=" + result.OUT_DATA[i].boardSeq, result.OUT_DATA[i].title, "width=1000,height=800");
-				
-				window.open("popup.do?view_nm=noticePop&boardSeq=" + result.OUT_DATA[i].boardSeq, result.OUT_DATA[i].title, "width=1000,height=800");
+				if(!noticePopX.split(',').includes(result.OUT_DATA[i].boardSeq)){	//하루 동안 표시하지 않음 대상이 아닌 경우
+					window.open("popup.do?view_nm=noticePop&boardSeq=" + result.OUT_DATA[i].boardSeq, result.OUT_DATA[i].title, "width=1000,height=800");	
+				}
 			}
         }
     });	

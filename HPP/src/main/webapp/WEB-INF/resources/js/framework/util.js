@@ -109,12 +109,13 @@ $util.inputTypeEmpty = function(el, type){
  * @param days 쿠키 보존 기간
  */
 $util.setCookie = function(name, value, days){
-	var expires = "30";
+	var expires = 360;
 	if(days){
-		var date = new Date();
-		date.setTime(date.getTime() + (days*24*60*60*1000));
-		expires = date.toUTCString();
+		expires = days; 
 	}
+	var date = new Date();
+	date.setTime(date.getTime() + (expires*24*60*60*1000));
+	expires = date.toUTCString();
 	document.cookie = name + "=" + value + "; expires=" + expires + "; path=/";
 }
 
@@ -129,6 +130,37 @@ $util.getCookie = function(name){
 	  .find((row) => row.startsWith(name))
 	  ?.split('=')[1];	
 	return value;
+}
+
+/**
+ * 쿠키에 값 추가하기
+ * @param name string - 쿠키 이름
+ * @param value string - 추가할 값
+ * @param days number - 쿠키 보존 기간(일)
+ */
+$util.addToCookie = function(name, value, days) {
+    var cookieValue = $util.getCookie(name);
+    var cookieArray = cookieValue ? cookieValue.split(',') : [];
+    if (cookieArray.indexOf(value) === -1) {
+        cookieArray.push(value);
+        $util.setCookie(name, cookieArray.join(','), days); // 1일 유지
+    }
+}
+
+/**
+ * 쿠키에 값 제거하기
+ * @param name string - 쿠키 이름
+ * @param value string - 제거할 값
+ * @param days number - 쿠키 보존 기간(일)
+ */
+$util.rmFromCookie = function(name, value, days) {
+    var cookieValue = $util.getCookie(name);
+    var cookieArray = cookieValue ? cookieValue.split(',') : [];
+    var index = cookieArray.indexOf(value);
+    if (index !== -1) {
+        cookieArray.splice(index, 1);
+        $util.setCookie(name, cookieArray.join(','), days); // 1일 유지
+    }
 }
 
 /**

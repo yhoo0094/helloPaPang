@@ -29,23 +29,18 @@
 			<tr>
 				<th>내용</th>
 				<td>
-					<div id="cn" title="내용" class="editor form-control">
-						<% 
-						    String cn = (String) request.getAttribute("cn");
-						    if (cn != null) {
-						        out.println(cn); // HTML로 렌더링
-						    }
-					    %>
-					</div>
+					<div id="cn" title="내용" class="editor form-control"></div>
 				</td>
 			</tr>
 			<tr>
 				<th>첨부파일</th>
 				<td>
-					<!-- 첨부파일 div -->
-					<%@include file="/WEB-INF/views/com/fileAttach.jsp" %>
+					<%@include file="/WEB-INF/views/com/fileAttach.jsp" %><!-- 첨부파일 div -->
 				</td>
 			</tr>
 		</tbody>
 	</table>
+	<div class="tr">
+		<input type="checkbox" id="noticePopX" style="margin-right: 5px;"><label for="noticePopX"><b>하루 동안 표시하지 않음</b></label>
+	</div>
 </div>
