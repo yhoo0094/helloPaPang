@@ -234,7 +234,7 @@ $util.XssReverseObj = function(obj) {
  * @param name string 파라미터명
  * @return string 파라미터값
  */
-$util.getParameterByName = function getParameterByName(name) {
+$util.getParameterByName = function(name) {
 	var url = window.location.href
     name = name.replace(/[\[\]]/g, '\\$&');
     const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
@@ -242,4 +242,22 @@ $util.getParameterByName = function getParameterByName(name) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+$util.getCodeForSelectTag = function(codeGroup, target){
+    $.ajax({
+        url: '/common/selectCodeList.do',
+        type: 'POST',
+        data: {codeGroup : codeGroup},
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+        dataType: 'json',
+        success: function (result) {
+            $.each(result.OUT_DATA, function(index, item) {
+		        var $option = $('<option></option>')
+		            .val(item.codeDetail) // value 속성 설정
+		            .text(item.codeDetailNm); // 텍스트 설정
+		        $('#' + target).append($option);
+	    	});
+        }
+    });	
 }

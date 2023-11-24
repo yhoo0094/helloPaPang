@@ -37,6 +37,23 @@
 		 WHERE T1.URL LIKE CONCAT(#{url},'%')    
 	</select>	
 	
+	
+	<!-- 공통 코드 조회 -->
+	<select id="selectCodeList" parameterType="map" resultType="camelCaseMap">
+		SELECT T1.CODE_GROUP                  /*코드그룹*/
+			,  T1.CODE_DETAIL                 /*코드상세*/
+			,  T1.CODE_DETAIL_NM              /*코드상세명*/
+			,  T1.MODIFY_YN                   /*코드수정가능여부*/
+			,  T1.DETAIL_ORDER                /*코드상세정렬순서*/
+			,  T1.FST_REG_ID                  /*최초등록자아이디*/
+			,  T1.FST_REG_DTTI                /*최초등록일시*/
+			,  T1.LT_UPD_ID                   /*최종수정자아이디*/
+			,  T1.LT_UPD_DTTI                 /*최종수정일시*/
+		  FROM TB_CODE_DETAIL T1			  /*테이블_코드상세*/
+		 WHERE T1.CODE_GROUP = #{codeGroup}  
+	</select>
+	
+	
 	<!-- 요청 로그 기록 -->
 	<insert id="insertReqLog" parameterType="map">
 		INSERT 

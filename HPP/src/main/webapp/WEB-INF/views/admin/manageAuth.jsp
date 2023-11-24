@@ -39,11 +39,13 @@
 		</form>
 	</div>
 	
-	<form id="writeForm" action="#">
-		<table id="mainTable" style="width:100%;"></table>
-	</form>
-	<div class="table_btn_wrapper">
-		<button type="button" class="papang-create-btn papang_btn paginate_button" onclick="updateAuth()">저장</button>
-		<button type="button" class="papang-close-btn papang_btn paginate_button" onclick="resetMainTable()">되돌리기</button>
+	<div class="papang-content-div">
+		<form id="writeForm" action="#">
+			<table id="mainTable" style="width:100%;"></table>
+		</form>
+		<div class="table_btn_wrapper">
+			<button type="button" class="papang-create-btn papang_btn paginate_button" onclick="updateAuth()">저장</button>
+			<button type="button" class="papang-close-btn papang_btn paginate_button" onclick="resetMainTable()">되돌리기</button>
+		</div>
 	</div>
 </div>	

@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -47,6 +48,8 @@ import com.ksm.hpp.framework.exception.ConfigurationException;
 import com.ksm.hpp.framework.util.Configuration;
 import com.ksm.hpp.framework.util.OSValidator;
 import com.ksm.hpp.framework.util.OS_Type;
+import com.ksm.hpp.framework.util.RequestUtil;
+import com.ksm.hpp.framework.util.ResponseUtil;
 import com.ksm.hpp.service.com.CommonService;
 
 @Controller
@@ -131,6 +134,20 @@ public class CommonController {
 		
 	 	return new UrlResource("file:///" + filePath + folder + "/" + filename + "." + extension);
 	 }	
+	
+	/**
+	* @메소드명: selectCodeList
+	* @작성자: KimSangMin
+	* @생성일: 2023. 11. 24. 오후 9:40:49
+	* @설명: 공통 코드 조회
+	 */
+	@RequestMapping("/selectCodeList.do")
+	public void selectCodeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> outData = commonService.selectCodeList((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		
+		ResponseUtil.setResAuto(response, inData, outData);
+	}
 	
 	/**
 	* @메소드명: apitest

@@ -8,51 +8,57 @@
  * @설명: 자유게시판 등록/조회/수정 화면 
 **/
  %>
-
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
-	<div class="papang-search-div lh50px">
-		<form id="searchForm" action="#">
-			<table class="papang-search-table">
+	<div class="papang-content-div">
+		<form id="freeBoardForm" name="freeBoardForm" method="post" enctype="multipart/form-data">
+			<input type="hidden" id="boardSeq" name="boardSeq" value="">
+			<input type="hidden" id="boardCode" name="boardCode" value="02"><!-- 게시판구분코드(01:공지사항,02:자유게시판,03:질문게시판,04:지역게시판) -->
+			
+			<table class="papang-table">
 				<colgroup>
-					<col width="8%">	
-					<col width="10%">	
-					<col width="8%">
-					<col width="10%">
-					<col width="8%">
-					<col width="*">	
-					<col width="8%">	
-					<col width="10%">	
-					<col width="8%">	
+					<col style="width: 10%">
+					<col style="width: 40%">
+					<col style="width: 10%">
+					<col style="width: 40%">
 				</colgroup>
 				<tbody>
-				<tr>
-					<th>제목:</th>
-					<td><input id="userId" name="userId" class="w100 form-control forSearch" title="아이디" type="text" maxlength="20"></td>	
-					<th>작성자:</th>
-					<td><input id="userId" name="userId" class="w100 form-control forSearch" title="아이디" type="text" maxlength="20"></td>
-					<th>게시일:</th>
-					<td>
-						<input id="dttiStr" name="dttiStr" class="datetimepicker w45 form-control" title="발생일시" type="text"> ~ 
-						<input id="dttiEnd" name="dttiEnd" class="datetimepicker w45 form-control" title="발생일시" type="text">
-					</td>						
-					<th>분류:</th>
-					<td>
-						<select id="loginCode" name="loginCode" class="w100 form-select">
-							<option value="">전체
-							<option value="01">로그인
-							<option value="02">로그아웃
-							<option value="03">존재하지 않는 아이디
-							<option value="04">비밀번호 오입력
-							<option value="05">비밀번호 오입력 횟수 초과
-						</select>
-					</td>
-					<td class="tc">
-						<button type="button" class="papang-search-btn papang_btn lh30px" onclick="doSearch()">검색</button>
-					</td>	
-				</tr>
+					<tr>
+						<th>제목</th>
+						<td colspan="3"><input id="title" name="title" class="form-control" type="text" title="제목" maxlength="100" required="all1"/></td>
+					</tr>
+					<tr>
+						<th>분류</th>
+						<td>
+							<!-- 01:잡담,02:정보,03:질문 -->
+							<select id="boardFreeCode" class="form-control w30">
+								<option value="">선택하세요
+							</select>
+						</td>
+						<th></th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td colspan="3">
+							<div id="cn" title="내용" class="editor form-control"></div>
+						</td>
+					</tr>
+					<tr>
+						<th>첨부파일</th>
+						<td colspan="3">
+							<%@include file="/WEB-INF/views/com/fileAttach.jsp" %><!-- 첨부파일 div -->
+						</td>
+					</tr>
 				</tbody>
 			</table>
+			
+			<div class="modal_btn_wrapper">
+				<button type="button" id="modalSaveBtn" class="btn papang-save-btn papang_btn" onclick="saveNotice()" style="display: none;">저장</button>
+				<button type="button" id="modalModifyBtn" class="btn papang-save-btn papang_btn" onclick="setModifyMode()" style="display: none;">수정</button>
+				<button type="button" id="modalDelBtn" class="btn papang-del-btn papang_btn" onclick="deleteBoard()" style="display: none;">삭제</button>
+				<button type="button" id="modalCloseBtn" class="btn papang-close-btn papang_btn" onclick="closeModal()">돌아가기</button>
+			</div>
 		</form>
 	</div>	
 </div>	

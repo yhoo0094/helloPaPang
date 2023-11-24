@@ -183,4 +183,20 @@ public class CommonService extends BaseService {
 		Map<String, Object> mnuInfo = sqlSession.selectOne("mapper.com.CommonMapper.selectMnuInfo", inData);
 		return mnuInfo;
 	}
+	
+	/**
+	* @메소드명: selectCodeList
+	* @작성자: KimSangMin
+	* @생성일: 2023. 11. 24. 오후 9:40:49
+	* @설명: 공통 코드 조회
+	 */
+	public Map<String, Object> selectCodeList(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<Map<String, Object>> list = sqlSession.selectList("mapper.com.CommonMapper.selectCodeList", inData);
+		result.put("data", list);
+		result.put(Constant.OUT_DATA, list);
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		return result;
+	}
 }
