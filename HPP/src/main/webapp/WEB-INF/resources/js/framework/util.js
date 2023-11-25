@@ -5,6 +5,35 @@
 **/
 
 var $util = {};
+
+$(()=>{
+	makeSelectTag();
+})
+
+//select 태그 자동 완성
+function makeSelectTag(){
+	$('.makeSelectTag').each(function(idx, itm){
+		let target = $(itm).attr('id');
+		let codeGroup = $util.camelToSnake(target);
+		
+		$.ajax({
+        url: '/common/selectCodeList.do',
+        type: 'POST',
+        data: {codeGroup : codeGroup},
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+        dataType: 'json',
+        async: false,
+        success: function (result) {
+            $.each(result.OUT_DATA, function(index, item) {
+		        var $option = $('<option></option>')
+		            .val(item.codeDetail) // value 속성 설정
+		            .text(item.codeDetailNm); // 텍스트 설정
+		        $('#' + target).append($option);
+	    	});
+        }
+    	});	
+	})
+}
  
 /**
  * 필수값 입력 여부 점검
@@ -231,8 +260,8 @@ $util.XssReverseObj = function(obj) {
 
 /**
  * url에 포함된 파라미터 값 가져오기
- * @param name string 파라미터명
- * @return string 파라미터값
+ * @param name String 파라미터명
+ * @return String 파라미터값
  */
 $util.getParameterByName = function(name) {
 	var url = window.location.href
@@ -244,6 +273,11 @@ $util.getParameterByName = function(name) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+/**
+ * select 태그에 코드를 기반으로 option 자동 생성 
+ * @param codeGroup String 코드그룹명
+ * @param target String select 태그의 id
+ */
 $util.getCodeForSelectTag = function(codeGroup, target){
     $.ajax({
         url: '/common/selectCodeList.do',
@@ -260,4 +294,42 @@ $util.getCodeForSelectTag = function(codeGroup, target){
 	    	});
         }
     });	
+}
+
+/**
+ * 테스트 데이터 byte 계산(MySQL의 utf8mb4 문자 집합 기준)
+ * @param str String 테스트 데이터
+ * @return Bytes number byte크기
+ */
+$util.calculateBytes = function(str) {
+    let bytes = 0;
+    for (let i = 0; i < str.length; i++) {
+        const charCode = str.charCodeAt(i);
+        if (charCode <= 0x7F) {
+            bytes += 1; // ASCII 문자: 1바이트
+        } else {
+            bytes += 3; // 한글 및 기타 유니코드 문자: 3바이트
+        }
+    }
+    return bytes;
+}
+
+/**
+ * 실수에 대해 천 단위 구분기호 넣기
+ * @param num Number 원래 숫자
+ * @return Number 천 단위 구분 기호가 적용된 숫자
+ */
+$util.numberWithCommas = function(num) {
+    var parts = num.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+}
+
+/**
+ * Camel case 문자열을 snake case로 변환
+ * @param str String Camel case 문자열
+ * @return String snake case 문자열
+ */
+$util.camelToSnake = function(str) {
+    return str.replace(/([A-Z])/g, '_$1').toLowerCase();
 }

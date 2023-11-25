@@ -53,7 +53,10 @@
 				<tr>
 					<th>내용</th>
 					<td colspan="3">
-						<div id="cn" title="내용" class="editor form-control"></div>
+						<div class="editor-container">
+							<div id="cn" title="내용" class="editor form-control"></div>
+							<div id="cnByteDisplay" class="byteDisplay" style="text-align: right;"></div>
+						</div>
 					</td>
 				</tr>
 				<tr>

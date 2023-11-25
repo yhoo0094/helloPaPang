@@ -39,7 +39,7 @@
 	<!-- 공지사항 등록 -->
 	<insert id="insertNotice" parameterType="map">
 		<selectKey resultType="integer" keyProperty="boardSeq" order="BEFORE">
-			SELECT nextval('BOARD_SEQ') FROM DUAL
+			SELECT nextval('BOARD_SEQ') FROM DUAL	/*boardSeq 값을 map에 반환*/
 		</selectKey>	
 		INSERT 
 		  INTO TB_BOARD_NOTICE			/*테이블_공지사항*/

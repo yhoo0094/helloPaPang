@@ -8,7 +8,7 @@
 		     , T1.BOARD_SEQ                                                 /*게시글일련번호*/
 		     , T1.TITLE                                                     /*자유게시판제목*/
 		     , T1.CN                                                        /*자유게시판내용*/
-		     , T1.FREE_CODE                                                 /*자유게시판코드*/
+		     , T1.BOARD_FREE_CODE                                           /*자유게시판코드*/
 		     , T1.HIT                                                       /*자유게시판조회수*/
 		     , T1.FST_REG_ID                                                /*최초등록자아이디*/
 		     , DATE_FORMAT(T1.FST_REG_DTTI, "%Y/%m/%d %H:%i") FST_REG_DTTI	/*최초등록일시*/
@@ -24,5 +24,32 @@
 		<if test='strIdx != null and strIdx != ""'>
 		 LIMIT ${strIdx}, ${pageLength}
 		</if>			 
-	</select>		
+	</select>	
+	
+	
+	<insert id="insertFreeBoard" parameterType="map">
+		<selectKey resultType="integer" keyProperty="boardSeq" order="BEFORE">
+			SELECT nextval('BOARD_SEQ') FROM DUAL	/*boardSeq 값을 map에 반환*/
+		</selectKey>	
+		INSERT 
+		  INTO TB_BOARD_FREE			/*테이블_자유게시판*/
+		     (
+		       BOARD_SEQ                /*게시글일련번호*/ 
+		     , TITLE                    /*자유게시판제목*/ 
+		     , CN                       /*자유게시판내용*/ 
+		     , BOARD_FREE_CODE          /*자유게시판코드(01:잡담,02:정보,03:질문)*/ 
+		     , FST_REG_ID 				/*최초등록자ID*/
+		     , LT_UPD_ID 				/*최종수정자ID*/
+		     )
+		VALUES
+			 (
+			   #{boardSeq}	
+			 , #{title}	
+			 , #{cn}
+			 , #{boardFreeCode}
+		     , #{loginInfo.userId} 	
+		     , #{loginInfo.userId}		 
+			 )   
+	</insert>	
+		
 </mapper>

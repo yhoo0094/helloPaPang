@@ -66,7 +66,6 @@ public class UserController extends BaseController {
 	@RequestMapping("/logout.do")
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
-		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
 		Map<String, Object> outData = userService.logout((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
 		
 		Gson gson = new Gson();

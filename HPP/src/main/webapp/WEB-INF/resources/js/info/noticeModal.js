@@ -5,11 +5,9 @@
  * @설명: 로그인 정보 입력 모달
 **/
 
-var edit;
+//var edit;
 $(()=>{
-	createEditor('.editor').then( newEditor => {
-			edit = watchdog.editor
-	} );
+	$editorUtil.createEditor('cn');
 })
 
 //공지사항 팝업 열기
@@ -49,7 +47,7 @@ function noticeModalOpen(data){
 		}
 		
 		data.boardCode = '01';								//게시판구분코드(01:공지사항,02:자유게시판,03:질문게시판,04:지역게시판)
-		data.boardSeq = data.boardSeq;						//게시글일련번호
+		//data.boardSeq = data.boardSeq;						//게시글일련번호
 		data.readonly = 'Y'									//파일 제거 버튼 출력 여부
 		$fileUtil.selectFile(data);							//첨부파일 조회
 		
@@ -83,7 +81,6 @@ function setModifyMode(){
 	edit.disableReadOnlyMode('noticeModal');							//내용
 	$('#fileAttachBtn').css('display','inline-block');				//첨부파일 버튼
 	$('.deleteFileBtn').css('display','inline-block');				//파일 제거 버튼
-
 }
 
 //공지사항 저장
@@ -95,8 +92,6 @@ function saveNotice(){
 		$('#cn').focus();
 		return;
 	}; 	
-	
-	//에디터 글자 수를 조회하여 내용에 입력하는 데이터 최대 길이 제한(추후 구현)
 	
 	var formData = new FormData($("#noticeForm")[0]);
 	

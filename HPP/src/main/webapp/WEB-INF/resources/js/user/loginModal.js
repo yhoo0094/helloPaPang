@@ -45,6 +45,9 @@ function login(){
         success: function (res, textStatus, jqXHR) {
 			$com.loadingEnd();
 	        if (res.RESULT == Constant.RESULT_SUCCESS){
+				// 로그인 정보를 세션 스토리지에 저장
+	            sessionStorage.setItem("loginInfo", JSON.stringify(res.loginInfo));
+				
 	            loginModalClose();
 	            
 	            //비밀번호 유효기간이 만료된 경우
@@ -56,7 +59,7 @@ function login(){
 					//비밀번호 변경 모달 띄우기(추후 구현)
 				}
 				
-				//로그인 에러 페이지 였으면 이전 페이지로 이동 
+				//로그인 에러 페이지였으면 이전 페이지로 이동 
 				var path = window.location.pathname;
 				if(path == '/error/noLoginInfo'){
 					location.href = "/";

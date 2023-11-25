@@ -44,4 +44,23 @@ public class FreeBoardService {
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;
 	}
+	
+	/**
+	* @메소드명: insertFreeBoard
+	* @작성자: KimSangMin
+	* @생성일: 2023. 11. 25. 오후 5:02:30
+	* @설명: 자유게시판 등록
+	*/	
+	public Map<String, Object> insertFreeBoard(StringBuilder logStr, Map<String, Object> inData, List<MultipartFile> fileList) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		inData = StringUtil.XssReplaceInData(inData);	//XSS스크립트 방지를 위해 텍스트 변환
+		
+		sqlSession.insert("mapper.board.FreeBoardMapper.insertFreeBoard", inData);
+		fileService.insertFile(logStr, inData, fileList);	
+		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		result.put(Constant.OUT_DATA, inData);
+		return result;
+	}	
 }

@@ -11,10 +11,23 @@ body, html, div {
     box-sizing: border-box;
 }
 
-a, p {
-/* 	text-decoration: none; */
-/* 	color: black; */
-/* 	margin: 0; */
+/*에디터 가로 길이 제한*/
+.form-control, .form-control p{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+.editor-container {
+    position: relative;
+}
+
+.byteDisplay {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: small;
+    color: gray;
 }
 
 .remove-a {

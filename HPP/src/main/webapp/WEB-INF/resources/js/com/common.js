@@ -5,6 +5,12 @@
 **/
 var $com = {};
 
+//로그인 사용자 정보 조회
+$com.getUserInfo = function(itemKey){
+	let storedItem = JSON.parse(sessionStorage.getItem("loginInfo"));
+	return storedItem[itemKey];
+};
+
 //로딩패널 보이기
 $com.loadingStart = function(){
 	$('#loadingPanel').css('display','flex');	

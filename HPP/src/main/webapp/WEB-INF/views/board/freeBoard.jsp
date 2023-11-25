@@ -38,13 +38,9 @@
 					</td>						
 					<th>분류:</th>
 					<td>
-						<select id="loginCode" name="loginCode" class="w100 form-select">
-							<option value="">전체
-							<option value="01">로그인
-							<option value="02">로그아웃
-							<option value="03">존재하지 않는 아이디
-							<option value="04">비밀번호 오입력
-							<option value="05">비밀번호 오입력 횟수 초과
+						<!-- 01:잡담,02:정보,03:질문 -->
+						<select id="boardFreeCode" name="boardFreeCode" class="form-control w100 makeSelectTag" title="분류">
+							<option value="">선택하세요</option>
 						</select>
 					</td>
 					<td class="tc">

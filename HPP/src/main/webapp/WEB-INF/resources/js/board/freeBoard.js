@@ -9,20 +9,6 @@ $(document).ready(function () {
 	makeDataTableServerSide();
 });
 
-//공지사항 목록 조회
-function selectNotice(){
-    $.ajax({
-        url: '/notice/selectNotice.do',
-        type: 'POST',
-        data: {},
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
-        dataType: 'json',
-        success: function (result) {
-            mkNoticeTable(result.list);
-        }
-    });	
-}
-
 //검색
 function doSearch(){
 	mainTable.ajax.reload();
@@ -30,11 +16,11 @@ function doSearch(){
 
 //DataTable 만들기(페이지네이션 서버 처리)
 var columInfo = [
-            { title: "제목"		, data: "title"			, width: "*"		, className: "text_align_left"}
-          , { title: "작성자"		, data: "fstRegId"		, width: "100px"	, className: "text_align_center"}
-          , { title: "분류"		, data: "freeCode"		, width: "150px"	, className: "text_align_center"}
-          , { title: "게시일"		, data: "ltUpdDtti"		, width: "150px"	, className: "text_align_center"	, render: function(data){return data.replace(/\//g,'-')}}	
-          , { title: "조회수"		, data: "hit"			, width: "50px"		, className: "text_align_center hit"}
+            { title: "제목"		, data: "title"				, width: "*"		, className: "text_align_left"}
+          , { title: "작성자"		, data: "fstRegId"			, width: "100px"	, className: "text_align_center"}
+          , { title: "분류"		, data: "boardFreeCode"		, width: "150px"	, className: "text_align_center"}
+          , { title: "게시일"		, data: "ltUpdDtti"			, width: "150px"	, className: "text_align_center"	, render: function(data){return data.replace(/\//g,'-')}}	
+          , { title: "조회수"		, data: "hit"				, width: "50px"		, className: "text_align_center hit"}
 ]
 var mainTable
 function makeDataTableServerSide() {
@@ -95,8 +81,25 @@ function makeDataTableServerSide() {
     //테이블 클릭 이벤트
 	$('#mainTable tbody').on('click', 'tr', function () {
 	    var data = mainTable.row(this).data();
-	    noticeModalOpen(data);
-	    $(this).children('.hit').text(++data.hit);
+	    moveFreeBoardView(data);	//자유게시판 조회 화면으로 이동
 	});
 }	
+
+//자유게시판 조회 화면으로 이동
+function moveFreeBoardView(data){
+	 // form 태그 생성
+    var $form = $('<form></form>')
+        .attr("action", "/board/freeBoard/freeBoardView")
+        .attr("method", "post");
+
+    // input 태그 생성 및 form 태그에 추가
+    $('<input>').attr({
+        type: "hidden",
+        name: "param",
+        value: data.boardSeq
+    }).appendTo($form);
+
+    // form 태그를 body에 추가하고 제출
+    $form.appendTo('body').submit();
+}
 	

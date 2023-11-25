@@ -8,6 +8,10 @@
  * @설명: 자유게시판 등록/조회/수정 화면 
 **/
  %>
+ <script>
+	const param = '<%= request.getAttribute("param") %>';
+</script>
+ 
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
 	<div class="papang-content-div">
@@ -31,7 +35,7 @@
 						<th>분류</th>
 						<td>
 							<!-- 01:잡담,02:정보,03:질문 -->
-							<select id="boardFreeCode" class="form-control w30">
+							<select id="boardFreeCode" name="boardFreeCode" class="form-control w30 makeSelectTag" title="분류" required="all1">
 								<option value="">선택하세요
 							</select>
 						</td>
@@ -41,7 +45,10 @@
 					<tr>
 						<th>내용</th>
 						<td colspan="3">
-							<div id="cn" title="내용" class="editor form-control"></div>
+							<div class="editor-container">
+								<div id="cn" title="내용" class="editor form-control"></div>
+								<div id="cnByteDisplay" class="byteDisplay" style="text-align: right;"></div>
+							</div>
 						</td>
 					</tr>
 					<tr>
@@ -54,10 +61,10 @@
 			</table>
 			
 			<div class="modal_btn_wrapper">
-				<button type="button" id="modalSaveBtn" class="btn papang-save-btn papang_btn" onclick="saveNotice()" style="display: none;">저장</button>
-				<button type="button" id="modalModifyBtn" class="btn papang-save-btn papang_btn" onclick="setModifyMode()" style="display: none;">수정</button>
-				<button type="button" id="modalDelBtn" class="btn papang-del-btn papang_btn" onclick="deleteBoard()" style="display: none;">삭제</button>
-				<button type="button" id="modalCloseBtn" class="btn papang-close-btn papang_btn" onclick="closeModal()">돌아가기</button>
+				<button type="button" id="saveBtn" class="btn papang-save-btn papang_btn" onclick="saveFreeBoard()" style="display: none;">저장</button>
+				<button type="button" id="modifyBtn" class="btn papang-save-btn papang_btn" onclick="setModifyMode()" style="display: none;">수정</button>
+				<button type="button" id="delBtn" class="btn papang-del-btn papang_btn" onclick="deleteBoard()" style="display: none;">삭제</button>
+				<button type="button" id="historyBackBtn" class="btn papang-close-btn papang_btn" onclick="closeModal()">돌아가기</button>
 			</div>
 		</form>
 	</div>	

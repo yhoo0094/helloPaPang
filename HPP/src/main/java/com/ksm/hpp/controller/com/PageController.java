@@ -141,6 +141,8 @@ public class PageController {
 				result.addObject("url", mnuInfo.get("url"));
 				result.addObject("mnuTopUrl", mnuInfo.get("mnuTopUrl"));
 				result.addObject("authGrade", readAuth.get("authGrade"));
+				Object param = (inData.get("param") != null)? inData.get("param") : ""; 
+				result.addObject("param", param);
 				result.setViewName(url1 + "/" + url3);
 			}
 		} while(false);
