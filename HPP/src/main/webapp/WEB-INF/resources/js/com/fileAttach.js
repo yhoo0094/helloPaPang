@@ -93,7 +93,8 @@ $fileUtil.selectFile = function selectFile(data) {
 			
 			if(data.readonly == 'Y'){
 				$('.deleteFileBtn').css('display','none');			//파일 제거 버튼
-				$('#fileAttachBtn').css('display','none');			//파일찾기 버튼
+			} else {
+				$('#fileAttachBtn').css('display','inline-block');			//파일찾기 버튼
 			}
         }
     });		

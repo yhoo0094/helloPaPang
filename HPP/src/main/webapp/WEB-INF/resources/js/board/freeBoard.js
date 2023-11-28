@@ -6,8 +6,18 @@
 **/
 
 $(document).ready(function () {
+	setDatetimepicker();		//datetimepicker 설정
 	makeDataTableServerSide();
 });
+
+//datetimepicker 설정
+function setDatetimepicker() {
+	var dttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),-1,0,0,0,0);	//1년 전
+	dttiStr = $dateUtil.dateHyphenTime(dttiStr);
+	
+	$com.datepicker('dttiStr',$dateUtil.todayYYYY_MM_DD_HHMM(dttiStr));
+	$com.datetimepicker('dttiEnd',$dateUtil.todayYYYY_MM_DD_HHMM());	
+}
 
 //검색
 function doSearch(){
@@ -18,14 +28,14 @@ function doSearch(){
 var columInfo = [
             { title: "제목"		, data: "title"				, width: "*"		, className: "text_align_left"}
           , { title: "작성자"		, data: "fstRegId"			, width: "100px"	, className: "text_align_center"}
-          , { title: "분류"		, data: "boardFreeCode"		, width: "150px"	, className: "text_align_center"}
+          , { title: "분류"		, data: "boardFreeCodeNm"	, width: "150px"	, className: "text_align_center"}
           , { title: "게시일"		, data: "ltUpdDtti"			, width: "150px"	, className: "text_align_center"	, render: function(data){return data.replace(/\//g,'-')}}	
           , { title: "조회수"		, data: "hit"				, width: "50px"		, className: "text_align_center hit"}
 ]
 var mainTable
 function makeDataTableServerSide() {
 	var url = '/freeBoard/selectFreeBoard.do';
-	var param = {};    
+	var param = {useYn : 'Y'};    
 	param.pageLength = 10;						//페이지당 레코드 수
 	
     mainTable = $('#mainTable').DataTable({
@@ -87,6 +97,8 @@ function makeDataTableServerSide() {
 
 //자유게시판 조회 화면으로 이동
 function moveFreeBoardView(data){
+	increaseHit(data.boardSeq); //조회수 증가
+	
 	 // form 태그 생성
     var $form = $('<form></form>')
         .attr("action", "/board/freeBoard/freeBoardView")
@@ -101,5 +113,23 @@ function moveFreeBoardView(data){
 
     // form 태그를 body에 추가하고 제출
     $form.appendTo('body').submit();
+}
+
+//조회수 증가
+function increaseHit(boardSeq){
+    $.ajax({
+        url: '/freeBoard/increaseHit.do',
+        type: 'POST',
+        data: {boardSeq: boardSeq},
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+        dataType: 'json',
+        success: function (result) {
+            if (result.RESULT == Constant.RESULT_SUCCESS){
+                
+            } else {
+				alert(Constant.OUT_RESULT_MSG)
+			}
+        }
+    });	
 }
 	

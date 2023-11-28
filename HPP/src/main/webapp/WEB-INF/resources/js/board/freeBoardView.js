@@ -54,23 +54,30 @@ function pageInit(){
 	}
 }
 
-//화면 모드 바꾸기(01: 등록, 02: 수정, 03: 조회)
+//화면 모드 바꾸기
 function chViewMode(type){
 	switch(type){ 
 		case('01'):	//등록
 			$('#saveBtn').css('display','inline-block');
 			$('#modifyBtn').css('display','none');
 			$('#delBtn').css('display','none');
+			$('#cnByteDisplay').css('display','inline-block');
+			$('.fileAttachBtn').css('display','inline-block');
 			break;
-		case('02'):
+		case('02'):	//수정
 			$('#saveBtn').css('display','none');
 			$('#modifyBtn').css('display','inline-block');
-			$('#delBtn').css('display','inline-block');	 
+			$('#delBtn').css('display','inline-block');
+			$('#cnByteDisplay').css('display','inline-block');	 
 			break;
-		case('03'):
+		case('03'):	//조회
 			$('#saveBtn').css('display','none');
 			$('#modifyBtn').css('display','none');
-			$('#delBtn').css('display','none');	 	 
+			$('#delBtn').css('display','none');	 
+			
+			$('#freeBoardForm .form-control').attr('readonly','readonly');		//readonly 적용
+			$('#freeBoardForm select').attr('disabled',true);					//disabled 적용
+			edit.enableReadOnlyMode('Y');										//에디터 readonly 적용
 			break;		
 		default:
 			break;
@@ -92,7 +99,7 @@ function saveFreeBoard(){
 	formData.set('cn',edit.getData());
 	
 	var url;    
-    if($util.isEmpty($('#boardSeq').val())){
+    if($util.isEmpty(param)){
 		url = '/freeBoard/insertFreeBoard.do';
 	} else {
 		url = '/freeBoard/updateFreeBoard.do';
@@ -103,20 +110,43 @@ function saveFreeBoard(){
         if (result.RESULT == Constant.RESULT_SUCCESS){
             alert("완료되었습니다.");
             
-            //수정 화면으로 이동
-		    var $form = $('<form></form>')
-		        .attr("action", "/board/freeBoard/freeBoardView")
-		        .attr("method", "post");
-		
-		    $('<input>').attr({
-		        type: "hidden",
-		        name: "param",
-		        value: result.OUT_DATA.boardSeq,
-		    }).appendTo($form);
-		
-		    $form.appendTo('body').submit();
+            //등록 후 수정 화면으로 이동
+            if($util.isEmpty(param)){
+			    var $form = $('<form></form>')
+			        .attr("action", "/board/freeBoard/freeBoardView")
+			        .attr("method", "post");
+			
+			    $('<input>').attr({
+			        type: "hidden",
+			        name: "param",
+			        value: result.OUT_DATA.boardSeq,
+			    }).appendTo($form);
+			
+			    $form.appendTo('body').submit();				
+			}
         } else {
 			alert(result[Constant.OUT_RESULT_MSG])
 		}		
 	});
+}
+
+//삭제
+function deleteFreeBoard(){
+	if(!confirm('정말로 삭제하시겠습니까?')){return false;}
+	
+	$.ajax({
+        url: '/freeBoard/deleteFreeBoard.do',
+        type: 'POST',
+        data: {boardSeq: param},
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+        dataType: 'json',
+        success: function (result) {
+			window.location.href = '/board/freeBoard';
+        }
+    });	
+}
+
+//돌아가기
+function moveList(){
+	window.location.href = '/board/freeBoard';
 }

@@ -407,14 +407,11 @@ table.dataTable.no-footer{
     /* border: solid 1px grey; */
 }
 
-.fileAttachBtn{
+#fileAttachBtn{
 	float: right;
 	cursor: pointer;
+	display: none;
 }
-
-/* .fileAttachBtn :hover{ */
-	
-/* } */
 
 .attachedFile{
 	display: inline-block;
@@ -562,15 +559,8 @@ label{
 	border: none;
 }
 
-.tc{
-	text-align: center;
-}
-
-.tr{
+.byteDisplay{
 	text-align: right;
-}
-
-.tl{
-	text-align: left;
+	display: none;
 }
 /* 전체 공용 끝 */

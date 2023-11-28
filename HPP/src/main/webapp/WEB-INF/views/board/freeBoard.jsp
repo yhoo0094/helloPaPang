@@ -28,7 +28,7 @@
 				<tbody>
 				<tr>
 					<th>제목:</th>
-					<td><input id="userId" name="userId" class="w100 form-control forSearch" title="아이디" type="text" maxlength="20"></td>	
+					<td><input id="title" name="title" class="w100 form-control forSearch" title="아이디" type="text" maxlength="20"></td>	
 					<th>작성자:</th>
 					<td><input id="userId" name="userId" class="w100 form-control forSearch" title="아이디" type="text" maxlength="20"></td>
 					<th>게시일:</th>

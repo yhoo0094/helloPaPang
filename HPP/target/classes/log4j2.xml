@@ -39,7 +39,7 @@
                 <Pattern>%5p %d{yyyy-MM-dd hh:mm:ss,SSS} [%C{3}.%M] %m%n</Pattern>
             </PatternLayout>
             <Policies>
-                <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>
+<!--                 <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/> -->
                 <!-- <SizeBasedTriggeringPolicy size="100MB"/> -->
                 <!-- <CronTriggeringPolicy schedule="0 0/2 * 1/1 * ? *" /> -->
             </Policies>
@@ -53,7 +53,7 @@
                 <Pattern>%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Pattern>
             </PatternLayout>
             <Policies>
-                <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>
+<!--                 <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/> -->
             </Policies>
         </RollingFile>        
         

@@ -27,7 +27,7 @@
 		   AND T1.BOARD_SEQ = ${boardSeq}
 		</if>	
 		<if test='popYn != null and popYn != ""'>
-		   AND T1.POP_YN = ${popYn}
+		   AND T1.POP_YN = #{popYn}
 		</if>
 		 ORDER BY T1.STR_DT DESC
 		 

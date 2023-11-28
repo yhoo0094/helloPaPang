@@ -9,6 +9,11 @@
 		     , T1.TITLE                                                     /*자유게시판제목*/
 		     , T1.CN                                                        /*자유게시판내용*/
 		     , T1.BOARD_FREE_CODE                                           /*자유게시판코드*/
+		     , (SELECT CODE_DETAIL_NM 
+		     	  FROM TB_CODE_DETAIL 
+		     	 WHERE CODE_GROUP = 'BOARD_FREE_CODE' 
+		     	   AND CODE_DETAIL = T1.BOARD_FREE_CODE) AS BOARD_FREE_CODE_NM	/*자유게시판코드_한글명*/
+		     , T1.USE_YN													/*자유게시판사용여부*/
 		     , T1.HIT                                                       /*자유게시판조회수*/
 		     , T1.FST_REG_ID                                                /*최초등록자아이디*/
 		     , DATE_FORMAT(T1.FST_REG_DTTI, "%Y/%m/%d %H:%i") FST_REG_DTTI	/*최초등록일시*/
@@ -19,6 +24,9 @@
 		<if test='boardSeq != null and boardSeq != ""'>
 		   AND T1.BOARD_SEQ = ${boardSeq}
 		</if>	
+		<if test='useYn != null and useYn != ""'>
+		   AND T1.USE_YN = #{useYn}
+		</if>
 		 ORDER BY T1.LT_UPD_DTTI DESC
 		 
 		<if test='strIdx != null and strIdx != ""'>
@@ -26,7 +34,7 @@
 		</if>			 
 	</select>	
 	
-	
+	<!-- 자유게시판 등록 -->
 	<insert id="insertFreeBoard" parameterType="map">
 		<selectKey resultType="integer" keyProperty="boardSeq" order="BEFORE">
 			SELECT nextval('BOARD_SEQ') FROM DUAL	/*boardSeq 값을 map에 반환*/
@@ -51,5 +59,31 @@
 		     , #{loginInfo.userId}		 
 			 )   
 	</insert>	
-		
+	
+	<!-- 자유게시판 수정 -->
+	<update id="updateFreeBoard" parameterType="map">
+		UPDATE TB_BOARD_FREE							/*테이블_자유게시판*/
+		   SET TITLE			= #{title}				/*자유게시판제목*/
+		     , CN				= #{cn}					/*자유게시판내용*/
+		     , BOARD_FREE_CODE  = #{boardFreeCode}		/*자유게시판코드(01:잡담,02:정보,03:질문)*/
+		     , LT_UPD_ID 		= #{loginInfo.userId}	/*최종수정자ID*/
+		     , LT_UPD_DTTI		= NOW() 				/*최종수정일시*/
+		 WHERE BOARD_SEQ		= #{boardSeq}			/*게시글일련번호*/    
+	</update>
+	
+	<!-- 자유게시판 삭제 -->
+	<update id="deleteFreeBoard" parameterType="map">
+		UPDATE TB_BOARD_FREE							/*테이블_자유게시판*/
+		   SET USE_YN			= 'N'					/*자유게시판사용여부*/
+		     , LT_UPD_ID 		= #{loginInfo.userId}	/*최종수정자ID*/
+		     , LT_UPD_DTTI		= NOW() 				/*최종수정일시*/
+		 WHERE BOARD_SEQ		= #{boardSeq}			/*게시글일련번호*/    
+	</update>	
+	
+	<!-- 자유게시판 조회수 증가 -->
+	<update id="increaseHit" parameterType="map">
+		UPDATE TB_BOARD_FREE							/*테이블_자유게시판*/
+		   SET HIT				= HIT + 1				/*자유게시판조회수*/
+		 WHERE BOARD_SEQ		= #{boardSeq}			/*게시글일련번호*/    
+	</update>
 </mapper>

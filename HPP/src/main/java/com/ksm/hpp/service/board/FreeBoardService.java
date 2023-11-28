@@ -62,5 +62,56 @@ public class FreeBoardService {
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		result.put(Constant.OUT_DATA, inData);
 		return result;
+	}
+	
+	/**
+	* @메소드명: insertFreeBoard
+	* @작성자: KimSangMin
+	* @생성일: 2023. 11. 28. 오후 7:49:41
+	* @설명: 자유게시판 수정
+	 */
+	public Map<String, Object> updateFreeBoard(StringBuilder logStr, Map<String, Object> inData, List<MultipartFile> fileList) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		inData = StringUtil.XssReplaceInData(inData);	//XSS스크립트 방지를 위해 텍스트 변환
+		
+		sqlSession.update("mapper.board.FreeBoardMapper.updateFreeBoard", inData);
+		fileService.insertFile(logStr, inData, fileList);	
+		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		result.put(Constant.OUT_DATA, inData);
+		return result;
+	}
+	
+	/**
+	* @메소드명: deleteFreeBoard
+	* @작성자: KimSangMin
+	* @생성일: 2023. 11. 28. 오후 8:28:02
+	* @설명: 자유게시판 삭제
+	*/
+	public Map<String, Object> deleteFreeBoard(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		int cnt = sqlSession.update("mapper.board.FreeBoardMapper.deleteFreeBoard", inData);
+		String consResult = (cnt == 1)? Constant.RESULT_SUCCESS : Constant.RESULT_FAILURE;
+		result.put(Constant.RESULT, consResult);
+		result.put(Constant.OUT_DATA, inData);
+		return result;
+	}	
+	
+	/**
+	* @메소드명: increaseHit
+	* @작성자: KimSangMin
+	* @생성일: 2023. 11. 28. 오후 9:31:07
+	* @설명: 자유게시판 조회수 증가
+	*/
+	public Map<String, Object> increaseHit(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		int cnt = sqlSession.update("mapper.board.FreeBoardMapper.increaseHit", inData);
+		String consResult = (cnt == 1)? Constant.RESULT_SUCCESS : Constant.RESULT_FAILURE;
+		result.put(Constant.RESULT, consResult);
+		result.put(Constant.OUT_DATA, inData);
+		return result;
 	}	
 }

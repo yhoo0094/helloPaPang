@@ -9,7 +9,7 @@
 var mainTable
 
 $(document).ready(function () {
-	setDatetimepicker();
+	setDatetimepicker();		//datetimepicker 설정
 	//selectData();				//DataTable 만들기
 	makeDataTableServerSide();	//DataTable 만들기(페이지네이션 서버 처리)
 });

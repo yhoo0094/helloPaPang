@@ -9,7 +9,7 @@
 //로그인 팝업 열기
 function loginModalOpen(){
 	//아이디 저장 여부 확인
-	if($util.getCookie('hpp_save_id')){
+	if($util.getCookie('hpp_save_id') == 'Y'){
 		$('#idModal').val($util.getCookie('hpp_user_id'));
 		$('#rememberIdChk').prop("checked", true);
 	}
@@ -28,10 +28,10 @@ function login(){
 	//아이디 저장 여부 확인
 	if($('#rememberIdChk').is(":checked")){
 		$util.setCookie('hpp_user_id', $('#idModal').val());
-		$util.setCookie('hpp_save_id', true);
+		$util.setCookie('hpp_save_id', 'Y');
 	} else {
 		$util.setCookie('hpp_user_id', '');
-		$util.setCookie('hpp_save_id', false);		
+		$util.setCookie('hpp_save_id', 'N');		
 	};
 	
 	var formData = $('#loginForm').serialize();

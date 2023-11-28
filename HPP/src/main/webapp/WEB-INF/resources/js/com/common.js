@@ -38,3 +38,21 @@ $com.datetimepicker = function(id, defVal){
 	$.datetimepicker.setLocale('ko');	
 };
 
+//datepicker
+$com.datepicker = function(id, defVal){
+	if($util.isEmpty(defVal)){
+		defVal = $dateUtil.todayYYYY_MM_DD();
+	}
+	
+	if($util.isEmpty(id)){
+		id = 'datetimepicker';
+	}	
+	
+	debugger;
+	jQuery('#' + id).datetimepicker({
+		format:'Y-m-d',
+		value: defVal,
+	});
+	$.datetimepicker.setLocale('ko');	
+};
+

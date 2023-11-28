@@ -8,7 +8,9 @@ function noticePop(){
 	$.ajax({
         url: '/notice/selectNotice.do',
         type: 'POST',
-        data: {periodToggle: true},
+        data: { periodToggle: true
+        	  , popYn: 'Y'
+        	  },
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
