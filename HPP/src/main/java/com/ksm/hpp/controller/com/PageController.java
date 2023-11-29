@@ -70,7 +70,7 @@ public class PageController {
 	 * @설명: 페이지 이동 관리 컨트롤러
 	 * @throws Exception
 	 */
-	@RequestMapping("/{url1:^(?!error).*$}/{url2}")
+	@RequestMapping("/{url1:^(?!error).*$}/{url2:^(?!.*\\.do$).*$}")
 	public ModelAndView pageController(HttpServletRequest request, HttpServletResponse response, @PathVariable("url1") String url1, @PathVariable("url2") String url2) throws Exception {
 		ModelAndView result = new ModelAndView();
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);

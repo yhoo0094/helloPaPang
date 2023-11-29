@@ -40,6 +40,8 @@
 			<mvc:exclude-mapping path="/home"/>			<!-- 홈페이지 -->
 			<mvc:exclude-mapping path="/user/signUp"/> 	<!-- 회원가입 -->
 			<mvc:exclude-mapping path="/info/notice"/>  <!-- 공지사항 -->
+			<mvc:exclude-mapping path="/board/freeBoard"/>  <!-- 자유 게시판 -->
+			<mvc:exclude-mapping path="/board/freeBoard/freeBoardView"/>  <!-- 자유 게시판 -->
 			
 			<bean id="LoginCheckInterceptor" class="com.ksm.hpp.framework.interceptor.LoginCheckInterceptor"></bean>
 		</mvc:interceptor>			

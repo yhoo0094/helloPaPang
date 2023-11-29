@@ -8,7 +8,7 @@ var $com = {};
 //로그인 사용자 정보 조회
 $com.getUserInfo = function(itemKey){
 	let storedItem = JSON.parse(sessionStorage.getItem("loginInfo"));
-	return storedItem[itemKey];
+	return (storedItem)? storedItem[itemKey] : storedItem;
 };
 
 //로딩패널 보이기
@@ -48,9 +48,9 @@ $com.datepicker = function(id, defVal){
 		id = 'datetimepicker';
 	}	
 	
-	debugger;
 	jQuery('#' + id).datetimepicker({
 		format:'Y-m-d',
+		timepicker:false,
 		value: defVal,
 	});
 	$.datetimepicker.setLocale('ko');	

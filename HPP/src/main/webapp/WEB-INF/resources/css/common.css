@@ -16,6 +16,11 @@
 .display-b{display: block;}
 .display-n{display: none;}	
 
+.blackText{color: black;}
+.whiteText{color: white;}
+.redText{color: red;}
+.blueText{color: blue;}
+
 .vh100{height: 100vh;}
 .vw100{width: 100vw;}
 
@@ -146,6 +151,10 @@
 .lh190px{line-height:190px;} 
 .lh195px{line-height:195px;} 
 .lh200px{line-height:200px;} 
+
+.col-width-8{max-width: 80px;}
+.col-width-8 th, .col-width-8 td{max-width: 80px;}
+
 
 .mb-1{margin-bottom: 0.5rem;}
 .mb-2{margin-bottom: 1.0rem;}

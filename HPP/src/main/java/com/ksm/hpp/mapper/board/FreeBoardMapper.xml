@@ -24,6 +24,18 @@
 		<if test='boardSeq != null and boardSeq != ""'>
 		   AND T1.BOARD_SEQ = ${boardSeq}
 		</if>	
+		<if test='title != null and title != ""'>
+		   AND T1.TITLE LIKE CONCAT('%',TRIM(#{title}),'%')
+		</if>
+		<if test='userId != null and userId != ""'>
+		   AND T1.FST_REG_ID LIKE CONCAT('%',TRIM(#{userId}),'%')
+		</if>
+		<if test='dttiStr != null and dttiStr != ""'>
+		   AND FST_REG_DTTI BETWEEN #{dttiStr} AND DATE_ADD(#{dttiEnd}, INTERVAL 1 DAY)
+		</if>
+		<if test='boardFreeCode != null and boardFreeCode != ""'>
+		   AND T1.BOARD_FREE_CODE = #{boardFreeCode}
+		</if>
 		<if test='useYn != null and useYn != ""'>
 		   AND T1.USE_YN = #{useYn}
 		</if>

@@ -16,7 +16,7 @@ function setDatetimepicker() {
 	dttiStr = $dateUtil.dateHyphenTime(dttiStr);
 	
 	$com.datepicker('dttiStr',$dateUtil.todayYYYY_MM_DD_HHMM(dttiStr));
-	$com.datetimepicker('dttiEnd',$dateUtil.todayYYYY_MM_DD_HHMM());	
+	$com.datepicker('dttiEnd',$dateUtil.todayYYYY_MM_DD_HHMM());	
 }
 
 //검색
@@ -45,7 +45,9 @@ function makeDataTableServerSide() {
         	type: 'POST',
 			data: function(){
 				//검색 조건 object에 담기
-				param.periodToggle = $('#periodToggle').prop('checked');
+				$.each($('#searchForm').serializeArray(), function() {
+			        param[this.name] = this.value;
+			    });
 				
 				if($util.isEmpty(mainTable)){
 					param.strIdx = 0;

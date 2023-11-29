@@ -65,7 +65,11 @@ public class ResponseUtil {
 			result = new HashMap<String, Object>();
 			result.put(Constant.RESULT, Constant.RESULT_FAILURE);
 			result.put(Constant.OUT_RESULT_MSG, e.getMessage());
-		} 
+		} else {
+			result = new HashMap<String, Object>();
+			result.put(Constant.RESULT, Constant.RESULT_FAILURE);
+			result.put(Constant.OUT_RESULT_MSG, "정의되지 않은 오류 발생");
+		}
 		
 		return result;
 	}

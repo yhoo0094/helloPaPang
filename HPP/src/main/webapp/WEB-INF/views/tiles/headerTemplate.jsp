@@ -79,7 +79,7 @@
 								</c:if>
 								<td class="navIcon"><a href="<%=request.getContextPath()%>/board/freeBoard" class="navMnu remove-a navMnu-color"><i class="fa fa-comment navIcon"></i> 게시판</a></td>
 								<td class="navIcon"><a href="#team" class="navMnu remove-a navMnu-color"><i class="fa-sharp fa-solid fa-store navIcon"></i> 장터</a></td>
-								<td class="navIcon"><a href="#pricing" class="navMnu remove-a navMnu-color"><i class="fa-solid fa-ice-cream navIcon"></i> 활동</a></td>								
+								<td class="navIcon"><a href="<%=request.getContextPath()%>/active/play" class="navMnu remove-a navMnu-color"><i class="fa-solid fa-ice-cream navIcon"></i> 활동</a></td>								
 								<td class="navIcon"><a href="#work" class="navMnu remove-a navMnu-color"><i class="fa-solid fa-baby-carriage navIcon"></i> 베이비시터</a></td>
 								<td class="navIcon"><a href="<%=request.getContextPath()%>/info/notice" class="navMnu remove-a navMnu-color"><i class="fa-sharp fa-solid fa-circle-info navIcon"></i> 정보</a></td>
 							</tr>	

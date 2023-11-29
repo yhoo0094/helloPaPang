@@ -136,8 +136,8 @@ public class CommonService extends BaseService {
 		List<Map<String, Object>> authList = (List<Map<String, Object>>) session.getAttribute(Constant.AUTH_LIST);
 		
 		//세션에 권한 정보가 없을 경우 => 비정상적인 접근
-		if(authList.isEmpty() || authList == null) {
-			throw new ConfigurationException("비정상적인 접근이 감지되었습니다.");
+		if(authList == null || authList.isEmpty()) {
+			throw new ConfigurationException("비정상적인 접근입니다.");
 		}
 		
 		//권한 목록에서 해당 url의 권한등급이 필요 권한등급을 만족하면 통과

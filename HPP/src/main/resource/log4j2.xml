@@ -30,6 +30,10 @@
             <patternLayout pattern="%5p %d{yyyy-MM-dd hh:mm:ss,SSS} [%C{3}.%M] %m%n"/>
         </console>
         
+        <console name="sql" target="SYSTEM_OUT"><!-- 콘솔에 출력하는 방식 설정 -->
+            <patternLayout pattern="%5p %d{yyyy-MM-dd hh:mm:ss,SSS} [%C{3}.%M] %n%n %m %n%n"/>
+        </console>
+        
         <!-- 파일  -->
         <RollingFile name ="RollingFile">
         	<!-- 개발환경 로그 경로 -->
@@ -64,20 +68,19 @@
 	 <!-- SQL Logger -->
 	<loggers>	 
 		<!--  SQL문과 해당 SQL을 실행시키는데 수행된 시간 정보(milliseconds) -->
-		<logger name="jdbc.sqltiming" additivity="false" level="INFO">
+		<logger name="jdbc.sqltiming" additivity="false" level="OFF">
 		    <appender-ref ref="console"/> 
 		    <AppenderRef ref="RollingFile"/>
 		</logger>
 		
 		<!--  SQL 쿼리 문장 -->
 		<logger name="jdbc.sqlonly" additivity="false" level="INFO"> 
-		    <appender-ref ref="console"/> 
+		    <appender-ref ref="sql"/> 
 		    <AppenderRef ref="RollingFile"/>
-		    <patternLayout pattern="%5p %d{yyyy-MM-dd hh:mm:ss} [%C.%M] %m%n"/>
 		</logger>
 		 
 		<!--  ResultSet을 제외한 모든 JDBC 호출 정보 -->
-		<logger name="jdbc.audit" additivity="false" level="INFO"> 
+		<logger name="jdbc.audit" additivity="false" level="OFF"> 
 		    <appender-ref ref="console"/> 
 		</logger>
 		 
