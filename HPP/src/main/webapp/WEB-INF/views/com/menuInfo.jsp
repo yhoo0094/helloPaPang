@@ -11,20 +11,20 @@
 
     
 <script>
-	var mnuUpperNm = '<%= request.getAttribute("mnuUpperNm") %>';
-	var mnuNm = '<%= request.getAttribute("mnuNm") %>';
-	var mnuTopUrl = '<%= request.getAttribute("mnuTopUrl") %>';
-	var mnuUrl = '<%= request.getAttribute("mnuUrl") %>';
-	var info = '<%= request.getAttribute("info") %>';
+	var infoMnuUpperNm = '<%= request.getAttribute("mnuUpperNm") %>';
+	var infoMnuNm = '<%= request.getAttribute("mnuNm") %>';
+	var infoTopUrl = '<%= request.getAttribute("topUrl") %>';
+	var infoUrl = '<%= request.getAttribute("url") %>';
+	var infoTxt = '<%= request.getAttribute("info") %>';
 	
-	window.onload = function(){
-		$('#mnuTitle').text(mnuNm);
-		$('#mnuUpperNm').text(mnuUpperNm);
-		$('#mnuNm').text(mnuNm);
-		$('#mnuTopUrl').attr('href', '/' + mnuTopUrl);
-		$('#mnuUrl').attr('href', '/' + mnuUrl);
-		$('#info').text(info);
-	}
+	$(document).ready(function () {
+		$('#mnuTitle').text(infoMnuNm);
+		$('#infoMnuUpperNm').text(infoMnuUpperNm);
+		$('#infoMnuNm').text(infoMnuNm);
+		$('#infoTopUrl').attr('href', '/' + infoTopUrl);
+		$('#infoUrl').attr('href', '/' + infoUrl);
+		$('#infoTxt').text(infoTxt);
+	})
 </script>
 
 	
@@ -33,7 +33,7 @@
 </div>
 <div class="menuPathDiv">
 	<a href="/" class="remove-a"><span>Hello Papang</span></a> &gt
-	<a href="/" id='mnuTopUrl' class="remove-a"><span id='mnuUpperNm'></span></a> &gt
-	<a href="/" id='mnuUrl' class="remove-a"><span id='mnuNm'></span></a> -
-	<span id='info'></span>
+	<a href="/" id='infoTopUrl' class="remove-a"><span id='infoMnuUpperNm'></span></a> &gt
+	<a href="/" id='infoUrl' class="remove-a"><span id='infoMnuNm'></span></a> -
+	<span id='infoTxt'></span>
 </div>

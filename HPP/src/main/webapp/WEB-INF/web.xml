@@ -67,5 +67,17 @@
 		<servlet-name>dispatcherServlet</servlet-name>
 		<url-pattern>/</url-pattern><!-- 모든 패턴의 요청이 dispatcherServlet을 통과하도록 한다 -->
 	</servlet-mapping>
-	<!-- dispatcherServlet 끝 -->	
+	<!-- dispatcherServlet 끝 -->
+	
+	<!-- error-page 시작 -->	
+	<error-page>
+	    <error-code>404</error-code>
+	    <location>/error/error404</location>
+	</error-page>
+	
+	<error-page>
+	    <error-code>500</error-code>
+	    <location>/error/error500</location>
+	</error-page>
+	<!-- error-page 끝 -->	
 </web-app>

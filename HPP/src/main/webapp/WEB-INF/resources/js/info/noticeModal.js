@@ -57,7 +57,8 @@ function noticeModalOpen(data){
 		$('#noticeForm .form-control').removeAttr('readonly');			//readonly 제거	
 		$('#popYnWrite').css('display','inline-block');		//공지사항팝업여부
 		$('#popYnRead').css('display','none');				//공지사항팝업여부
-		edit.disableReadOnlyMode('noticeModal');				//내용
+		edit.disableReadOnlyMode('noticeModal');			//내용
+		$('#cnByteDisplay').css('display','inline-block');
 		$('#fileAttachBtn').css('display','inline-block');	//첨부파일 버튼
 		
 		$('#modalSaveBtn').css('display','inline-block');
@@ -78,7 +79,8 @@ function setModifyMode(){
 	$('#noticeForm .form-control').removeAttr('readonly');			//readonly 제거		
 	$('#popYnWrite').css('display','inline-block');					//공지사항팝업여부
 	$('#popYnRead').css('display','none');							//공지사항팝업여부
-	edit.disableReadOnlyMode('noticeModal');							//내용
+	edit.disableReadOnlyMode('noticeModal');						//내용
+	$('#cnByteDisplay').css('display','inline-block');
 	$('#fileAttachBtn').css('display','inline-block');				//첨부파일 버튼
 	$('.deleteFileBtn').css('display','inline-block');				//파일 제거 버튼
 }

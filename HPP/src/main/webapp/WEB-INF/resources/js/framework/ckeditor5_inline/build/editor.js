@@ -39,8 +39,10 @@ window.createEditor = function(target) {
                     'fontSize', 'fontColor', 'fontBackgroundColor', 'fontFamily', 'alignment', '|',
                     'bold', 'italic', 'underline', '|',
                     'highlight', 'outdent', 'indent', '|',
+                    'specialCharacters', 'imageInsert', 'heading'
+                    //, 'style'
                     // 'imageUpload', 'insertTable', 'undo', 'redo', 'findAndReplace',
-                    '-', 'specialCharacters', 'imageInsert', 'heading', 'style'
+//                    '-',
                 ],
                 shouldNotGroupWhenFull: true
             },
@@ -69,7 +71,13 @@ window.createEditor = function(target) {
                     'tableCellProperties',
                     'tableProperties'
                 ]
-            }
+            },
+            fontSize: {
+	            options: [
+	                8,10,12,14,16,18,20,24,28,32,36,40
+	            ],
+	            supportAllValues: false
+	        }
         })
         .catch(handleSampleError);
 };

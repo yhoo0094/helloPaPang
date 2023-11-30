@@ -97,7 +97,8 @@ public class PageController {
 				result.addObject("mnuUpperNm", mnuInfo.get("mnuUpperNm"));
 				result.addObject("info", mnuInfo.get("info"));
 				result.addObject("url", mnuInfo.get("url"));
-				result.addObject("mnuTopUrl", mnuInfo.get("mnuTopUrl"));
+				result.addObject("topUrl", mnuInfo.get("topUrl"));
+				result.addObject("upperUrl", mnuInfo.get("upperUrl"));
 				result.addObject("authGrade", readAuth.get("authGrade"));
 				result.setViewName(url1 + "/" + url2);
 			}
@@ -139,7 +140,8 @@ public class PageController {
 				result.addObject("mnuUpperNm", mnuInfo.get("mnuUpperNm"));
 				result.addObject("info", mnuInfo.get("info"));
 				result.addObject("url", mnuInfo.get("url"));
-				result.addObject("mnuTopUrl", mnuInfo.get("mnuTopUrl"));
+				result.addObject("topUrl", mnuInfo.get("topUrl"));
+				result.addObject("upperUrl", mnuInfo.get("upperUrl"));
 				result.addObject("authGrade", readAuth.get("authGrade"));
 				Object param = (inData.get("param") != null)? inData.get("param") : ""; 
 				result.addObject("param", param);

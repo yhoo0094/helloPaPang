@@ -75,11 +75,11 @@
   	<div class='wrap'>
   		<tiles:insertAttribute name="header"/>
 		<div class='content'>  	
-	  		<div class="home_content">
+			<div id="centerCon">
 	  			<tiles:insertAttribute name="body"/>
 	  		</div>
-	  		<tiles:insertAttribute name="foot"/>
   		</div>
+  		<tiles:insertAttribute name="foot"/>
   	</div>
   	
   	<!-- 로딩 패널 -->

@@ -75,12 +75,12 @@
   		<tiles:insertAttribute name="header"/>
 		<div class='content'>  	
   			<tiles:insertAttribute name="left"/>
-	  		<div class="page_content">
+	  		<div id="centerCon">
 	  			<tiles:insertAttribute name="body"/>
 	  		</div>
 	  		<tiles:insertAttribute name="right"/>
-	  		<tiles:insertAttribute name="foot"/>
   		</div>
+  		<tiles:insertAttribute name="foot"/>
   	</div>
   	
   	<!-- 로딩 패널 -->

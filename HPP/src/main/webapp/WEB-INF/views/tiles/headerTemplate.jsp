@@ -43,79 +43,78 @@
 
 <!-- Navbar (sit on top) -->
 <div class="top">
-	<div id="myNavbar">
-		<div class="logoDiv">  
-	    	<a href="/" class="logo-font remove-a">Hello Papang</a>
-	 	</div>
-	 	<div class="navDiv">
-		 	<div class="loginMnuDiv">
-		 		<span style="width: 15px; float: right;">&nbsp;</span>
-		 		<c:choose>
-		 			<c:when test="${sessionScope.LOGIN_INFO eq null}">
-						<a href="<%=request.getContextPath()%>/user/signUp" class="loginMnu remove-a"><i class="fa-solid fa-door-open loginMnuIcon"></i>회원가입</a>			 			
-						<a id="loginModalbtn" class="loginMnu remove-a" href="javascript:loginModalOpen()"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그인</a>
-		 			</c:when>
-		 			<c:otherwise>
-						<span class="sessionTimer"><i class="fa-solid fa-clock loginMnuIcon"></i>자동 로그아웃: <span id="sessionTimer">02:00:00</span></span> 
-						<a href="#about" class="loginMnu remove-a"><i class="fa-solid fa-user loginMnuIcon"></i>마이페이지</a>
-						<a href="javascript:loginOut()" class="loginMnu remove-a"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그아웃</a>	
-		 			</c:otherwise>
-		 		</c:choose>
-			</div>	
-			<div class="navMnuDiv">
-				<div class="navMnuThDiv">
-					<table class="navMnuTh">
-						<colgroup>
-							<col class="navMnuCol">
-							<col class="navMnuCol">
-							<col class="navMnuCol">
-							<col class="navMnuCol">
-							<col class="navMnuCol">
-						</colgroup>
-						<tbody>
-							<tr>
-								<c:if test="${sessionScope.LOGIN_INFO ne null}">
-									<td class="navIcon"><a href="<%=request.getContextPath()%>/admin/adminHome" class="navMnu remove-a navMnu-color"><i class="fa fa-gear navIcon"></i> 관리자</a></td>
-								</c:if>
-								<td class="navIcon"><a href="<%=request.getContextPath()%>/board/freeBoard" class="navMnu remove-a navMnu-color"><i class="fa fa-comment navIcon"></i> 게시판</a></td>
-								<td class="navIcon"><a href="#team" class="navMnu remove-a navMnu-color"><i class="fa-sharp fa-solid fa-store navIcon"></i> 장터</a></td>
-								<td class="navIcon"><a href="<%=request.getContextPath()%>/active/play" class="navMnu remove-a navMnu-color"><i class="fa-solid fa-ice-cream navIcon"></i> 활동</a></td>								
-								<td class="navIcon"><a href="#work" class="navMnu remove-a navMnu-color"><i class="fa-solid fa-baby-carriage navIcon"></i> 베이비시터</a></td>
-								<td class="navIcon"><a href="<%=request.getContextPath()%>/info/notice" class="navMnu remove-a navMnu-color"><i class="fa-sharp fa-solid fa-circle-info navIcon"></i> 정보</a></td>
-							</tr>	
-						</tbody>
-					</table>
-				</div>
-				
-				<%-- <div class="dropdownDiv">
-					<table style="width: 100%; text-align: center;">
-						<colgroup>
-							<col class="navMnuCol">
-							<col class="navMnuCol">
-							<col class="navMnuCol">
-							<col class="navMnuCol">
-							<col class="navMnuCol">
-						</colgroup>
-						<tbody>
-							<tr>
-								<td>게시판 하위메뉴1</td>
-								<td>장터 하위메뉴1</td>
-								<td>베이비시터 하위메뉴1</td>
-								<td>활동 하위메뉴1</td>
-								<td><a href="/info/notice" class="dropdownMnu">공지사항</a></td>
-							</tr>	
-							<tr>
-								<td>게시판 하위메뉴2</td>
-								<td>장터 하위메뉴2</td>
-								<td>베이비시터 하위메뉴2</td>
-								<td>활동 하위메뉴2</td>
-								<td>정보 하위메뉴2</td>
-							</tr>							
-						</tbody>
-					</table>			
-				</div> --%>
-				
-			</div>	
-		</div>
+	<a href="/" class="logo-font remove-a">Hello Papang</a>
+	<div class="logoDiv">  
+    	<a href="/" class="logo-font remove-a">Hello Papang</a>
+ 	</div>
+ 	<div class="navDiv">
+	 	<div class="loginMnuDiv">
+	 		<span style="width: 15px; float: right;">&nbsp;</span>
+	 		<c:choose>
+	 			<c:when test="${sessionScope.LOGIN_INFO eq null}">
+					<a href="<%=request.getContextPath()%>/user/signUp" class="loginMnu remove-a"><i class="fa-solid fa-door-open loginMnuIcon"></i>회원가입</a>			 			
+					<a id="loginModalbtn" class="loginMnu remove-a" href="javascript:loginModalOpen()"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그인</a>
+	 			</c:when>
+	 			<c:otherwise>
+					<span class="sessionTimer"><i class="fa-solid fa-clock loginMnuIcon"></i>자동 로그아웃: <span id="sessionTimer">02:00:00</span></span> 
+					<a href="#about" class="loginMnu remove-a"><i class="fa-solid fa-user loginMnuIcon"></i>마이페이지</a>
+					<a href="javascript:loginOut()" class="loginMnu remove-a"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그아웃</a>	
+	 			</c:otherwise>
+	 		</c:choose>
+		</div>	
+		<div class="navMnuDiv">
+			<div class="navMnuThDiv">
+				<table class="tc">
+<%-- 						<colgroup> --%>
+<%-- 							<col class="navMnuCol"> --%>
+<%-- 							<col class="navMnuCol"> --%>
+<%-- 							<col class="navMnuCol"> --%>
+<%-- 							<col class="navMnuCol"> --%>
+<%-- 							<col class="navMnuCol"> --%>
+<%-- 						</colgroup> --%>
+					<tbody>
+						<tr>
+							<c:if test="${sessionScope.LOGIN_INFO ne null}">
+								<td class="navIcon"><a href="<%=request.getContextPath()%>/admin/adminHome" class="navMnu remove-a navMnu-color"><i class="fa fa-gear navIcon"></i> 관리자</a></td>
+							</c:if>
+							<td class="navIcon"><a href="<%=request.getContextPath()%>/board/freeBoard" class="navMnu remove-a navMnu-color"><i class="fa fa-comment navIcon"></i> 게시판</a></td>
+							<td class="navIcon"><a href="#team" class="navMnu remove-a navMnu-color"><i class="fa-sharp fa-solid fa-store navIcon"></i> 장터</a></td>
+							<td class="navIcon"><a href="<%=request.getContextPath()%>/active/play" class="navMnu remove-a navMnu-color"><i class="fa-solid fa-ice-cream navIcon"></i> 활동</a></td>								
+							<td class="navIcon"><a href="#work" class="navMnu remove-a navMnu-color"><i class="fa-solid fa-baby-carriage navIcon"></i> 베이비시터</a></td>
+							<td class="navIcon"><a href="<%=request.getContextPath()%>/info/notice" class="navMnu remove-a navMnu-color"><i class="fa-sharp fa-solid fa-circle-info navIcon"></i> 정보</a></td>
+						</tr>	
+					</tbody>
+				</table>
+			</div>
+			
+			<%-- <div class="dropdownDiv">
+				<table style="width: 100%; text-align: center;">
+					<colgroup>
+						<col class="navMnuCol">
+						<col class="navMnuCol">
+						<col class="navMnuCol">
+						<col class="navMnuCol">
+						<col class="navMnuCol">
+					</colgroup>
+					<tbody>
+						<tr>
+							<td>게시판 하위메뉴1</td>
+							<td>장터 하위메뉴1</td>
+							<td>베이비시터 하위메뉴1</td>
+							<td>활동 하위메뉴1</td>
+							<td><a href="/info/notice" class="dropdownMnu">공지사항</a></td>
+						</tr>	
+						<tr>
+							<td>게시판 하위메뉴2</td>
+							<td>장터 하위메뉴2</td>
+							<td>베이비시터 하위메뉴2</td>
+							<td>활동 하위메뉴2</td>
+							<td>정보 하위메뉴2</td>
+						</tr>							
+					</tbody>
+				</table>			
+			</div> --%>
+			
+		</div>	
 	</div>
 </div>

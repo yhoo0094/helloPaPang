@@ -70,8 +70,8 @@ input[type = 'date']{
 :root {
   --header-heigth: 70px;
   --footer-heigth: 100px;
-  --banner-width: 150px;
-  --sideBar-width: 150px;  
+  --right-width: 150px;
+  --left-width: 150px;  
   --navMnu-color: #692626;
   --navMnu-backGround: rgb(255 224 112);
 }
@@ -82,6 +82,32 @@ input[type = 'date']{
 
 .content {
 	background-color: rgb(254 255 187); 
+	margin: calc(var(--header-heigth)) 
+			0 
+			0 
+			0;	
+	min-height: calc(100vh - var(--header-heigth) - var(--footer-heigth));	
+	display: flex;
+}
+
+#leftCon{
+	flex: 0 0 var(--left-width); /* flex-grow, flex-shrink, flex-basis */
+	padding: 20px;
+	line-height: 2;
+   	font-weight: bold;
+}
+
+#centerCon{
+	flex-grow: 1; /* 남은 공간을 모두 차지 */
+	padding: 15px;
+}
+
+#rightCon{
+	flex: 0 0 var(--right-width); /* flex-grow, flex-shrink, flex-basis */
+	text-align: center;
+    display: flex;             /* Flexbox 레이아웃 사용 */
+    justify-content: center;   /* 수평 중앙 정렬 */
+    align-items: center;       /* 수직 중앙 정렬 */
 }
 
 .selectedRow{
@@ -118,62 +144,14 @@ input[type = 'date']{
     background-color: var(--navMnu-backGround);
 }
 
-.sideBar, .banner{
-	height: calc(100vh - var(--header-heigth) - var(--footer-heigth));
-	position: fixed;
-	top: var(--header-heigth);
-}
-
-.sideBar{
-    left: 0;
-    width: var(--sideBar-width);
-    padding: 20px;
-    line-height: 2;
-   	font-weight: bold;
-	font-size: 15px;
-	/* 
-	background-color: #edecec;
-	border-right: 7px solid #5b5a59;
-    border-radius: 0 0% 50% 0;
-    clip-path: polygon(0% 0%, 0% 100%, 80% 100%, 85% 90%, 90% 80%, 95% 75%, 100% 50%, 100% 0); 
-    */
-}
-
 .sideMnuTop{
 	font-size: 20px;
 	font-weight: 900;
 }
 
-.banner{
-    right: 0;
-    width: var(--banner-width);  
-    text-align: center;
-    display: flex;             /* Flexbox 레이아웃 사용 */
-    justify-content: center;   /* 수평 중앙 정렬 */
-    align-items: center;       /* 수직 중앙 정렬 */
-}
-
 .bannerImg{
 	width: 150px; 
 	height: 250px;
-}
-
-.page_content{
-	margin: calc(var(--header-heigth)) 
-			calc(var(--banner-width) + 20px) 
-			0 
-			calc(var(--sideBar-width) + 20px);
-	width: calc(100vw - 40px - var(--banner-width) - var(--sideBar-width));
-	min-height: calc(100vh - var(--header-heigth) - var(--footer-heigth));
-	padding: 15px;
-}
-
-.home_content{
-	margin: calc(var(--header-heigth)) 
-			0px
-			calc(var(--footer-heigth) + 18px) 
-			0px;
-	min-height: 710px;	
 }
 
 .bottom{
@@ -240,10 +218,6 @@ input[type = 'date']{
     display: block;	
  	margin: 8px 0px;   
   	font-weight: 900;
-}
-
-.navMnuTh{
- 	text-align: center;	
 }
 
 .loginMnuDiv{

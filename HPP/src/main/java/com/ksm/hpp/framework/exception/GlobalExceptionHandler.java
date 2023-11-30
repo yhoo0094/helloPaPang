@@ -1,5 +1,7 @@
 package com.ksm.hpp.framework.exception;
 
+import javax.servlet.ServletException;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -45,6 +47,12 @@ public class GlobalExceptionHandler {
     //데이터베이스 또는 다른 데이터 소스와의 상호 작용 중 발생하는 예외
     @ExceptionHandler(DataAccessException.class)
     public ModelAndView handleDataAccessException(DataAccessException e) {
+    	return exceptionAction(e);
+    }
+    
+    //서블릿 오류(jsp 파일이 없을 때 발생)
+    @ExceptionHandler(ServletException.class)
+    public ModelAndView handleServletException(ServletException e) {
     	return exceptionAction(e);
     }
     

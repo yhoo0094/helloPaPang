@@ -199,4 +199,20 @@ public class CommonService extends BaseService {
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;
 	}
+	
+	/**
+	* @메소드명: selectSideBarList
+	* @작성자: KimSangMin
+	* @생성일: 2023. 11. 30. 오전 8:35:49
+	* @설명: 사이드바 메뉴 목록 조회
+	 */
+	public Map<String, Object> selectSideBarList(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<Map<String, Object>> list = sqlSession.selectList("mapper.com.CommonMapper.selectSideBarList", inData);
+		result.put("data", list);
+		result.put(Constant.OUT_DATA, list);
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		return result;
+	}
 }

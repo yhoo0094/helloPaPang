@@ -13,7 +13,6 @@
 
 <style>
 	.ck-editor__editable[role="textbox"] {
-	    /* editing area */
 	    min-height: 500px;
 	}
 </style>
