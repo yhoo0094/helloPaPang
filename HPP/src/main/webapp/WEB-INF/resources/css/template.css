@@ -142,6 +142,8 @@ input[type = 'date']{
     height: var(--header-heigth);
     z-index: 10;
     background-color: var(--navMnu-backGround);
+    display: flex;
+    align-items: center;
 }
 
 .sideMnuTop{
@@ -209,21 +211,35 @@ input[type = 'date']{
 }
 
 .navDiv {
-    float: right;
-    display: inline-grid;
+    flex-grow: 1;
+    text-align: right;
+    height: 70px;
+    display: flex;
+    flex-direction: column; /* 내부 콘텐츠를 세로 방향으로 정렬 */
 }
 
 .navMnuThDiv{
-	font-size: 18px;
-    display: block;	
- 	margin: 8px 0px;   
-  	font-weight: 900;
+  	height: 100%;
+  	list-style: none;
+}
+
+.navMnuTdDiv{
+	position: absolute; /* 절대 위치 설정 */
+    top: 100%; /* 부모 요소의 하단에 위치 */
+    left: 0; /* 부모 요소의 왼쪽 정렬 */
+    width: 100%; /* 부모 요소의 전체 너비를 차지하도록 설정 */
+	height: 100%;
+	list-style: none;
+	display: none;
+	background-color: var(--navMnu-backGround);
+	font-size: 1.0rem;
 }
 
 .loginMnuDiv{
-	font-size: 13px;
+	font-size: 0.8rem;
     width: 100%;
     display: inline-block;	
+    height: 30px; /* 고정 높이 */
 }
 
 .loginMnu{
@@ -234,38 +250,27 @@ input[type = 'date']{
 }
 
 .logoDiv{
-    margin: 10px;
-    display: inline-block;	
-}
-
-.dropdownDiv {
-    display: none;
-    position: relative;
-    background-color: #000000cc;
-    width: 100%;
-    min-height: 100px;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    color: var(--navMnu-color);
-    font-weight: 900;
-    float: right;
-}
-
-.dropdownMnu{
-	color: var(--navMnu-color);
+    width: 200px;
+    height: var(--header-heigth);
+    display: flex;
+    align-items: center;
 }
 
 .navMnuDiv{
 	display: inline-block;	
+    height: 40px;
 }
 
 .navMnuCol{
-	width: 160px;
-}
-
-.navIcon{
-	color: var(--navMnu-color);
+	position: relative; /* 상대 위치 설정 */
+	display: inline-block;	
+	height: 100%;
+	font-size: 1.2rem;
+  	font-weight: 900;
+  	color: var(--navMnu-color);
+  	width: 12%;
+  	text-align: center;
+  	padding: 0
 }
 
 .loginMnuIcon{

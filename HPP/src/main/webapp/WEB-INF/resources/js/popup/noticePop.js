@@ -7,14 +7,24 @@
 
 var edit;
 $(()=>{
+	calWrapHeight();
+	createEditor('.editor').then( newEditor => {edit = watchdog.editor});	//에디터 생성
+	selectNotice();	//공지사항 조회
+	noticePopX();	//하루 동안 표시하지 않음 체크 동작
 	
-	//에디터 생성
-	createEditor('.editor').then( newEditor => {
-			edit = watchdog.editor
-	} );
+})
 
-	selectNotice();
-	
+//wrap 높이 조정
+function calWrapHeight(){
+	let viewportHeight = parseInt(window.innerHeight);
+	let wrapHeight = parseInt($('.wrap').css('height').replace('px',''));
+	if(viewportHeight > wrapHeight){
+		$('.wrap').css('height', viewportHeight);
+	}
+}
+
+//하루 동안 표시하지 않음 체크 동작
+function noticePopX(){
 	$('#noticePopX').on({
 		change : function(){
 			var boardSeq = $util.getParameterByName('boardSeq');
@@ -27,7 +37,7 @@ $(()=>{
 	        }
 		}
 	});
-})
+}
 
 //공지사항 조회
 function selectNotice(){

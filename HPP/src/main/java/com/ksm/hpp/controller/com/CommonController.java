@@ -154,11 +154,25 @@ public class CommonController {
 	* @작성자: KimSangMin
 	* @생성일: 2023. 11. 30. 오전 8:35:49
 	* @설명: 사이드바 메뉴 목록 조회
-	 */
+	*/
 	@RequestMapping("/selectSideBarList.do")
 	public void selectSideBarList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
 		Map<String, Object> outData = commonService.selectSideBarList((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		
+		ResponseUtil.setResAuto(response, inData, outData);
+	}
+	
+	/**
+	* @메소드명: selectNavMnuList
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 4. 오후 4:42:32
+	* @설명: 네비게이션 메뉴 목록 조회
+	*/
+	@RequestMapping("/selectNavMnuList.do")
+	public void selectNavMnuList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> outData = commonService.selectNavMnuList((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		
 		ResponseUtil.setResAuto(response, inData, outData);
 	}

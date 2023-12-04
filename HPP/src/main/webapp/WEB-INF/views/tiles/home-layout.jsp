@@ -65,14 +65,14 @@
 	<script src="<%=request.getContextPath()%><tiles:getAsString name="js"/>"></script> <!-- 페이지 개별 -->
 	
 	<script>
-	var authGrade = '<%= request.getAttribute("authGrade") %>';
+	const authGrade = '<%= request.getAttribute("authGrade") %>';
 	</script>
 	
     <title><tiles:insertAttribute name="title" /></title>
   </head>
 
   <body>
-  	<div class='wrap'>
+  	<div class='wrap vh100'>
   		<tiles:insertAttribute name="header"/>
 		<div class='content'>  	
 			<div id="centerCon">

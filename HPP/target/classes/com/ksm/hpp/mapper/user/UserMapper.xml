@@ -4,14 +4,17 @@
 	
 	<!-- 사용자 조회-->
 	<select id="selectUser" parameterType="map" resultType="camelCaseMap">
-		SELECT USER_ID										/*아이디*/
-			 , USER_PW										/*비밀번호*/
-			 , PW_ERR_CNT									/*비밀번호 오입력 횟수*/
-			 , DATE_FORMAT(PW_CH_DTTI, '%Y%m%d') PW_CH_DTTI	/*비밀번호 최종수정일시*/
-		  FROM TB_USER										/*테이블_사용자*/
+		SELECT T1.USER_ID										/*아이디*/
+			 , T1.USER_PW										/*비밀번호*/
+			 , T1.PW_ERR_CNT									/*비밀번호 오입력 횟수*/
+			 , DATE_FORMAT(T1.PW_CH_DTTI, '%Y%m%d') PW_CH_DTTI	/*비밀번호 최종수정일시*/
+			 , T2.ROLE_SEQ										/*권한그룹일련번호*/
+		  FROM TB_USER T1										/*테이블_사용자*/
+		  JOIN TB_USER_ROLE_MAP	T2								/*테이블_사용자_권한그룹_매핑*/
+		    ON T1.USER_ID = T2.USER_ID
 		<trim prefix="WHERE" prefixOverrides="AND">  
 			<if test='userId != null and userId != ""'>
-				AND USER_ID = #{userId}
+				AND T1.USER_ID = #{userId}
 			</if>
 		</trim>
 	</select>

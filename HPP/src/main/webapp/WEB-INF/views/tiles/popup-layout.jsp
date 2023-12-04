@@ -69,7 +69,7 @@
 	<script src="<%=request.getContextPath()%><tiles:getAsString name="js"/>"></script> <!-- 페이지 개별 -->
 	
 	<script>
-	var authGrade = '<%= request.getAttribute("authGrade") %>';
+	const authGrade = '<%= request.getAttribute("authGrade") %>';
 	</script>
 	
     <title><tiles:insertAttribute name="title" /></title>
@@ -77,7 +77,7 @@
 
   <body>
   	<div class='wrap'>
-		<div class='content vw100 vh100'>  	
+		<div class='content'>  	
   			<tiles:insertAttribute name="body"/>
   		</div>
   	</div>

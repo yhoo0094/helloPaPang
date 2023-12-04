@@ -137,12 +137,6 @@ public class FreeBoardController extends BaseController {
 		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
 		inData.put("loginInfo", loginInfo);
 		
-		//권한 확인
-		inData.put("url", url);				//메뉴 경로
-		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
-		inData.put("reqAuthGrade", 2);		//필요 권한등급
-		commonService.writeAuthChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
-		
 		Map<String, Object> outData = freeBoardService.increaseHit((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		
 		Gson gson = new Gson();

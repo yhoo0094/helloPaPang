@@ -189,7 +189,7 @@ public class CommonService extends BaseService {
 	* @작성자: KimSangMin
 	* @생성일: 2023. 11. 24. 오후 9:40:49
 	* @설명: 공통 코드 조회
-	 */
+	*/
 	public Map<String, Object> selectCodeList(StringBuilder logStr, Map<String, Object> inData) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
@@ -205,11 +205,27 @@ public class CommonService extends BaseService {
 	* @작성자: KimSangMin
 	* @생성일: 2023. 11. 30. 오전 8:35:49
 	* @설명: 사이드바 메뉴 목록 조회
-	 */
+	*/
 	public Map<String, Object> selectSideBarList(StringBuilder logStr, Map<String, Object> inData) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		List<Map<String, Object>> list = sqlSession.selectList("mapper.com.CommonMapper.selectSideBarList", inData);
+		result.put("data", list);
+		result.put(Constant.OUT_DATA, list);
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		return result;
+	}
+	
+	/**
+	* @메소드명: selectNavMnuList
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 4. 오후 4:42:32
+	* @설명: 네비게이션 메뉴 목록 조회
+	*/
+	public Map<String, Object> selectNavMnuList(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<Map<String, Object>> list = sqlSession.selectList("mapper.com.CommonMapper.selectNavMnuList", inData);
 		result.put("data", list);
 		result.put(Constant.OUT_DATA, list);
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
