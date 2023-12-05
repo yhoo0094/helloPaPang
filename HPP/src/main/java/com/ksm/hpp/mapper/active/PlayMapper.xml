@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.active.PlayMapper">
+	
+	<!-- 놀이 등록 -->
+	<insert id="insertPlay" parameterType="map">
+		<selectKey resultType="integer" keyProperty="boardSeq" order="BEFORE">
+			SELECT nextval('BOARD_SEQ') FROM DUAL	/*boardSeq 값을 map에 반환*/
+		</selectKey>	
+		INSERT 
+		  INTO TB_PLAY					/*테이블_놀이*/
+		     (
+		       BOARD_SEQ                /*게시글일련번호*/ 
+		     , TITLE                    /*자유게시판제목*/ 
+		     , INTRO                    /*소개*/
+		     , CN                       /*자유게시판내용*/ 
+		     , FST_REG_ID 				/*최초등록자ID*/
+		     , LT_UPD_ID 				/*최종수정자ID*/
+		     )
+		VALUES
+			 (
+			   #{boardSeq}	
+			 , #{title}	
+			 , #{intro}
+			 , #{cn}
+		     , #{loginInfo.userId} 	
+		     , #{loginInfo.userId}		 
+			 )   
+	</insert>	
+</mapper>

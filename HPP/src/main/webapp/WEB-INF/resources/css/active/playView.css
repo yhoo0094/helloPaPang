@@ -1,0 +1,22 @@
+@charset "UTF-8";
+/**
+ * @화면명: 놀이 조회
+ * @작성자: KimSangMin
+ * @생성일: 2023. 12. 5. 오후 1:20:45
+ * @설명: 놀이 등록/조회/수정 화면 
+**/
+
+.thumbnailImg{
+	width: 100%; 
+	height: 0px;
+	cursor: pointer;
+}
+
+#thumbnail{
+	display: none;
+}
+
+#intro{
+	height: 100%;
+}
+

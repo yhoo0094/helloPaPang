@@ -11,6 +11,10 @@ body, html, div {
     box-sizing: border-box;
 }
 
+textarea{
+	resize: none;
+}
+
 /*에디터 가로 길이 제한*/
 .form-control, .form-control p{
     word-wrap: break-word;
@@ -123,7 +127,7 @@ input[type = 'date']{
 }
 
 .wrap{
-	width: 100vw;
+/* 	width: 100vw; */
 }
 
 .fadeIn {
@@ -543,3 +547,70 @@ label{
 	display: none;
 }
 /* 전체 공용 끝 */
+
+
+/* active 관련 시작 */
+.cardWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cardItem {
+    display: flex;
+    background-color: var(--navMnu-backGround);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.cardImg {
+    flex-basis: 20%;
+    margin-right: 10px;
+    position: relative; /* Add position relative here */
+}
+
+#cardImgMsg {
+    position: absolute; /* Position the span absolutely */
+    top: 50%; /* Position at the center from the top */
+    left: 50%; /* Position at the center from the left */
+    transform: translate(-50%, -50%); /* Offset the span by its own dimensions */
+    color: white; /* Example text color for visibility */
+    background: rgba(0, 0, 0, 0.5); /* Example background for visibility */
+    padding: .5em 1em; /* Example padding */
+    border-radius: 5px; /* Example border radius */
+    max-width: 90%; /* Prevent span from being wider than its container */
+    text-align: center; /* Center the text inside the span */
+    white-space: nowrap; /* Prevent the text from wrapping */
+    overflow: hidden; /* Prevent overflow of the text */
+    text-overflow: ellipsis; /* Add an ellipsis if the text is too long */
+    display: none;
+    cursor: pointer;
+}
+
+.cardContent {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cardTitle, .cardIntro, .cardBtn {
+    border-radius: 5px;
+}
+
+.cardBtn {
+	text-align: right;	
+}
+
+.cardIntro {
+	flex-grow: 1;
+}
+
+.viewCardWrap{
+	padding: 1.5rem 0;
+}
+
+.cardBtn > img{
+	height: 2rem;
+}
+/* active 관련 끝 */

@@ -17,7 +17,7 @@
 	<div class="papang-content-div">
 		<form id="freeBoardForm" name="freeBoardForm" method="post" enctype="multipart/form-data">
 			<input type="hidden" id="boardSeq" name="boardSeq" value="">
-			<input type="hidden" id="boardCode" name="boardCode" value="02"><!-- 게시판구분코드(01:공지사항,02:자유게시판,03:질문게시판,04:지역게시판) -->
+			<input type="hidden" id="boardCode" name="boardCode" value="02"><!-- 게시판구분코드(01:공지사항,02:자유게시판,03:질문게시판,04:지역게시판,05:놀이) -->
 			
 			<table class="papang-table">
 				<colgroup>

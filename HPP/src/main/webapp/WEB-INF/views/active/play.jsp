@@ -15,41 +15,93 @@
 		<form id="searchForm" action="#">
 			<table class="papang-search-table">
 				<colgroup>
+					<col width="*">
+					<col width="60rem">	
+					<col width="20%">	
 					<col width="60rem">	
 					<col width="14%">	
-					<col width="90rem">
 					<col width="14%">
-					<col width="90rem">
-					<col width="*">	
-					<col width="60rem">	
-					<col width="14%">	
-					<col width="8%">	
 				</colgroup>
 				<tbody>
 				<tr>
+					<td></td>
 					<th>제목:</th>
 					<td><input id="title" name="title" class="w100 form-control forSearch" title="제목" type="text" maxlength="20"></td>	
-					<th>작성자:</th>
-					<td><input id="userId" name="userId" class="w100 form-control forSearch" title="아이디" type="text" maxlength="20"></td>
-					<th>게시일:</th>
+					<th>정렬:</th>
 					<td>
-						<input id="dttiStr" name="dttiStr" class="datetimepicker w45 form-control" title="게시일" type="text"> ~ 
-						<input id="dttiEnd" name="dttiEnd" class="datetimepicker w45 form-control" title="게시일" type="text">
-					</td>						
-					<th>분류:</th>
-					<td>
-						<!-- 01:잡담,02:정보,03:질문 -->
-						<select id="boardFreeCode" name="boardFreeCode" class="form-control w100 makeSelectTag" title="분류">
-							<option value="">선택하세요</option>
-						</select>
+						<select id="playOrderCode" name="playOrderCode" class="form-control w100 makeSelectTag" title="정렬"></select>
+						<!-- 좋아요, 제목, 등록일 -->
 					</td>
 					<td class="tc">
 						<button type="button" class="papang-search-btn papang_btn lh30px" onclick="doSearch()">검색</button>
-					</td>	
+						<button type="button" class="papang-save-btn papang_btn lh30px" onclick="mvCreatePlay()">신규</button>
+					</td>
 				</tr>
 				</tbody>
 			</table>
 		</form>
 	</div>	
-	<table id="mainTable" class="display" style="width:100%"></table>
+	<div class="cardWrap">
+	    <div class="cardItem">
+	        <div class="cardImg"></div>
+	        <div class="cardContent">
+	            <div class="cardBtn">
+	            	<img src="<%=request.getContextPath()%>/resources/images/etc/search.png" alt="no image"/>
+	            	<img src="<%=request.getContextPath()%>/resources/images/etc/like.png" alt="no image"/>	
+	            </div>
+	            <div class="cardTitle">Card Title</div>
+	            <div class="cardIntro">Card Introduction</div>
+	        </div>
+	    </div>
+	    <div class="cardItem">
+	        <div class="cardImg"></div>
+	        <div class="cardContent">
+	            <div class="cardBtn">Card Button</div>
+	            <div class="cardTitle">Card Title</div>
+	            <div class="cardIntro">Card Introduction</div>
+	        </div>
+	    </div>
+	    <div class="cardItem">
+	        <div class="cardImg"></div>
+	        <div class="cardContent">
+	            <div class="cardBtn">Card Button</div>
+	            <div class="cardTitle">Card Title</div>
+	            <div class="cardIntro">Card Introduction</div>
+	        </div>
+	    </div>
+	    <div class="cardItem">
+	        <div class="cardImg"></div>
+	        <div class="cardContent">
+	            <div class="cardBtn">Card Button</div>
+	            <div class="cardTitle">Card Title</div>
+	            <div class="cardIntro">Card Introduction</div>
+	        </div>
+	    </div>
+	    <div class="cardItem">
+	        <div class="cardImg"></div>
+	        <div class="cardContent">
+	            <div class="cardBtn">Card Button</div>
+	            <div class="cardTitle">Card Title</div>
+	            <div class="cardIntro">Card Introduction</div>
+	        </div>
+	    </div>
+	    <div class="cardItem">
+	        <div class="cardImg"></div>
+	        <div class="cardContent">
+	            <div class="cardBtn">Card Button</div>
+	            <div class="cardTitle">Card Title</div>
+	            <div class="cardIntro">Card Introduction</div>
+	        </div>
+	    </div>
+	    <div class="cardItem">
+	        <div class="cardImg"></div>
+	        <div class="cardContent">
+	            <div class="cardBtn">Card Button</div>
+	            <div class="cardTitle">Card Title</div>
+	            <div class="cardIntro">Card Introduction</div>
+	        </div>
+	    </div>
+	</div>
+	
+	
 </div>	

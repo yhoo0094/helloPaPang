@@ -72,7 +72,7 @@
   </head>
 
   <body>
-  	<div class='wrap vh100'>
+  	<div class='wrap'>
   		<tiles:insertAttribute name="header"/>
 		<div class='content'>  	
 			<div id="centerCon">
