@@ -6,3 +6,8 @@
  * @설명: 아이와 함께할 수 있는 놀이 정보를 나누는 메뉴입니다.
 **/
 
+.cardIntro {
+	white-space: pre-line;
+	overflow: auto;
+	height: 0;
+}

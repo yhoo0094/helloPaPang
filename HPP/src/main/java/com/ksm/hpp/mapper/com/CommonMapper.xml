@@ -89,6 +89,21 @@
 		 ORDER BY T1.MNU_LV ASC, T1.MNU_ORDER ASC
 	</select>
 	
+	<!-- 이미지 조회 -->
+	<select id="getImage" parameterType="map" resultType="camelCaseMap">
+		SELECT T1.BOARD_SEQ				/*게시글일련번호*/
+			,  T1.ATCFILE_NUM			/*파일번호*/
+			,  T1.BOARD_CODE			/*게시판구분코드(01:공지사항,02:자유게시판,03:질문게시판,04:지역게시판)*/
+			,  T1.ATC_FILE_NM			/*파일명*/
+			,  T1.SAVE_ATC_FILE_NM		/*파일 저장명*/
+			,  T1.ATC_FILE_PATH			/*파일 경로*/
+			,  T1.ATC_FILE_CAPA_VAL		/*파일 용량*/
+			,  T1.ATC_FILE_EXTS			/*파일 확장자*/
+		  FROM TB_ATCFILE T1			/*테이블_첨부파일*/
+		 WHERE T1.ATCFILE_NUM = '1'
+		   AND T1.BOARD_SEQ = #{boardSeq}
+	</select>	
+	
 	<!-- 요청 로그 기록 -->
 	<insert id="insertReqLog" parameterType="map">
 		INSERT 

@@ -29,7 +29,7 @@
 					<td><input id="title" name="title" class="w100 form-control forSearch" title="제목" type="text" maxlength="20"></td>	
 					<th>정렬:</th>
 					<td>
-						<select id="playOrderCode" name="playOrderCode" class="form-control w100 makeSelectTag" title="정렬"></select>
+						<select id="playOrderCode" name="playOrderCode" class="form-select w100 makeSelectTag" title="정렬"></select>
 						<!-- 좋아요, 제목, 등록일 -->
 					</td>
 					<td class="tc">
@@ -41,67 +41,5 @@
 			</table>
 		</form>
 	</div>	
-	<div class="cardWrap">
-	    <div class="cardItem">
-	        <div class="cardImg"></div>
-	        <div class="cardContent">
-	            <div class="cardBtn">
-	            	<img src="<%=request.getContextPath()%>/resources/images/etc/search.png" alt="no image"/>
-	            	<img src="<%=request.getContextPath()%>/resources/images/etc/like.png" alt="no image"/>	
-	            </div>
-	            <div class="cardTitle">Card Title</div>
-	            <div class="cardIntro">Card Introduction</div>
-	        </div>
-	    </div>
-	    <div class="cardItem">
-	        <div class="cardImg"></div>
-	        <div class="cardContent">
-	            <div class="cardBtn">Card Button</div>
-	            <div class="cardTitle">Card Title</div>
-	            <div class="cardIntro">Card Introduction</div>
-	        </div>
-	    </div>
-	    <div class="cardItem">
-	        <div class="cardImg"></div>
-	        <div class="cardContent">
-	            <div class="cardBtn">Card Button</div>
-	            <div class="cardTitle">Card Title</div>
-	            <div class="cardIntro">Card Introduction</div>
-	        </div>
-	    </div>
-	    <div class="cardItem">
-	        <div class="cardImg"></div>
-	        <div class="cardContent">
-	            <div class="cardBtn">Card Button</div>
-	            <div class="cardTitle">Card Title</div>
-	            <div class="cardIntro">Card Introduction</div>
-	        </div>
-	    </div>
-	    <div class="cardItem">
-	        <div class="cardImg"></div>
-	        <div class="cardContent">
-	            <div class="cardBtn">Card Button</div>
-	            <div class="cardTitle">Card Title</div>
-	            <div class="cardIntro">Card Introduction</div>
-	        </div>
-	    </div>
-	    <div class="cardItem">
-	        <div class="cardImg"></div>
-	        <div class="cardContent">
-	            <div class="cardBtn">Card Button</div>
-	            <div class="cardTitle">Card Title</div>
-	            <div class="cardIntro">Card Introduction</div>
-	        </div>
-	    </div>
-	    <div class="cardItem">
-	        <div class="cardImg"></div>
-	        <div class="cardContent">
-	            <div class="cardBtn">Card Button</div>
-	            <div class="cardTitle">Card Title</div>
-	            <div class="cardIntro">Card Introduction</div>
-	        </div>
-	    </div>
-	</div>
-	
-	
+	<div id="cardWrap" class="cardWrap"></div>
 </div>	

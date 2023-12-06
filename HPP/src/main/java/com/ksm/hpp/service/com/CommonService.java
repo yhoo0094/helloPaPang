@@ -231,4 +231,16 @@ public class CommonService extends BaseService {
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;
 	}
+	
+	/**
+	* @메소드명: getImage
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 6. 오후 7:58:27
+	* @설명: 이미지 조회
+	*/	
+	public Map<String, Object> getImage(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = sqlSession.selectOne("mapper.com.CommonMapper.getImage", inData);
+		return result;
+	}
+	
 }

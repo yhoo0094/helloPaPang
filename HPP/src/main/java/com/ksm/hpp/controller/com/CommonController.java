@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -35,6 +36,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -176,6 +181,33 @@ public class CommonController {
 		
 		ResponseUtil.setResAuto(response, inData, outData);
 	}
+	
+	/**
+	* @메소드명: getImage
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 6. 오후 7:58:27
+	* @설명: 이미지 조회
+	 */
+	@RequestMapping("/getImage.do")
+	public ResponseEntity<byte[]> getImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> outData = commonService.getImage((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		
+		String atcFilePath = (String) outData.get("atcFilePath");
+		String saveAtcFileNm = (String) outData.get("saveAtcFileNm");
+		
+        // NAS 경로에서 이미지 파일을 읽어옵니다.
+        File imageFile = new File(atcFilePath + saveAtcFileNm);
+        
+        // 이미지 파일을 byte 배열로 읽어옵니다.
+        byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
+        
+        // HTTP 응답으로 이미지를 전송합니다.
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG); // 이미지 타입에 맞게 설정
+        
+        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
+    }
 	
 	/**
 	* @메소드명: apitest

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.google.gson.Gson;
 import com.ksm.hpp.controller.com.BaseController;
 import com.ksm.hpp.framework.util.RequestUtil;
+import com.ksm.hpp.framework.util.ResponseUtil;
 import com.ksm.hpp.service.active.PlayService;
 import com.ksm.hpp.service.com.CommonService;
 
@@ -28,6 +30,20 @@ public class PlayController extends BaseController {
 	protected CommonService commonService;
 	
 	String url = "active/play";
+	
+	/**
+	* @메소드명: selectPlay
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 6. 오후 6:38:17
+	* @설명: 놀이 조회
+	*/
+	@RequestMapping("/selectPlay.do")
+	public void selectPlay(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> outData = playService.selectPlay((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		
+		ResponseUtil.setResAuto(response, inData, outData);
+	}	
 	
 	/**
 	* @메소드명: insertPlay

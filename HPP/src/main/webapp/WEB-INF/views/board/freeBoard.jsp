@@ -39,7 +39,7 @@
 					<th>분류:</th>
 					<td>
 						<!-- 01:잡담,02:정보,03:질문 -->
-						<select id="boardFreeCode" name="boardFreeCode" class="form-control w100 makeSelectTag" title="분류">
+						<select id="boardFreeCode" name="boardFreeCode" class="form-select w100 makeSelectTag" title="분류">
 							<option value="">선택하세요</option>
 						</select>
 					</td>

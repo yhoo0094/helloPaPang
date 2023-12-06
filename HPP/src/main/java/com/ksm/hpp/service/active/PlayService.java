@@ -25,6 +25,27 @@ public class PlayService {
 	protected FileService fileService;
 
 	/**
+	* @메소드명: selectPlay
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 6. 오후 6:38:17
+	* @설명: 놀이 조회
+	*/
+	public Map<String, Object> selectPlay(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<Map<String, Object>> list = sqlSession.selectList("mapper.active.PlayMapper.selectPlay", inData);
+		result.put("data", list);
+		result.put(Constant.OUT_DATA, list);
+		if(!list.isEmpty()) {
+			result.put("recordsFiltered", list.get(0).get("rowCnt"));	//필터링 후의 총 레코드 수
+		} else {
+			result.put("recordsFiltered", "0");	//필터링 후의 총 레코드 수
+		}		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		return result;
+	}	
+	
+	/**
 	* @메소드명: insertPlay
 	* @작성자: KimSangMin
 	* @생성일: 2023. 12. 5. 오후 8:48:43
