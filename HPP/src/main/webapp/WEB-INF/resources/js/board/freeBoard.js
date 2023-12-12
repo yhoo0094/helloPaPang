@@ -93,13 +93,13 @@ function makeDataTableServerSide() {
     //테이블 클릭 이벤트
 	$('#mainTable tbody').on('click', 'tr', function () {
 	    var data = mainTable.row(this).data();
-	    moveFreeBoardView(data);	//자유게시판 조회 화면으로 이동
+	    moveFreeBoardView(data.boardSeq);	//자유게시판 조회 화면으로 이동
 	});
 }	
 
 //자유게시판 조회 화면으로 이동
-function moveFreeBoardView(data){
-	increaseHit(data.boardSeq); //조회수 증가
+function moveFreeBoardView(boardSeq){
+	increaseHit(boardSeq); //조회수 증가
 	
 	 // form 태그 생성
     var $form = $('<form></form>')
@@ -110,7 +110,7 @@ function moveFreeBoardView(data){
     $('<input>').attr({
         type: "hidden",
         name: "param",
-        value: data.boardSeq
+        value: boardSeq
     }).appendTo($form);
 
     // form 태그를 body에 추가하고 제출

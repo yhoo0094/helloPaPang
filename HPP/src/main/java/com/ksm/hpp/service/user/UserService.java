@@ -41,14 +41,24 @@ public class UserService extends BaseService {
 		
 		//비밀번호 해쉬 처리
 		//1 = SXRLcrGA1f5nK8A5cvZICY86tW2d/Rekkm3lrWEgqJU=
-		String userPw = StringUtil.getSHA256("HPP" + (String)inData.get("pw") + "MELONA");
+		String userPw = StringUtil.getSHA256("HPP" + (String)inData.get("userPw") + "MELONA");
 		inData.put("userPw", userPw);
 		
 		do {
+			//사용자 정보 등록
 			cnt = sqlSession.insert("mapper.user.UserMapper.insertUser", inData);
 			if(cnt == 0) {
 				result.put(Constant.RESULT, Constant.RESULT_FAILURE);
 				result.put(Constant.OUT_RESULT_MSG, "사용자 생성에 실패했습니다.");
+				break;
+			}
+
+			//기본 사용자 그룹 매핑
+			cnt = sqlSession.insert("mapper.user.UserMapper.insertDefaultGroup", inData);
+			if(cnt == 0) {
+				result.put(Constant.RESULT, Constant.RESULT_FAILURE);
+				result.put(Constant.OUT_RESULT_MSG, "사용자 생성에 실패했습니다.");
+				break;
 			}
 			
 			result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
@@ -76,7 +86,7 @@ public class UserService extends BaseService {
 			if(loginInfo == null) {	//해당 계정이 조회되지 않을 때
 				//Exception 처리를 통한 메서드 중지
 				inData.put("loginCode", "03");
-				cnt = sqlSession.insert("mapper.user.UserMapper.insetLoginLog", inData);
+				cnt = sqlSession.insert("mapper.user.UserMapper.insertLoginLog", inData);
 				throw new ConfigurationException("존재하지 않는 아이디이거나 비밀번호가 일치하지 않습니다.");
 			} else {
 				//사용자 정책 조회
@@ -151,7 +161,7 @@ public class UserService extends BaseService {
 
 			//로그인 내역 저장
 			inData.put("loginCode", loginCode);
-			cnt = sqlSession.insert("mapper.user.UserMapper.insetLoginLog", inData);
+			cnt = sqlSession.insert("mapper.user.UserMapper.insertLoginLog", inData);
 			if(cnt != 1) {throw new ConfigurationException("로그인 내역 저장 오류 발생");}
 			
 			result.put("loginInfo", loginInfo);
@@ -174,7 +184,7 @@ public class UserService extends BaseService {
 		//로그아웃 내역 저장
 		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
 		loginInfo.put("loginCode", "02");	//로그인_코드(01:로그인, 02:로그아웃, 03:존재하지 않는 사용자, 04: 잘못된 비밀번호, 05: 비밀번호 오입력 횟수 초과)
-		cnt = sqlSession.insert("mapper.user.UserMapper.insetLoginLog", loginInfo);
+		cnt = sqlSession.insert("mapper.user.UserMapper.insertLoginLog", loginInfo);
 		if(cnt != 1) {throw new ConfigurationException("로그아웃 내역 저장 오류 발생");}
 		
 		//세션 로그인 정보 파기

@@ -7,7 +7,12 @@
 
 <script src="<%=request.getContextPath()%>/resources/js/tiles/headerTemplate.js"></script> <!-- 헤더 템플릿 -->
 <script>
-	const loginInfo = '${sessionScope.LOGIN_INFO}';
+	let loginInfoArr = '${sessionScope.LOGIN_INFO}'.slice(1, -1).split(', ');
+	const loginInfo = {};
+    loginInfoArr.map(item => {
+    	loginInfo[item.split('=')[0]] = item.split('=')[1]
+    });
+	
 	const roleSeq = '${sessionScope.LOGIN_INFO.roleSeq}';
 
 	//자동 로그아웃 타이머

@@ -141,7 +141,7 @@ function deleteFreeBoard(){
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
-			window.location.href = '/board/freeBoard';
+			window.location.href = contextPath + '/board/freeBoard';
         }
     });	
 }

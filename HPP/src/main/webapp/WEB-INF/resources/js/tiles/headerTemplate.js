@@ -24,7 +24,6 @@ function loginOut() {
         success: function (result) {
 			$com.loadingEnd();
 	        if (result.RESULT == Constant.RESULT_SUCCESS){
-				sessionStorage.removeItem("loginInfo");
 	            location.replace('/');
 	        } else {
 				alert(result[Constant.OUT_RESULT_MSG])

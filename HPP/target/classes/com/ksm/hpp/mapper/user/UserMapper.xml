@@ -74,7 +74,7 @@
 	</insert>
 	
 	<!-- 로그인 로그 -->
-	<insert id="insetLoginLog" parameterType="map">
+	<insert id="insertLoginLog" parameterType="map">
 		INSERT 
 		  INTO TB_LOG_LOGIN			/*테이블_로그_로그인*/
 		     ( LOGIN_SEQ			/*로그인일련번호*/
@@ -87,6 +87,21 @@
 			 , #{userId}			/*사용자_아이디*/
 		     , #{ip}			/*사용자_아이피*/
 		     , #{loginCode} 		/*로그인_코드(01:로그인, 02:로그아웃, 03:존재하지 않는 사용자, 04: 잘못된 비밀번호, 05: 비밀번호 오입력 횟수 초과)*/		 
+			 )    
+	</insert>	
+	
+	<!-- 기본 사용자 그룹 매핑 -->
+	<insert id="insertDefaultGroup" parameterType="map">
+		INSERT 
+		  INTO TB_USER_ROLE_MAP			/*테이블_사용자_권한그룹_매핑*/
+		     ( USER_ID 					/*사용자_아이디*/
+		     , ROLE_SEQ 				/*권한그룹일련번호*/
+		     , FST_REG_ID 				/*최초등록자ID*/
+		     )
+		VALUES
+			 ( #{userId}			/*사용자_아이디*/
+			 , '1'					/*권한그룹일련번호*/
+		     , 'SYSTEM' 			/*최초등록자ID*/
 			 )    
 	</insert>	
 	

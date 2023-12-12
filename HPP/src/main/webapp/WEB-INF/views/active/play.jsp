@@ -30,7 +30,6 @@
 					<th>정렬:</th>
 					<td>
 						<select id="playOrderCode" name="playOrderCode" class="form-select w100 makeSelectTag" title="정렬"></select>
-						<!-- 좋아요, 제목, 등록일 -->
 					</td>
 					<td class="tc">
 						<button type="button" class="papang-search-btn papang_btn lh30px" onclick="doSearch()">검색</button>

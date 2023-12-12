@@ -11,8 +11,6 @@ $(()=>{
 	pageInit();			//권한 및 조회/등록 목적에 따른 버튼, 내용 표시 여부 조정
 	
 	thumbnailImgHeight();	//썸네일 이미지 높이 조정
-	thumbnail();		//등록 이미지 미리보기
-	clickThumbnail();	//썸네일 이미지 클릭
 })
 
 //썸네일 이미지 높이 조정
@@ -35,7 +33,7 @@ function clickThumbnail(){
 }
 
 //등록 이미지 미리보기
-function thumbnail(){
+function thumbnailPreview(){
 	document.getElementById('thumbnail').addEventListener('change', function(event) {
 		$('#cardImgMsg').hide();	//'썸네일을 선택하세요.' 숨기기
 		
@@ -58,11 +56,13 @@ function thumbnail(){
 function pageInit(){
 	if($util.isEmpty(param)){
 		//param 변수가 null이면 신규 등록
-		chViewMode('01');	//화면 모드 바꾸기(01: 등록, 02: 수정, 03: 조회)
+		chViewMode('01');		//화면 모드 바꾸기(01: 등록, 02: 수정, 03: 조회)
+		thumbnailPreview();		//등록 이미지 미리보기
+		clickThumbnail();		//썸네일 이미지 클릭
 	} else {
-		//데이터 조회해서 작성자와 id가 같으면 수정 모드
+		//데이터 조회해서 작성자와 id가 같으면 수정
 		$.ajax({
-	        url: '/freeBoard/selectFreeBoard.do',
+	        url: '/play/selectPlay.do',
 	        type: 'POST',
 	        data: {boardSeq: param},
 	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
@@ -79,19 +79,18 @@ function pageInit(){
 				    }
 				}
 				edit.setData(data.cn); //에디터 조회
+				let src = '/common/getImage.do?boardSeq=' + data.boardSeq;
+				$('#thumbnailImg').attr('src', src);
 				
 				if($com.getUserInfo('userId') == data.fstRegId){	
 					//작성자ID와 조회ID가 같을 경우 -> 수정
-					chViewMode('02');	//화면 모드 바꾸기(01: 등록, 02: 수정, 03: 조회)
-					data.readonly = 'N'	//첨부파일 제거 버튼 출력 여부					
+					chViewMode('02');		//화면 모드 바꾸기(01: 등록, 02: 수정, 03: 조회)
+					thumbnailPreview();		//등록 이미지 미리보기
+					clickThumbnail();		//썸네일 이미지 클릭
 				} else {
-					chViewMode('03');	//화면 모드 바꾸기(01: 등록, 02: 수정, 03: 조회)
-					data.readonly = 'Y'	//첨부파일 제거 버튼 출력 여부
+					chViewMode('03');		//화면 모드 바꾸기(01: 등록, 02: 수정, 03: 조회)
+					$('.thumbnailImg').css('cursor','default')
 				}
-				
-				//첨부파일 조회
-				data.boardCode = '02';								//게시판구분코드(01:공지사항,02:자유게시판,03:질문게시판,04:지역게시판)
-				$fileUtil.selectFile(data);							//첨부파일 조회
 	        }
 	    });
 	}
@@ -116,8 +115,8 @@ function chViewMode(type){
 			$('#modifyBtn').css('display','none');
 			$('#delBtn').css('display','none');	 
 			
-			$('#freeBoardForm .form-control').attr('readonly','readonly');		//readonly 적용
-			$('#freeBoardForm select').attr('disabled',true);					//disabled 적용
+			$('#viewForm .form-control').attr('readonly','readonly');		//readonly 적용
+			$('#viewForm select').attr('disabled',true);					//disabled 적용
 			edit.enableReadOnlyMode('Y');										//에디터 readonly 적용
 			break;		
 		default:
@@ -127,6 +126,14 @@ function chViewMode(type){
 
 //저장
 function saveBtnClick(){
+	//유효성 검사
+	if(!$util.checkRequired({group:["all1"]})){return;};
+	if($util.isEmpty(edit.getData())){
+		alert("내용이 입력되지 않았습니다.");
+		$('#cn').focus();
+		return;
+	}; 
+	
 	var formData = new FormData($("#viewForm")[0]);
 	
 	// input 태그에서 파일을 가져와서 FormData 객체에 추가
@@ -138,6 +145,10 @@ function saveBtnClick(){
 	
 	var url;    
     if($util.isEmpty(param)){
+		if(fileData){
+			return;
+		}
+		
 		url = '/play/insertPlay.do';
 	} else {
 		url = '/play/updatePlay.do';
@@ -157,7 +168,7 @@ function saveBtnClick(){
 	            
 	            //수정 화면으로 이동
 			    var $form = $('<form></form>')
-			        .attr("action", "/board/freeBoard/freeBoardView")
+			        .attr("action", "/active/play/playView")
 			        .attr("method", "post");
 			
 			    $('<input>').attr({
@@ -170,6 +181,22 @@ function saveBtnClick(){
 	        } else {
 				alert(result[Constant.OUT_RESULT_MSG])
 			}	
+        }
+    });	
+}
+
+//삭제
+function deleteBtnClick(){
+	if(!confirm('정말로 삭제하시겠습니까?')){return false;}
+	
+	$.ajax({
+        url: '/play/deletePlay.do',
+        type: 'POST',
+        data: {boardSeq: param},
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+        dataType: 'json',
+        success: function (result) {
+			window.location.href = contextPath + '/active/play';
         }
     });	
 }

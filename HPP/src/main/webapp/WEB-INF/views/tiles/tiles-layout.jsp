@@ -65,6 +65,7 @@
 	
 	<script>
 	const authGrade = '<%= request.getAttribute("authGrade") %>';
+	const contextPath = "<%=request.getContextPath()%>";
 	</script>
 	
     <title><tiles:insertAttribute name="title" /></title>

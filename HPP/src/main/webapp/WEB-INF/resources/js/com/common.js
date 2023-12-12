@@ -7,8 +7,7 @@ var $com = {};
 
 //로그인 사용자 정보 조회
 $com.getUserInfo = function(itemKey){
-	let storedItem = JSON.parse(sessionStorage.getItem("loginInfo"));
-	return (storedItem)? storedItem[itemKey] : storedItem;
+	return (loginInfo)? loginInfo[itemKey] : loginInfo;
 };
 
 //로딩패널 보이기

@@ -46,6 +46,20 @@ public class PlayController extends BaseController {
 	}	
 	
 	/**
+	* @메소드명: selectPlayHome
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 12. 오후 5:53:47
+	* @설명: 놀이 조회(홈 화면)
+	*/
+	@RequestMapping("/selectPlayHome.do")
+	public void selectPlayHome(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> outData = playService.selectPlayHome((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		
+		ResponseUtil.setResAuto(response, inData, outData);
+	}	
+	
+	/**
 	* @메소드명: insertPlay
 	* @작성자: KimSangMin
 	* @생성일: 2023. 12. 5. 오후 8:48:43
@@ -71,6 +85,59 @@ public class PlayController extends BaseController {
 		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
 		response.setContentType("application/x-json; charset=UTF-8");
 	}
+	
+	/**
+	* @메소드명: updatePlay
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 11. 오후 5:12:04
+	* @설명: 놀이 수정
+	*/
+	@RequestMapping("/updatePlay.do")
+	public void updatePlay(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
+		inData.put("loginInfo", loginInfo);
+		
+		//권한 확인
+		inData.put("url", url);				//메뉴 경로
+		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
+		inData.put("reqAuthGrade", 2);		//필요 권한등급
+		commonService.writeAuthChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
+		
+		List<MultipartFile> fileList = request.getFiles("files");
+		Map<String, Object> outData = playService.updatePlay((StringBuilder)request.getAttribute("IN_LOG_STR"), inData, fileList);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(outData);
+		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
+		response.setContentType("application/x-json; charset=UTF-8");
+	}	
+	
+	/**
+	* @메소드명: deletePlay
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 12. 오전 11:28:06
+	* @설명: 놀이 삭제
+	*/
+	@RequestMapping("/deletePlay.do")
+	public void deletePlay(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
+		inData.put("loginInfo", loginInfo);
+		
+		//권한 확인
+		inData.put("url", url);				//메뉴 경로
+		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
+		inData.put("reqAuthGrade", 2);		//필요 권한등급
+		commonService.writeAuthChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
+		
+		Map<String, Object> outData = playService.deletePlay((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(outData);
+		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
+		response.setContentType("application/x-json; charset=UTF-8");
+	}	
 }
 
 

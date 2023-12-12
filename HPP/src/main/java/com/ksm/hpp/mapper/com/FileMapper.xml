@@ -88,10 +88,12 @@
 		  FROM TB_ATCFILE						/*테이블_첨부파일*/
 		 WHERE BOARD_SEQ = #{boardSeq}			/*게시글일련번호*/
 		   AND BOARD_CODE = #{boardCode}		/*게시판구분코드*/
+		<if test='delFilesArr != null and delFilesArr != ""'>
 		   AND ATCFILE_NUM IN (
 				   <foreach collection="delFilesArr" item="delFilesArr" separator=",">
 				   		#{delFilesArr}
 				   </foreach>
 		   	   )
+		</if>	
 	</delete>
 </mapper>

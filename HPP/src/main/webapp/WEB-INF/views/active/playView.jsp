@@ -17,12 +17,13 @@
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
 	<div class="papang-content-div">
 		<form id="viewForm" name="viewForm" method="post" enctype="multipart/form-data">
+			<input type="hidden" id="boardSeq" name="boardSeq" value="">
 			<input type="hidden" id="boardCode" name="boardCode" value="05"><!-- 게시판구분코드(01:공지사항,02:자유게시판,03:질문게시판,04:지역게시판,05:놀이) -->
 			<div class="viewCardWrap">
 			    <div class="cardItem">
 			        <div class="cardImg">
 						<input type="file" id="thumbnail" name="thumbnail" accept="image/*">
-					    <img id="thumbnailImg" class="thumbnailImg" title="썸네일을 입력하세요" src="<%=request.getContextPath()%>/resources/images/etc/upload.png" alt="no image"/>
+					    <img id="thumbnailImg" class="thumbnailImg" src="<%=request.getContextPath()%>/resources/images/etc/upload.png" alt="no image"/>
 					    <span id="cardImgMsg">썸네일을 선택하세요.</span>						        
 			        </div>
 			        <div class="cardContent">
@@ -34,7 +35,7 @@
 			            	<input id="title" name="title" class="form-control" type="text" title="제목" placeholder="제목을 입력하세요." maxlength="100" required="all1"/>
 			            </div>
 			            <div class="cardIntro">
-			            	<textarea id="intro" name="intro" class="form-control" title="소개" placeholder="놀이에 대한 소개를 입력하세요." maxlength="200"></textarea>
+			            	<textarea id="intro" name="intro" class="form-control" title="소개" placeholder="놀이에 대한 소개를 입력하세요." maxlength="200" required="all1"></textarea>
 			            </div>
 			        </div>
 			    </div>		

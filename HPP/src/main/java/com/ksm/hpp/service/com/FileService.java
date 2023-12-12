@@ -194,7 +194,8 @@ public class FileService extends BaseService {
 		for(Map<String, Object> delFile : list) {
 			File file = new File((String) delFile.get("atcFilePath"), (String) delFile.get("saveAtcFileNm"));
 			file.delete();
-		}		
+		}	
+		int cnt = sqlSession.delete("mapper.com.FileMapper.deleteFile", inData);
 		
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;	
