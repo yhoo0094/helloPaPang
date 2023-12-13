@@ -120,13 +120,13 @@ public class CommonService extends BaseService {
 	}	
 	
 	/**
-	* @메소드명: writeAuthChk
+	* @메소드명: authChk
 	* @작성자: KimSangMin
 	* @생성일: 2023. 1. 31. 오후 5:40:11
-	* @설명: 쓰기권한 조회
+	* @설명: 권한 조회
 	*/
 	@SuppressWarnings("unchecked")
-	public void writeAuthChk(StringBuilder logStr, HttpServletRequest request, Map<String, Object> inData) throws Exception {
+	public void authChk(StringBuilder logStr, HttpServletRequest request, Map<String, Object> inData) throws Exception {
 		Boolean result = false;
 		String url = (String) inData.get("url");					//메뉴 경로
 		Boolean isRange = (Boolean) inData.get("isRange");			//권한등급이 정확히 일치해야 하는지

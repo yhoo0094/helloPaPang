@@ -25,7 +25,7 @@
     background: rgba(0, 0, 0, 0.5); /* Example background for visibility */
     padding: .5em 1em; /* Example padding */
     border-radius: 5px; /* Example border radius */
-    max-width: 90%; /* Prevent span from being wider than its container */
+    max-width: 100%; /* Prevent span from being wider than its container */
     text-align: center; /* Center the text inside the span */
     white-space: nowrap; /* Prevent the text from wrapping */
     overflow: hidden; /* Prevent overflow of the text */

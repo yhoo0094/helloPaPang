@@ -362,8 +362,8 @@ table.dataTable.no-footer{
 	width: 100%;
 }
 
-.papang-table td, .papang-search-table td, .papang-info-table td{
-	padding: 2px;
+.papang-table > tr{
+	line-height: 2.5;	
 }
 
 .papang-table th{
@@ -378,6 +378,10 @@ table.dataTable.no-footer{
 
 .papang-info-table th{
 	padding-right: 5px;
+}
+
+.papang-table td, .papang-search-table td, .papang-info-table td{
+	padding: 2px;
 }
 
 .papang-search-table input, .papang-info-table input{

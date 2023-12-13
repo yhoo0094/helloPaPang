@@ -61,7 +61,7 @@ public class FreeBoardController extends BaseController {
 		inData.put("url", url);				//메뉴 경로
 		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
 		inData.put("reqAuthGrade", 2);		//필요 권한등급
-		commonService.writeAuthChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
+		commonService.authChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
 		
 		List<MultipartFile> fileList = request.getFiles("files"); 
 		Map<String, Object> outData = freeBoardService.insertFreeBoard((StringBuilder)request.getAttribute("IN_LOG_STR"), inData, fileList);
@@ -88,7 +88,7 @@ public class FreeBoardController extends BaseController {
 		inData.put("url", url);				//메뉴 경로
 		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
 		inData.put("reqAuthGrade", 2);		//필요 권한등급
-		commonService.writeAuthChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
+		commonService.authChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
 		
 		List<MultipartFile> fileList = request.getFiles("files"); 
 		Map<String, Object> outData = freeBoardService.updateFreeBoard((StringBuilder)request.getAttribute("IN_LOG_STR"), inData, fileList);
@@ -115,7 +115,7 @@ public class FreeBoardController extends BaseController {
 		inData.put("url", url);				//메뉴 경로
 		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
 		inData.put("reqAuthGrade", 2);		//필요 권한등급
-		commonService.writeAuthChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
+		commonService.authChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
 		
 		Map<String, Object> outData = freeBoardService.deleteFreeBoard((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		

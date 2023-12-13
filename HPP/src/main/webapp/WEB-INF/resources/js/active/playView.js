@@ -119,8 +119,6 @@ function chViewMode(type){
 			$('#viewForm select').attr('disabled',true);					//disabled 적용
 			edit.enableReadOnlyMode('Y');										//에디터 readonly 적용
 			break;		
-		default:
-			break;
 	}
 }
 
@@ -145,7 +143,9 @@ function saveBtnClick(){
 	
 	var url;    
     if($util.isEmpty(param)){
-		if(fileData){
+		if(fileData == undefined){
+			alert("썸네일이 선택되지 않았습니다.");
+			clickThumbnail()
 			return;
 		}
 		

@@ -100,23 +100,21 @@ public class FileService extends BaseService {
 			String atcFilePath = this.makeDir();
 			
 			//파일 검증
-			for(MultipartFile multiFile : fileList) {
+			validFileLoop: for(MultipartFile multiFile : fileList) {	// validFileLoop로 반복문 라벨 지정
 				String atcFileNm = multiFile.getOriginalFilename();	//원본 파일명
 				int pos = atcFileNm.lastIndexOf(".");
-				//수정필요!! (break가 do while 문이 아닌 for문에 대해서 동작)
 				if(pos == -1) {
 					result.put(Constant.RESULT, Constant.RESULT_FAILURE);
 					result.put(Constant.OUT_RESULT_MSG, atcFileNm + " 파일의 확장자가 존재하지 않습니다.");	
-					break;					
+					break validFileLoop; // 라벨로 지정된 반복문을 벗어납니다.				
 				}
 				String atcFileExts = atcFileNm.substring(pos + 1);	//확장자명			
 				
 				//허용된 확장자인지 검증
-				//수정필요!! (break가 do while 문이 아닌 for문에 대해서 동작)
 				if(excludedExtsList.contains(atcFileExts)) {
 					result.put(Constant.RESULT, Constant.RESULT_FAILURE);
 					result.put(Constant.OUT_RESULT_MSG, atcFileExts + "는 허용되지 않은 확장자입니다.");	
-					break;					
+					break validFileLoop; // 라벨로 지정된 반복문을 벗어납니다.					
 				}			
 			}
 			
@@ -261,5 +259,88 @@ public class FileService extends BaseService {
 		}
 		
 		return atcFilePath;
+	}
+	
+	/**
+	* @메소드명: makeDir
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 13. 오후 3:34:04
+	* @설명: 이미지 디렉토리 생성
+	 */
+	public String makeImageDir(String dirName) throws ConfigurationException {
+		String atcFilePath = "";	//파일 저장 경로
+		
+		OS_Type os = OSValidator.getOS();	//OS타입 구하기(UNKNOWN(0), WINDOWS(1), LINUX(2), MAC(3), SOLARIS(4))
+		Configuration conf = new Configuration();
+		atcFilePath = conf.getString("Global." + os + ".getComFilePath") + "images/" + dirName + "/";	
+		File dir = new File(atcFilePath);
+		if(!dir.isDirectory()) {	//해당 경로가 디렉토리인지 확인
+			if(!dir.exists()) {		//해당 경로 디렉토리가 있는지 확인
+				dir.mkdir();		//해당 디렉토리가 없으면 생성
+			}
+		}
+		
+		return atcFilePath;
+	}
+	
+	/**
+	* @메소드명: saveImage
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 13. 오후 3:21:32
+	* @설명: 이미지 파일 저장
+	 */
+	public Map<String, Object> saveImage(StringBuilder logStr, Map<String, Object> inData, MultipartFile image, String dirName) throws Exception{
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		//현재 시간 구하기
+		LocalTime time = LocalTime.now();
+		DateTimeFormatter dtfTime = DateTimeFormatter.ofPattern("HHmmss");
+		String nowTime = time.format(dtfTime);
+		
+		do {
+			if(image == null) {
+				result.put(Constant.RESULT, Constant.RESULT_FAILURE);
+				result.put(Constant.OUT_RESULT_MSG, "이미지가 존재하지 않습니다.");	
+				break;
+			}
+			
+			//이미지 디렉토리 생성
+			String atcFilePath = this.makeImageDir(dirName);
+			
+			//파일 확장자 검증
+			String atcFileNm = image.getOriginalFilename();	//원본 파일명
+			int pos = atcFileNm.lastIndexOf(".");
+			if(pos == -1) {
+				result.put(Constant.RESULT, Constant.RESULT_FAILURE);
+				result.put(Constant.OUT_RESULT_MSG, atcFileNm + " 파일의 확장자가 존재하지 않습니다.");	
+				break;					
+			}
+			String atcFileExts = atcFileNm.substring(pos + 1);	//확장자명			
+			
+			//허용된 확장자인지 검증
+			if(excludedExtsList.contains(atcFileExts)) {	
+				result.put(Constant.RESULT, Constant.RESULT_FAILURE);
+				result.put(Constant.OUT_RESULT_MSG, atcFileExts + "는 허용되지 않은 확장자입니다.");	
+				break;					
+			}				
+			
+			InputStream fi = image.getInputStream();
+			//파일명에 현재 시간 입력(파일명_현재시간.확장자)
+			String saveAtcFileNm = atcFileNm.substring(0, pos) + "_" + nowTime + "." + atcFileExts;
+			//중복된 파일명 변경
+			saveAtcFileNm = this.getUniqueFileName(atcFilePath, saveAtcFileNm);
+			
+			//업로드할 파일명(경로+파일명)
+			File uploadFile = new File(atcFilePath + saveAtcFileNm);
+			FileOutputStream fo = new FileOutputStream(uploadFile);
+			
+			//물리적인 공간에 파일 저장
+			FileUtil.saveFileOri(fi, fo);
+			
+			result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+			result.put("saveAtcFileNm", saveAtcFileNm);
+		} while(false);
+		
+		return result;
 	}
 }

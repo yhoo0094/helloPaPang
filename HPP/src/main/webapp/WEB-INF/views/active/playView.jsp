@@ -23,8 +23,8 @@
 			    <div class="cardItem">
 			        <div class="cardImg">
 						<input type="file" id="thumbnail" name="thumbnail" accept="image/*">
-					    <img id="thumbnailImg" class="thumbnailImg" src="<%=request.getContextPath()%>/resources/images/etc/upload.png" alt="no image"/>
-					    <span id="cardImgMsg">썸네일을 선택하세요.</span>						        
+					    <img id="thumbnailImg" class="thumbnailImg" title="썸네일을 선택하세요." src="<%=request.getContextPath()%>/resources/images/etc/upload.png" alt="no image"/>
+					    <span id="cardImgMsg" title="썸네일을 선택하세요.">썸네일을 선택하세요.</span>						        
 			        </div>
 			        <div class="cardContent">
 			            <div class="cardBtn">

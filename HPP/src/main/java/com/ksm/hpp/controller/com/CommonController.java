@@ -96,7 +96,7 @@ public class CommonController {
 		
 		OS_Type os = OSValidator.getOS();	//OS타입 구하기(UNKNOWN(0), WINDOWS(1), LINUX(2), MAC(3), SOLARIS(4))
 		Configuration conf = new Configuration();
-		String filePath = new String(conf.getString("Global." + os + ".getComImagePath").getBytes("ISO-8859-1"), "UTF-8") + nowDate;	
+		String filePath = new String(conf.getString("Global." + os + ".getComEditorImagePath").getBytes("ISO-8859-1"), "UTF-8") + nowDate;	
 		
 		/*
 		File dir = new File(filePath);
@@ -131,13 +131,13 @@ public class CommonController {
 	* @설명: 에디터 이미지 조회
 	 */
 	@ResponseBody
-	@GetMapping("/images/{folder}/{filename}.{extension}")
-	public org.springframework.core.io.Resource showImage(@PathVariable String folder, @PathVariable String filename, @PathVariable String extension) throws Exception {
+	@GetMapping("/images/{dir}/{filename}.{extension}")
+	public org.springframework.core.io.Resource showImage(@PathVariable String dir, @PathVariable String filename, @PathVariable String extension) throws Exception {
 		OS_Type os = OSValidator.getOS();	//OS타입 구하기(UNKNOWN(0), WINDOWS(1), LINUX(2), MAC(3), SOLARIS(4))
 		Configuration conf = new Configuration();
-		String filePath = new String(conf.getString("Global." + os + ".getComImagePath").getBytes("ISO-8859-1"), "UTF-8");
+		String filePath = new String(conf.getString("Global." + os + ".getComEditorImagePath").getBytes("ISO-8859-1"), "UTF-8");
 		
-	 	return new UrlResource("file:///" + filePath + folder + "/" + filename + "." + extension);
+	 	return new UrlResource("file:///" + filePath + dir + "/" + filename + "." + extension);
 	 }	
 	
 	/**

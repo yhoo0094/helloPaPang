@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.market.EnterpriseMapper">
+
+	<!-- 기업장터 등록 -->
+	<insert id="insertEnterprise" parameterType="map">
+		<selectKey resultType="integer" keyProperty="entMarketSeq" order="BEFORE">
+			SELECT nextval('ENT_MARKET_SEQ') FROM DUAL	/*sequence 값을 map에 반환*/
+		</selectKey>	
+		INSERT 
+		  INTO TB_ENT_MARKET			/*테이블_기업장터*/
+		     (
+		       ENT_MARKET_SEQ          	/*기업장터일련번호*/
+		     , PRO_NAME                	/*상품명*/
+		     , PRICE                   	/*가격*/
+		     , CNT                     	/*재고수량*/
+		     , CN                      	/*상세내용*/
+		     , MARKET_TYPE_CODE        	/*상품분류코드*/
+		     , THUMBNAIL               	/*썸네일*/
+		     , FST_REG_ID 				/*최초등록자ID*/
+		     , LT_UPD_ID 				/*최종수정자ID*/
+		     )
+		VALUES
+			 (
+			   #{entMarketSeq}
+			 , #{proName}
+			 , #{price}
+			 , #{cnt}
+			 , #{cn}
+			 , #{marketTypeCode}
+			 , #{thumbnail}
+		     , #{loginInfo.userId} 	
+		     , #{loginInfo.userId}		 
+			 )   
+	</insert>	
+	
+</mapper>
