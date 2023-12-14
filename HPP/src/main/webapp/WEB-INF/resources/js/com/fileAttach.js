@@ -129,7 +129,7 @@ $fileUtil.saveFile = function saveFile(url, formData){
 }
 
 //첨부파일 다운로드
-$fileUtil.downloadFile = function downloadFile(bizId, atcfileSeq){
+$fileUtil.downloadFile = function downloadFile(boardSeq, atcfileNum){
     $("[id='downloadForm']").remove();	//이미 생성된 form이 있으면 제거
     
     //form 생성
@@ -140,17 +140,17 @@ $fileUtil.downloadFile = function downloadFile(bizId, atcfileSeq){
     document.body.appendChild(form);
     
     //input 생성
-    var bizIdInput = document.createElement("input");
-    bizIdInput.type = "text";
-    bizIdInput.name = "bizId";
-    bizIdInput.value = bizId;
-    form.appendChild(bizIdInput);
+    var boardSeqInput = document.createElement("input");
+    boardSeqInput.type = "text";
+    boardSeqInput.name = "boardSeq";
+    boardSeqInput.value = boardSeq;
+    form.appendChild(boardSeqInput);
  
-    var atcfileSeqInput = document.createElement("input");
-    atcfileSeqInput.type = "text";
-    atcfileSeqInput.name = "atcfileSeq";
-    atcfileSeqInput.value = atcfileSeq;
-    form.appendChild(atcfileSeqInput);
+    var atcfileNumInput = document.createElement("input");
+    atcfileNumInput.type = "text";
+    atcfileNumInput.name = "atcfileNum";
+    atcfileNumInput.value = atcfileNum;
+    form.appendChild(atcfileNumInput);
     form.submit();
     
     $("[id='downloadForm']").remove();	

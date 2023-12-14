@@ -448,7 +448,7 @@ table.dataTable.no-footer{
 /* 에디터 시작 */
 .editor {
 	border: 1px solid #ced4da !important;
-	height: 500px;
+	min-height: 500px;
 }
 /* 에디터 끝 */
 

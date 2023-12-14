@@ -111,7 +111,7 @@ public class CommonController {
         file.transferTo(imageUpload);
 	    
         //jsonObject.put("url", "/resources/images/editor/" + nowDate + "/" + imageName);
-        jsonObject.put("url", "/common/images/" + nowDate + "/" + imageName);
+        jsonObject.put("url", "/common/editor/" + nowDate + "/" + imageName);
         
         //리턴 response 작성
 //        printWriter = response.getWriter();
@@ -131,13 +131,13 @@ public class CommonController {
 	* @설명: 에디터 이미지 조회
 	 */
 	@ResponseBody
-	@GetMapping("/images/{dir}/{filename}.{extension}")
-	public org.springframework.core.io.Resource showImage(@PathVariable String dir, @PathVariable String filename, @PathVariable String extension) throws Exception {
+	@GetMapping("/{dir1}/{dir2}/{filename}.{extension}")
+	public org.springframework.core.io.Resource showImage(@PathVariable String dir1, @PathVariable String dir2, @PathVariable String filename, @PathVariable String extension) throws Exception {
 		OS_Type os = OSValidator.getOS();	//OS타입 구하기(UNKNOWN(0), WINDOWS(1), LINUX(2), MAC(3), SOLARIS(4))
 		Configuration conf = new Configuration();
-		String filePath = new String(conf.getString("Global." + os + ".getComEditorImagePath").getBytes("ISO-8859-1"), "UTF-8");
+		String filePath = new String(conf.getString("Global." + os + ".getComNasPath").getBytes("ISO-8859-1"), "UTF-8");
 		
-	 	return new UrlResource("file:///" + filePath + dir + "/" + filename + "." + extension);
+	 	return new UrlResource("file:///" + filePath + dir1 + "/" + dir2 + "/" + filename + "." + extension);
 	 }	
 	
 	/**

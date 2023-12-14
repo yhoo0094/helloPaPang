@@ -3,6 +3,7 @@ package com.ksm.hpp.controller.market;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.google.gson.Gson;
 import com.ksm.hpp.controller.com.BaseController;
 import com.ksm.hpp.framework.util.RequestUtil;
+import com.ksm.hpp.framework.util.ResponseUtil;
 import com.ksm.hpp.service.com.CommonService;
 import com.ksm.hpp.service.market.EnterpriseService;
 
@@ -27,6 +29,22 @@ public class EnterpriseController extends BaseController {
 	protected CommonService commonService;
 	
 	String url = "market/enterprise";
+	
+	/**
+	* @메소드명: selectEnterprise
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 14. 오후 3:12:47
+	* @설명: 기업장터 조회
+	 */
+	@RequestMapping("/selectEnterprise.do")
+	public void selectEnterprise(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> outData = enterpriseService.selectEnterprise((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		
+		ResponseUtil.setResAuto(response, inData, outData);
+	}	
+	
+	
 	
 	/**
 	* @메소드명: insertEnterprise

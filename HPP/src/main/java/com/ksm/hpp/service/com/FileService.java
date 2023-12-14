@@ -272,7 +272,7 @@ public class FileService extends BaseService {
 		
 		OS_Type os = OSValidator.getOS();	//OS타입 구하기(UNKNOWN(0), WINDOWS(1), LINUX(2), MAC(3), SOLARIS(4))
 		Configuration conf = new Configuration();
-		atcFilePath = conf.getString("Global." + os + ".getComFilePath") + "images/" + dirName + "/";	
+		atcFilePath = conf.getString("Global." + os + ".getComImagePath") + dirName + "/";	
 		File dir = new File(atcFilePath);
 		if(!dir.isDirectory()) {	//해당 경로가 디렉토리인지 확인
 			if(!dir.exists()) {		//해당 경로 디렉토리가 있는지 확인

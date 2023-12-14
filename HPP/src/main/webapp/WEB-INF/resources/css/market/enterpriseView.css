@@ -8,28 +8,48 @@
 
 #marketItem {
     display: flex; /* Flex container로 설정 */
-    background-color: grey; /* 배경색 설정 */
-    padding: 20px; /* 안쪽 여백 설정 */
+    background-color: var(--navMnu-backGround);
+    padding: 10px;
+    margin-bottom: 10px;     
 }
 
 #marketThumbnail {
-	flex: 30% 0 0;
-    background-color: yellow; /* 썸네일 배경색 설정 */
+	flex: 50% 0 0;
     margin-right: 20px; /* 오른쪽 여백 설정 */
+    width: 50%;
 }
 
 #marketContent{
 	flex-grow: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between; /* 모든 자식 요소를 수직으로 정렬하고, #btnBox를 아래로 밀어냄 */
 }
 
-#title, #price, #btnBox {
-    background-color: yellow; /* 배경색 설정 */
-    margin-bottom: 10px; /* 아래쪽 여백 설정 */
-    padding: 10px; /* 안쪽 여백 설정 */
+#marketContent * {
+	font-weight: bold;
+	font-size: 25px;
+}
+
+#starBox *{
+	font-size: 20px;	
+}
+
+#stars{
+	color: #fd0000;	
 }
 
 #btnBox {
+    flex-grow: 1;
+    display: flex; /* Flexbox를 사용하여 버튼들을 정렬 */
+    flex-direction: column; /* 버튼들을 수직으로 정렬 */
+    justify-content: flex-end; /* 버튼들을 #btnBox의 아래쪽으로 정렬 */
+    text-align: right; /* 내부 텍스트를 오른쪽으로 정렬 */
+    align-items: flex-end; /* 버튼들을 오른쪽으로 정렬 */
     margin-bottom: 0; /* 마지막 요소이므로 아래 여백 제거 */
+}
+
+.productInfo{
+    width: 100px;
+    display: inline-block;
 }

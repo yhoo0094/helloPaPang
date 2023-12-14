@@ -25,6 +25,27 @@ public class EnterpriseService {
 	protected FileService fileService;
 
 	/**
+	* @메소드명: selectEnterprise
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 14. 오후 3:12:47
+	* @설명: 기업장터 조회
+	 */	
+	public Map<String, Object> selectEnterprise(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<Map<String, Object>> list = sqlSession.selectList("mapper.market.EnterpriseMapper.selectEnterprise", inData);
+		result.put("data", list);
+		result.put(Constant.OUT_DATA, list);
+		if(!list.isEmpty()) {
+			result.put("recordsFiltered", list.get(0).get("rowCnt"));	//필터링 후의 총 레코드 수
+		} else {
+			result.put("recordsFiltered", "0");	//필터링 후의 총 레코드 수
+		}		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		return result;
+	}		
+	
+	/**
 	* @메소드명: insertEnterprise
 	* @작성자: KimSangMin
 	* @생성일: 2023. 12. 13. 오후 3:17:19

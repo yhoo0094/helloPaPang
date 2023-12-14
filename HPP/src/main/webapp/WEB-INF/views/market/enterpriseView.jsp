@@ -14,18 +14,36 @@
 		<div id="marketItem">
 		    <img id="marketThumbnail" src="/common/images/enterprise/smart-home-3148026_1920_170749.jpg" alt="Market Thumbnail"/>
 		    <div id="marketContent">
-			    <div id="title">제품 이름</div>
-			    <div id="price">가격 정보</div>
-			    <div id="btnBox">버튼 영역</div>
-			<div id="marketInfoBox">
+			    <div id="proName"></div>
+			    <div id="starBox"><span id="stars">★★★★☆</span><span id="starCnt">(77)</span></div>
+			    <div class="tr"><span id="price"></span>원</div>
+			    <hr>
+			    <div>
+			    	<span class="productInfo">판매자</span>: 
+			    	<span id="fstRegNm">홍길동</span>
+			    </div>
+			    <div>
+			    	<span class="productInfo">수량</span>: 
+			    	<input id="cnt" name="cnt" type="number" value="1" class="form-control w30" max="100">
+			    </div>
+			    <div id="btnBox">
+			    	<div>
+				    	<button type="button" id="" class="btn papang-search-btn papang_btn" onclick="modifyBtnClick()">장바구니</button>
+				    	<button type="button" id="" class="btn papang-search-btn papang_btn" onclick="modifyBtnClick()">구매하기</button>
+			    	</div>
+			    </div>
+			</div>
 		</div>
-
+		
+		<div class="editor-container">
+			<div id="cn" title="내용" class="editor form-control"></div>
+			<div id="cnByteDisplay" class="byteDisplay"></div>
+		</div>
 			
-<!-- 		<div class="modal_btn_wrapper"> -->
-<!-- 			<button type="button" id="saveBtn" class="btn papang-save-btn papang_btn" onclick="saveBtnClick()" style="display: none;">저장</button> -->
-<!-- 			<button type="button" id="modifyBtn" class="btn papang-save-btn papang_btn" onclick="modifyBtnClick()" style="display: none;">수정</button> -->
-<!-- 			<button type="button" id="delBtn" class="btn papang-del-btn papang_btn" onclick="deleteBtnClick()" style="display: none;">삭제</button> -->
-<!-- 			<button type="button" id="historyBackBtn" class="btn papang-close-btn papang_btn" onclick="moveList()">돌아가기</button> -->
-<!-- 		</div> -->
+		<div class="modal_btn_wrapper">
+			<button type="button" id="modifyBtn" class="btn papang-save-btn papang_btn" onclick="modifyBtnClick()" style="display: none;">수정</button>
+			<button type="button" id="delBtn" class="btn papang-del-btn papang_btn" onclick="deleteBtnClick()" style="display: none;">삭제</button>
+			<button type="button" id="historyBackBtn" class="btn papang-close-btn papang_btn" onclick="moveList()">돌아가기</button>
+		</div>
 	</div>	
 </div>	
