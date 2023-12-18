@@ -8,7 +8,7 @@
 
 #marketItem {
     display: flex; /* Flex container로 설정 */
-    background-color: var(--navMnu-backGround);
+/*     background-color: var(--navMnu-backGround); */
     padding: 10px;
     margin-bottom: 10px;     
 }
@@ -52,4 +52,15 @@
 .productInfo{
     width: 100px;
     display: inline-block;
+}
+
+/* input 타입이 number인 요소의 화살표를 항상 표시 */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+/* Firefox를 위한 추가 스타일 */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

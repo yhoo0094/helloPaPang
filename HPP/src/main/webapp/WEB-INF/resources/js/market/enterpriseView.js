@@ -45,6 +45,13 @@ function pageInit(){
 			}
 			edit.setData(data.cn); //에디터 조회
 			
+			//썸네일 이미지
+			$('#marketThumbnail').attr('src', '/common/images/enterprise/' + data.thumbnail)	
+			
+			//재고 수량 최대 값
+			let cntMax = data.cnt
+			$('#cnt').attr('max', cntMax);
+			
 			if($com.getUserInfo('userId') == data.fstRegId){	
 				//작성자ID와 조회ID가 같을 경우 -> 수정, 삭제 버튼 보이기
 				$('#modifyBtn').css('display','inline-block');
@@ -56,6 +63,22 @@ function pageInit(){
 			thumbnailImgHeight();	//썸네일 이미지 높이 조정
         }
     });
+}
+
+//삭제
+function deleteBtnClick(){
+	if(!confirm('정말로 삭제하시겠습니까?')){return false;}
+	
+	$.ajax({
+        url: '/enterprise/deleteEnterprise.do',
+        type: 'POST',
+        data: {entMarketSeq: entMarketSeq},
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+        dataType: 'json',
+        success: function (result) {
+			window.location.href = contextPath + '/market/enterprise';
+        }
+    });	
 }
 
 //돌아가기

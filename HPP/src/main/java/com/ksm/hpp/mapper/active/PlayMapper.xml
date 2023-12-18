@@ -59,8 +59,7 @@
 		     , T1.LT_UPD_ID                                                 /*최종수정자아이디*/
 		     , DATE_FORMAT(T1.LT_UPD_DTTI, "%Y/%m/%d %H:%i") LT_UPD_DTTI	/*최종수정일시*/
 		  FROM TB_PLAY T1													/*테이블_놀이*/
-		 WHERE 1 = 1
-		   AND T1.USE_YN = 'Y'
+		 WHERE T1.USE_YN = 'Y'
 		 ORDER BY T1.FST_REG_DTTI DESC	
 		 LIMIT 0, 3
 	</select>		

@@ -46,6 +46,27 @@ public class EnterpriseService {
 	}		
 	
 	/**
+	* @메소드명: selectEnterprise
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 18. 오후 4:31:29
+	* @설명:기업장터 조회(홈 화면)
+	 */	
+	public Map<String, Object> selectEnterpriseHome(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<Map<String, Object>> list = sqlSession.selectList("mapper.market.EnterpriseMapper.selectEnterpriseHome", inData);
+		result.put("data", list);
+		result.put(Constant.OUT_DATA, list);
+		if(!list.isEmpty()) {
+			result.put("recordsFiltered", list.get(0).get("rowCnt"));	//필터링 후의 총 레코드 수
+		} else {
+			result.put("recordsFiltered", "0");	//필터링 후의 총 레코드 수
+		}		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		return result;
+	}		
+	
+	/**
 	* @메소드명: insertEnterprise
 	* @작성자: KimSangMin
 	* @생성일: 2023. 12. 13. 오후 3:17:19
@@ -77,4 +98,20 @@ public class EnterpriseService {
 		result.put(Constant.OUT_DATA, inData);
 		return result;
 	}
+	
+	/**
+	* @메소드명: deleteEnterprise
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 18. 오후 5:42:33
+	* @설명: 기업장터 삭제
+	*/	
+	public Map<String, Object> deleteEnterprise(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		int cnt = sqlSession.update("mapper.active.EnterpriseMapper.deleteEnterprise", inData);
+		String consResult = (cnt == 1)? Constant.RESULT_SUCCESS : Constant.RESULT_FAILURE;
+		result.put(Constant.RESULT, consResult);
+		result.put(Constant.OUT_DATA, inData);
+		return result;
+	}	
 }

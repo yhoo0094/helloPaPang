@@ -83,7 +83,7 @@ function selectNavMnuList() {
 				    	$ul.append($li);
 				    	
 				    	let $a = $('<a></a>');
-				    	$a.attr('href', contextPath + '/' + menu.url);
+				    	$a.attr('href', '/' + menu.url);
 				    	$a.addClass('navMnu remove-a navMnu-color');
 				    	$li.append($a);
 				    	

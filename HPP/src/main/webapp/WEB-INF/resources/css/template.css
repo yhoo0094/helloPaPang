@@ -136,7 +136,7 @@ input[type = 'date']{
 }
 
 .navMnu-color{
-	color: var(--navMnu-color);
+/* 	color: var(--navMnu-color); */
 }
 
 /* 헤더, 사이드, 바디, 푸터 설정 시작 */
@@ -622,3 +622,57 @@ label{
 	cursor: pointer;
 }
 /* active 관련 끝 */
+
+/* enterprise 관련 시작 */
+.container {
+	padding: 0;
+}
+
+.row{
+	margin-bottom: 1rem;
+}
+
+.gridCardImg {
+  object-fit: fill;	/* 이미지를 크기에 맞게 늘이기 */
+  height: 300px; /* 이미지 높이를 고정합니다 */
+  width: 100%;
+}
+
+.gridCardBody {
+    padding: 5px;
+}
+
+#gridCardWrap .card{
+	overflow: hidden;
+	cursor: pointer;
+}
+
+#gridCardWrap .card:hover {
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+    -ms-transform:scale(1.2);   
+    -o-transform:scale(1.2);
+    transform:scale(1.05);
+    transition-duration: 0.5s;
+}
+
+.card-title {
+  font-size: 1.5rem; /* 타이틀 폰트 크기를 조절합니다 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-text {
+  font-size: 1rem; /* 텍스트 폰트 크기를 조절합니다 */
+}
+
+/* 아래는 부트스트랩 그리드 시스템을 사용하여 카드를 가로로 나열합니다 */
+.card-deck .col {
+  padding: 0 15px; /* 카드 사이의 간격을 조정합니다 */
+  overflow: hidden;
+  flex: 0 0 33%;
+}
+
+
+/* enterprise 관련 끝 */

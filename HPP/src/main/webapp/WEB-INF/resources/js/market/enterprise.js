@@ -6,18 +6,18 @@
 **/
 
 $(()=>{
-	selectPlay();			//놀이 조회
+	selectEnterprise();			//기압징터 조회
 })
 
 //검색
 function doSearch(){
-	selectPlay();
+	selectEnterprise();
 };
 
-//놀이 조회
-function selectPlay(){
+//기압징터 조회
+function selectEnterprise(){
 		$com.loadingStart();	
-		$('#cardWrap').html('');	//기존 데이터 초기화
+		$('#gridCardWrap').html('');	//기존 데이터 초기화
 		
 		let formData = new FormData($("#searchForm")[0]);
 		let formObject = {};
@@ -27,7 +27,7 @@ function selectPlay(){
 		formObject.useYn = 'Y';
 	
 		$.ajax({
-	        url: '/play/selectPlay.do',
+	        url: '/enterprise/selectEnterprise.do',
 	        type: 'POST',
 	        data: formObject,
 	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
@@ -35,42 +35,54 @@ function selectPlay(){
 	        success: function (result) {
 
 				//데이터 조회
+				let index = 0;
+				let gridCardWrap = $('#gridCardWrap');
+				let row;
 				for (let data of result.OUT_DATA) {
-				    let cardWrap = $('#cardWrap');
+					if(index % 3 == 0){
+						row = $('<div class="row card-deck"></div>');	
+					}
+					
+					let col = $('<div class="col"></div>');
+				    let card = $('<div class="card"><div>');
+				    card.attr('title', data.proName);
+				    card.attr('onClick', 'mvEnterpriseView(' + data.entMarketSeq + ')');
 				    
-				    let cardItem = $('<div class="cardItem"></div>');
+				    let gridCardImg = $('<img src="" class="gridCardImg card-img-top" alt="...">');
+				    let src = '/common/images/enterprise/' + data.thumbnail;
+				    gridCardImg.attr('src',src);
 				    
-				    let cardImg = $('<div class="cardImg"></div>')
-				    let thumbnailImg = $('<img class="thumbnailImg" alt="no image"/>');
-				    let src = '/common/getImage.do?boardSeq=' + data.boardSeq;
-				    thumbnailImg.attr('src',src);
-				    thumbnailImg.attr('onClick','mvPlayView(' + data.boardSeq +')');
-				    cardImg.append(thumbnailImg);
+				    let gridCardBody = $('<div class="gridCardBody"></div>');
 				    
-				    let cardContent = $('<div class="cardContent"></div>');
+				    let proName = $('<h5 class="card-title"></h5>');
+				    proName.text(data.proName);
 				    
-				    let cardBtn = $('<div class="cardBtn"></div>');
-				    let searchBtn = $('<img src="/resources/images/etc/search.png" alt="no image" class="cardBtnImg"/>');
-				    searchBtn.attr('onClick','mvPlayView(' + data.boardSeq +')');
-		            let likeBtn = $('<img src="/resources/images/etc/like.png" alt="no image" class="cardBtnImg"/>');	
-		            let cardTitle = $('<div class="cardTitle"></div>');
-		            cardTitle.text(data.title);
-		            let cardIntro = $('<div class="cardIntro"></div>');
-		            let intro = $util.XssReverse(data.intro);
-		            cardIntro.text(intro);
-		            
-				    cardBtn.append(searchBtn);
-		            cardBtn.append(likeBtn);
-		            cardContent.append(cardBtn);
-		            cardContent.append(cardTitle);
-		            cardContent.append(cardIntro);
-		            
-		            cardItem.append(cardImg);
-				    cardItem.append(cardContent);
+				    let price = $('<p class="card-text"></p>');
+				    price.text(data.price.toLocaleString() + '원');
 				    
-				    cardWrap.append(cardItem);
+				    card.append(gridCardImg);
+				    gridCardBody.append(proName);
+				    gridCardBody.append(price);
+				    card.append(gridCardBody);
+				    col.append(card);
+				    row.append(col);
+				    
+				    if(index % 3 == 2){
+						//3개씩 출력
+						gridCardWrap.append(row);	
+					} else if(result.OUT_DATA.length - 1 == index) {
+						//마지막 데이터는 3개가 아니라도 출력
+						gridCardWrap.append(row);	
+					}
+					
+					index++;
 				}
-				thumbnailImgHeight();	//썸네일 이미지 높이 조정
+				
+				//신규 버튼 노출 여부
+				if (authGrade > 1) {			//쓰기 권한이 있을 떄
+					$('#createBtn').css('display', 'inline-block');
+				}
+				
 				$com.loadingEnd();
 	        },
 	    error: function(textStatus, jqXHR, thrownError){
@@ -81,21 +93,8 @@ function selectPlay(){
 }
 
 //놀이 조회 화면 이동
-function mvPlayView(boardSeq){
-	 // form 태그 생성
-    var $form = $('<form></form>')
-        .attr("action", "/active/play/playView")
-        .attr("method", "post");
-
-    // input 태그 생성 및 form 태그에 추가
-    $('<input>').attr({
-        type: "hidden",
-        name: "param",
-        value: boardSeq
-    }).appendTo($form);
-
-    // form 태그를 body에 추가하고 제출
-    $form.appendTo('body').submit();
+function mvEnterpriseView(entMarketSeq){
+	window.location.href = '/market/enterprise/enterpriseView?entMarketSeq=' + entMarketSeq;
 }
 
 //놀이 신규 등록 화면으로 이동 

@@ -12,7 +12,7 @@
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
 	<div class="papang-content-div">
 		<div id="marketItem">
-		    <img id="marketThumbnail" src="/common/images/enterprise/smart-home-3148026_1920_170749.jpg" alt="Market Thumbnail"/>
+		    <img id="marketThumbnail" src="#" alt="Market Thumbnail"/>
 		    <div id="marketContent">
 			    <div id="proName"></div>
 			    <div id="starBox"><span id="stars">★★★★☆</span><span id="starCnt">(77)</span></div>
@@ -24,7 +24,7 @@
 			    </div>
 			    <div>
 			    	<span class="productInfo">수량</span>: 
-			    	<input id="cnt" name="cnt" type="number" value="1" class="form-control w30" max="100">
+			    	<input id="cnt" name="cnt" type="number" value="1" class="form-control w30" max="100" min="1">
 			    </div>
 			    <div id="btnBox">
 			    	<div>

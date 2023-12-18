@@ -44,7 +44,19 @@ public class EnterpriseController extends BaseController {
 		ResponseUtil.setResAuto(response, inData, outData);
 	}	
 	
-	
+	/**
+	* @메소드명: selectEnterprise
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 18. 오후 4:31:29
+	* @설명:기업장터 조회(홈 화면)
+	 */
+	@RequestMapping("/selectEnterpriseHome.do")
+	public void selectEnterpriseHome(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> outData = enterpriseService.selectEnterpriseHome((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		
+		ResponseUtil.setResAuto(response, inData, outData);
+	}		
 	
 	/**
 	* @메소드명: insertEnterprise
@@ -72,6 +84,32 @@ public class EnterpriseController extends BaseController {
 		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
 		response.setContentType("application/x-json; charset=UTF-8");
 	}
+	
+	/**
+	* @메소드명: deleteEnterprise
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 18. 오후 5:42:33
+	* @설명: 기업장터 삭제
+	 */
+	@RequestMapping("/deleteEnterprise.do")
+	public void deleteEnterprise(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
+		inData.put("loginInfo", loginInfo);
+		
+		//권한 확인
+		inData.put("url", url);				//메뉴 경로
+		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
+		inData.put("reqAuthGrade", 2);		//필요 권한등급
+		commonService.authChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
+		
+		Map<String, Object> outData = enterpriseService.deleteEnterprise((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(outData);
+		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
+		response.setContentType("application/x-json; charset=UTF-8");
+	}	
 }
 
 

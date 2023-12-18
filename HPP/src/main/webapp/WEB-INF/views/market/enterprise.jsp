@@ -15,29 +15,41 @@
 			<table class="papang-search-table">
 				<colgroup>
 					<col width="*">
-					<col width="60rem">	
+					<col width="90rem">	
 					<col width="20%">	
 					<col width="60rem">	
-					<col width="14%">	
 					<col width="14%">
+					<col width="60rem">	
+					<col width="14%">
+					<col width="10%">
 				</colgroup>
 				<tbody>
 				<tr>
 					<td></td>
-					<th>제목:</th>
-					<td><input id="title" name="title" class="w100 form-control forSearch" title="제목" type="text" maxlength="20"></td>	
+					<th>제품명:</th>
+					<td><input id="title" name="title" class="w100 form-control forSearch" title="제목" type="text" maxlength="20"></td>
+					<th>분류:</th>
+					<td>
+						<select id="marketTypeCode" name="marketTypeCode" class="form-select w100 makeSelectTag" title="분류" required="all1">
+							<option value="">선택하세요
+						</select>
+					</td>	
 					<th>정렬:</th>
 					<td>
 						<select id="playOrderCode" name="playOrderCode" class="form-select w100 makeSelectTag" title="정렬"></select>
 					</td>
 					<td class="tc">
 						<button type="button" class="papang-search-btn papang_btn lh30px" onclick="doSearch()">검색</button>
-						<button type="button" class="papang-save-btn papang_btn lh30px" onclick="window.location.href = '/market/enterprise/enterpriseEdit';">신규</button>
 					</td>
 				</tr>
 				</tbody>
 			</table>
 		</form>
 	</div>	
-	<div id="cardWrap" class="cardWrap"></div>
+
+	<div id="gridCardWrap" class="entCardWrap container"></div>
+
+	<div class="table_btn_wrapper">
+		<button type="button" id="createBtn" class="papang-save-btn papang_btn lh30px display-n" onclick="window.location.href = '/market/enterprise/enterpriseEdit';">신규</button>
+	</div>
 </div>	

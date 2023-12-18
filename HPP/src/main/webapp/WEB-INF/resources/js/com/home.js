@@ -2,6 +2,7 @@ $(() => {
 	createImgSlide();	//이미지 슬라이드 생성
 	noticePop();		//공지사항 팝업 열기		
 	selectPlay();		//놀이 조회
+	selectEnterprise(); //기업장터 조회
 })
 
 //놀이 조회
@@ -53,6 +54,78 @@ function selectPlay(){
 				    
 				    cardWrap.append(cardItem);
 				}
+				$com.loadingEnd();
+	        },
+	    error: function(textStatus, jqXHR, thrownError){
+			$com.loadingEnd();
+		} 
+	        
+	    });
+}
+
+//기압징터 조회
+function selectEnterprise(){
+		$com.loadingStart();	
+		$('#gridCardWrap').html('');	//기존 데이터 초기화
+		
+		let formData = new FormData($("#searchForm")[0]);
+		let formObject = {};
+		formData.forEach(function(value, key) {
+		    formObject[key] = value;
+		});
+		formObject.useYn = 'Y';
+	
+		$.ajax({
+	        url: '/enterprise/selectEnterpriseHome.do',
+	        type: 'POST',
+	        data: formObject,
+	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+	        dataType: 'json',
+	        success: function (result) {
+
+				//데이터 조회
+				let index = 0;
+				let gridCardWrap = $('#gridCardWrap');
+				let row;
+				for (let data of result.OUT_DATA) {
+					if(index % 3 == 0){
+						row = $('<div class="row card-deck"></div>');	
+					}
+					
+					let col = $('<div class="col"></div>');
+				    let card = $('<div class="card"><div>');
+				    card.attr('title', data.proName);
+				    card.attr('onClick', 'mvEnterpriseView(' + data.entMarketSeq + ')');
+				    
+				    let gridCardImg = $('<img src="" class="gridCardImg card-img-top" alt="...">');
+				    let src = '/common/images/enterprise/' + data.thumbnail;
+				    gridCardImg.attr('src',src);
+				    
+				    let gridCardBody = $('<div class="gridCardBody"></div>');
+				    
+				    let proName = $('<h5 class="card-title"></h5>');
+				    proName.text(data.proName);
+				    
+				    let price = $('<p class="card-text"></p>');
+				    price.text(data.price.toLocaleString() + '원');
+				    
+				    card.append(gridCardImg);
+				    gridCardBody.append(proName);
+				    gridCardBody.append(price);
+				    card.append(gridCardBody);
+				    col.append(card);
+				    row.append(col);
+				    
+				    if(index % 3 == 2){
+						//3개씩 출력
+						gridCardWrap.append(row);	
+					} else if(result.OUT_DATA.length - 1 == index) {
+						//마지막 데이터는 3개가 아니라도 출력
+						gridCardWrap.append(row);	
+					}
+					
+					index++;
+				}
 				thumbnailImgHeight();	//썸네일 이미지 높이 조정
 				$com.loadingEnd();
 	        },
@@ -61,6 +134,11 @@ function selectPlay(){
 		} 
 	        
 	    });
+}
+
+//놀이 조회 화면 이동
+function mvEnterpriseView(entMarketSeq){
+	window.location.href = '/market/enterprise/enterpriseView?entMarketSeq=' + entMarketSeq;
 }
 
 //썸네일 이미지 높이 조정

@@ -28,22 +28,29 @@
 		<!-- 로그인 체크 인터셉터 -->
 		<mvc:interceptor>
 			<!-- 제외할 URL를 뺀 모든 URL에 입터셉터 적용 -->
-			<mvc:mapping path="/**/**"/>
+<!-- 			<mvc:mapping path="/**/**"/> -->
 			
 			<!-- 제외할 URL 형식 -->
-			<mvc:exclude-mapping path="/**/**.do"/> 	<!-- 페이지 미이동 요청 -->
-			<mvc:exclude-mapping path="/error/**"/> 	<!-- 에러페이지 -->
-			<mvc:exclude-mapping path="/resources/**"/> <!-- 리소스 -->
+<!-- 			<mvc:exclude-mapping path="/**/**.do"/> 						페이지 미이동 요청 -->
+<!-- 			<mvc:exclude-mapping path="/error/**"/> 						에러페이지 -->
+<!-- 			<mvc:exclude-mapping path="/resources/**"/> 					리소스 -->
 			
 			<!-- 제외할 URL 개별 -->
-			<mvc:exclude-mapping path="/"/>									<!-- 홈페이지 -->
-			<mvc:exclude-mapping path="/home"/>								<!-- 홈페이지 -->
-			<mvc:exclude-mapping path="/user/signUp"/> 						<!-- 회원가입 -->
-			<mvc:exclude-mapping path="/info/notice"/>  					<!-- 공지사항 -->
-			<mvc:exclude-mapping path="/board/freeBoard"/>  				<!-- 자유 게시판 -->
-			<mvc:exclude-mapping path="/board/freeBoard/freeBoardView"/>  	<!-- 자유 게시판 -->
-			<mvc:exclude-mapping path="/active/play"/>  					<!-- 놀이 -->
-			<mvc:exclude-mapping path="/active/play/playView"/>  			<!-- 놀이 -->
+<!-- 			<mvc:exclude-mapping path="/"/>									홈페이지 -->
+<!-- 			<mvc:exclude-mapping path="/home"/>								홈페이지 -->
+<!-- 			<mvc:exclude-mapping path="/user/signUp"/> 						회원가입 -->
+<!-- 			<mvc:exclude-mapping path="/info/notice"/>  					공지사항 -->
+<!-- 			<mvc:exclude-mapping path="/board/freeBoard"/>  				자유 게시판 -->
+<!-- 			<mvc:exclude-mapping path="/board/freeBoard/freeBoardView"/>  	자유 게시판 -->
+<!-- 			<mvc:exclude-mapping path="/active/play"/>  					놀이 -->
+<!-- 			<mvc:exclude-mapping path="/active/play/playView"/>  			놀이 -->
+			
+			
+			<!-- login 정보가 필요한 URL 형식 -->
+			<mvc:mapping path="/admin/**"/>									<!-- 관리자 메뉴 -->
+			
+			<!-- login 정보가 필요한 URL -->
+			
 			
 			<bean id="LoginCheckInterceptor" class="com.ksm.hpp.framework.interceptor.LoginCheckInterceptor"></bean>
 		</mvc:interceptor>			

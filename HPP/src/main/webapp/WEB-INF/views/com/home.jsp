@@ -115,97 +115,100 @@
 	<!-- Portfolio Section -->
 	<p class="homeTitle display-inb">Papang SHOP</p>
 	<p class="moreClass" id="moreBtn">더보기 ></p>
-	<div class="row">
-		<div class="col-lg-4 portfolio-item sample_image">
-			<div class="card h100">
-				<a href="#"><img class="card-img-top"
-					src="${pageContext.request.contextPath}/resources/images/market/보행기.jpg"
-					alt="상품 사진이없습니다"></a>
-				<div class="card-body">
-					<h4 class="card-title">
-						<a class="card_title2" href="#">card_title</a>
-					</h4>
-					<div>
-						<p class="card-text">&#8361;card-text</p>
-					</div>
-				</div>
-			</div>
-		</div>
+	
+	<div id="gridCardWrap" class="entCardWrap container"></div>
+	
+<!-- 	<div class="row"> -->
+<!-- 		<div class="col-lg-4 portfolio-item sample_image"> -->
+<!-- 			<div class="card h100"> -->
+<!-- 				<a href="#"><img class="card-img-top" -->
+<%-- 					src="${pageContext.request.contextPath}/resources/images/market/보행기.jpg" --%>
+<!-- 					alt="상품 사진이없습니다"></a> -->
+<!-- 				<div class="card-body"> -->
+<!-- 					<h4 class="card-title"> -->
+<!-- 						<a class="card_title2" href="#">card_title</a> -->
+<!-- 					</h4> -->
+<!-- 					<div> -->
+<!-- 						<p class="card-text">&#8361;card-text</p> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 
-		<div class="col-lg-4 portfolio-item sample_image">
-			<div class="card h100">
-				<a href="#"><img class="card-img-top"
-					src="${pageContext.request.contextPath}/resources/images/market/상품2.jpg"
-					alt="상품 사진이없습니다"></a>
-				<div class="card-body">
-					<h4 class="card-title">
-						<a class="card_title2" href="#">card_title</a>
-					</h4>
-					<div>
-						<p class="card-text">&#8361;card-text</p>
-					</div>
-				</div>
-			</div>
-		</div>
+<!-- 		<div class="col-lg-4 portfolio-item sample_image"> -->
+<!-- 			<div class="card h100"> -->
+<!-- 				<a href="#"><img class="card-img-top" -->
+<%-- 					src="${pageContext.request.contextPath}/resources/images/market/상품2.jpg" --%>
+<!-- 					alt="상품 사진이없습니다"></a> -->
+<!-- 				<div class="card-body"> -->
+<!-- 					<h4 class="card-title"> -->
+<!-- 						<a class="card_title2" href="#">card_title</a> -->
+<!-- 					</h4> -->
+<!-- 					<div> -->
+<!-- 						<p class="card-text">&#8361;card-text</p> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 
-		<div class="col-lg-4 portfolio-item sample_image">
-			<div class="card h100">
-				<a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/market/상품3.jpg" alt="상품 사진이없습니다"></a>
-				<div class="card-body">
-					<h4 class="card-title">
-						<a class="card_title2" href="#">card_title</a>
-					</h4>
-					<div>
-						<p class="card-text">&#8361;card-text</p>
-					</div>
-				</div>
-			</div>
-		</div>
+<!-- 		<div class="col-lg-4 portfolio-item sample_image"> -->
+<!-- 			<div class="card h100"> -->
+<%-- 				<a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/market/상품3.jpg" alt="상품 사진이없습니다"></a> --%>
+<!-- 				<div class="card-body"> -->
+<!-- 					<h4 class="card-title"> -->
+<!-- 						<a class="card_title2" href="#">card_title</a> -->
+<!-- 					</h4> -->
+<!-- 					<div> -->
+<!-- 						<p class="card-text">&#8361;card-text</p> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 
-		<div class="col-lg-4 portfolio-item sample_image">
-			<div class="card h100">
-				<a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/market/상품4.jpg" alt="상품 사진이없습니다"></a>
-				<div class="card-body">
-					<h4 class="card-title">
-						<a class="card_title2" href="#">card_title</a>
-					</h4>
-					<div>
-						<p class="card-text">&#8361;card-text</p>
-					</div>
-				</div>
-			</div>
-		</div>
+<!-- 		<div class="col-lg-4 portfolio-item sample_image"> -->
+<!-- 			<div class="card h100"> -->
+<%-- 				<a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/market/상품4.jpg" alt="상품 사진이없습니다"></a> --%>
+<!-- 				<div class="card-body"> -->
+<!-- 					<h4 class="card-title"> -->
+<!-- 						<a class="card_title2" href="#">card_title</a> -->
+<!-- 					</h4> -->
+<!-- 					<div> -->
+<!-- 						<p class="card-text">&#8361;card-text</p> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 
-		<div class="col-lg-4 portfolio-item sample_image">
-			<div class="card h100">
-				<a href="#"><img class="card-img-top"
-					src="${pageContext.request.contextPath}/resources/images/market/상품5.jpg"
-					alt="상품 사진이없습니다"></a>
-				<div class="card-body">
-					<h4 class="card-title">
-						<a class="card_title2" href="#">card_title</a>
-					</h4>
-					<div>
-						<p class="card-text">&#8361;card-text</p>
-					</div>
-				</div>
-			</div>
-		</div>
+<!-- 		<div class="col-lg-4 portfolio-item sample_image"> -->
+<!-- 			<div class="card h100"> -->
+<!-- 				<a href="#"><img class="card-img-top" -->
+<%-- 					src="${pageContext.request.contextPath}/resources/images/market/상품5.jpg" --%>
+<!-- 					alt="상품 사진이없습니다"></a> -->
+<!-- 				<div class="card-body"> -->
+<!-- 					<h4 class="card-title"> -->
+<!-- 						<a class="card_title2" href="#">card_title</a> -->
+<!-- 					</h4> -->
+<!-- 					<div> -->
+<!-- 						<p class="card-text">&#8361;card-text</p> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 
-		<div class="col-lg-4 portfolio-item sample_image">
-			<div class="card h100">
-				<a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/market/상품6.jpg" alt="상품 사진이없습니다"></a>
-				<div class="card-body">
-					<h4 class="card-title">
-						<a class="card_title2" href="#">card_title</a>
-					</h4>
-					<div>
-						<p class="card-text">&#8361;card-text</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- 		<div class="col-lg-4 portfolio-item sample_image"> -->
+<!-- 			<div class="card h100"> -->
+<%-- 				<a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/market/상품6.jpg" alt="상품 사진이없습니다"></a> --%>
+<!-- 				<div class="card-body"> -->
+<!-- 					<h4 class="card-title"> -->
+<!-- 						<a class="card_title2" href="#">card_title</a> -->
+<!-- 					</h4> -->
+<!-- 					<div> -->
+<!-- 						<p class="card-text">&#8361;card-text</p> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 	<!-- /.row -->
 
 	<hr />

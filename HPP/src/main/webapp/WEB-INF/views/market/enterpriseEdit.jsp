@@ -46,7 +46,6 @@
 					<tr>
 						<th>분류</th>
 						<td>
-							<!-- 01:잡담,02:정보,03:질문 -->
 							<select id="marketTypeCode" name="marketTypeCode" class="form-select w50 makeSelectTag" title="분류" required="all1">
 								<option value="">선택하세요
 							</select>
