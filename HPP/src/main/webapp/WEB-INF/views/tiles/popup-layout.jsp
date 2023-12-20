@@ -76,8 +76,8 @@
   </head>
 
   <body>
-  	<div class='wrap'>
-		<div class='content'>  	
+  	<div>
+		<div class='popContent'>  	
   			<tiles:insertAttribute name="body"/>
   		</div>
   	</div>

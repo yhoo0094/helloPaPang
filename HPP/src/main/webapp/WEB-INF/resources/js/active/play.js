@@ -71,6 +71,12 @@ function selectPlay(){
 				    cardWrap.append(cardItem);
 				}
 				thumbnailImgHeight();	//썸네일 이미지 높이 조정
+				
+				//신규 버튼 노출 여부
+				if (authGrade > 1) {			//쓰기 권한이 있을 떄
+					$('#createBtn').css('display', 'inline-block');
+				}
+				
 				$com.loadingEnd();
 	        },
 	    error: function(textStatus, jqXHR, thrownError){

@@ -41,6 +41,6 @@
 		</tbody>
 	</table>
 	<div class="tr">
-		<input type="checkbox" id="noticePopX" style="margin-right: 5px;"><label for="noticePopX"><b>하루 동안 표시하지 않음</b></label>
+		<button type="button" class="papang_btn" onclick="noticePopX()">하루 동안 표시하지 않음</button>
 	</div>
 </div>

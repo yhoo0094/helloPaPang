@@ -14,6 +14,12 @@
 <!DOCTYPE html>
 <html>
   <head>
+  	<meta property="og:type" content="website">
+  	<meta property="og:url" content="<%=request.getContextPath()%>/home">	<!-- 공유시 이동 url -->
+	<meta property="og:title" content="Hello Papang"> 						<!-- 타이틀 -->
+	<meta property="og:image" content="<%=request.getContextPath()%>/resources/images/title-logo/superhero.png"> 	<!-- 미리보기 될 이미지 -->
+	<meta property="og:description" content="육아하는 아빠를 위한 최고의 파트너."> 	<!-- URL 요약 --> 
+  
   	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/font.css"> <!-- 폰트적용 -->
     <link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath()%>/resources/images/title-logo/superhero.png"> <!-- title 아이콘 변경 -->	

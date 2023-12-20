@@ -2,19 +2,16 @@
     pageEncoding="UTF-8"%>
 <% 
 /**
- * @화면명: 공지사항 팝업 
+ * @화면명: 기업장터 
  * @작성자: KimSangMin
- * @생성일: 2023. 11. 20. 오후 8:17:36
- * @설명: 공지사항 조회 팝업
+ * @생성일: 2023. 12. 14. 오후 3:12:47
+ * @설명: 기업장터 입력, 수정 화면
 **/
  %>
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
 	<div class="papang-content-div">
 		<form id="viewForm" method="post" enctype="multipart/form-data">
-			<input type="hidden" id="boardSeq" name="boardSeq" value="">
-			<input type="hidden" id="boardCode" name="boardCode" value="02"><!-- 게시판구분코드(01:공지사항,02:자유게시판,03:질문게시판,04:지역게시판,05:놀이) -->
-			
 			<table class="papang-table">
 				<colgroup>
 					<col style="width: 10%">
@@ -29,7 +26,7 @@
 							<div class="thumbnailDiv">
 								<input type="file" id="thumbnail" name="thumbnail" accept="image/*">
 							    <img id="thumbnailImg" class="thumbnailImg" title="썸네일을 선택하세요." src="<%=request.getContextPath()%>/resources/images/etc/upload.png" alt="no image"/>
-							    <span id="cardImgMsg" title="썸네일을 선택하세요.">썸네일을 선택하세요.</span>						        
+							    <span id="cardImgMsg" class="display-n" title="썸네일을 선택하세요.">썸네일을 선택하세요.</span>						        
 					        </div>
 						</td>
 					</tr>
@@ -69,7 +66,6 @@
 			
 			<div class="modal_btn_wrapper">
 				<button type="button" id="saveBtn" class="btn papang-save-btn papang_btn" onclick="saveBtnClick()" style="display: none;">저장</button>
-				<button type="button" id="modifyBtn" class="btn papang-save-btn papang_btn" onclick="modifyBtnClick()" style="display: none;">수정</button>
 				<button type="button" id="delBtn" class="btn papang-del-btn papang_btn" onclick="deleteBtnClick()" style="display: none;">삭제</button>
 				<button type="button" id="historyBackBtn" class="btn papang-close-btn papang_btn" onclick="moveList()">돌아가기</button>
 			</div>

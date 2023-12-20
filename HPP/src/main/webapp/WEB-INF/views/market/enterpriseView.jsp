@@ -14,7 +14,7 @@
 		<div id="marketItem">
 		    <img id="marketThumbnail" src="#" alt="Market Thumbnail"/>
 		    <div id="marketContent">
-			    <div id="proName"></div>
+			    <div><span id="proName"></span></div>
 			    <div id="starBox"><span id="stars">★★★★☆</span><span id="starCnt">(77)</span></div>
 			    <div class="tr"><span id="price"></span>원</div>
 			    <hr>

@@ -92,7 +92,7 @@ function makeDataTable(data) {
     
     //엑셀 다운로드 버튼
     excelDownBtn.on('click', function(){
-		$excelUtil.downloadData(mnuNm, mnuNm, mainTable.columInfo, data);
+		$excelUtil.downloadData(infoMnuNm, infoMnuNm, mainTable.columInfo, data);
 	})
     $('#mainTable_paginate').after(excelDownBtn);
     
@@ -169,7 +169,7 @@ function makeDataTableServerSide() {
     
     //엑셀 다운로드 버튼
     excelDownBtn.on('click', function(){
-		$excelUtil.downloadURL(mnuNm, mnuNm, mainTable.columInfo, url, param);
+		$excelUtil.downloadURL(infoMnuNm, infoMnuNm, mainTable.columInfo, url, param);
 	})
     $('#mainTable_paginate').after(excelDownBtn); 
     

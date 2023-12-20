@@ -54,6 +54,7 @@ function selectPlay(){
 				    
 				    cardWrap.append(cardItem);
 				}
+				thumbnailImgHeight();	//썸네일 이미지 높이 조정
 				$com.loadingEnd();
 	        },
 	    error: function(textStatus, jqXHR, thrownError){
@@ -68,17 +69,14 @@ function selectEnterprise(){
 		$com.loadingStart();	
 		$('#gridCardWrap').html('');	//기존 데이터 초기화
 		
-		let formData = new FormData($("#searchForm")[0]);
-		let formObject = {};
-		formData.forEach(function(value, key) {
-		    formObject[key] = value;
-		});
-		formObject.useYn = 'Y';
+		let colCnt = 4;	//한 줄에 표시하는 상품 개수
 	
 		$.ajax({
 	        url: '/enterprise/selectEnterpriseHome.do',
 	        type: 'POST',
-	        data: formObject,
+	        data: { useYn : 'Y'
+	        	  , colCnt : colCnt	
+	        	  },
 	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
 	        dataType: 'json',
 	        success: function (result) {
@@ -88,7 +86,7 @@ function selectEnterprise(){
 				let gridCardWrap = $('#gridCardWrap');
 				let row;
 				for (let data of result.OUT_DATA) {
-					if(index % 3 == 0){
+					if(index % colCnt == 0){
 						row = $('<div class="row card-deck"></div>');	
 					}
 					
@@ -103,7 +101,7 @@ function selectEnterprise(){
 				    
 				    let gridCardBody = $('<div class="gridCardBody"></div>');
 				    
-				    let proName = $('<h5 class="card-title"></h5>');
+				    let proName = $('<p class="card-title"></p>');
 				    proName.text(data.proName);
 				    
 				    let price = $('<p class="card-text"></p>');
@@ -116,17 +114,15 @@ function selectEnterprise(){
 				    col.append(card);
 				    row.append(col);
 				    
-				    if(index % 3 == 2){
-						//3개씩 출력
+				    if(index % colCnt == colCnt - 1){
 						gridCardWrap.append(row);	
 					} else if(result.OUT_DATA.length - 1 == index) {
-						//마지막 데이터는 3개가 아니라도 출력
+						//마지막 데이터 출력
 						gridCardWrap.append(row);	
 					}
 					
 					index++;
 				}
-				thumbnailImgHeight();	//썸네일 이미지 높이 조정
 				$com.loadingEnd();
 	        },
 	    error: function(textStatus, jqXHR, thrownError){

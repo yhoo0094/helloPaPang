@@ -1,9 +1,9 @@
 @charset "UTF-8";
 /**
- * @화면명: 자유게시판 
+ * @화면명: 기업장터 
  * @작성자: KimSangMin
- * @생성일: 2023. 11. 23. 오후 7:01:06
- * @설명: 자유롭운 주제로 이야기를 나눌 수 있는 게시판입니다.
+ * @생성일: 2023. 12. 14. 오후 3:12:47
+ * @설명: 기업장터 입력, 수정 화면
 **/
 
 #thumbnail{
@@ -38,6 +38,5 @@
   white-space: nowrap; /* 텍스트 줄바꿈 없음 */
   overflow: hidden; /* 텍스트가 넘칠 경우 숨김 */
   text-overflow: ellipsis; /* 텍스트가 넘칠 경우 말줄임표로 표시 */
-  display: block; /* span을 보여주기 위해 display: none; 을 display: block;으로 변경 */
   cursor: pointer; /* 마우스 오버 시 커서 변경 */
 }

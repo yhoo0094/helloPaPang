@@ -17,7 +17,7 @@
 		  FROM TB_PLAY T1													/*테이블_놀이*/
 		 WHERE 1 = 1
 
-		 <if test='boardSeq != null and boardSeq != ""'>
+		<if test='boardSeq != null and boardSeq != ""'>
 		   AND T1.BOARD_SEQ = ${boardSeq}
 		</if>
 		<if test='title != null and title != ""'>
@@ -40,7 +40,6 @@
 				</when>
 			</choose>			
 		</if>
-		
 			 
 		<if test='strIdx != null and strIdx != ""'>
 		 LIMIT ${strIdx}, ${pageLength}

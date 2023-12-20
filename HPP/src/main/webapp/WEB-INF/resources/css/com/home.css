@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.homeBox{
+	margin: 0 10%;	
+}
+
 .swiper {
 	width: 100%;
 	padding-top: 50px;
@@ -214,15 +218,6 @@ figure.snip1200:hover p, figure.snip1200.hover p {
   margin-bottom: 0.75rem;
 }
 
-.card_title2, .card-title {
-	color: rgb(64, 60, 60);
-}
-
-.card_title2:hover {
-	color: #fa91a2;
-	text-decoration: none;
-}
-
 .topnav {
 	width: 60px;
 	height: 60px;
@@ -230,6 +225,6 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 }
 
 .introDiv{
-	font-family: 'Open Sans', sans-serif;
+/* 	font-family: 'Open Sans', sans-serif; */
 	font-weight: bold;
 }

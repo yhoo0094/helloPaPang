@@ -10,8 +10,6 @@ $(()=>{
 	calWrapHeight();
 	createEditor('.editor').then( newEditor => {edit = watchdog.editor});	//에디터 생성
 	selectNotice();	//공지사항 조회
-	noticePopX();	//하루 동안 표시하지 않음 체크 동작
-	
 })
 
 //wrap 높이 조정
@@ -23,20 +21,11 @@ function calWrapHeight(){
 	}
 }
 
-//하루 동안 표시하지 않음 체크 동작
+//하루 동안 표시하지 않음 클릭
 function noticePopX(){
-	$('#noticePopX').on({
-		change : function(){
-			var boardSeq = $util.getParameterByName('boardSeq');
-			if (this.checked) {
-	            // 체크되었을 때: '1'을 쿠키에 추가
-	            $util.addToCookie('noticePopX', boardSeq, 1);
-	        } else {
-	            // 체크 해제되었을 때: 쿠키에서 '1' 제거
-	            $util.rmFromCookie('noticePopX', boardSeq, 1);
-	        }
-		}
-	});
+	var boardSeq = $util.getParameterByName('boardSeq');
+	$util.addToCookie('noticePopX', boardSeq, 1);
+	window.close();
 }
 
 //공지사항 조회

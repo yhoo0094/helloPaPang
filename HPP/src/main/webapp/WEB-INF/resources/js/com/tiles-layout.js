@@ -7,7 +7,6 @@ $(()=>{
 	$('.forSearch').on({ 
 		keydown: function(e) {
 			//엔터 눌렀을 때 검색
-			debugger;
 			if(e.keyCode == 13 ){doSearch();}
 		},
 	});

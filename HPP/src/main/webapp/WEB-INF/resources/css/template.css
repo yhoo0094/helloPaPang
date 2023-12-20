@@ -15,6 +15,10 @@ textarea{
 	resize: none;
 }
 
+.dataTables_scrollHeadInner {
+    background-color: #c3c3c3;
+}
+
 /*에디터 가로 길이 제한*/
 .form-control, .form-control p{
     word-wrap: break-word;
@@ -85,13 +89,18 @@ input[type = 'date']{
 	z-index: 100;
 }
 
+.wrap{
+	min-width: 1500px;
+}
+
 .content {
-	background-color: rgb(254 255 187); 
+/* 	background-color: rgb(254 255 187);  */
 	margin: calc(var(--header-heigth)) 
 			0 
 			0 
 			0;	
-	min-height: calc(100vh - var(--header-heigth) - var(--footer-heigth));	
+	min-height: calc(100vh - var(--header-heigth) - var(--footer-heigth));
+	min-width: 1500px;	
 	display: flex;
 }
 
@@ -103,8 +112,9 @@ input[type = 'date']{
 }
 
 #centerCon{
-	flex-grow: 1; /* 남은 공간을 모두 차지 */
 	padding: 15px;
+    flex: 10% 1 0;
+    width: 0;
 }
 
 #rightCon{
@@ -125,10 +135,6 @@ input[type = 'date']{
 
 .form-control[readonly]{
     background-color: #fff;
-}
-
-.wrap{
-/* 	width: 100vw; */
 }
 
 .fadeIn {
@@ -275,7 +281,7 @@ input[type = 'date']{
   	color: var(--navMnu-color);
   	width: 12%;
   	text-align: center;
-  	padding: 0
+  	padding: 0;
 }
 
 .loginMnuIcon{
@@ -657,22 +663,23 @@ label{
 }
 
 .card-title {
-  font-size: 1.5rem; /* 타이틀 폰트 크기를 조절합니다 */
+  font-size: 1.2rem;
+  font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .card-text {
-  font-size: 1rem; /* 텍스트 폰트 크기를 조절합니다 */
+  text-align: right;
+  font-weight: bold;
+  color: blue;
 }
 
 /* 아래는 부트스트랩 그리드 시스템을 사용하여 카드를 가로로 나열합니다 */
 .card-deck .col {
   padding: 0 15px; /* 카드 사이의 간격을 조정합니다 */
   overflow: hidden;
-  flex: 0 0 33%;
+  flex: 0 0 25%;
 }
-
-
 /* enterprise 관련 끝 */

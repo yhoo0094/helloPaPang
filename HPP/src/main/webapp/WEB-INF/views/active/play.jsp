@@ -33,7 +33,6 @@
 					</td>
 					<td class="tc">
 						<button type="button" class="papang-search-btn papang_btn lh30px" onclick="doSearch()">검색</button>
-						<button type="button" class="papang-save-btn papang_btn lh30px" onclick="mvCreatePlay()">신규</button>
 					</td>
 				</tr>
 				</tbody>
@@ -41,4 +40,7 @@
 		</form>
 	</div>	
 	<div id="cardWrap" class="cardWrap"></div>
+	<div class="table_btn_wrapper">
+		<button type="button" id="createBtn" class="papang-save-btn papang_btn lh30px display-n" onclick="mvCreatePlay()">신규</button>
+	</div>
 </div>	

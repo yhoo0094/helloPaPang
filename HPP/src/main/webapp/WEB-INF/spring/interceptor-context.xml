@@ -18,10 +18,10 @@
 			
 			<!-- 제외할 URL 형식 -->
 			<mvc:exclude-mapping path="/"/>				<!-- 홈페이지 -->
-			<mvc:exclude-mapping path="/resources/**"/> <!-- 리소스 -->
 			<mvc:exclude-mapping path="/home"/>			<!-- 홈페이지 -->
+			<mvc:exclude-mapping path="/aws"/>				<!-- aws연결 검증 -->
+			<mvc:exclude-mapping path="/resources/**"/> <!-- 리소스 -->
 			<mvc:exclude-mapping path="/common/images/**"/> <!-- 이미지 조회 -->
-			
 			<bean id="RequestInterceptor" class="com.ksm.hpp.framework.interceptor.RequestInterceptor"></bean>
 		</mvc:interceptor>	
 		

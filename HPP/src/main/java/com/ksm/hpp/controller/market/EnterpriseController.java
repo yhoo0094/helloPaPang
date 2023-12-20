@@ -86,6 +86,33 @@ public class EnterpriseController extends BaseController {
 	}
 	
 	/**
+	* @메소드명: updateEnterprise
+	* @작성자: KimSangMin
+	* @생성일: 2023. 12. 19. 오전 10:56:32
+	* @설명: 기업장터 수정
+	*/
+	@RequestMapping("/updateEnterprise.do")
+	public void updateEnterprise(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
+		inData.put("loginInfo", loginInfo);
+		
+		//권한 확인
+		inData.put("url", url);				//메뉴 경로
+		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
+		inData.put("reqAuthGrade", 2);		//필요 권한등급
+		commonService.authChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
+		
+		MultipartFile image = request.getFile("image");
+		Map<String, Object> outData = enterpriseService.updateEnterprise((StringBuilder)request.getAttribute("IN_LOG_STR"), inData, image);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(outData);
+		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
+		response.setContentType("application/x-json; charset=UTF-8");
+	}	
+	
+	/**
 	* @메소드명: deleteEnterprise
 	* @작성자: KimSangMin
 	* @생성일: 2023. 12. 18. 오후 5:42:33

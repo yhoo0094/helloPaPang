@@ -44,9 +44,7 @@ function pageInit(){
 			    }
 			}
 			edit.setData(data.cn); //에디터 조회
-			
-			//썸네일 이미지
-			$('#marketThumbnail').attr('src', '/common/images/enterprise/' + data.thumbnail)	
+			$('#marketThumbnail').attr('src', '/common/images/enterprise/' + data.thumbnail)	//썸네일 이미지
 			
 			//재고 수량 최대 값
 			let cntMax = data.cnt
@@ -79,6 +77,11 @@ function deleteBtnClick(){
 			window.location.href = contextPath + '/market/enterprise';
         }
     });	
+}
+
+//수정 페이지 이동
+function modifyBtnClick(){
+	window.location.href = '/market/enterprise/enterpriseEdit?entMarketSeq=' + entMarketSeq;
 }
 
 //돌아가기
