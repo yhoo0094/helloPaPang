@@ -19,6 +19,12 @@ textarea{
     background-color: #c3c3c3;
 }
 
+.dataTables_wrapper th, .dataTables_wrapper td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /*에디터 가로 길이 제한*/
 .form-control, .form-control p{
     word-wrap: break-word;
@@ -27,7 +33,17 @@ textarea{
 }
 
 .editor-container {
-    position: relative;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	position: relative;
+	width: 100%;
+	justify-content: center;
+}
+
+.fixed-container {
+	overflow: auto;
+	height: 500px;
 }
 
 .byteDisplay {
@@ -463,10 +479,10 @@ table.dataTable thead th{
 	text-align: center;
 }
 
-table.dataTable td{
-	overflow: hidden;
-	white-space: pre;
-}
+/* table.dataTable td{ */
+/* 	overflow: hidden; */
+/* 	white-space: pre; */
+/* } */
 
 .dataTables_paginate{
 	float: left !important;

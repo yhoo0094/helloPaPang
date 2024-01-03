@@ -254,7 +254,7 @@ public class FileService extends BaseService {
 		File dir = new File(atcFilePath);
 		if(!dir.isDirectory()) {	//해당 경로가 디렉토리인지 확인
 			if(!dir.exists()) {		//해당 경로 디렉토리가 있는지 확인
-				dir.mkdir();		//해당 디렉토리가 없으면 생성
+				dir.mkdirs();		//해당 디렉토리가 없으면 생성
 			}
 		}
 		
@@ -276,7 +276,7 @@ public class FileService extends BaseService {
 		File dir = new File(atcFilePath);
 		if(!dir.isDirectory()) {	//해당 경로가 디렉토리인지 확인
 			if(!dir.exists()) {		//해당 경로 디렉토리가 있는지 확인
-				dir.mkdir();		//해당 디렉토리가 없으면 생성
+				dir.mkdirs();		//해당 디렉토리가 없으면 생성
 			}
 		}
 		

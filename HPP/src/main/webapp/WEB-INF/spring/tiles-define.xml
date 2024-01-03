@@ -6,7 +6,7 @@
 <tiles-definitions>
 	<!-- 홈페이지 -->
 	<definition name="com/home" template="/WEB-INF/views/tiles/home-layout.jsp">
-		<put-attribute name="title" value="HelloPaPang!" />
+		<put-attribute name="title" value="Hello Papang!" />
 	    <put-attribute name="header" value="/WEB-INF/views/tiles/headerTemplate.jsp" />
 	    <put-attribute name="body" value="/home.jsp" />
 	    <put-attribute name="foot" value="/WEB-INF/views/tiles/footerTemplate.jsp" />

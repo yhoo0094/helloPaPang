@@ -7,7 +7,7 @@
 
 var edit;
 $(()=>{
-	calWrapHeight();
+	//calWrapHeight();
 	createEditor('.editor').then( newEditor => {edit = watchdog.editor});	//에디터 생성
 	selectNotice();	//공지사항 조회
 })

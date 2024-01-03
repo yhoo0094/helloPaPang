@@ -18,6 +18,7 @@
 	
 	<!-- resources/**로 요청이 들어오면 controller를 타지 않고 /WEB-INF/resources/ 경로 하위의 파일로 response를 반환 -->
 	<mvc:resources location="/WEB-INF/resources/" mapping="/resources/**/"></mvc:resources>	
+	<mvc:resources location="/WEB-INF/resources/images/title-logo/favicon.ico" mapping="/favicon.ico"></mvc:resources>	
 
 	<!-- viewResolver로 jsp 페이지 호출할 때 앞, 뒤에 자동으로 경로 입력 --> 	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
