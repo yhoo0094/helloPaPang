@@ -41,6 +41,6 @@
 		</tbody>
 	</table>
 	<div class="tr">
-		<button type="button" class="papang_btn" onclick="noticePopX()">하루 동안 표시하지 않음</button>
+		<button type="button" class="papang_btn papang-transparent-btn" onclick="noticePopX()">하루 동안 표시하지 않음</button>
 	</div>
 </div>

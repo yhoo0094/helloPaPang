@@ -359,6 +359,10 @@ input[type = 'date']{
 	background-color: #0dcaf0;
 }
 
+.papang-transparent-btn{
+	background-color: transparent;
+}
+
 .papang-del-btn{
 	background-color: #f83b2f;
 }
@@ -699,3 +703,33 @@ label{
   flex: 0 0 25%;
 }
 /* enterprise 관련 끝 */
+
+/* 미완성 메뉴(notComp.jsp) 관련 시작 */
+.not-comp-box{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 10rem;
+	text-align: center;	
+}
+
+.not-comp-msg{
+	font-weight: bold;
+	color: blue;
+}
+/* 미완성 메뉴(notComp.jsp) 관련 끝 */
+
+/* 예외 페이지(error.jsp) 관련 시작*/
+.error-box{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 10rem;
+	text-align: center;	
+}
+
+.error-msg{
+	font-weight: bold;
+}
+/* 예외 페이지(error.jsp) 관련 끝 */

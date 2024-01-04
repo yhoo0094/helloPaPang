@@ -2,6 +2,7 @@ package com.ksm.hpp.framework.util;
 
 import java.net.Inet4Address;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -111,34 +112,44 @@ public class RequestUtil {
 	 * @설명: 사용자의 IP주소 구하기
 	 */
 	public static String getIpAddr(HttpServletRequest request) throws Exception {
+		
+        Enumeration<String> headerNames = request.getHeaderNames();
+        StringBuilder headers = new StringBuilder();
+
+//        while (headerNames.hasMoreElements()) {
+//            String headerName = headerNames.nextElement();
+//            String headerValue = request.getHeader(headerName);
+//            headers.append(headerName).append(": ").append(headerValue).append("\n");
+//        }
+		
 	    String ipAddr = request.getHeader("X-Forwarded-For");
-	    //log.info("> X-FORWARDED-FOR : " + ipAddr);
+//	    log.info("> X-FORWARDED-FOR : " + ipAddr);
 
 	    if (ipAddr == null) {
 	        ipAddr = request.getHeader("Proxy-Client-IP");
-	        //log.info("> Proxy-Client-IP : " + ipAddr);
+//	        log.info("> Proxy-Client-IP : " + ipAddr);
 	    }
 	    if (ipAddr == null) {
 	        ipAddr = request.getHeader("WL-Proxy-Client-IP");
-	        //log.info(">  WL-Proxy-Client-IP : " + ipAddr);
+//	        log.info(">  WL-Proxy-Client-IP : " + ipAddr);
 	    }
 	    if (ipAddr == null) {
 	        ipAddr = request.getHeader("HTTP_CLIENT_IP");
-	        //log.info("> HTTP_CLIENT_IP : " + ipAddr);
+//	        log.info("> HTTP_CLIENT_IP : " + ipAddr);
 	    }
 	    if (ipAddr == null) {
 	        ipAddr = request.getHeader("HTTP_X_FORWARDED_FOR");
-	        //log.info("> HTTP_X_FORWARDED_FOR : " + ipAddr);
+//	        log.info("> HTTP_X_FORWARDED_FOR : " + ipAddr);
 	    }
 	    if (ipAddr == null) {
 	        ipAddr = request.getRemoteAddr();
-	        //log.info("> getRemoteAddr : "+ipAddr);
+//	        log.info("> getRemoteAddr : "+ipAddr);
 	    }
 	    if ("0:0:0:0:0:0:0:1".equals(ipAddr)) {
 	    	ipAddr = Inet4Address.getLocalHost().getHostAddress();
-	    	//log.info("> getHostAddress : "+ipAddr);
+//	    	log.info("> getHostAddress : "+ipAddr);
 	    }
-	    log.info("> IP Address : "+ipAddr);		
+//	    log.info("> IP Address : "+ipAddr);		
 		
 		return ipAddr;
 	}

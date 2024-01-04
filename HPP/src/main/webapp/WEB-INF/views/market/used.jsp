@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
+<!DOCTYPE html>
+<% 
 /**
- * @화면명: 관리자 보드
- * @작성자: 김상민
- * @생성일: 2023. 1. 12. 오후 2:46:04
- * @설명: 관리자가 페이지 현황을 전체적으로 조회할 수 있는 페이지
+ * @화면명: 중고장터
+ * @작성자: KimSangMin
+ * @생성일: 2024. 1. 4. 오후 5:49:38
+ * @설명: 중고 물품을 사고 팔 수 있는 메뉴입니다.
 **/
-%>
-
+ %>
+ 
 <div>
 	<%@include file="/WEB-INF/views/com/menuInfo.jsp" %>
 	<%@include file="/WEB-INF/views/com/notComp.jsp" %>

@@ -81,9 +81,9 @@ var columInfo = [
 		, className: "authGrade text_align_center"	
 		, defaultContent: ""
         , render: function ( data, type, row, meta ) {
-			 var result = '<a href="#" onclick="authChng(this)" data-val="-1"><b>&lt;</b> </a>' 
+			 var result = '<a href="#" class="remove-a" onclick="authChng(this)" data-val="-1"><b>&lt;</b> </a>' 
 			 			+ '<span name="authGrade" data-rowidx="' + meta.row + '">' + data + '</span>'
-			 			+ '<a href="#" onclick="authChng(this)" data-val="+1"> <b>&gt;</b></a>';
+			 			+ '<a href="#" class="remove-a" onclick="authChng(this)" data-val="+1"> <b>&gt;</b></a>';
 			 return result;
 		  }		
 		}
