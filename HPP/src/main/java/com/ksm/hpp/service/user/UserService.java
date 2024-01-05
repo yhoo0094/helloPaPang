@@ -84,10 +84,12 @@ public class UserService extends BaseService {
 		
 		do {
 			if(loginInfo == null) {	//해당 계정이 조회되지 않을 때
-				//Exception 처리를 통한 메서드 중지
-				inData.put("loginCode", "03");
+				loginInfo = new HashMap();
+				loginCode = "03";
 				cnt = sqlSession.insert("mapper.user.UserMapper.insertLoginLog", inData);
-				throw new ConfigurationException("존재하지 않는 아이디이거나 비밀번호가 일치하지 않습니다.");
+				result.put(Constant.OUT_RESULT_MSG, "존재하지 않는 아이디이거나 비밀번호가 일치하지 않습니다.");	
+				result.put(Constant.RESULT, Constant.RESULT_FAILURE);
+				break;
 			} else {
 				//사용자 정책 조회
 				inData.put("poliCode", "01");	//정책분류코드(01:사용자)
@@ -137,11 +139,6 @@ public class UserService extends BaseService {
 				cnt = sqlSession.update("mapper.user.UserMapper.resetPwErrCnt", inData);
 				if(cnt != 1) {throw new ConfigurationException("비밀번호 오입력 횟수 초기화 오류 발생");}
 				
-				//로그인 IP 파악
-				String ip = RequestUtil.getIpAddr(request);
-				inData.put("ip", ip);
-				loginInfo.put("ip", ip);
-				
 				//사용자 정보 세션에 저장
 				HttpSession session = request.getSession();
 				loginInfo.remove("userPw");	//비밀번호 정보는 제거
@@ -157,17 +154,20 @@ public class UserService extends BaseService {
 				session.setAttribute(Constant.SESSION_TIME, sessionTime);	//세션 유지시간 정보 세션에 추가
 			
 				loginCode = "01";
+				result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+				result.put("loginInfo", loginInfo);
 			}
-
-			//로그인 내역 저장
-			inData.put("loginCode", loginCode);
-			cnt = sqlSession.insert("mapper.user.UserMapper.insertLoginLog", inData);
-			if(cnt != 1) {throw new ConfigurationException("로그인 내역 저장 오류 발생");}
-			
-			result.put("loginInfo", loginInfo);
-			result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
-		
 		} while(false);
+		//로그인 IP 파악
+		String ip = RequestUtil.getIpAddr(request);
+		inData.put("ip", ip);
+		loginInfo.put("ip", ip);
+		
+		//로그인 내역 저장
+		inData.put("loginCode", loginCode);
+		cnt = sqlSession.insert("mapper.user.UserMapper.insertLoginLog", inData);
+		if(cnt != 1) {throw new ConfigurationException("로그인 내역 저장 오류 발생");}
+		
 		return result;
 	}	
 	

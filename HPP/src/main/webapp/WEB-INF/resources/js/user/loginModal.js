@@ -69,8 +69,8 @@ function login(){
 			}
         },
         error: function(textStatus, jqXHR, thrownError){
-			alert(res[Constant.OUT_RESULT_MSG]);
 			$com.loadingEnd();
+			alert(res[Constant.OUT_RESULT_MSG]);
 		}
     });		
 }

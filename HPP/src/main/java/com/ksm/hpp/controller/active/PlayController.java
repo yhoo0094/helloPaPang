@@ -74,7 +74,7 @@ public class PlayController extends BaseController {
 		//권한 확인
 		inData.put("url", url);				//메뉴 경로
 		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
-		inData.put("reqAuthGrade", 2);		//필요 권한등급
+		inData.put("reqAuthGrade", 99);		//필요 권한등급
 		commonService.authChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
 		
 		List<MultipartFile> fileList = request.getFiles("files");
@@ -101,7 +101,7 @@ public class PlayController extends BaseController {
 		//권한 확인
 		inData.put("url", url);				//메뉴 경로
 		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
-		inData.put("reqAuthGrade", 2);		//필요 권한등급
+		inData.put("reqAuthGrade", 99);		//필요 권한등급
 		commonService.authChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
 		
 		List<MultipartFile> fileList = request.getFiles("files");
@@ -128,7 +128,7 @@ public class PlayController extends BaseController {
 		//권한 확인
 		inData.put("url", url);				//메뉴 경로
 		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
-		inData.put("reqAuthGrade", 2);		//필요 권한등급
+		inData.put("reqAuthGrade", 99);		//필요 권한등급
 		commonService.authChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
 		
 		Map<String, Object> outData = playService.deletePlay((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);

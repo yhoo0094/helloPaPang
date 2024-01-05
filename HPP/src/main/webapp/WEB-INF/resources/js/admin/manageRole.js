@@ -106,6 +106,8 @@ var param = {
 
 var groupUserTable;
 function makeGroupUserDataTable(){
+	
+	
     groupUserTable = $('#groupUserTable').DataTable({
 		serverSide: true,						//페이징 처리 서버에서 수행
 		ajax: {
@@ -115,7 +117,7 @@ function makeGroupUserDataTable(){
 				if($util.isEmpty(groupUserTable)){
 					param.strIdx = 0;
 				} else {
-					param.strIdx = 0 + (param.pageLength * parseInt(mainTable.page()));		//시작 레코드 인덱스 
+					param.strIdx = 0 + (param.pageLength * parseInt(groupUserTable.page()));		//시작 레코드 인덱스 
 				};
 				return param;
 			},
@@ -163,7 +165,11 @@ function deleteGroupUser(){
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
         success: function (result) {
-            groupUserTable.ajax.reload();
+	        if (result.RESULT == Constant.RESULT_SUCCESS){
+	            groupUserTable.ajax.reload();
+	        } else {
+				alert(result[Constant.OUT_RESULT_MSG])
+			}	
         }
     });		
 }

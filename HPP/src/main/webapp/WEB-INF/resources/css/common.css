@@ -18,8 +18,9 @@
 
 .blackText{color: black;}
 .whiteText{color: white;}
+.grayText{color: #3b3939;}
 .redText{color: red;}
-.blueText{color: blue;}
+.blueText{color: #0e0eb9;}
 
 .over-auto{overflow: auto;}
 .over-hidden{overflow: hidden;}
@@ -127,7 +128,8 @@
 .max-w190px{max-width:190px;} 
 .max-w195px{max-width:195px;} 
 .max-w200px{max-width:200px;} 
-.max-w300px{max-width:300px;} 
+.max-w300px{max-width:300px;}
+.max-w400px{max-width:400px;} 
 
 .w0px{width:0px;} 
 .w5px{width:5px;} 

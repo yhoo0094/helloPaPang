@@ -66,6 +66,7 @@
 					<span class="sessionTimer"><i class="fa-solid fa-clock loginMnuIcon"></i>자동 로그아웃: <span id="sessionTimer">02:00:00</span></span> 
 					<a href="#about" class="loginMnu remove-a"><i class="fa-solid fa-user loginMnuIcon"></i>마이페이지</a>
 					<a href="javascript:loginOut()" class="loginMnu remove-a"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그아웃</a>	
+					<span class="loginMnu grayText"><span id="sessionUserId"></span>님 환영합니다.</span>
 	 			</c:otherwise>
 	 		</c:choose>
 		</div>	

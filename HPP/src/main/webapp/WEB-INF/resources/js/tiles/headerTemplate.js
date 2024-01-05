@@ -7,6 +7,8 @@
 
 $(document).ready(function() {
 	selectNavMnuList();	//네비게이션 메뉴 그리기
+	
+	$('#sessionUserId').text(loginInfo.userId);
 });
 
 //로그아웃
@@ -48,9 +50,9 @@ function selectNavMnuList() {
 	        if (result.RESULT == Constant.RESULT_SUCCESS){
 				for(let menu of result.OUT_DATA){
 				    if(menu.upperUrl == '#'){	//최상위 메뉴 일 때
-				    	//관리자 메뉴는 관리자 권한(3)이 있을 때만 노출
+				    	//관리자 메뉴는 관리자 권한(3), 게스트 권한(2)이 있을 때만 노출
 				    	if(menu.url == 'admin'){
-							if(roleSeq != 3){continue;}
+							if(roleSeq != 3 && roleSeq != 2){continue;}
 						}
 				    
 				    	let $ul = $('<ul></ul>');

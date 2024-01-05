@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ksm.hpp.framework.exception.ConfigurationException;
 import com.ksm.hpp.framework.util.Constant;
 import com.ksm.hpp.service.com.FileService;
 
@@ -37,10 +38,6 @@ public class LoginLogService {
 		} else {
 			result.put("recordsFiltered", "0");	//필터링 후의 총 레코드 수
 		}		
-		
-//		int cnt = sqlSession.selectOne("mapper.admin.LoginLogMapper.selectLoginLogCnt", inData);
-//		result.put("recordsTotal", cnt);	//총 레코드 수
-//		result.put("recordsFiltered", cnt);	//필터링 후의 총 레코드 수	
 		
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;

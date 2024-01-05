@@ -9,14 +9,15 @@
 			 , T1.PW_ERR_CNT									/*비밀번호 오입력 횟수*/
 			 , DATE_FORMAT(T1.PW_CH_DTTI, '%Y%m%d') PW_CH_DTTI	/*비밀번호 최종수정일시*/
 			 , T2.ROLE_SEQ										/*권한그룹일련번호*/
+			 , T3.ROLE_NM										/*권한그룹명*/
 		  FROM TB_USER T1										/*테이블_사용자*/
-		  JOIN TB_USER_ROLE_MAP	T2								/*테이블_사용자_권한그룹_매핑*/
-		    ON T1.USER_ID = T2.USER_ID
-		<trim prefix="WHERE" prefixOverrides="AND">  
-			<if test='userId != null and userId != ""'>
-				AND T1.USER_ID = #{userId}
-			</if>
-		</trim>
+		  	 , TB_USER_ROLE_MAP	T2								/*테이블_사용자_권한그룹_매핑*/
+		  	 , TB_ROLE T3										/*테이블_권한그룹*/
+		 WHERE T1.USER_ID = T2.USER_ID
+		   AND T3.ROLE_SEQ = T2.ROLE_SEQ
+		<if test='userId != null and userId != ""'>
+		   AND T1.USER_ID = #{userId}
+		</if>
 	</select>
 
 	<!-- 권한 조회-->

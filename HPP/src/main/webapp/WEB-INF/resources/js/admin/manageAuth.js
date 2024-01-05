@@ -122,14 +122,20 @@ function authChng(obj){
 	var $tr = mainTable.row(obj.closest('tr'));
 	var rowData = $tr.data();
 	var authGrade = rowData.authGrade + parseInt(obj.dataset.val); 
-	if(authGrade > 0){
+	if(authGrade >= 0){
 		rowData.authGrade = authGrade;
 		rowData.isChng = true;
-		if(authGrade == 1){
-			rowData.authNm = '읽기';
-		} else if(authGrade == 2){
-			rowData.authNm = '쓰기';
-		} 
+		switch(authGrade){
+			case(0):
+				rowData.authNm = '권한없음';
+				break;
+			case(1):
+				rowData.authNm = '읽기';
+				break;
+			case(2):
+				rowData.authNm = '쓰기';
+				break;
+		}
 		$tr.data(rowData).draw();
 	}	
 }
@@ -189,16 +195,26 @@ function updateAuth(){
 	}
 	param[Constant.IN_DATA_JOSN] = JSON.stringify({mainTableData : mainTableData});
 	
+	$com.loadingStart();
     $.ajax({
         url: '/admin/updateAuth.do',
         type: 'POST',
         data: param,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
         dataType: 'json',
-        success: function (result) {
-			mainTable.ajax.reload();
-            alert('저장 완료하였습니다.');
-        }
+        success: function (res, textStatus, jqXHR) {
+			$com.loadingEnd();
+			if (res.RESULT == Constant.RESULT_SUCCESS){
+				mainTable.ajax.reload();
+            	alert('저장 완료하였습니다.');
+			} else {
+				alert(res[Constant.OUT_RESULT_MSG]);
+			}	
+        },
+        error: function(textStatus, jqXHR, thrownError){
+			$com.loadingEnd();
+			alert(res[Constant.OUT_RESULT_MSG]);
+		}
     });		
 }
 

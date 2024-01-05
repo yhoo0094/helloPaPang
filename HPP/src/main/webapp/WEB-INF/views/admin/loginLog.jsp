@@ -37,13 +37,8 @@
 					<td><input id="ip" name="ip" class="w100 form-control forSearch" title="아이피" type="text" maxlength="39"></td>						
 					<th>유형:</th>
 					<td>
-						<select id="loginCode" name="loginCode" class="w100 form-select">
+						<select id="loginCode" name="loginCode" class="form-select w100 makeSelectTag" title="유형">
 							<option value="">전체
-							<option value="01">로그인
-							<option value="02">로그아웃
-							<option value="03">존재하지 않는 아이디
-							<option value="04">비밀번호 오입력
-							<option value="05">비밀번호 오입력 횟수 초과
 						</select>
 					</td>
 					<td class="tc">

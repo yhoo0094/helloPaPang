@@ -7,17 +7,29 @@
 
 $(document).ready(function() {
 	setDatetimepicker();
+	guestChk();
 	makeDataTableServerSide();	//DataTable 만들기(페이지네이션 서버 처리)
 });
 
+//게스트 계정에 대한 제약사항 적용
+function guestChk(){
+	if(loginInfo.roleNm == '게스트'){
+		$('#userId').val(loginInfo.userId);
+		$('#userId').attr('readonly',true);
+		$('#ip').val(loginInfo.ip);
+		$('#ip').attr('readonly',true);
+	}
+}
+
 //datetimepicker 설정
 function setDatetimepicker() {
-	//var reqDttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),0,0,-1,0,0);	//1일 전
 	var reqDttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),-1,0,0,0,0);	//1년 전
 	reqDttiStr = $dateUtil.dateHyphenTime(reqDttiStr);
+	var reqDttiEnd = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),0,0,0,1,0);	//1시간 후(로컬과 서버 시간 안 맞는 경우 때문에)
+	reqDttiEnd = $dateUtil.dateHyphenTime(reqDttiEnd);
 	
 	$com.datetimepicker('reqDttiStr',$dateUtil.todayYYYY_MM_DD_HHMM(reqDttiStr));
-	$com.datetimepicker('reqDttiEnd',$dateUtil.todayYYYY_MM_DD_HHMM());	
+	$com.datetimepicker('reqDttiEnd',$dateUtil.todayYYYY_MM_DD_HHMM(reqDttiEnd));	
 }
 
 //검색
@@ -30,7 +42,7 @@ var columInfo = [
       , { title: "아이디"		, data: "userId"		, width: "90px"		, className: "text_align_center"	, defaultContent: ""}
       , { title: "아이피"		, data: "ip"			, width: "90px"		, className: "text_align_center"	, defaultContent: ""}
       , { title: "URI"		, data: "uri"			, width: "90px"		, className: "text_align_left"		, defaultContent: ""}      
-      , { title: "파라미터"	, data: "param100"		, width: "*"		, className: "max-w300px text_align_left"		, defaultContent: ""}      
+      , { title: "파라미터"	, data: "param"			, width: "*"		, className: "text_align_left max-w300px"		, defaultContent: ""}      
       , { title: "메뉴"		, data: "reqTypeNm"		, width: "120px"	, className: "text_align_center"	, defaultContent: ""}
 ]
 
@@ -67,6 +79,13 @@ function makeDataTableServerSide() {
 				};
 				return param;
 			},
+			dataSrc: function (json) {
+		        if (json.RESULT == Constant.RESULT_FAILURE) {
+		             alert(json[Constant.OUT_RESULT_MSG]);
+		             location.reload();
+		        }
+		        return json.data;
+		    },			
 		},
         columns: columInfo,
 	  	createdRow: function( row, data, dataIndex ) {	//행 옵션

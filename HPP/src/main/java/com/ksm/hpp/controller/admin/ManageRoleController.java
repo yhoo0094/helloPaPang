@@ -14,6 +14,7 @@ import com.ksm.hpp.controller.com.BaseController;
 import com.ksm.hpp.framework.util.RequestUtil;
 import com.ksm.hpp.framework.util.ResponseUtil;
 import com.ksm.hpp.service.admin.ManageRoleService;
+import com.ksm.hpp.service.com.CommonService;
 
 @Controller
 @RequestMapping("/admin")
@@ -21,6 +22,11 @@ public class ManageRoleController extends BaseController {
 	
 	@Resource(name = "ManageRoleService")
 	protected ManageRoleService manageRoleService;
+	
+	@Resource(name = "CommonService")
+	protected CommonService commonService;	
+	
+	String url = "admin/manageRole";
 	
 	/**
 	* @메소드명: selectRoleList
@@ -62,6 +68,12 @@ public class ManageRoleController extends BaseController {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
 		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
 		inData.put("loginInfo", loginInfo);
+		
+		//권한 확인
+		inData.put("url", url);				//메뉴 경로
+		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
+		inData.put("reqAuthGrade", 99);		//필요 권한등급
+		commonService.authChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
 		
 		//array 대괄호 제거
 		String userIdList = (String) inData.get("userIdList");

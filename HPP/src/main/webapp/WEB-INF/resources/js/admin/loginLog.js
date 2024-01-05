@@ -10,37 +10,34 @@ var mainTable
 
 $(document).ready(function () {
 	setDatetimepicker();		//datetimepicker 설정
-	//selectData();				//DataTable 만들기
+	guestChk(); 				//게스트 계정에 대한 제약사항 적용
 	makeDataTableServerSide();	//DataTable 만들기(페이지네이션 서버 처리)
 });
 
+//게스트 계정에 대한 제약사항 적용
+function guestChk(){
+	if(loginInfo.roleNm == '게스트'){
+		$('#userId').val(loginInfo.userId);
+		$('#userId').attr('readonly',true);
+		$('#ip').val(loginInfo.ip);
+		$('#ip').attr('readonly',true);
+	}
+}
+
 //datetimepicker 설정
 function setDatetimepicker() {
-	//var dttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),0,0,-1,0,0);	//1일 전
 	var dttiStr = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),-1,0,0,0,0);	//1년 전
 	dttiStr = $dateUtil.dateHyphenTime(dttiStr);
+	var dttiEnd = $dateUtil.addDate($dateUtil.todayYYYYMMDDHHMM(),0,0,0,1,0);	//1시간 후(로컬과 서버 시간 안 맞는 경우 때문에)
+	dttiEnd = $dateUtil.dateHyphenTime(dttiEnd);
 	
 	$com.datetimepicker('dttiStr',$dateUtil.todayYYYY_MM_DD_HHMM(dttiStr));
-	$com.datetimepicker('dttiEnd',$dateUtil.todayYYYY_MM_DD_HHMM());	
+	$com.datetimepicker('dttiEnd',$dateUtil.todayYYYY_MM_DD_HHMM(dttiEnd));	
 }
 
 //검색
 function doSearch(){
 	mainTable.ajax.reload();
-}
-
-//사용자 접속 기록 조회
-function selectData(){
-    $.ajax({
-        url: '/admin/selectLoginLog.do',
-        type: 'POST',
-        data: $('#searchForm').serialize(),
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
-        dataType: 'json',
-        success: function (result) {
-            makeDataTable(result.data);
-        }
-    });	
 }
 
 var columInfo = [
@@ -137,6 +134,13 @@ function makeDataTableServerSide() {
 				};
 				return param;
 			},
+			dataSrc: function (json) {
+		        if (json.RESULT == Constant.RESULT_FAILURE) {
+		             alert(json[Constant.OUT_RESULT_MSG]);
+		             location.reload();
+		        }
+		        return json.data;
+		    },
 		},
         columns: columInfo,
         pagingType: "numbers",					//v페이지 표시 옵션

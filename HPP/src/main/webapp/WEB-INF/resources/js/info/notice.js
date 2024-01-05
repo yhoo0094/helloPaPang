@@ -30,7 +30,7 @@ function doSearch(){
 
 //DataTable 만들기(페이지네이션 서버 처리)
 var columInfo = [
-            { title: "제목"		, data: "title"			, width: "*"		, className: "text_align_left"}
+            { title: "제목"		, data: "title"			, width: "*"		, className: "text_align_left max-w400px"}
           , { title: "작성자"		, data: "fstRegId"		, width: "100px"	, className: "text_align_center"}
           , { title: "게시기간"	, data: "period"		, width: "150px"	, className: "text_align_center"}
           , { title: "게시일"		, data: "fstRegDtti"	, width: "150px"	, className: "text_align_center"	, render: function(data){return data.replace(/\//g,'-')}}	

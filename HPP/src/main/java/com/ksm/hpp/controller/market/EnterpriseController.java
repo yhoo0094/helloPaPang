@@ -73,7 +73,7 @@ public class EnterpriseController extends BaseController {
 		//권한 확인
 		inData.put("url", url);				//메뉴 경로
 		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
-		inData.put("reqAuthGrade", 2);		//필요 권한등급
+		inData.put("reqAuthGrade", 99);		//필요 권한등급
 		commonService.authChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
 		
 		MultipartFile image = request.getFile("image");
@@ -100,7 +100,7 @@ public class EnterpriseController extends BaseController {
 		//권한 확인
 		inData.put("url", url);				//메뉴 경로
 		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
-		inData.put("reqAuthGrade", 2);		//필요 권한등급
+		inData.put("reqAuthGrade", 99);		//필요 권한등급
 		commonService.authChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
 		
 		MultipartFile image = request.getFile("image");
@@ -127,7 +127,7 @@ public class EnterpriseController extends BaseController {
 		//권한 확인
 		inData.put("url", url);				//메뉴 경로
 		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
-		inData.put("reqAuthGrade", 2);		//필요 권한등급
+		inData.put("reqAuthGrade", 99);		//필요 권한등급
 		commonService.authChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
 		
 		Map<String, Object> outData = enterpriseService.deleteEnterprise((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);

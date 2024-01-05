@@ -41,6 +41,6 @@
 	</div>	
 	<div id="cardWrap" class="cardWrap"></div>
 	<div class="table_btn_wrapper">
-		<button type="button" id="createBtn" class="papang-save-btn papang_btn lh30px display-n" onclick="mvCreatePlay()">신규</button>
+		<button type="button" id="createBtn" class="papang-create-btn papang_btn lh30px display-n" onclick="mvCreatePlay()">신규</button>
 	</div>
 </div>	
