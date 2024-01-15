@@ -37,21 +37,21 @@
 					<tr>
 						<th>메뉴명</th>
 						<td>
-							<input type="text" id="mnuNm" name="mnuNm" class="form-control" title="메뉴명">
+							<input type="text" id="mnuNm" name="mnuNm" class="form-control" title="메뉴명" required="all1">
 						</td>	
 						<th>메뉴경로</th>
 						<td>
-							<input type="text" id="url" name="url" class="form-control" title="메뉴경로">
+							<input type="text" id="url" name="url" class="form-control gray" title="메뉴경로" required="all1" readonly="readonly">
 						</td>				
 					</tr>		
 					<tr>
 						<th>최상위메뉴경로</th>
 						<td>
-							<input type="text" id="topUrl" name="topUrl" class="form-control" title="최상위메뉴경로" disabled="disabled">
+							<input type="text" id="topUrl" name="topUrl" class="form-control gray" title="최상위메뉴경로" readonly="readonly">
 						</td>	
 						<th>상위메뉴경로</th>
 						<td>
-							<input type="text" id="upperUrl" name="upperUrl" class="form-control" title="상위메뉴경로" disabled="disabled">
+							<input type="text" id="upperUrl" name="upperUrl" class="form-control gray" title="상위메뉴경로" readonly="readonly">
 						</td>				
 					</tr>
 					<tr>
@@ -71,17 +71,17 @@
 					<tr>
 						<th>메뉴레벨</th>
 						<td>
-							<input type="text" id="mnuLv" name="mnuLv" class="form-control" title="메뉴레벨" disabled="disabled">
+							<input type="text" id="mnuLv" name="mnuLv" class="form-control gray" title="메뉴레벨" readonly="readonly">
 						</td>	
 						<th>표시순서</th>
 						<td>
-							<input type="text" id="mnuOrder" name="mnuOrder" class="form-control" title="표시순서" disabled="disabled">
+							<input type="text" id="mnuOrder" name="mnuOrder" class="form-control gray" title="표시순서" readonly="readonly">
 						</td>				
 					</tr>					
 					<tr>
 						<th>메뉴정보</th>
 						<td colspan="3">
-							<input type="text" id="info" name="info" class="form-control" title="메뉴정보">
+							<input type="text" id="info" name="info" class="form-control" title="메뉴정보" required="all1">
 						</td>
 					</tr>	
 					<tr>
@@ -92,8 +92,7 @@
 					</tr>
 					<tr>
 						<td colspan="4" style="text-align: right; line-height: normal;">
-							<button type="button" class="papang-create-btn papang_btn paginate_button" onclick="userSelectModalOpen()">저장</button>
-							<button type="button" class="papang-create-btn papang_btn paginate_button" onclick="userSelectModalOpen()">삭제</button>
+							<button type="button" class="papang-create-btn papang_btn paginate_button" onclick="updateMnu()">저장</button>
 						</td>				
 					</tr>																			
 				</table>

@@ -10,12 +10,31 @@ $(document).ready(function () {
 	selectMnuList()
 });	
 
-function test(){
-//	jsTree.load_node(data2);
-	jsTree.jstree(true).settings.core.data = data2;
-	jsTree.jstree(true).refresh();
+//메뉴 수정
+function updateMnu(){
+	//유효성 검사
+	if(!$util.checkRequired({group:["all1"]})){return;};
+	var formData = new FormData($("#writeForm")[0]);
+	
+    $.ajax({
+		url: '/admin/updateMnu.do',
+		type: 'POST',
+		data: formData,
+	    processData: false, // 데이터를 쿼리 문자열로 변환하지 않도록 설정
+	    contentType: false, // 자동으로 Content-Type 설정을 하도록 설정
+        dataType: 'json',
+        success: function (result) {
+	        if (result.RESULT == Constant.RESULT_SUCCESS){
+	            alert("완료되었습니다.");
+	            location.reload();
+	        } else {
+				alert(result[Constant.OUT_RESULT_MSG])
+			}	
+        }
+    });		
 }
 
+//메뉴 목록 조회
 var mnuList;
 function selectMnuList(){
     $.ajax({

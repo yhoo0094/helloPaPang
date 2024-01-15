@@ -153,6 +153,10 @@ input[type = 'date']{
     background-color: #fff;
 }
 
+.form-control[readonly].gray{
+    background-color: #e9ecef;
+}
+
 .fadeIn {
   animation-name: fadeIn;
 }

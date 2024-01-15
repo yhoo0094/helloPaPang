@@ -35,4 +35,25 @@ public class ManageMnuService {
 		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
 		return result;
 	}
+	
+	/**
+	* @메소드명: updateAuth
+	* @작성자: KimSangMin
+	* @생성일: 2024. 1. 15. 오전 9:49:04
+	* @설명: 메뉴 수정
+	*/	
+	public Map<String, Object> updateMnu(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		int cnt = sqlSession.update("mapper.admin.ManageMnuMapper.updateMnu", inData);
+		
+		if(cnt != 1) {
+			result.put(Constant.RESULT, Constant.RESULT_FAILURE);
+			result.put(Constant.OUT_RESULT_MSG, "저장 과정에서 오류가 발생하였습니다.");
+			return result;			
+		}
+		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		result.put(Constant.OUT_DATA, cnt);
+		return result;
+	}			
 }

@@ -22,6 +22,24 @@
 		     , T1.URL						AS id
 		     , T1.UPPER_URL					AS parent
 		     , T1.MNU_NM					AS text
-		  FROM TB_MNU T1					/*테이블_권한그룹*/
+		  FROM TB_MNU T1					/*테이블_메뉴*/
 	</select>
+	
+	<!-- 메뉴 수정 -->
+	<update id="updateMnu" parameterType="map">
+		UPDATE TB_MNU  											/*테이블_메뉴*/
+           SET MNU_NM					= #{mnuNm}				/*메뉴명*/
+			 , TOP_URL					= #{topUrl}				/*최상위메뉴경로*/
+			 , UPPER_URL				= #{upperUrl}			/*상위메뉴경로*/
+			 , OPEN_YN					= #{openYn}				/*메뉴노출여부*/
+			 , AUTH_YN					= #{authYn}				/*권한검사여부*/
+			 , MNU_LV					= #{mnuLv}				/*메뉴레벨*/
+			 , INFO						= #{info}				/*메뉴정보*/
+			 , MNU_ORDER				= #{mnuOrder}			/*메뉴표시순서*/
+			 , RMRK						= #{rmrk}				/*메뉴비고*/          
+		     , LT_UPD_ID 				= #{loginInfo.userId}	/*최종수정자ID*/
+		     , LT_UPD_DTTI				= NOW() 				/*최종수정일시*/
+         WHERE URL						= #{mnuUrl}				/*메뉴경로*/
+	</update>	
+	
 </mapper>
