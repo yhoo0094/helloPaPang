@@ -738,3 +738,7 @@ label{
 	font-weight: bold;
 }
 /* 예외 페이지(error.jsp) 관련 끝 */
+
+.modal a.close-modal{
+	background-image : url("/resources/images/etc/remove_red.png"); 
+}

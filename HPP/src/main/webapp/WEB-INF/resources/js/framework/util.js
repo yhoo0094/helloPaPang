@@ -13,7 +13,7 @@ $(()=>{
 //select 태그 자동 완성
 function makeSelectTag(){
 	$('.makeSelectTag').each(function(idx, itm){
-		let target = $(itm).attr('id');
+		let target = $(itm).attr('name');
 		let codeGroup = $util.camelToSnake(target);
 		
 		$.ajax({
@@ -28,7 +28,8 @@ function makeSelectTag(){
 		        var $option = $('<option></option>')
 		            .val(item.codeDetail) // value 속성 설정
 		            .text(item.codeDetailNm); // 텍스트 설정
-		        $('#' + target).append($option);
+//		        $('#' + target).append($option);
+		        $(itm).append($option);
 	    	});
         }
     	});	

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 import com.ksm.hpp.controller.com.BaseController;
-import com.ksm.hpp.framework.exception.ConfigurationException;
 import com.ksm.hpp.framework.util.RequestUtil;
 import com.ksm.hpp.service.user.UserService;
 
