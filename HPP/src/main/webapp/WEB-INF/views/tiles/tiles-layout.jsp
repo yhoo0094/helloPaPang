@@ -43,6 +43,7 @@
     <script src="<%=request.getContextPath()%>/resources/lib/dataTables/dataTables.rowReorder.js"></script> <!-- RowReorder 관련 -->
     <script src="<%=request.getContextPath()%>/resources/lib/dataTables/jquery.dataTables.js"></script> <!-- RowReorder 관련 -->
     <script>$.fn.DataTable.ext.pager.numbers_length = 11;</script>	<!-- dataTable 페이지 버튼 표시할 개수 -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script><!-- Google 차트 -->
 
 	<script src="https://kit.fontawesome.com/e2689e2fa2.js"></script> <!-- 아이콘 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script><!-- jQuery Modal -->

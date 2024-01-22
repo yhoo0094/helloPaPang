@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 import com.ksm.hpp.controller.com.BaseController;
+import com.ksm.hpp.framework.exception.ConfigurationException;
 import com.ksm.hpp.framework.util.RequestUtil;
 import com.ksm.hpp.framework.util.ResponseUtil;
 import com.ksm.hpp.service.admin.ManageUserService;
@@ -59,8 +60,27 @@ public class ManageUserController extends BaseController {
 	@RequestMapping("/selectUser.do")
 	public void selectUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
-		Map<String, Object> outData = manageUserService.selectUser((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
+		inData.put("loginInfo", loginInfo);
 		
+		//권한 확인
+		inData.put("url", url);				//메뉴 경로
+		inData.put("isRange", true);		//권한등급이 정확히 일치해야 하는지
+		inData.put("reqAuthGrade", 1);		//필요 권한등급
+		commonService.authChk((StringBuilder)request.getAttribute("IN_LOG_STR"), request, inData);
+		
+		//게스트 계정 제약 사항 확인
+		String roleNm = (String) loginInfo.get("roleNm"); 
+		if(roleNm.equals("게스트")) {
+			String loginUserId = (String) loginInfo.get("userId");
+			String searchUserId = (String) inData.get("userId");
+			
+			if(!loginUserId.equals(searchUserId)) {
+				throw new ConfigurationException("본인의 계정만 확인 가능합니다.");
+			}
+		}			
+		
+		Map<String, Object> outData = manageUserService.selectUser((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		ResponseUtil.setResAuto(response, inData, outData);
 	}	
 	

@@ -1,4 +1,7 @@
 $(()=>{
+	alert('죄송합니다. 현재 회원가입 기능은 지원하지 않고 있습니다. \n계정이 필요한 경우 개발자에게 문의해주세요.')
+	location.href = "/home";
+	
 	$('#userId').on('change',function(){
 		$('#chkUniqIdBtn').removeClass('papang_disabled');
 		$('#idUniChkMsg').attr('class','idUniChkBf');
@@ -21,6 +24,11 @@ function insertUser(){
 	//비밀번호 유효성 검증
 	if(!pwValidation()){return;}
 	
+	//비밀번호 유효성 검증
+	let userPw = formData.get('userPw');
+	let userPwChk = formData.get('userPwChk');	
+	if(!$util.pwValidation(userPw, userPwChk)){return;}
+	
 	var formData = $('#signUpForm').serialize();
     $.ajax({
         url: '/user/insertUser.do',
@@ -33,7 +41,7 @@ function insertUser(){
                 alert("회원가입이 완료되었습니다.")
                 location.href = "/"	//홈으로 이동
             } else {
-				alert(Constant.OUT_RESULT_MSG)
+				alert(result[Constant.OUT_RESULT_MSG])
 			}
         }
     });
@@ -117,7 +125,7 @@ function chkUniqId(){
 					alert("중복된 아이디입니다.");
 				}
             } else {
-				alert(Constant.OUT_RESULT_MSG)
+				alert(result[Constant.OUT_RESULT_MSG])
 			}
         }
     });	

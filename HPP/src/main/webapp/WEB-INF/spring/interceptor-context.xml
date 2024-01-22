@@ -51,7 +51,7 @@
 			<mvc:mapping path="/admin/**"/>									<!-- 관리자 메뉴 -->
 			
 			<!-- login 정보가 필요한 URL -->
-			
+			<mvc:mapping path="/user/myPage"/>								<!-- 마이페이지 -->
 			
 			<bean id="LoginCheckInterceptor" class="com.ksm.hpp.framework.interceptor.LoginCheckInterceptor"></bean>
 		</mvc:interceptor>			

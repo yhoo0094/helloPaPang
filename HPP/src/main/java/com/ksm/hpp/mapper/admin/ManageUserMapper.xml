@@ -51,7 +51,7 @@
  		 WHERE T1.USER_ID = T2.USER_ID
  		   AND T2.ROLE_SEQ = T3.ROLE_SEQ		
  		<if test='userId != null and userId != ""'>
-		   AND T1.USER_ID LIKE CONCAT('%',TRIM(#{userId}),'%')
+		   AND T1.USER_ID = #{userId}
 		</if>			   
  		<if test='userName != null and userName != ""'>
 		   AND T1.USER_NAME LIKE CONCAT('%',TRIM(#{userName}),'%')

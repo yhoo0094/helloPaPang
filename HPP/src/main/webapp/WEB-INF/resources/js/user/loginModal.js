@@ -5,6 +5,11 @@
  * @설명: 로그인 정보 입력 모달
 **/
 
+$(()=>{
+	$('#chngPwModal').on('modal:close', function(event, modal) {	
+	    location.reload();
+	});
+})
 
 //로그인 팝업 열기
 function loginModalOpen(){
@@ -47,13 +52,22 @@ function login(){
 	        if (res.RESULT == Constant.RESULT_SUCCESS){
 	            loginModalClose();
 	            
+	            //비밀번호가 초기화된 경우 -> 비밀번호 변경 모달 띄우기
+	            if(res.loginInfo.pwInitYn == 'Y'){
+					alert('현재 초기 비밀번호를 사용 중입니다. 비밀번호를 변경해 주십시오.');
+					chngPwModalOpen();
+					return;
+				}
+	            
 	            //비밀번호 유효기간이 만료된 경우
 	            var obj = $util.getObjFromArr(res.userPoli, 'poliNm', 'PSWD_LIM_DAYS');	//비밀번호 변경 주기 객체
 	            var pswdLimDays = obj['poliVal'];	//비밀번호 변경 주기(일)
 	            var pswdLimDate = $dateUtil.addDate(res.loginInfo.pwChDtti, 0, 0, pswdLimDays);	//비밀번호 유효 날짜(yyyymmdd)
 	            if(pswdLimDate - $dateUtil.todayYYYYMMDD() < 0){
 					alert('비밀번호 변경 후 ' + pswdLimDays + '일 이상 경과하였습니다.\n계정 보호를 위해 비밀번호를 변경해 주십시오.');
-					//비밀번호 변경 모달 띄우기(추후 구현)
+					//비밀번호 변경 모달 띄우기
+					chngPwModalOpen();
+					return;
 				}
 				
 				//로그인 에러 페이지였으면 이전 페이지로 이동 
@@ -70,7 +84,6 @@ function login(){
         },
         error: function(textStatus, jqXHR, thrownError){
 			$com.loadingEnd();
-			alert(res[Constant.OUT_RESULT_MSG]);
 		}
     });		
 }

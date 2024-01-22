@@ -129,7 +129,7 @@ function increaseHit(boardSeq){
             if (result.RESULT == Constant.RESULT_SUCCESS){
                 
             } else {
-				alert(Constant.OUT_RESULT_MSG)
+				alert(result[Constant.OUT_RESULT_MSG])
 			}
         }
     });	

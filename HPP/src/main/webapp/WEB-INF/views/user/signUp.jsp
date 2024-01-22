@@ -31,12 +31,12 @@
 					</tr>
 					<tr>
 						<td>비밀번호<span class="required">*</span></td>
-						<td><input id="userPw" type="password" class="papang_input" name="userPw" title="비밀번호" maxlength="50" required="all1"></td>
+						<td><input id="userPw" name="userPw" type="password" class="papang_input" title="비밀번호" maxlength="50" required="all1"></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>비밀번호 확인<span class="required">*</span></td>
-						<td><input id="pwChk" type="password" class="papang_input" title="비밀번호 확인" maxlength="50" required="all1"></td>
+						<td><input id="pwChk" name="userPwChk" type="password" class="papang_input" title="비밀번호 확인" maxlength="50" required="all1"></td>
 						<td></td>
 					</tr>					
 					<tr>

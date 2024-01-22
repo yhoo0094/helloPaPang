@@ -18,11 +18,20 @@
 		  LEFT OUTER JOIN TB_CODE_DETAIL T2												/*테이블_코드상세*/
 		    ON T1.REQ_TYPE_CODE = T2.CODE_DETAIL	
 		 WHERE REQ_DTTI BETWEEN DATE_FORMAT(#{reqDttiStr}, '%Y-%m-%d %H:%i') AND DATE_FORMAT(#{reqDttiEnd}, '%Y-%m-%d %H:%i')
-		   AND T1.REQ_TYPE_CODE IN(
-		     <foreach collection="reqTypeCode" item="code" index="index" separator=",">
-		        #{code}
-		     </foreach>	
-	     	   )
+		<choose>
+		    <!-- 컬렉션인 경우 -->
+		    <when test="reqTypeCode.getClass().isArray()">
+		        AND T1.REQ_TYPE_CODE IN (
+		            <foreach collection="reqTypeCode" item="code" separator=",">
+		                #{code}
+		            </foreach>
+		        )
+		    </when>
+		    <!-- 단일 객체인 경우 -->
+		    <otherwise>
+		        AND T1.REQ_TYPE_CODE = #{reqTypeCode}
+		    </otherwise>
+		</choose>		 
 		<if test='userId != null and userId != ""'>
 		   AND T1.USER_ID LIKE CONCAT('%',#{userId},'%')
 		</if>

@@ -167,7 +167,7 @@ function deleteBoard(){
 				mainTable.ajax.reload(null,false);
                 alert("삭제가 완료되었습니다.")
             } else {
-				alert(Constant.OUT_RESULT_MSG)
+				alert(result[Constant.OUT_RESULT_MSG])
 			}
         }
     });  	
@@ -189,7 +189,7 @@ function increaseHit(){
             if (result.RESULT == Constant.RESULT_SUCCESS){
                 
             } else {
-				alert(Constant.OUT_RESULT_MSG)
+				alert(result[Constant.OUT_RESULT_MSG])
 			}
         }
     });	

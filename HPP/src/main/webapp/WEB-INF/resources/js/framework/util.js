@@ -334,3 +334,45 @@ $util.numberWithCommas = function(num) {
 $util.camelToSnake = function(str) {
     return str.replace(/([A-Z])/g, '_$1').toLowerCase();
 }
+
+/**
+ * 비밀번호 유효성 검증
+ * @param userPw String 비밀번호
+ * @param userPwChk String 비밀번호 확인(필수 X)
+ * @return String snake case 문자열
+ */
+$util.pwValidation = function(userPw, userPwChk) {
+	var result;	//처리 결과
+	
+	//조건: 숫자, 영어, 특수문자를 포함하여 8글자 이상 50글자 이하
+	var allChk = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[~!@#\$%\^&\*()_\+\-={}\[\]\\:;"'<>,.\/]).{8,20}$/;
+	var numChk = /\d/gim;		//숫자 포함
+	var enChk = /[A-Za-z]/gim;	//영어 포함
+	var speChaChk = /[~!@#\$%\^&\*()_\+\-={}\[\]\\:;"'<>,.\/]/gim;	//특수문자 포함
+	var lenChk = /.{8,}$/gim;	//최소 길이
+	var maxLenChk = /.{,50}$/gim;	//최대 길이
+	
+	if(allChk.test(userPw)){ //비밀번호 입력 조건 검증
+		if(!userPwChk || userPw == userPwChk){ //비밀번호와 비밀번호 확인이 같은지 검증(userPwChk가 undefinded면 true 출력)
+			result = true;
+		} else {
+			alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+			result = false;
+		}
+	} else {
+		if(!numChk.test(userPw)){
+			alert('비밀번호에 숫자가 포함되지 않았습니다.');
+		} else if(!enChk.test(userPw)) {
+			alert('비밀번호에 영어가 포함되지 않았습니다.');
+		} else if(!speChaChk.test(userPw)) {
+			alert('비밀번호에 특수문자가 포함되지 않았습니다.');
+		} else if(!lenChk.test(userPw)) {
+			alert('비밀번호의 길이가 8글자보다 길어야합니다.');
+		} else if(!maxLenChk.test(userPw)) {
+			alert('비밀번호의 최대 길이는 50글자입니다.');
+		} 
+		result = false;				
+	}
+	
+	return result;	
+}

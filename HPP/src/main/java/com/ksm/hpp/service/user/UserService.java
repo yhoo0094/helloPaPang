@@ -212,4 +212,32 @@ public class UserService extends BaseService {
 		return result;
 	}		
 	
+	/**
+	* @메소드명: chngUserPw
+	* @작성자: KimSangMin
+	* @생성일: 2024. 1. 18. 오후 2:00:03
+	* @설명: 비밀번호 변경
+	 */	
+	public Map<String, Object> chngUserPw(StringBuilder logStr, Map<String, Object> inData) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		int cnt = 0;
+		String userPw = StringUtil.getSHA256("HPP" + (String)inData.get("userPw") + "MELONA");
+		inData.put("userPw", userPw);
+		String bfoUserPwModal = StringUtil.getSHA256("HPP" + (String)inData.get("bfoUserPwModal") + "MELONA");
+		inData.put("bfoUserPwModal", bfoUserPwModal);
+		
+		//비밀번호 일치여부 확인
+		Boolean isFreeAuth = sqlSession.selectOne("mapper.user.UserMapper.userPwChk", inData);
+		if(!isFreeAuth) {
+			throw new ConfigurationException("기존 비밀번호가 일치하지 않습니다.");
+		} else {
+			cnt = sqlSession.update("mapper.user.UserMapper.chngUserPw", inData);
+			if(cnt != 1) {
+				throw new ConfigurationException("비밀번호 변경 과정에서 오류가 발생하였습니다.");
+			}
+		}
+		
+		result.put(Constant.RESULT, Constant.RESULT_SUCCESS);
+		return result;
+	}		
 }

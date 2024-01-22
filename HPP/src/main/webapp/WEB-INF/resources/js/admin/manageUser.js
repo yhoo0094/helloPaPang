@@ -7,8 +7,17 @@
 	
 $(document).ready(function () {
 	makeRoleSelectTag();		//권한그룹 select태그 만들기
+	guestChk();
 	makeDataTableServerSide();	//사용자 목록 조회
 });	
+
+//게스트 계정에 대한 제약사항 적용
+function guestChk(){
+	if(loginInfo.roleNm == '게스트'){
+		$('#userId').val(loginInfo.userId);
+		$('#userId').attr('readonly',true);
+	}
+}
 
 //검색
 function doSearch(){
@@ -47,6 +56,13 @@ function makeDataTableServerSide() {
 				};
 				return param;
 			},
+			dataSrc: function (json) {
+		        if (json.RESULT == Constant.RESULT_FAILURE) {
+		             alert(json[Constant.OUT_RESULT_MSG]);
+		             location.reload();
+		        }
+		        return json.data;
+		    },				
 		},
         columns: columInfo,
 	  	createdRow: function( row, data, dataIndex ) {

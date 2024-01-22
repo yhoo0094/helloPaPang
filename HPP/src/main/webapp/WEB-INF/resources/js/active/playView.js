@@ -61,6 +61,7 @@ function pageInit(){
 		clickThumbnail();		//썸네일 이미지 클릭
 	} else {
 		//데이터 조회해서 작성자와 id가 같으면 수정
+		$com.loadingStart();	
 		$.ajax({
 	        url: '/play/selectPlay.do',
 	        type: 'POST',
@@ -91,7 +92,11 @@ function pageInit(){
 					chViewMode('03');		//화면 모드 바꾸기(01: 등록, 02: 수정, 03: 조회)
 					$('.thumbnailImg').css('cursor','default')
 				}
-	        }
+				$com.loadingEnd();
+	        },
+	  	    error: function(textStatus, jqXHR, thrownError){
+				$com.loadingEnd();
+			}  
 	    });
 	}
 }

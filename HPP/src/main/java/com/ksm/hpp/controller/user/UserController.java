@@ -91,4 +91,23 @@ public class UserController extends BaseController {
 		response.setContentType("application/x-json; charset=UTF-8");
 	}	
 	
+	/**
+	* @메소드명: chngUserPw
+	* @작성자: KimSangMin
+	* @생성일: 2024. 1. 18. 오후 2:00:03
+	* @설명: 비밀번호 변경
+	 */
+	@RequestMapping("/chngUserPw.do")
+	public void chngUserPw(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> inData = RequestUtil.getParameterMap(request);
+		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
+		inData.put("loginInfo", loginInfo);
+		
+		Map<String, Object> outData = userService.chngUserPw((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
+
+		Gson gson = new Gson();
+		String json = gson.toJson(outData);
+		response.getWriter().print(json);	//결과 json형태로 담아서 보내기
+		response.setContentType("application/x-json; charset=UTF-8");
+	}		
 }

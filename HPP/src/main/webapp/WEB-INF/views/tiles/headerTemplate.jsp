@@ -4,6 +4,7 @@
 <c:if test="${sessionScope.LOGIN_INFO eq null}">
 	<%@ include file="/WEB-INF/views/user/loginModal.jsp" %><!-- 로그인 모달 -->
 </c:if>
+<%@ include file="/WEB-INF/views/user/chngPwModal.jsp" %><!-- 비밀번호 변경 모달  -->
 
 <script src="<%=request.getContextPath()%>/resources/js/tiles/headerTemplate.js"></script> <!-- 헤더 템플릿 -->
 <script>
@@ -64,7 +65,7 @@
 	 			</c:when>
 	 			<c:otherwise>
 					<span class="sessionTimer"><i class="fa-solid fa-clock loginMnuIcon"></i>자동 로그아웃: <span id="sessionTimer">02:00:00</span></span> 
-					<a href="#about" class="loginMnu remove-a"><i class="fa-solid fa-user loginMnuIcon"></i>마이페이지</a>
+					<a href="<%=request.getContextPath()%>/user/myPage" class="loginMnu remove-a"><i class="fa-solid fa-user loginMnuIcon"></i>마이페이지</a>
 					<a href="javascript:loginOut()" class="loginMnu remove-a"><i class="fa-solid fa-door-open loginMnuIcon"></i>로그아웃</a>	
 					<span class="loginMnu grayText"><span id="sessionUserId"></span>님 환영합니다.</span>
 	 			</c:otherwise>

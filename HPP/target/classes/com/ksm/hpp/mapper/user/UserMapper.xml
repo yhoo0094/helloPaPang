@@ -6,8 +6,13 @@
 	<select id="selectUser" parameterType="map" resultType="camelCaseMap">
 		SELECT T1.USER_ID										/*아이디*/
 			 , T1.USER_PW										/*비밀번호*/
-			 , T1.PW_ERR_CNT									/*비밀번호 오입력 횟수*/
+			 , T1.USER_NAME										/*이름*/
+			 , T1.BIRTH_DT										/*생년월일*/
+			 , T1.PHONE											/*연락처*/
+			 , DATE_FORMAT(T1.FST_REG_DTTI, '%Y%m%d') SIGNUP_DT	/*가입일*/
 			 , DATE_FORMAT(T1.PW_CH_DTTI, '%Y%m%d') PW_CH_DTTI	/*비밀번호 최종수정일시*/
+			 , T1.PW_ERR_CNT									/*비밀번호 오입력 횟수*/
+			 , T1.PW_INIT_YN									/*비밀번호 초기화 여부*/
 			 , T2.ROLE_SEQ										/*권한그룹일련번호*/
 			 , T3.ROLE_NM										/*권한그룹명*/
 		  FROM TB_USER T1										/*테이블_사용자*/
@@ -45,7 +50,7 @@
 		    ON T2.MNU_SEQ = T4.MNU_SEQ  		    
 		 WHERE T4.MNU_LV = 2					/*메뉴레벨*/
 		   AND T4.AUTH_YN = 'N'					/*권한검사여부*/
-		   AND T1.USER_ID = #{loginInfo.userId}			/*사용자아이디*/
+		   AND T1.USER_ID = #{loginInfo.userId}	/*사용자아이디*/
 		 GROUP BY T4.URL		
 	</select>		
 	
@@ -56,6 +61,14 @@
 		 WHERE AUTH_YN = 'N'				/*권한검사여부*/
 		   AND URL = #{url}					/*메뉴경로*/
 	</select>	
+	
+	<!-- 비밀번호 일치여부 확인 -->
+	<select id="userPwChk" parameterType="map" resultType="boolean">
+		SELECT IF(COUNT(*) = 1, 1, 0)		
+		  FROM TB_USER							/*테이블_사용자*/
+		 WHERE USER_ID = #{loginInfo.userId}	/*사용자아이디*/
+		   AND USER_PW = #{bfoUserPwModal}		/*사용자비밀번호*/
+	</select>		
 	
 	<!-- 사용자 생성 -->
 	<insert id="insertUser" parameterType="map">
@@ -86,7 +99,7 @@
 		VALUES
 			 ( (SELECT nextval('LOGIN_SEQ') FROM DUAL)		/*로그인일련번호*/
 			 , #{userId}			/*사용자_아이디*/
-		     , #{ip}			/*사용자_아이피*/
+		     , #{ip}				/*사용자_아이피*/
 		     , #{loginCode} 		/*로그인_코드(01:로그인, 02:로그아웃, 03:존재하지 않는 사용자, 04: 잘못된 비밀번호, 05: 비밀번호 오입력 횟수 초과)*/		 
 			 )    
 	</insert>	
@@ -123,4 +136,15 @@
 		     , LT_UPD_DTTI	= NOW() 				/*최종수정일시*/		   
 		 WHERE USER_ID 		= #{userId}				/*아이디*/
 	</update>	
+	
+	<!-- 비밀번호 변경 -->
+	<update id="chngUserPw" parameterType="map">
+		UPDATE TB_USER
+		   SET USER_PW 		= #{userPw}				/*비밀번호*/
+		   	 , PW_CH_DTTI   = NOW()					/*비밀번호 최종수정일시*/
+		     , PW_INIT_YN   = 'N'					/*비밀번호 초기화 여부*/
+		     , LT_UPD_ID 	= #{loginInfo.userId}	/*최종수정자ID*/
+		     , LT_UPD_DTTI	= NOW() 				/*최종수정일시*/
+		 WHERE USER_ID 		= #{loginInfo.userId}	/*아이디*/
+	</update>		
 </mapper>
