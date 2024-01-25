@@ -28,8 +28,8 @@
 			    </div>
 			    <div id="btnBox">
 			    	<div>
-				    	<button type="button" id="" class="btn papang-search-btn papang_btn" onclick="modifyBtnClick()">장바구니</button>
-				    	<button type="button" id="" class="btn papang-search-btn papang_btn" onclick="modifyBtnClick()">구매하기</button>
+				    	<button type="button" id="" class="btn papang-search-btn papang_btn" onclick="$util.notYet()">장바구니</button>
+				    	<button type="button" id="" class="btn papang-search-btn papang_btn" onclick="$util.notYet()">구매하기</button>
 			    	</div>
 			    </div>
 			</div>

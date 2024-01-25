@@ -93,9 +93,9 @@
 		     )
 		VALUES
 			 (
-			   #{userIdModal}	
-			 , 'SXRLcrGA1f5nK8A5cvZICY86tW2d/Rekkm3lrWEgqJU='  
-			 , #{userNameModal}	
+			   #{userId}	
+			 , 'SXRLcrGA1f5nK8A5cvZICY86tW2d/Rekkm3lrWEgqJU='  	/*1*/
+			 , #{userName}	
 			 , #{userStatusCode}
 			 , #{rmrkModal}
 		     , #{loginInfo.userId} 	
@@ -115,7 +115,7 @@
 		     )
 		VALUES
 			 (
-			   #{userIdModal}	
+			   #{userId}	
 			 , #{roleSeq}	
 		     , #{loginInfo.userId} 	
 		     , #{loginInfo.userId}		 
@@ -130,7 +130,7 @@
 			 , RMRK						= #{rmrkModal}				/*사용자비고*/          
 		     , LT_UPD_ID 				= #{loginInfo.userId}		/*최종수정자ID*/
 		     , LT_UPD_DTTI				= NOW() 					/*최종수정일시*/
-         WHERE USER_ID					= #{userIdModal}			/*사용자아이디*/
+         WHERE USER_ID					= #{userId}			/*사용자아이디*/
 	</update>		
 	
 	<!-- 사용자 권한그룹 매핑 수정 -->
@@ -139,7 +139,7 @@
            SET ROLE_SEQ					= #{roleSeq}				/*권한그룹일련번호*/
 		     , LT_UPD_ID 				= #{loginInfo.userId}		/*최종수정자ID*/
 		     , LT_UPD_DTTI				= NOW() 					/*최종수정일시*/
-         WHERE USER_ID					= #{userIdModal}			/*사용자아이디*/
+         WHERE USER_ID					= #{userId}			/*사용자아이디*/
 	</update>		
 	
 	<!-- 비밀번호 초기화 -->
@@ -148,7 +148,7 @@
            SET USER_PW					= 'SXRLcrGA1f5nK8A5cvZICY86tW2d/Rekkm3lrWEgqJU=' 			/*사용자비밀번호*/
 		     , LT_UPD_ID 				= #{loginInfo.userId}		/*최종수정자ID*/
 		     , LT_UPD_DTTI				= NOW() 					/*최종수정일시*/
-         WHERE USER_ID					= #{userIdModal}			/*사용자아이디*/
+         WHERE USER_ID					= #{userId}			/*사용자아이디*/
 	</update>			
 		
 </mapper>

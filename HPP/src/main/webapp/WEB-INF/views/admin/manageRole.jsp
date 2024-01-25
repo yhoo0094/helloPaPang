@@ -18,7 +18,7 @@
 			권한그룹 목록
 		</div>		
 		<table id="mainTable" class="display" style="width:100%;"></table>
-		<div class="table_btn_wrapper"><button type="button" class="papang-create-btn papang_btn paginate_button" onclick="userSelectModalOpen()">신규</button></div>
+		<div class="table_btn_wrapper"><button type="button" class="papang-create-btn papang_btn paginate_button" onclick="$util.notYet()">신규</button></div>
 	</div>
 	
 	<div id="groupUserTableDiv" style="display: inline-block; width: 47%; float: right;">

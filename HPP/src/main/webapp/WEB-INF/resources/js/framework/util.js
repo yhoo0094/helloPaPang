@@ -10,6 +10,11 @@ $(()=>{
 	makeSelectTag();
 })
 
+//해당 기능은 아직 구현되지 않았습니다.
+$util.notYet = function notYet(){
+	alert('해당 기능은 아직 구현되지 않았습니다.');
+}
+
 //select 태그 자동 완성
 function makeSelectTag(){
 	$('.makeSelectTag').each(function(idx, itm){

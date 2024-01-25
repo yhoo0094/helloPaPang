@@ -15,9 +15,9 @@
 	<div style="display: inline-block; width: 30%;">
 		<div class="titleDiv">
 			<img src="<%=request.getContextPath()%>/resources/images/title-logo/arrow.png" style="width: 30px; margin-bottom: 4px; margin-right: -10px;">
-			메뉴 목록
+			메뉴목록
 		</div>
-		<div class="papang-info-div" style="height:630px;"><div id="jstree"></div></div>
+		<div class="papang-info-div over-auto" style="height:630px;"><div id="jstree"></div></div>
 	</div>
 	
 	<div id="mnuInfoTableDiv" style="display: inline-block; width: 67%; float: right;">

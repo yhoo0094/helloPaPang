@@ -24,11 +24,11 @@
 				<tr class="h50px">
 					<th>아이디</th>
 					<td>
-						<input id="userIdModal" name="userIdModal" class="form-control gray" title="아이디" type="text" readonly="readonly" required="all1"/>
+						<input id="userIdModal" name="userId" class="form-control gray" title="아이디" type="text" readonly="readonly" required="all1"/>
 					</td>
 					<th>이름</th>
 					<td>
-						<input id="userNameModal" name="userNameModal" title="이름" class="form-control" type="text" required="all1"/>
+						<input id="userNameModal" name="userName" title="이름" class="form-control" type="text" required="all1"/>
 					</td>
 				</tr>
 				<tr class="h50px">
