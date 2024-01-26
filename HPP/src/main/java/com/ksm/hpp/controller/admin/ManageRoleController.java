@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 import com.ksm.hpp.controller.com.BaseController;
+import com.ksm.hpp.framework.exception.ConfigurationException;
 import com.ksm.hpp.framework.util.RequestUtil;
 import com.ksm.hpp.framework.util.ResponseUtil;
 import com.ksm.hpp.service.admin.ManageRoleService;
@@ -52,8 +53,18 @@ public class ManageRoleController extends BaseController {
 	@RequestMapping("/selectGroupUser.do")
 	public void selectGroupUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> inData = RequestUtil.getParameterMap(request);
-		Map<String, Object> outData = manageRoleService.selectGroupUser((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		
+		Map<String, Object> loginInfo = RequestUtil.getLoginInfo(request);
+		inData.put("loginInfo", loginInfo);
+		
+		//게스트 계정 제약 사항 확인(게스트 권한인 경우 사용자 그룹만 조회 가능)
+		String loginRoleNm = (String) loginInfo.get("roleNm"); 
+		String roleSeq = (String) inData.get("roleSeq");
+		if(loginRoleNm.equals("게스트") && roleSeq != null && !roleSeq.equals("1")) {
+			throw new ConfigurationException("게스트 권한인 경우 사용자 그룹만 조회 가능합니다.");
+		}		
+		
+		Map<String, Object> outData = manageRoleService.selectGroupUser((StringBuilder)request.getAttribute("IN_LOG_STR"), inData);
 		ResponseUtil.setResAuto(response, inData, outData);
 	}		
 	

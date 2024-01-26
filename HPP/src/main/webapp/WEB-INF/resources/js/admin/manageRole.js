@@ -62,8 +62,15 @@ function makeDataTable(data) {
 	$('#mainTable tr').on('click', function () {
 	    var data = mainTable.row(this).data();
 	    $('#roleNmSpan').text(data.roleNm);
-	    param.roleSeq = data.roleSeq;
-	    groupUserTable.ajax.reload();
+	    
+	    //게스트 권한인 경우 사용자 그룹만 조회 가능
+	    if(loginInfo.roleNm == '게스트' && data.roleNm != '사용자'){
+			alert('게스트 권한인 경우 사용자 그룹만 조회 가능합니다.');	
+			$('#mainTable tr').eq(1).click();
+		} else {
+			param.roleSeq = data.roleSeq;
+	    	groupUserTable.ajax.reload();	
+		}
 	});	    
 	
 	$('#mainTable tr').eq(1).click();
@@ -106,8 +113,6 @@ var param = {
 
 var groupUserTable;
 function makeGroupUserDataTable(){
-	
-	
     groupUserTable = $('#groupUserTable').DataTable({
 		serverSide: true,						//페이징 처리 서버에서 수행
 		ajax: {
@@ -121,6 +126,13 @@ function makeGroupUserDataTable(){
 				};
 				return param;
 			},
+			dataSrc: function (json) {
+		        if (json.RESULT == Constant.RESULT_FAILURE) {
+		             alert(json[Constant.OUT_RESULT_MSG]);
+		             location.reload();
+		        }
+		        return json.data;
+		    },			
 		},
         columns: groupUserCol,
         pagingType: "numbers",					//v페이지 표시 옵션
