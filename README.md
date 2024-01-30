@@ -29,9 +29,9 @@
 <table>    
     <tbody>
         <tr>
-            <th rowspan="2" style="text-align:center">S/W</th>
-            <td style="text-align:center">OS</td>            
-            <td>
+            <th rowspan="2" style="text-align:center; width:10%;">S/W</th>
+            <td style="text-align:center; width:10%;">OS</td>            
+            <td style="width:*;">
                 개발:
                 <br>
                 배포:
