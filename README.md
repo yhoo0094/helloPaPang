@@ -29,14 +29,12 @@
 <table>    
     <tbody>
         <tr>
-            <th rowspan="7" style="text-align:center">&nbsp;&nbsp;&nbsp;&nbsp;S/W&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            <td style="text-align:center">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <th rowspan="7">&nbsp;&nbsp;&nbsp;&nbsp;S/W&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 OS
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </td>            
+            </th>            
             <td>
                 개발: Windows 10 Home
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -48,27 +46,27 @@
             </td>            
         </tr>
         <tr>
-            <td style="text-align:center">서버</td>            
+            <th>서버</th>
             <td>Tomcat 8.5</td>        
         </tr>   
         <tr>
-            <td style="text-align:center">데이터베이스</td>            
+            <th>데이터베이스</th>
             <td>MySQL 8.0</td>        
         </tr>          
         <tr>
-            <td style="text-align:center">빌드 도구</td>            
+            <th>빌드 도구</th>            
             <td>Maven 3.8</td>        
         </tr>  
          <tr>
-            <td style="text-align:center">개발 언어</td>            
+            <th>개발 언어</th>
             <td>Java 11, HTML5, JavaScript, CSS</td>        
         </tr>   
         <tr>
-            <td style="text-align:center">
+            <th>
                 라이브러리/
                 <br>
                 프레임워크
-            </td> 
+            </th> 
            <td>
                프론트엔드: Bootstrap5, jQuery, Ajax
                <br>
@@ -76,12 +74,12 @@
             </td>        
         </tr>   
         <tr>
-            <td style="text-align:center">IDE</td>            
+            <th>IDE</th>
             <td>Eclipse 2022-09 (4.25.0)</td>        
         </tr> 
         <tr>
-            <th rowspan="3" style="text-align:center">S/W</th>
-            <td style="text-align:center">OS</td>            
+            <th rowspan="3">S/W</th>
+            <th>OS</th>    
             <td>
                 개발: Windows 10 Home
                 <br>
@@ -89,16 +87,16 @@
             </td>            
         </tr>
         <tr>
-            <td style="text-align:center">서버</td>            
+            <th>서버</th>  
             <td>Tomcat 8.5</td>        
         </tr>   
         <tr>
-            <td style="text-align:center">데이터베이스</td>            
+            <td>데이터베이스</td>            
             <td>MySQL 8.0</td>        
         </tr>  
        <tr>
-            <th style="text-align:center">S/W</th>
-            <td colspan="2" style="text-align:center">GitHub</td>                    
+            <th>S/W</th>
+            <td colspan="2">GitHub</td>                    
         </tr>        
     </tbody>
 </table>     
