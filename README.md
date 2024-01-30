@@ -107,9 +107,11 @@
 
 
 
-## 라. 상세내용
+## 라. 산출물
 
 <a href="./산출물/완료보고서/HelloPapang_완료보고서.pdf">HelloPapang_완료보고서.pdf</a>
+
+<a href="./산출물/사용자 매뉴얼/사용자 매뉴얼.pdf">사용자 매뉴얼.pdf</a>
 
 <a href="./요구사항 명세서/완료보고서/HelloPapang_요구사항_명세서.xlsx">HelloPapang_요구사항_명세서.xlsx</a>
 
