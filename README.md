@@ -29,10 +29,10 @@
 <table>    
     <tbody>
         <tr>
-            <th rowspan="7" style="text-align:center">S/W</th>
+            <th rowspan="7" style="text-align:center">    S/W    </th>
             <td style="text-align:center">OS</td>            
             <td>
-                개발: Windows 10 Home
+                개발: Windows 10 Home                                         
                 <br>
                 배포: Amazon Linux 2023
             </td>            
