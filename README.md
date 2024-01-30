@@ -2,7 +2,7 @@
 
 
 
-### **접속 경로: <a href="hellopapang.com" target="_blank">hellopapang.com</a>**
+### **접속 경로: <a href="https://hellopapang.com" target="_blank">hellopapang.com</a>**
 
 
 
