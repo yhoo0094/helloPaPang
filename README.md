@@ -29,24 +29,72 @@
 <table>    
     <tbody>
         <tr>
-            <th rowspan="2" style="text-align:center; width:10%;">S/W</th>
-            <td style="text-align:center; width:10%;">OS</td>            
-            <td style="width:*;">
-                개발:
+            <th rowspan="7" style="text-align:center">S/W</th>
+            <td style="text-align:center">OS</td>            
+            <td>
+                개발: Windows 10 Home
                 <br>
-                배포:
+                배포: Amazon Linux 2023
             </td>            
         </tr>
         <tr>
-            <th style="text-align:center">OS</th>            
-            <td>
-                개발:
+            <td style="text-align:center">서버</td>            
+            <td>Tomcat 8.5</td>        
+        </tr>   
+        <tr>
+            <td style="text-align:center">데이터베이스</td>            
+            <td>MySQL 8.0</td>        
+        </tr>          
+        <tr>
+            <td style="text-align:center">빌드 도구</td>            
+            <td>Maven 3.8</td>        
+        </tr>  
+         <tr>
+            <td style="text-align:center">개발 언어</td>            
+            <td>Java 11, HTML5, JavaScript, CSS</td>        
+        </tr>   
+        <tr>
+            <td style="text-align:center">
+                라이브러리/
                 <br>
-                배포:
+                프레임워크
+            </td> 
+           <td>
+               프론트엔드: Bootstrap5, jQuery, Ajax
+               <br>
+			   백엔드: Spring Framework 5
+            </td>        
+        </tr>   
+        <tr>
+            <td style="text-align:center">IDE</td>            
+            <td>Eclipse 2022-09 (4.25.0)</td>        
+        </tr> 
+        <tr>
+            <th rowspan="3" style="text-align:center">S/W</th>
+            <td style="text-align:center">OS</td>            
+            <td>
+                개발: Windows 10 Home
+                <br>
+                배포: Amazon Linux 2023
             </td>            
+        </tr>
+        <tr>
+            <td style="text-align:center">서버</td>            
+            <td>Tomcat 8.5</td>        
+        </tr>   
+        <tr>
+            <td style="text-align:center">데이터베이스</td>            
+            <td>MySQL 8.0</td>        
+        </tr>  
+       <tr>
+            <th style="text-align:center">S/W</th>
+            <td colspan="2" style="text-align:center">GitHub</td>                    
         </tr>        
     </tbody>
 </table>     
+
+
+
 
 
 
