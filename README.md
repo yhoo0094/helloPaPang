@@ -1,8 +1,4 @@
-# Hello Papang
-
-
-
-### **접속 경로: <a href="https://hellopapang.com" target="_blank">hellopapang.com</a>**
+# Hello Papang(<a href="https://hellopapang.com" target="_blank">hellopapang.com</a>)
 
 
 
