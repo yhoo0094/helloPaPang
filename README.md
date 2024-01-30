@@ -78,25 +78,33 @@
             <td>Eclipse 2022-09 (4.25.0)</td>        
         </tr> 
         <tr>
-            <th rowspan="3">S/W</th>
-            <th>OS</th>    
+            <th rowspan="3">H/W</th>
+            <th>프로세서</th>    
             <td>
-                개발: Windows 10 Home
+                개발: Intel Core i5-10210
                 <br>
-                배포: Amazon Linux 2023
+                배포: 1 vCPU
             </td>            
         </tr>
         <tr>
-            <th>서버</th>  
-            <td>Tomcat 8.5</td>        
+            <th>메모리</th>  
+            <td>
+                개발: 16GB
+                <br>
+                배포: 1GB
+            </td>        
         </tr>   
         <tr>
-            <td>데이터베이스</td>            
-            <td>MySQL 8.0</td>        
+            <th>보조 기억장치</th>   
+            <td>
+                개발: SSD 256GB
+                <br>
+                배포: SSD 8GB
+            </td>        
         </tr>  
        <tr>
-            <th>S/W</th>
-            <td colspan="2">GitHub</td>                    
+            <th>협업 툴</th>
+            <th colspan="2">GitHub</th>          
         </tr>        
     </tbody>
 </table>     
