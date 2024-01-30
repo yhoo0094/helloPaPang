@@ -113,6 +113,7 @@
 
 <a href="./산출물/사용자 매뉴얼/HelloPapang_사용자 매뉴얼.pdf">HelloPapang_사용자 매뉴얼.pdf</a>
 
-<a href="./요구사항 명세서/요구사항 명세서/HelloPapang_요구사항_명세서.xlsx">HelloPapang_요구사항_명세서.xlsx</a>
+<a href="./산출물/요구사항 명세서/HelloPapang_요구사항_명세서.xlsx">HelloPapang_요구사항_명세서.xlsx</a>
 
-<a href="./테이블 명세서/완료보고서/HelloPapang_테이블 명세서.xlsx">HelloPapang_테이블 명세서.xlsx</a>
+<a href="./산출물/테이블 명세서/HelloPapang_테이블 명세서.xlsx">HelloPapang_테이블 명세서.xlsx</a>
+
